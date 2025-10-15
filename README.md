@@ -1,2 +1,2 @@
 # vadaszProjekt
-Iskolai projekt, melyben egy vadász webshoő
+Iskolai projekt, melyben egy vadász webshop
