@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Nov 05. 08:36
--- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- Létrehozás ideje: 2025. Nov 11. 18:45
+-- Kiszolgáló verziója: 10.4.28-MariaDB
+-- PHP verzió: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,6 +37,13 @@ CREATE TABLE `felhasználó` (
   `rangId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
+--
+-- A tábla adatainak kiíratása `felhasználó`
+--
+
+INSERT INTO `felhasználó` (`felhasználónév`, `jelszó`, `email`, `számlázásicím`, `rangId`) VALUES
+('admin', 'admin', 'admin@gmail.com', 'teszt', 12345);
+
 -- --------------------------------------------------------
 
 --
@@ -44,9 +51,16 @@ CREATE TABLE `felhasználó` (
 --
 
 CREATE TABLE `kategória` (
-  `id` int(10) NOT NULL,
+  `id` int(11) NOT NULL,
   `kategória` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `kategória`
+--
+
+INSERT INTO `kategória` (`id`, `kategória`) VALUES
+(54321, 'ruházat');
 
 -- --------------------------------------------------------
 
@@ -55,9 +69,16 @@ CREATE TABLE `kategória` (
 --
 
 CREATE TABLE `leárazás` (
-  `id` int(10) NOT NULL,
+  `id` int(11) NOT NULL,
   `LeárazásMértéke` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `leárazás`
+--
+
+INSERT INTO `leárazás` (`id`, `LeárazásMértéke`) VALUES
+(11111, 20);
 
 -- --------------------------------------------------------
 
@@ -66,9 +87,16 @@ CREATE TABLE `leárazás` (
 --
 
 CREATE TABLE `rang` (
-  `id` int(10) NOT NULL,
+  `id` int(11) NOT NULL,
   `rang` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `rang`
+--
+
+INSERT INTO `rang` (`id`, `rang`) VALUES
+(12345, 'admin');
 
 -- --------------------------------------------------------
 
@@ -77,12 +105,19 @@ CREATE TABLE `rang` (
 --
 
 CREATE TABLE `rendelés` (
-  `id` int(10) NOT NULL,
+  `id` int(11) NOT NULL,
   `felhasználó` varchar(255) NOT NULL,
   `fizetve` tinyint(1) NOT NULL,
   `elküldve` datetime NOT NULL,
   `teljesítve` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `rendelés`
+--
+
+INSERT INTO `rendelés` (`id`, `felhasználó`, `fizetve`, `elküldve`, `teljesítve`) VALUES
+(647648, 'admin', 1, '2025-11-11 18:44:52', '2025-11-11 18:44:52');
 
 -- --------------------------------------------------------
 
@@ -91,13 +126,20 @@ CREATE TABLE `rendelés` (
 --
 
 CREATE TABLE `szállításicímek` (
-  `id` int(10) NOT NULL,
+  `id` int(11) NOT NULL,
   `felhasználó` varchar(255) NOT NULL,
   `ország` varchar(255) NOT NULL,
   `irányítószám` int(11) NOT NULL,
   `város` varchar(255) NOT NULL,
   `utca` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `szállításicímek`
+--
+
+INSERT INTO `szállításicímek` (`id`, `felhasználó`, `ország`, `irányítószám`, `város`, `utca`) VALUES
+(9999, 'admin', 'Magyarország', 8184, 'Balatonfűzfő', 'Gagarin utca 3');
 
 -- --------------------------------------------------------
 
@@ -106,7 +148,7 @@ CREATE TABLE `szállításicímek` (
 --
 
 CREATE TABLE `termék` (
-  `id` int(10) NOT NULL,
+  `id` int(11) NOT NULL,
   `név` varchar(255) NOT NULL,
   `névEn` varchar(255) NOT NULL,
   `leírás` varchar(255) NOT NULL,
@@ -118,6 +160,13 @@ CREATE TABLE `termék` (
   `kép` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
+--
+-- A tábla adatainak kiíratása `termék`
+--
+
+INSERT INTO `termék` (`id`, `név`, `névEn`, `leírás`, `leírásEn`, `ár`, `kategóriaId`, `készlet`, `leárazásid`, `kép`) VALUES
+(55555, 'kabát', 'jacket', 'több rétegű kabát', 'multi-layer jacket', 12000, 54321, 67, 11111, '');
+
 -- --------------------------------------------------------
 
 --
@@ -125,11 +174,18 @@ CREATE TABLE `termék` (
 --
 
 CREATE TABLE `tételek` (
-  `id` int(10) NOT NULL,
+  `id` int(11) NOT NULL,
   `rendelésId` int(11) NOT NULL,
   `termékId` int(11) NOT NULL,
   `mennyiség` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `tételek`
+--
+
+INSERT INTO `tételek` (`id`, `rendelésId`, `termékId`, `mennyiség`) VALUES
+(76543456, 647648, 55555, 1);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -198,43 +254,43 @@ ALTER TABLE `tételek`
 -- AUTO_INCREMENT a táblához `kategória`
 --
 ALTER TABLE `kategória`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54322;
 
 --
 -- AUTO_INCREMENT a táblához `leárazás`
 --
 ALTER TABLE `leárazás`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11112;
 
 --
 -- AUTO_INCREMENT a táblához `rang`
 --
 ALTER TABLE `rang`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12346;
 
 --
 -- AUTO_INCREMENT a táblához `rendelés`
 --
 ALTER TABLE `rendelés`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=647649;
 
 --
 -- AUTO_INCREMENT a táblához `szállításicímek`
 --
 ALTER TABLE `szállításicímek`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000;
 
 --
 -- AUTO_INCREMENT a táblához `termék`
 --
 ALTER TABLE `termék`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55556;
 
 --
 -- AUTO_INCREMENT a táblához `tételek`
 --
 ALTER TABLE `tételek`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76543457;
 
 --
 -- Megkötések a kiírt táblákhoz
