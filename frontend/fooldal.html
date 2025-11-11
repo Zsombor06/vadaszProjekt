@@ -71,13 +71,13 @@
                     window.location.href = ""; //bejelentkezési oldal
                 } else {
                     switch (adatok["rangId"]) {
-                        case 0: //rangId 0 az admin
+                        case 1: //rangId 1 az admin
                             window.location.href = ""; //admin oldal
                             break;
-                        case 1: //rangId 1 a dolgozó
+                        case 2: //rangId 2 a dolgozó
                             window.location.href = ""; //munkás oldal
                             break;
-                        default: //rangId 2 a regisztrált felhasználó
+                        default: //rangId 3 a regisztrált felhasználó
                             window.location.href = ""; //sima felhasználó oldal
                             break;
                     }
