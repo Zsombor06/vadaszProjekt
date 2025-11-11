@@ -5,7 +5,7 @@ $uri=parse_url($_SERVER["REQUEST_URI"],PHP_URL_PATH);
 $uri=explode("/",$uri);
 $bodyAdatok=json_decode(file_get_contents("php://input"),true);
 switch(end($uri)){
-    case "felhasznaloAdatok":
+    case "felhasznaloAdatok": //főoldal Navbar
         if($metodus!="GET"){
             return http_response_code(405);
         }
@@ -13,7 +13,7 @@ switch(end($uri)){
         $getFelhasznaloAdat=adatokLekerese($getFelhasznaloAdatSQL,"s",[$_GET["felhasznalo"]]);
         echo json_encode($getFelhasznaloAdat,JSON_UNESCAPED_UNICODE);
         return http_response_code(200);
-    case "felhasznaloNevek":
+    case "felhasznaloNevek": //Admin oldal select-be töltéséhez
         if($metodus!="GET"){
             return http_response_code(405);
         }
@@ -21,7 +21,7 @@ switch(end($uri)){
         $getFelhasznalonev=adatokLekerese($getFelhasznalonevSQL);
         echo json_encode($getFelhasznalonev,JSON_UNESCAPED_UNICODE);
         return http_response_code(200);
-    case "ujFelhasznalo":
+    case "ujFelhasznalo": //Admin oldal új felhasználó felvétele
     if($metodus!="POST"){
         return http_response_code(405);
     }
@@ -39,7 +39,7 @@ switch(end($uri)){
     echo json_encode(["valasz"=>"Sikertelen feltöltés!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
     
-    case "modositFelhasznalo":
+    case "modositFelhasznalo"://Admin oldal  felhasználó adatai módosítása felvétele
     if($metodus!="PUT"){
         return http_response_code(405);
     }
@@ -51,7 +51,7 @@ switch(end($uri)){
     }
     echo json_encode(["valasz"=>"Sikertelen módosítás!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
-    case "felhasznaloTorles":
+    case "felhasznaloTorles":////Admin oldal  felhasználó törlése TODO: Fejezd be törlje ki a kosarat és a tételt
         if($metodus!="DELETE"){
             return http_response_code(405);
         }
@@ -65,7 +65,7 @@ switch(end($uri)){
     }
     echo json_encode(["valasz"=>"Sikertelen törlés!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
-    case "kategoriakNeve":
+    case "kategoriakNeve"://Admin oldal kategóriák neve select-be és Navbar töltéséhez 
         if($metodus!="GET"){
             return http_response_code(405);
         }
@@ -73,7 +73,7 @@ switch(end($uri)){
         $getKategoriak=adatokLekerese($getKategoriakSQL);
         echo json_encode($getKategoriak,JSON_UNESCAPED_UNICODE);
         return http_response_code(200);
-    case "learazasokMerteke":
+    case "learazasokMerteke"://Admin oldal leárazás mértékeinek feltöltése select-be
         if($metodus!="GET"){
             return http_response_code(405);
         }
@@ -81,7 +81,7 @@ switch(end($uri)){
         $getLearazasok=adatokLekerese($getLearazasokSQL);
         echo json_encode($getLearazasok,JSON_UNESCAPED_UNICODE);
         return http_response_code(200);
-    case "ujTermek":
+    case "ujTermek"://Admin oldal új termék felvétele
         if($metodus!="POST"){
             return http_response_code(405);
         }
@@ -96,7 +96,7 @@ switch(end($uri)){
         }
          echo json_encode(["valasz"=>"Sikertelen feltöltés"],JSON_UNESCAPED_UNICODE);
             return http_response_code(400);
-    case "termekNeve":
+    case "termekNeve"://Admin oldal termék neve select-be töltéshez
         if($metodus!="GET"){
             return http_response_code(405);
         }
@@ -104,7 +104,7 @@ switch(end($uri)){
         $gettermekNev=adatokLekerese($gettermekNevSQL);
         echo json_encode($gettermekNev,JSON_UNESCAPED_UNICODE);
         return http_response_code(200);
-    case "modositTermek":
+    case "modositTermek"://Admin oldal termék adatainak módosítása
         if($metodus!="PUT"){
             return http_response_code(405);
         }
@@ -119,7 +119,7 @@ switch(end($uri)){
         }
          echo json_encode(["valasz"=>"Sikertelen módosítés"],JSON_UNESCAPED_UNICODE);
             return http_response_code(400);
-    case "termekTorles":
+    case "termekTorles":////Admin oldal termék törlése TODO:törlése kosárból
         if($metodus!="DELETE"){
             return http_response_code(405);
         }
