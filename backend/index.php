@@ -51,12 +51,16 @@ switch(end($uri)){
     }
     echo json_encode(["valasz"=>"Sikertelen módosítás!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
-    case "felhasznaloTorles":////Admin oldal  felhasználó törlése TODO: Fejezd be törlje ki a kosarat és a tételt
+    case "felhasznaloTorles":////Admin oldal  felhasználó törlése
         if($metodus!="DELETE"){
             return http_response_code(405);
         }
         $cimekTorleseSQL="DELETE FROM szállításicímek WHERE felhasználó=?";
         $cimekTorlese=adatokValtoztatasa($cimekTorleseSQL,"s",[$bodyAdatok["felhasználónév"]]);
+        $kosarTorlesSQL="DELETE tételek FROM `tételek` INNER join rendelés ON rendelés.id=rendelésId WHERE felhasználó=?";
+        $kosarTorles=adatokValtoztatasa($kosarTorlesSQL,"s",[$bodyAdatok["felhasználónév"]]);
+        $rendelésekTorlesSQL="DELETE  FROM rendelés WHERE felhasználó=?";
+        $rendelésTorles=adatokValtoztatasa($rendelésekTorlesSQL,"s",[$bodyAdatok["felhasználónév"]]);
         $felhasznaloTorlesSQL="DELETE FROM felhasználó WHERE felhasználónév=?";
         $felhasznaloTorles=adatokValtoztatasa($felhasznaloTorlesSQL,"s",[$bodyAdatok["felhasználónév"]]);
         if($cimekTorlese && $felhasznaloTorles){
@@ -119,10 +123,12 @@ switch(end($uri)){
         }
          echo json_encode(["valasz"=>"Sikertelen módosítés"],JSON_UNESCAPED_UNICODE);
             return http_response_code(400);
-    case "termekTorles":////Admin oldal termék törlése TODO:törlése kosárból
+    case "termekTorles":////Admin oldal termék törlése TODO
         if($metodus!="DELETE"){
             return http_response_code(405);
         }
+        $kosarTorlesSQL="DELETE FROM tételek WHERE termékId=?";
+        $kosarTorles=adatokValtoztatasa($kosarTorlesSQL,"i",[$bodyAdatok["termekId"]]);
         $termekTorlesSQL="DELETE FROM termék WHERE id=?";
         $termekTorles=adatokValtoztatasa($termekTorlesSQL,"i",[$bodyAdatok["termekId"]]);
         if($termekTorles){
