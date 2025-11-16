@@ -1,0 +1,46 @@
+.navbar {
+    border-bottom: 2px solid #ddd;
+}
+
+.navbar .dropdown-menu {
+    position: absolute;
+    z-index: 2000;
+}
+
+.offcanvas {
+    width: 260px;
+}
+
+.btn-kat {
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    background: #f5f5f5;
+    transition: 0.2s;
+}
+
+.btn-kat:hover {
+    background: #e1e1e1;
+    cursor: pointer;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.login-box {
+    width: 450px;
+    border: 2px solid #000;
+    border-radius: 15px;
+}
+
+.login-box .form-control {
+    border-radius: 15px;
+    border: 2px solid #000;
+}
+
+.login-box .btn {
+    border-width: 2px;
+}

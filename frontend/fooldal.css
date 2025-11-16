@@ -28,8 +28,14 @@ body {
     color: white;
 }
 
+/*Navbar css része*/
 .navbar {
     border-bottom: 2px solid #ddd;
+}
+
+.navbar .dropdown-menu {
+    position: absolute;
+    z-index: 2000;
 }
 
 .offcanvas {
@@ -54,3 +60,4 @@ body {
 .text-justify {
     text-align: justify;
 }
+/*navbar*/
