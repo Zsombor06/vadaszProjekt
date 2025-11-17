@@ -1,0 +1,14 @@
+.navbar {
+    border-bottom: 2px solid #ddd;
+}
+
+.navbar .dropdown-menu {
+    position: absolute;
+    z-index: 2000;
+}
+.text-justify {
+    text-align: justify;
+}
+.offcanvas {
+    width: 260px;
+}
