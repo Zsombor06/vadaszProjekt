@@ -24,6 +24,30 @@
         }
     }
 
+    const felhasznaloGomb = async () => {
+        try {
+            let bStatus = bejelentkezesiStatus();
+            switch (bStatus) {
+                case 0:
+                    window.location.href = "../bejelentkezes/bejelentkezes.html"
+                    break;
+                case 1:
+                    window.location.href = "" //admin oldal
+                    break;
+                case 2:
+                    window.location.href = "" //munkas oldal
+                    break;
+                case 3:
+                    window.location.href = "" //sima felhasznalo oldal
+                    break;
+                default:
+                    break;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     document.getElementById('szemecske').addEventListener('click', function () {
         const jelszoIn = document.getElementById('FjelszoIn');
         const icon = this.querySelector('i');
@@ -38,3 +62,4 @@
 
     document.getElementById("RegGomb").addEventListener("click", regisztralasGomb);
     document.getElementById("BejGomb").addEventListener("click", bejelentkezesGomb);
+    document.getElementById("felhasznaloGomb").addEventListener("click", felhasznaloGomb);
