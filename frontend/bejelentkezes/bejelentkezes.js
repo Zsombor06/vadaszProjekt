@@ -80,7 +80,6 @@
         for (let i = 0; i < 6; i++) {
             kapcsaSzoveg += karakterek.charAt(Math.floor(Math.random() * karakterek.length));
         }
-        console.log(kapcsaSzoveg);
         kapcsa.innerHTML = kapcsaSzoveg;
     }
 
