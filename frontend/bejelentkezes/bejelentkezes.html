@@ -6,6 +6,7 @@
     <title>Bejelentkezés</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <link rel="stylesheet" href="./bejelentkezes.css">
 </head>
 <body>
@@ -55,6 +56,17 @@
                 <i class="bi bi-eye-slash fs-4" id="szembigyo"></i>
             </button>
         </div>
+
+        <div class="mb-3" id="captcha">
+            <div class="mb-3 position-relative">
+                <input type="text" id="kapcsaIn" placeholder="Captcha" class="form-control form-control-lg text-center">
+                <button  type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2" id="ujkapcsa" style="border: none; background: none;">
+                    <i class="fas fa-sync"></i>
+                </button>
+            </div>
+            <div id="kapcsaKep" class="inline" selectable="False"></div>
+        </div>
+
         <div class="d-grid">
            <input type="button" value="Bejelentkezés" id="BejGomb" class="btn btn-dark btn-lg">
        </div>
@@ -64,7 +76,6 @@
             <input type="button" name="RegGomb" value="Regisztráció" id="RegGomb" class="btn btn-outline-dark btn-lg">
         </div>
     </form>
-    <!-- <div id="phpvalasz" class="alert d-none w-50 text-center"> </div> -->
 </div>
 
 <!--footer-->
