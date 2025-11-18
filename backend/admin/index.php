@@ -193,7 +193,7 @@ case "modositTermekT"://Admin oldal termék adatainak módosítása
         $putTermekModosit=adatokValtoztatasa($putTermekModositSQL,"ssssiiiii",[$bodyAdatok["név"],$bodyAdatok["névEn"],$bodyAdatok["leírás"],$bodyAdatok["leírásEn"],$bodyAdatok["ár"],$bodyAdatok["kategóriaId"],$bodyAdatok["készlet"],$bodyAdatok["leárazásId"],$bodyAdatok["id"]]);
         if($putTermekModosit){
             echo json_encode(["valasz"=>"Sikeres módosítés"],JSON_UNESCAPED_UNICODE);
-            return http_response_code(201);
+            return http_response_code(200);
         }
          echo json_encode(["valasz"=>"Sikertelen módosítés"],JSON_UNESCAPED_UNICODE);
             return http_response_code(400);
@@ -208,7 +208,7 @@ case "modositTermekT"://Admin oldal termék adatainak módosítása
         $termekTorles=adatokValtoztatasa($termekTorlesSQL,"i",[$bodyAdatok["termekId"]]);
         if($termekTorles){
             echo json_encode(["valasz"=>"Sikeres törlés!"],JSON_UNESCAPED_UNICODE);
-        return http_response_code(201);
+        return http_response_code(200);
         }
         echo json_encode(["valasz"=>"Sikertelen törlés!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);

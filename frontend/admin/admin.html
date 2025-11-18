@@ -42,94 +42,99 @@
         </div>
     </div>
 <!-- navbar vége-->
-
-<div>
-<select name="" id="tablaValaszt">
+<div class="container ">
+<div class="row d-flex align-items-center justify-content-center">
+<div class="col-4">
+<select class="form-select" name="" id="tablaValaszt">
     <option value="">Kérem válasszon egy táblát!</option>
     <option value="felhasznalo">Felhasználó</option>
     <option value="termék">Termék</option>
 
-</select><!-- Kiválasztja melyik táblán végezzen műveletet -->
-<select name="" id="muveletValaszt">
+</select>
+</div><!-- Kiválasztja melyik táblán végezzen műveletet -->
+<div class="col-4">
+<select class="form-select" name="" id="muveletValaszt">
     <option value="">Kérem válasszon műveletet</option>
-</select><!-- Kiválasztja milyen műveletet végezzen, első select után tölti csak fel az opciókat -->
-
+</select>
+</div><!-- Kiválasztja milyen műveletet végezzen, első select után tölti csak fel az opciókat -->
+</div>
 </div><!-- Végpont kiválasztó -->
 
-<div id="ujFelhasznaloDiv" hidden>
-<label >Név:</label><input type="text" id="ujNev"><br>
-<label >Jelszó:</label><input type="password" id="ujJelszo"><br>
-<label >Email:</label><input type="email" id="ujEmail"><br>
-<label >Számlázási cím:</label><input type="text" id="ujSzamla"><br>
+
+<div class="card justify-content-center align-items-center"  id="ujFelhasznaloDiv" hidden>
+<label >Név:</label><input  class="form-control" style="width:auto;" type="text" id="ujNev"><br>
+<label >Jelszó:</label><input  class="form-control" style="width:auto;" type="password" id="ujJelszo"><br>
+<label >Email:</label><input  class="form-control" style="width:auto;" type="email" id="ujEmail"><br>
+<label >Számlázási cím:</label><input  class="form-control" style="width:auto;" type="text" id="ujSzamla"><br>
 <label for="">Rang Id:</label>
-<select name="" id="rangok">
+<select class="form-select" style="width:auto;" name="" id="rangok">
 
 </select><br>
-<input type="button" id="ujFelhasznalo" value="Feltöltés">
+<input   type="button"  class="btn btn-dark" id="ujFelhasznalo" value="Feltöltés">
 </div><!-- Felhasználó feltöltés-->
 
-<div id="modositFelhasznaloDiv" hidden>
+<div class="card align-items-center " id="modositFelhasznaloDiv" hidden>
 <label for="">Felhasználó neve:</label>
-<select name="" id="felhasznalok">
+<select class="form-select" style="width:auto;" name="" id="felhasznalok">
 
 </select><br>
-<label >Jelszó:</label><input type="password" id="modositJelszo"><br>
-<label >Email:</label><input type="email" id="modositEmail"><br>
-<label >Számlázási cím:</label><input type="text" id="modositSzamla"><br>
+<label >Jelszó:</label><input  class="form-control" style="width:auto;" type="password" id="modositJelszo"><br>
+<label >Email:</label><input  class="form-control" style="width:auto;" type="email" id="modositEmail"><br>
+<label >Számlázási cím:</label><input  class="form-control" style="width:auto;" type="text" id="modositSzamla"><br>
 <label for="">Rang Id:</label>
-<select name="" id="rangok">
+<select class="form-select" style="width:auto;" name="" id="rangok">
 
 </select><br>
-<input type="button" id="modositFelhasznalo" value="Módosítás">
+<input  type="button"  class="btn btn-dark" id="modositFelhasznalo" value="Módosítás">
 </div><!--Felhasználó módosítás-->
 
-<div id="torlesFelhasznaloDiv" hidden>
+<div class="card align-items-center" id="torlesFelhasznaloDiv" hidden>
 <label for="">Felhasználó neve:</label>
-<select name="" id="felhasznalok">
+<select class="form-select" style="width:auto;" name="" id="felhasznalok">
 
 </select><br>
-<input type="button" id="torolFelhasznalo" value="Törlés">
+<input  type="button"  class="btn btn-dark" id="torolFelhasznalo" value="Törlés">
 </div><!--Felhasználó törlés-->
 
 
-<div id="ujTermekDiv" hidden>
-<label >Név:</label><input type="text" id="ujTermekNev"><br>
-<label >Angol Név:</label><input type="text" id="ujEnNev"><br>
-<label >Leírás:</label><input type="text" id="ujLeiras"><br>
-<label >Angol Leírás:</label><input type="text" id="ujEnLeiras"><br>
-<label >Ár:</label><input type="number" id="ujAr"><br>
-<label >Készleten:</label><input type="number" id="ujRaktar"><br>
+<div class="card align-items-center" id="ujTermekDiv" hidden>
+<label >Név:</label><input  class="form-control" style="width:auto;" type="text" id="ujTermekNev"><br>
+<label >Angol Név:</label><input  class="form-control" style="width:auto;" type="text" id="ujEnNev"><br>
+<label >Leírás:</label><input  class="form-control" style="width:auto;" type="text" id="ujLeiras"><br>
+<label >Angol Leírás:</label><input  class="form-control" style="width:auto;" type="text" id="ujEnLeiras"><br>
+<label >Ár:</label><input  class="form-control" style="width:auto;" type="number" id="ujAr"><br>
+<label >Készleten:</label><input  class="form-control" style="width:auto;" type="number" id="ujRaktar"><br>
 <label for="">Kategóriák</label>
-<select name="" id="kategoriak"></select><br>
+<select class="form-select" style="width:auto;" name="" id="kategoriak"></select><br>
 <label for="">Leárazás mértéke</label>
-<select name="" id="learazasok"></select><br>
-<label for="">Kép</label><b>TODO</b> <br>
-<input type="button" id="ujTermek" value="Feltöltés">
+<select class="form-select" style="width:auto;" name="" id="learazasok"></select><br>
+<!-- <label for="">Kép</label><b>TODO</b> <br> -->
+<input type="button"  class="btn btn-dark" id="ujTermek" value="Feltöltés">
 </div><!-- Termék feltöltés-->
 
 
-<div id="modositTermekDiv" hidden>
+<div class="card align-items-center" id="modositTermekDiv" hidden>
 <label >Nevek:</label>
-<select name="" id="termekNevek"></select><br>
+<select class="form-select" style="width: auto;" name="" id="termekNevek"></select><br>
 <label >Név:</label>
-<input type="text" id="modositNev"><br>
-<label >Angol Név:</label><input type="text" id="modositEnNev"><br>
-<label >Leírás:</label><input type="text" id="modositLeiras"><br>
-<label >Angol Leírás:</label><input type="text" id="modositEnLeiras"><br>
-<label >Ár:</label><input type="number" id="modositAr"><br>
-<label >Készleten:</label><input type="number" id="modositRaktar"><br>
+<input  class="form-control" style="width:auto;" type="text" id="modositNev"><br>
+<label >Angol Név:</label><input  class="form-control" style="width:auto;" type="text" id="modositEnNev"><br>
+<label >Leírás:</label><input  class="form-control" style="width:auto;" type="text" id="modositLeiras"><br>
+<label >Angol Leírás:</label><input  class="form-control" style="width:auto;" type="text" id="modositEnLeiras"><br>
+<label >Ár:</label><input  class="form-control" style="width:auto;" type="number" id="modositAr"><br>
+<label >Készleten:</label><input  class="form-control" style="width:auto;" type="number" id="modositRaktar"><br>
 <label for="">Kategóriák</label>
-<select name="" id="kategoriak"></select><br>
+<select class="form-select" style="width:auto;" name="" id="kategoriak"></select><br>
 <label for="">Leárazás mértéke</label>
-<select name="" id="learazasok"></select><br>
-<label for="">Kép</label><b>TODO</b> <br>
-<input type="button" id="modositTermek" value="Módosítás">
+<select class="form-select" style="width:auto;" name="" id="learazasok"></select><br>
+<!-- <label for="">Kép</label><b>TODO</b> <br> -->
+<input    type="button"  class="btn btn-dark" id="modositTermek" value="Módosítás">
 </div><!-- Termék módosítása-->
 
-<div id="torlesTermekDiv" hidden>
+<div class="card align-items-center" id="torlesTermekDiv" hidden>
 <label >Név:</label>
-<select name="" id="termekNevek"></select><br>
-<input type="button" value="Törlés" id="torlesTermek">
+<select class="form-select" style="width:auto;" name="" id="termekNevek"></select><br>
+<input   type="button"  class="btn btn-dark" value="Törlés" id="torlesTermek">
 </div> <!-- Termék törlése-->
 
 <div id="muveletEredmeny"></div>
