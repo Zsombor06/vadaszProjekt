@@ -10,7 +10,6 @@
 
     const bejelentkezesGomb = async () => {
         try {
-            
             if (!kapcsaEllenorzes()) {
                 alert("Helytelen kapcsa!");
                 kapcsaGen();
@@ -18,16 +17,14 @@
             }
             let Fnev = document.getElementById("FnevIn").value;
             let Fjelszo = document.getElementById("FjelszoIn").value;
-            let httpValasz = await fetch("") //bejelentkezés
+            let httpValasz = await fetch(`../../backend/bejelentkezes/index.php/bejelentkezes?felhasznalonev=${Fnev}&jelszo=${Fjelszo}`) //bejelentkezés
             let httpAdat = await httpValasz.json();
             if (httpValasz.ok) {
-                if (httpAdat != "") {
-                    alert(httpAdat.valasz);
-                    window.location.href = "../fooladl/fooldal.html" //főoldal
-                } else {
-                    alert(httpAdat.valasz);
-                    kapcsaGen();
-                }
+                alert(httpAdat.valasz);
+                window.location.href = "../fooldal/fooldal.html" //főoldal
+            } else {
+                alert(httpAdat.valasz);
+                kapcsaGen();
             }
         } catch (error) {
             console.log(error);
