@@ -175,8 +175,16 @@ async function felhasznaloFeltolt() {
                 "rangId":rangok[0].value                
             })
          })
-        adatok=await httpvalasz.json()
-        document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        if(httpvalasz.ok){
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
+        else{
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
          httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/felhasznaloNevek")
         adatok=await httpvalasz.json()
         for (const felhasznalo of felhasznalok) {
@@ -203,8 +211,16 @@ async function felhasznaloModosit() {
                 "rangId":rangok[1].value                
             })
          })
-        adatok=await httpvalasz.json()
-        document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+         if(httpvalasz.ok){
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
+        else{
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
     } catch (error) {
         console.log(error)
     }
@@ -214,8 +230,18 @@ async function felhasznaloTorles() {
     try {
         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/felhasznaloTorles`,{
             method:"DELETE",
-            body:JSON.stringify({"felhasználónév":felhasznalok[1].value})})
- document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+            body:JSON.stringify({"felhasználónév":felhasznalok[1].value})}
+        )
+         if(httpvalasz.ok){
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
+        else{
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
     } catch (error) {
         console.log(error)
     }
@@ -236,8 +262,16 @@ async function termekFeltolt() {
                 "leárazásId":learazasok[0].value            
             })
          })
-        adatok=await httpvalasz.json()
-        document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+         if(httpvalasz.ok){
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
+        else{
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
          httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/termekNeve")
         adatok=await httpvalasz.json()
         for (const termekNeve of termekNevek) {
@@ -286,8 +320,16 @@ async function termekModosit() {
                 "leárazásId":learazasok[1].value            
             })
          })
-        adatok=await httpvalasz.json()
-        document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+         if(httpvalasz.ok){
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
+        else{
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
          httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/termekNeve")
         adatok=await httpvalasz.json()
         for (const termekNeve of termekNevek) {
@@ -311,8 +353,16 @@ async function termekTorles() {
                 "termekId":termekNevek[1].value           
             })
          })
-         let adatok=await httpvalasz.json()
-         document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+         if(httpvalasz.ok){
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
+        else{
+            adatok=await httpvalasz.json()
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }
           httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/termekNeve")
         adatok=await httpvalasz.json()
         for (const termekNeve of termekNevek) {
