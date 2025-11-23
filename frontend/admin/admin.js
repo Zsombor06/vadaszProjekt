@@ -66,7 +66,7 @@ async function felToltesek() {
         }
         for (const felhasznalo of felhasznalok) {
             for (const adat of adatok) {
-            felhasznalo.innerHTML+=`<option value=${adat["felhasználónév"]}>${adat["felhasználónév"]}</option>`
+            felhasznalo.innerHTML+=`<option value=${adat["felhasznalonev"]}>${adat["felhasznalonev"]}</option>`
         }
         }
         //kategóriák feltöltése select-be
@@ -74,7 +74,7 @@ async function felToltesek() {
         adatok=await httpvalasz.json()
         for (const kategoria of kategoriak) {
             for (const adat of adatok) {
-            kategoria.innerHTML+=`<option value=${adat["id"]}>${adat["kategória"]}</option>`
+            kategoria.innerHTML+=`<option value=${adat["id"]}>${adat["kategoria"]}</option>`
         }
         }
 
@@ -83,7 +83,7 @@ async function felToltesek() {
         adatok=await httpvalasz.json()
         for (const learazas of learazasok) {
             for (const adat of adatok) {
-            learazas.innerHTML+=`<option value=${adat["id"]}>${adat["LeárazásMértéke"]}</option>`
+            learazas.innerHTML+=`<option value=${adat["id"]}>${adat["LearazasMerteke"]}</option>`
         }
         }
 
@@ -92,7 +92,7 @@ async function felToltesek() {
         adatok=await httpvalasz.json()
         for (const termekNeve of termekNevek) {
             for (const adat of adatok) {
-            termekNeve.innerHTML+=`<option value=${adat["id"]}>${adat["név"]}</option>`
+            termekNeve.innerHTML+=`<option value=${adat["id"]}>${adat["nev"]}</option>`
         }
         }
     } catch (error) {
@@ -154,10 +154,10 @@ async function felhasznaloAdatok() {
     try {
         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/felhasznaloAdatok?felhasznalo=${felhasznalok[0].value}`)
         adatok=await httpvalasz.json()
-        document.getElementById("modositJelszo").value=adatok["jelszó"]
+        document.getElementById("modositJelszo").value=adatok["jelszo"]
         document.getElementById("modositEmail").value=adatok["email"]
-        document.getElementById("modositSzamla").value=adatok["számlázásicím"]
-        rangok[0].value=adatok["rangId"]
+        document.getElementById("modositSzamla").value=adatok["szamlazasicim"]
+        rangok[1].value=adatok["rangId"]
     } catch (error) {
         console.log(error)
     }
@@ -168,10 +168,10 @@ async function felhasznaloFeltolt() {
          httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/ujFelhasznalo`,{
             method:"POST",
             body:JSON.stringify({
-                "felhasználónév":document.getElementById("ujNev").value,
-                "jelszó":document.getElementById("ujJelszo").value,
+                "felhasznalonev":document.getElementById("ujNev").value,
+                "jelszo":document.getElementById("ujJelszo").value,
                 "email":document.getElementById("ujEmail").value,
-                "számlázásicím":document.getElementById("ujSzamla").value,
+                "szamlazasicim":document.getElementById("ujSzamla").value,
                 "rangId":rangok[0].value                
             })
          })
@@ -192,7 +192,7 @@ async function felhasznaloFeltolt() {
         }
         for (const felhasznalo of felhasznalok) {
             for (const adat of adatok) {
-            felhasznalo.innerHTML+=`<option value=${adat["felhasználónév"]}>${adat["felhasználónév"]}</option>`
+            felhasznalo.innerHTML+=`<option value=${adat["felhasznalonev"]}>${adat["felhasznalonev"]}</option>`
         }
         }
     } catch (error) {
@@ -204,10 +204,10 @@ async function felhasznaloModosit() {
          httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositFelhasznalo`,{
             method:"PUT",
             body:JSON.stringify({
-                "felhasználónév":felhasznalok[0].value,
-                "jelszó":document.getElementById("modositJelszo").value,
+                "felhasznalonev":felhasznalok[0].value,
+                "jelszo":document.getElementById("modositJelszo").value,
                 "email":document.getElementById("modositEmail").value,
-                "számlázásicím":document.getElementById("modositSzamla").value,
+                "szamlazasicim":document.getElementById("modositSzamla").value,
                 "rangId":rangok[1].value                
             })
          })
@@ -230,7 +230,7 @@ async function felhasznaloTorles() {
     try {
         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/felhasznaloTorles`,{
             method:"DELETE",
-            body:JSON.stringify({"felhasználónév":felhasznalok[1].value})}
+            body:JSON.stringify({"felhasznalonev":felhasznalok[1].value})}
         )
          if(httpvalasz.ok){
             adatok=await httpvalasz.json()
@@ -252,14 +252,14 @@ async function termekFeltolt() {
          httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/ujTermekT`,{
             method:"POST",
             body:JSON.stringify({
-                "név":document.getElementById("ujTermekNev").value,
-                "névEn":document.getElementById("ujEnNev").value,
-                "leírás":document.getElementById("ujLeiras").value,
-                "leírásEn":document.getElementById("ujEnLeiras").value,
-                "ár":document.getElementById("ujAr").value,
-                "készlet":document.getElementById("ujRaktar").value,
-                "kategóriaId":kategoriak[0].value,
-                "leárazásId":learazasok[0].value            
+                "nev":document.getElementById("ujTermekNev").value,
+                "nevEn":document.getElementById("ujEnNev").value,
+                "leiras":document.getElementById("ujLeiras").value,
+                "leirasEn":document.getElementById("ujEnLeiras").value,
+                "ar":document.getElementById("ujAr").value,
+                "keszlet":document.getElementById("ujRaktar").value,
+                "kategoriaId":kategoriak[0].value,
+                "learazasId":learazasok[0].value            
             })
          })
          if(httpvalasz.ok){
@@ -279,7 +279,7 @@ async function termekFeltolt() {
         }
         for (const termekNeve of termekNevek) {
             for (const adat of adatok) {
-            termekNeve.innerHTML+=`<option value=${adat["id"]}>${adat["név"]}</option>`
+            termekNeve.innerHTML+=`<option value=${adat["id"]}>${adat["nev"]}</option>`
         }
         }
          
@@ -291,14 +291,14 @@ async function termekAdatok() {
     try {
         let httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/termekAdatok?id=${termekNevek[0].value}`)
         let adatok=await httpvalasz.json()
-        document.getElementById("modositNev").value=adatok["név"]
-        document.getElementById("modositEnNev").value=adatok["névEn"]
-        document.getElementById("modositLeiras").value=adatok["leírás"]
-        document.getElementById("modositEnLeiras").value=adatok["leírásEn"]
-        document.getElementById("modositAr").value=adatok["ár"]
-        document.getElementById("modositRaktar").value=adatok["készlet"]
-        kategoriak[1].value=adatok["kategóriaId"],
-        learazasok[1].value=adatok["leárazásid"]        
+        document.getElementById("modositNev").value=adatok["nev"]
+        document.getElementById("modositEnNev").value=adatok["nevEn"]
+        document.getElementById("modositLeiras").value=adatok["leiras"]
+        document.getElementById("modositEnLeiras").value=adatok["leirasEn"]
+        document.getElementById("modositAr").value=adatok["ar"]
+        document.getElementById("modositRaktar").value=adatok["keszlet"]
+        kategoriak[1].value=adatok["kategoriaId"],
+        learazasok[1].value=adatok["learazasid"]        
     } catch (error) {
         console.log(error)
     }
@@ -310,14 +310,14 @@ async function termekModosit() {
             method:"PUT",
             body:JSON.stringify({
                 "id":termekNevek[0].value,
-                "név":document.getElementById("modositNev").value,
-                "névEn":document.getElementById("modositEnNev").value,
-                "leírás":document.getElementById("modositLeiras").value,
-                "leírásEn":document.getElementById("modositEnLeiras").value,
-                "ár":document.getElementById("modositAr").value,
-                "készlet":document.getElementById("modositRaktar").value,
-                "kategóriaId":kategoriak[1].value,
-                "leárazásId":learazasok[1].value            
+                "nev":document.getElementById("modositNev").value,
+                "nevEn":document.getElementById("modositEnNev").value,
+                "leiras":document.getElementById("modositLeiras").value,
+                "leirasEn":document.getElementById("modositEnLeiras").value,
+                "ar":document.getElementById("modositAr").value,
+                "keszlet":document.getElementById("modositRaktar").value,
+                "kategoriaId":kategoriak[1].value,
+                "learazasId":learazasok[1].value            
             })
          })
          if(httpvalasz.ok){
@@ -337,7 +337,7 @@ async function termekModosit() {
         }
         for (const termekNeve of termekNevek) {
             for (const adat of adatok) {
-            termekNeve.innerHTML+=`<option value=${adat["id"]}>${adat["név"]}</option>`
+            termekNeve.innerHTML+=`<option value=${adat["id"]}>${adat["nev"]}</option>`
         }
         }
          
@@ -370,7 +370,7 @@ async function termekTorles() {
         }
         for (const termekNeve of termekNevek) {
             for (const adat of adatok) {
-            termekNeve.innerHTML+=`<option value=${adat["id"]}>${adat["név"]}</option>`
+            termekNeve.innerHTML+=`<option value=${adat["id"]}>${adat["nev"]}</option>`
         }
         }
     } catch (error) {
@@ -389,3 +389,17 @@ document.getElementById("ujTermek").addEventListener("click",termekFeltolt)
 document.getElementById("torlesTermek").addEventListener("click",termekTorles)
 document.getElementById("modositTermek").addEventListener("click",termekModosit)
 termekNevek[0].addEventListener("click",termekAdatok)
+
+    const navbarKategoriak=async()=>{
+        try {
+            let httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/navbar/index.php/kategoriakNeve")
+            let adatok=await httpvalasz.json()
+            for (const adat of adatok) {
+                    document.getElementById("navbarKategoriak").innerHTML+=`<div class="btn-kat"><a href="" style="text-decoration: none; color:black;">${adat["kategoria"]}</a></div>`
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    window.addEventListener("load",navbarKategoriak)
