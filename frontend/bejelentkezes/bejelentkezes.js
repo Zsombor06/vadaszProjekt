@@ -1,13 +1,5 @@
     import { bejelentkezesiStatus } from "../bejelentkezesiStatus.js";
 
-    const regisztralasGomb = async () => {
-        try {
-            window.location.href = "" //regisztracios oldal
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     const bejelentkezesGomb = async () => {
         try {
             if (!kapcsaEllenorzes()) {
@@ -54,7 +46,15 @@
             console.log(error);
         }
     }
-
+    
+    document.getElementById("RegGomb").addEventListener("click", function() {
+        try {
+            window.location.href = "../regisztracio/regisztracio.html" //regisztracios oldal
+        } catch (error) {
+            console.log(error);
+        }
+    });
+    
     document.getElementById('szemecske').addEventListener('click', function () {
         const jelszoIn = document.getElementById('FjelszoIn');
         const icon = this.querySelector('i');
@@ -93,6 +93,5 @@
     document.getElementById("ujkapcsa").addEventListener("click", kapcsaGen);
     window.addEventListener("load", kapcsaGen);
 
-    document.getElementById("RegGomb").addEventListener("click", regisztralasGomb);
     document.getElementById("felhasznaloGomb").addEventListener("click", felhasznaloGomb);
     document.getElementById("BejGomb").addEventListener("click", bejelentkezesGomb);
