@@ -46,6 +46,9 @@ import { bejelentkezesiStatus } from "../bejelentkezesiStatus.js";
         } catch (error) {
             console.log(error);
         }
+
+    document.getElementById("Regisztralas").addEventListener("click", regisztralasGomb);
+    document.getElementById("felhasznaloGomb").addEventListener("click", felhasznaloGomb);
     }
     const navbarKategoriak=async()=>{
         try {
@@ -58,6 +61,5 @@ import { bejelentkezesiStatus } from "../bejelentkezesiStatus.js";
             console.log(error)
         }
     }
-    document.getElementById("Regisztralas").addEventListener("click", regisztralasGomb);
-    document.getElementById("felhasznaloGomb").addEventListener("click", felhasznaloGomb);
+
     window.addEventListener("load",navbarKategoriak)
