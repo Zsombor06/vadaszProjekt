@@ -248,8 +248,12 @@ async function felhasznaloTorles() {
 }
 
 async function termekFeltolt() {
-    try {
-         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/ujTermekT`,{
+    try { 
+const img = document.createElement("img");
+  img.src = URL.createObjectURL(new Blob(document.getElementById("ujKep").files, {type: "application/text"}));
+
+  document.body.appendChild(img);
+        httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/ujTermekT`,{
             method:"POST",
             body:JSON.stringify({
                 "nev":document.getElementById("ujTermekNev").value,
@@ -259,7 +263,7 @@ async function termekFeltolt() {
                 "ar":document.getElementById("ujAr").value,
                 "keszlet":document.getElementById("ujRaktar").value,
                 "kategoriaId":kategoriak[0].value,
-                "learazasId":learazasok[0].value            
+                "learazasId":learazasok[0].value,
             })
          })
          if(httpvalasz.ok){

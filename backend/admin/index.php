@@ -130,9 +130,10 @@ switch(end($uri)){
         }
         if(empty($bodyAdatok["nev"]) ||empty($bodyAdatok["nevEn"]) ||empty($bodyAdatok["leiras"]) ||empty($bodyAdatok["leirasEn"]) ||empty($bodyAdatok["ar"]) ||empty($bodyAdatok["kategoriaId"]) || empty($bodyAdatok["keszlet"]) ||empty($bodyAdatok["learazasId"]) ||empty($bodyAdatok["kep"])){
             echo json_encode(["valasz"=>"Hianyzo adat"]);
+            return http_response_code(400);
         }
         $postUjTermekSQL="INSERT INTO `termek` (`nev`, `nevEn`, `leiras`, `leirasEn`, `ar`, `kategoriaId`, `keszlet`, `learazasid`, `kep`) values ( ?,?,?,?,?,?,?,?,?)";
-        $postUjTermek=adatokValtoztatasa($postUjTermekSQL,"ssssiiiib",[$bodyAdatok["nev"],$bodyAdatok["nevEn"],$bodyAdatok["leiras"],$bodyAdatok["leirasEn"],$bodyAdatok["ar"],$bodyAdatok["kategoriaId"],$bodyAdatok["keszlet"],$bodyAdatok["learazasId"],$bodyAdatok["kep"]]);
+        $postUjTermek=adatokValtoztatasa($postUjTermekSQL,"ssssiiiib",[$bodyAdatok["nev"],$bodyAdatok["nevEn"],$bodyAdatok["leiras"],$bodyAdatok["leirasEn"],$bodyAdatok["ar"],$bodyAdatok["kategoriaId"],$bodyAdatok["keszlet"],$bodyAdatok["learazasId"],file_get_contents($bodyAdatok["kep"])]);
         if($postUjTermek){
             echo json_encode(["valasz"=>"Sikeres feltoltes"],JSON_UNESCAPED_UNICODE);
             return http_response_code(201);
@@ -140,12 +141,13 @@ switch(end($uri)){
          echo json_encode(["valasz"=>"Sikertelen feltoltes"],JSON_UNESCAPED_UNICODE);
             return http_response_code(400);
 
-        case "ujTermekT"://Admin oldal uj termek felvetele
+    case "ujTermekT"://Admin oldal uj termek felvetele
         if($metodus!="POST"){
             return http_response_code(405);
         }
         if(empty($bodyAdatok["nev"]) ||empty($bodyAdatok["nevEn"]) ||empty($bodyAdatok["leiras"]) ||empty($bodyAdatok["leirasEn"]) ||empty($bodyAdatok["ar"]) ||empty($bodyAdatok["kategoriaId"]) || empty($bodyAdatok["keszlet"]) ||empty($bodyAdatok["learazasId"])){
             echo json_encode(["valasz"=>"Hianyzo adat"]);
+            return http_response_code(400);
         }
         $postUjTermekSQL="INSERT INTO `termek` ( `nev`, `nevEn`, `leiras`, `leirasEn`, `ar`, `kategoriaId`, `keszlet`, `learazasid`) values ( ?,?,?,?,?,?,?,?)";
         $postUjTermek=adatokValtoztatasa($postUjTermekSQL,"ssssiiii",[$bodyAdatok["nev"],$bodyAdatok["nevEn"],$bodyAdatok["leiras"],$bodyAdatok["leirasEn"],$bodyAdatok["ar"],$bodyAdatok["kategoriaId"],$bodyAdatok["keszlet"],$bodyAdatok["learazasId"]]);
@@ -173,6 +175,8 @@ switch(end($uri)){
         }
         if(empty($bodyAdatok["nev"]) ||empty($bodyAdatok["nevEn"]) ||empty($bodyAdatok["leiras"]) ||empty($bodyAdatok["leirasEn"]) ||empty($bodyAdatok["ar"]) ||empty($bodyAdatok["kategoriaId"]) || empty($bodyAdatok["keszlet"]) ||empty($bodyAdatok["learazasId"]) ||empty($bodyAdatok["kep"])){
             echo json_encode(["valasz"=>"Hianyzo adat"]);
+            return http_response_code(400);
+
         }
         $putTermekModositSQL="UPDATE `termek` SET `nev`=?,`nevEn`=?,`leiras`=?,`leirasEn`=?,`ar`=?,`kategoriaId`=?,`keszlet`=?,`learazasid`=?,`kep`=? WHERE `id`=?";
         $putTermekModosit=adatokValtoztatasa($putTermekModositSQL,"ssssiiiibi",[$bodyAdatok["nev"],$bodyAdatok["nevEn"],$bodyAdatok["leiras"],$bodyAdatok["leirasEn"],$bodyAdatok["ar"],$bodyAdatok["kategoriaId"],$bodyAdatok["keszlet"],$bodyAdatok["learazasId"],$bodyAdatok["kep"],$bodyAdatok["id"]]);
@@ -182,12 +186,15 @@ switch(end($uri)){
         }
          echo json_encode(["valasz"=>"Sikertelen modosites"],JSON_UNESCAPED_UNICODE);
             return http_response_code(400);
+
+
 case "modositTermekT"://Admin oldal termek adatainak modositasa
         if($metodus!="PUT"){
             return http_response_code(405);
         }
         if(empty($bodyAdatok["nev"]) ||empty($bodyAdatok["nevEn"]) ||empty($bodyAdatok["leiras"]) ||empty($bodyAdatok["leirasEn"]) ||empty($bodyAdatok["ar"]) ||empty($bodyAdatok["kategoriaId"]) || empty($bodyAdatok["keszlet"]) ||empty($bodyAdatok["learazasId"])){
             echo json_encode(["valasz"=>"Hianyzo adat"]);
+            return http_response_code(400);
         }
         $putTermekModositSQL="UPDATE `termek` SET `nev`=?,`nevEn`=?,`leiras`=?,`leirasEn`=?,`ar`=?,`kategoriaId`=?,`keszlet`=?,`learazasid`=? WHERE `id`=?";
         $putTermekModosit=adatokValtoztatasa($putTermekModositSQL,"ssssiiiii",[$bodyAdatok["nev"],$bodyAdatok["nevEn"],$bodyAdatok["leiras"],$bodyAdatok["leirasEn"],$bodyAdatok["ar"],$bodyAdatok["kategoriaId"],$bodyAdatok["keszlet"],$bodyAdatok["learazasId"],$bodyAdatok["id"]]);

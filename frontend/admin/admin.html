@@ -107,7 +107,10 @@
 <select class="form-select" style="width:auto;" name="" id="kategoriak"></select><br>
 <label for="">Leárazás mértéke</label>
 <select class="form-select" style="width:auto;" name="" id="learazasok"></select><br>
-<!-- <label for="">Kép</label><b>TODO</b> <br> -->
+<form action="" enctype="multipart/form-data">
+<label for="">Kép:</label>
+<input type="file" class="form-control" style="width: auto;" name="" id="ujKep">
+</form><br>
 <input type="button"  class="btn btn-dark" id="ujTermek" value="Feltöltés">
 </div><!-- Termék feltöltés-->
 
@@ -126,7 +129,8 @@
 <select class="form-select" style="width:auto;" name="" id="kategoriak"></select><br>
 <label for="">Leárazás mértéke</label>
 <select class="form-select" style="width:auto;" name="" id="learazasok"></select><br>
-<!-- <label for="">Kép</label><b>TODO</b> <br> -->
+<label for="">Kép:</label>
+<input type="file" class="form-control" style="width: auto;" name="" id="modositKep"><br>
 <input    type="button"  class="btn btn-dark" id="modositTermek" value="Módosítás">
 </div><!-- Termék módosítása-->
 
@@ -137,7 +141,7 @@
 </div> <!-- Termék törlése-->
 
 <div id="muveletEredmeny"></div>
-
+<img id="kepEr">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="./admin.js"></script>
 </body>
