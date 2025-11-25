@@ -254,7 +254,7 @@ CREATE TABLE `termek` (
   `kategoriaId` int(11) NOT NULL,
   `keszlet` int(11) NOT NULL,
   `learazasid` int(11) NOT NULL,
-  `kep` blob NOT NULL
+  `kep` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
