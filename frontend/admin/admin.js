@@ -249,12 +249,13 @@ async function felhasznaloTorles() {
 
 async function termekFeltolt() {
     try { 
-const img = document.createElement("img");
-  img.src = URL.createObjectURL(new Blob(document.getElementById("ujKep").files, {type: "application/text"}));
+console.log(document.getElementById("ujKep").files.length)
 
-  document.body.appendChild(img);
-        httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/ujTermekT`,{
-            method:"POST",
+
+       var blob=URL.createObjectURL(new Blob(document.getElementById("ujKep").files,{type: "application/text"}))
+        if(document.getElementById("ujKep").files.length!=0){
+        httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermek`,{
+            method:"PUT",
             body:JSON.stringify({
                 "nev":document.getElementById("ujTermekNev").value,
                 "nevEn":document.getElementById("ujEnNev").value,
@@ -264,8 +265,24 @@ const img = document.createElement("img");
                 "keszlet":document.getElementById("ujRaktar").value,
                 "kategoriaId":kategoriak[0].value,
                 "learazasId":learazasok[0].value,
+                "kep":blob.substring(5)
+            })
+         })}
+         else{
+             httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermekT`,{
+            method:"PUT",
+            body:JSON.stringify({
+                "nev":document.getElementById("ujTermekNev").value,
+                "nevEn":document.getElementById("ujEnNev").value,
+                "leiras":document.getElementById("ujLeiras").value,
+                "leirasEn":document.getElementById("ujEnLeiras").value,
+                "ar":document.getElementById("ujAr").value,
+                "keszlet":document.getElementById("ujRaktar").value,
+                "kategoriaId":kategoriak[0].value,
+                "learazasId":learazasok[0].value
             })
          })
+         }
          if(httpvalasz.ok){
             adatok=await httpvalasz.json()
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
@@ -310,7 +327,9 @@ async function termekAdatok() {
  
 async function termekModosit() {
      try {
-         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermekT`,{
+        var blob=URL.createObjectURL(new Blob(document.getElementById("modositKep").files,{type: "application/text"}))
+        if(document.getElementById("modositKep").files.length!=0){
+         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermek`,{
             method:"PUT",
             body:JSON.stringify({
                 "id":termekNevek[0].value,
@@ -321,9 +340,26 @@ async function termekModosit() {
                 "ar":document.getElementById("modositAr").value,
                 "keszlet":document.getElementById("modositRaktar").value,
                 "kategoriaId":kategoriak[1].value,
-                "learazasId":learazasok[1].value            
+                "learazasId":learazasok[1].value,
+                "kep":blob.substring(5)
+            })
+         })}
+         else{
+            httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermekT`,{
+            method:"PUT",
+            body:JSON.stringify({
+                "id":termekNevek[0].value,
+                "nev":document.getElementById("modositNev").value,
+                "nevEn":document.getElementById("modositEnNev").value,
+                "leiras":document.getElementById("modositLeiras").value,
+                "leirasEn":document.getElementById("modositEnLeiras").value,
+                "ar":document.getElementById("modositAr").value,
+                "keszlet":document.getElementById("modositRaktar").value,
+                "kategoriaId":kategoriak[1].value,
+                "learazasId":learazasok[1].value        
             })
          })
+         }
          if(httpvalasz.ok){
             adatok=await httpvalasz.json()
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")

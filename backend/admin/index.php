@@ -133,7 +133,7 @@ switch(end($uri)){
             return http_response_code(400);
         }
         $postUjTermekSQL="INSERT INTO `termek` (`nev`, `nevEn`, `leiras`, `leirasEn`, `ar`, `kategoriaId`, `keszlet`, `learazasid`, `kep`) values ( ?,?,?,?,?,?,?,?,?)";
-        $postUjTermek=adatokValtoztatasa($postUjTermekSQL,"ssssiiiib",[$bodyAdatok["nev"],$bodyAdatok["nevEn"],$bodyAdatok["leiras"],$bodyAdatok["leirasEn"],$bodyAdatok["ar"],$bodyAdatok["kategoriaId"],$bodyAdatok["keszlet"],$bodyAdatok["learazasId"],file_get_contents($bodyAdatok["kep"])]);
+        $postUjTermek=adatokValtoztatasa($postUjTermekSQL,"ssssiiiis",[$bodyAdatok["nev"],$bodyAdatok["nevEn"],$bodyAdatok["leiras"],$bodyAdatok["leirasEn"],$bodyAdatok["ar"],$bodyAdatok["kategoriaId"],$bodyAdatok["keszlet"],$bodyAdatok["learazasId"],$bodyAdatok["kep"]]);
         if($postUjTermek){
             echo json_encode(["valasz"=>"Sikeres feltoltes"],JSON_UNESCAPED_UNICODE);
             return http_response_code(201);
@@ -179,7 +179,7 @@ switch(end($uri)){
 
         }
         $putTermekModositSQL="UPDATE `termek` SET `nev`=?,`nevEn`=?,`leiras`=?,`leirasEn`=?,`ar`=?,`kategoriaId`=?,`keszlet`=?,`learazasid`=?,`kep`=? WHERE `id`=?";
-        $putTermekModosit=adatokValtoztatasa($putTermekModositSQL,"ssssiiiibi",[$bodyAdatok["nev"],$bodyAdatok["nevEn"],$bodyAdatok["leiras"],$bodyAdatok["leirasEn"],$bodyAdatok["ar"],$bodyAdatok["kategoriaId"],$bodyAdatok["keszlet"],$bodyAdatok["learazasId"],$bodyAdatok["kep"],$bodyAdatok["id"]]);
+        $putTermekModosit=adatokValtoztatasa($putTermekModositSQL,"ssssiiiisi",[$bodyAdatok["nev"],$bodyAdatok["nevEn"],$bodyAdatok["leiras"],$bodyAdatok["leirasEn"],$bodyAdatok["ar"],$bodyAdatok["kategoriaId"],$bodyAdatok["keszlet"],$bodyAdatok["learazasId"],$bodyAdatok["kep"],$bodyAdatok["id"]]);
         if($putTermekModosit){
             echo json_encode(["valasz"=>"Sikeres modosites"],JSON_UNESCAPED_UNICODE);
             return http_response_code(201);
