@@ -249,9 +249,6 @@ async function felhasznaloTorles() {
 
 async function termekFeltolt() {
     try { 
-console.log(document.getElementById("ujKep").files.length)
-
-
        var blob=URL.createObjectURL(new Blob(document.getElementById("ujKep").files,{type: "application/text"}))
         if(document.getElementById("ujKep").files.length!=0){
         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermek`,{
