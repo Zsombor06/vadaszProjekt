@@ -21,7 +21,7 @@ $stmt->execute([$data->username]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // ellenőrzés
-if (!$user || $user["jelszo"] !== $data->password) {
+if (!$user || !password_verify($data->password, $user["jelszo"])) {
     http_response_code(401);
     echo json_encode(["valasz" => "Érvénytelen hitelesítő adatok"]);
     exit;
