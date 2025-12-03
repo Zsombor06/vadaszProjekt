@@ -23,27 +23,30 @@ document.getElementById('szemecske2').addEventListener('click', function () {
 });
 
 //adatok betöltése:
-let userNev = ""; //bejelentkezett felhasznalo nevet ide kell betenni
+let userNev = "user1"; //bejelentkezett felhasznalo nevet ide kell betenni
 window.addEventListener("load", async () => {
     try {
-        let httpValasz = await fetch(`../../backend/felhasznalo/index.php/felhasznaloAdat?felhasznalonev=${userNev}`); //felhasznalo nevet at kell adni
+        let httpValasz = await fetch(`../../backend/felhasznalo/index.php/felhasznaloAdat?nev=${userNev}`); //felhasznalo nevet at kell adni
         if (httpValasz.ok) {
             let httpAdat = await httpValasz.json();
-            document.getElementById("fNev").value = httpAdat.felhasznalonev;
-            document.getElementById("fEmail").value = httpAdat.email;
-            document.getElementById("fSzamla").value = httpAdat.szamlazasicim;
+            for (const adat of httpAdat) {
+                document.getElementById("fNev").value = adat.felhasznalonev;
+                document.getElementById("fEmail").value = adat.email;
+                //document.getElementById("fSzamla").value = adat.szamlazasicim;
+            }
         }
     } catch (error) {
         console.log("Hiba az adatok betöltésekor!", error);
     }
 });
-window.addEventListener("load", async () => {
+window.addEventListener("load", async () => { //szallitasi cimek
     try {
-        let httpValasz = await fetch(`../../backend/felhasznalo/index.php/szallitasCimek?felhasznalo=${userNev}`); //felhasznalo nevet at kell adni
+        let httpValasz = await fetch(`../../backend/felhasznalo/index.php/szallitasiCimek?nev=${userNev}`); //felhasznalo nevet at kell adni
         if (httpValasz.ok) {
             let httpAdat = await httpValasz.json();
             document.getElementById("fLak").innerHTML = "<option value='0'></option>";
             for (const cim of httpAdat) {
+                console.log(cim)
                 document.getElementById("fLak").innerHTML += `<option value="${cim.id}">${cim.orszag}, ${cim.iranyitoszam} ${cim.varos}, ${cim.utca}</option>`;
             }
         }
@@ -54,12 +57,12 @@ window.addEventListener("load", async () => {
 //rendelések betöltése:
 window.addEventListener("load", async () => {
     try {
-        let httpValasz = await fetch(`../../backend/felhasznalo/index.php/rendelesekAdatai?felhasznalo=${userNev}`);
+        let httpValasz = await fetch(`../../backend/felhasznalo/index.php/rendelesekAdatai?nev=${userNev}`);
         if (httpValasz.ok) {
             let httpAdat = await httpValasz.json();
             document.getElementById("rendelesLista").innerHTML = "<option value='0'></option>";
             for (const rendeles of httpAdat) {
-                document.getElementById("rendelesLista").innerHTML += `<option value="${rendeles.id}">${rendeles.id}</option>`; //mikor adta fel
+                document.getElementById("rendelesLista").innerHTML += `<option value="${rendeles.id}">${rendeles.elkuldve}</option>`; //mikor adta fel
             }
         }
     } catch (error) {
@@ -76,7 +79,7 @@ document.getElementById("rendelesLista").addEventListener("change", async () => 
             document.getElementById("rendelesReszletek").innerHTML = "";
             document.getElementById("rendelesP").hidden = false;
             for (const termek of httpAdat) {
-                document.getElementById("rendelesReszletek").innerHTML += `Termék neve: ${termek.termeknev}, ${termek.mennyiseg} db, egységár: ${termek.ar}Ft`;
+                document.getElementById("rendelesReszletek").innerHTML += `Termék neve: ${termek.nev}, ${termek.mennyiseg} db, egységár: ${termek.ar}Ft <br>`;
             }
         }
     } catch (error) {
