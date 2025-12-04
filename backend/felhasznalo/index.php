@@ -105,7 +105,7 @@ case "modositSzallitasiCim":
         echo json_encode(["valasz"=>"Hibás szállítási cím!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
     }
-    $modositSzallitasiCimSQL="UPDATE `szallitasicimek` SET `orszag`='[value-3]',`iranyitoszam`=?,`varos`=?,`utca`=? WHERE `id`=?";
+    $modositSzallitasiCimSQL="UPDATE `szallitasicimek` SET `orszag`=? ,`iranyitoszam`=?,`varos`=?,`utca`=? WHERE `id`=?";
     $modositSzallitasiCim=adatokValtoztatasa($modositSzallitasiCimSQL,"sissi",[$bodyAdatok["orszag"],$bodyAdatok["irsz"],$bodyAdatok["varos"],$bodyAdatok["utca"],$bodyAdatok["id"]]);
      if($modositSzallitasiCim){
          echo json_encode(["valasz"=>"Sikeres módosítás!"],JSON_UNESCAPED_UNICODE);

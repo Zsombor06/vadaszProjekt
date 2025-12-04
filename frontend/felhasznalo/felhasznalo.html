@@ -27,7 +27,7 @@
                 </ul>
     
                 <button class="btn btn-outline-secondary me-3" onclick="window.location.href=''">  Kosár </button> <!-- Kosár oldal     Ne biztos hogy jó lesz így-->
-                <button class="btn btn-outline-success me-3" id="felhasznaloGomb">  Felhasználó </button> <!-- Felhasználói oldal -->
+                <button class="btn btn-outline-success me-3" id="felhasznaloGomb" onclick="tagret = '_blank'">  Felhasználó </button> <!-- Felhasználói oldal -->
                 <button class="btn btn-outline-dark" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"> ☰ </button>
             </div>
         </div>
@@ -68,13 +68,36 @@
                             <i class="bi bi-eye-slash fs-4" id="szembigyo2"></i>
                         </button>
                     </div>
-                    <input type="button" value="Jelszó módosítás" id="btn_jMod" class="btn btn-primary">
+                    <input type="button" value="Jelszó módosítás" id="btn_jMod" class="btn btn-info">
                 </div>
                 <br>
-                <label for="fLak"> Szállításicím(ek) módosítása: </label>
-                <select name="fLak" id="fLak">
-                    <!-- Itt jelennek meg a címek -->
-                </select><br>
+                <div class="form-control mb-3">
+                    <table class="table table-striped">
+                        <tr>
+                            <td><label for="fLak">Szállításicím(ek) módosítása:</label></td>
+                            <td><select name="fLak" id="fLak"></select></td>
+                        </tr>
+                        <tr>
+                            <td><label for="orszagMod">Ország:</label></td>
+                            <td><input id="orszagMod" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="irszMod">Irányítószám:</label></td>
+                            <td><input id="irszMod" type="number"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="varosMod">Város:</label></td>
+                            <td><input id="varosMod" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="utcaMod">Utca, házszám:</label></td>
+                            <td><input id="utcaMod" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="button" id="cimMod" value="Módosítás" class="btn btn-info"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div id="rendelesiAdatok" class="mb-3 d-flex flex-column align-items-center col-lg-6 col-sm-12">
                 <h3>Rendeléseid:</h3><br>
