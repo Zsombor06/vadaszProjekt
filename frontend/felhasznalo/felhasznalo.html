@@ -104,8 +104,21 @@
                 <select id="rendelesLista">
                     <!-- Itt jelennek meg a rendelések -->
                 </select><br>
-                <p class="mb-3 position-relative" id="rendelesP" hidden>Rendelés adatai:</p>
-                <div id="rendelesReszletek" class="mb-3 position-relative"></div>
+                <div class="mb-3 form-control" id="rAdatok" hidden>
+                    <p class="mb-3 position-relative">Rendelés adatai:</p>
+                    <table class="table table-striped" >
+                        <thead>
+                            <tr>
+                                <th scope="col">Termék név</th>
+                                <th scope="col">Mennyiség</th>
+                                <th scope="col">Ár</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rendelesReszletek">
+                            <!-- Itt jelennek meg a rendelés részletei -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="mb-3 d-flex flex-column justify-content-center align-items-center row">

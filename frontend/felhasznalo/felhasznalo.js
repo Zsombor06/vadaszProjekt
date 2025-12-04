@@ -68,14 +68,19 @@ window.addEventListener("load", async () => {
 
 document.getElementById("rendelesLista").addEventListener("change", async () => {
     try {
+        if (document.getElementById("rendelesLista").value == 0) {
+            document.getElementById("rendelesReszletek").innerHTML = "";
+            document.getElementById("rAdatok").setAttribute("hidden", true);
+            return;
+        }
         const rendelesId = document.getElementById("rendelesLista").value;
         let httpValasz = await fetch(`../../backend/felhasznalo/index.php/rendelesTetelek?rendelesId=${rendelesId}`);
         if (httpValasz.ok) {
             let httpAdat = await httpValasz.json();
             document.getElementById("rendelesReszletek").innerHTML = "";
-            document.getElementById("rendelesP").hidden = false;
+            document.getElementById("rAdatok").removeAttribute("hidden");
             for (const termek of httpAdat) {
-                document.getElementById("rendelesReszletek").innerHTML += `Termék neve: ${termek.nev}, ${termek.mennyiseg} db, egységár: ${termek.ar}Ft <br>`;
+                document.getElementById("rendelesReszletek").innerHTML += `<tr> <td>${termek.nev}</td> <td>${termek.mennyiseg} db</td> <td>${termek.ar}Ft</td> </tr>`;
             }
         }
     } catch (error) {
@@ -110,17 +115,16 @@ document.getElementById("btn_jMod").addEventListener("click", async () => {
     }
 });
 
-document.getElementById("btn_kij").addEventListener("click", async () => { //TODO kijelentkezés végpont...
-    try {
-        
-    } catch (error) {
-        
-    }
-});
-
 let CimID = 0;
 document.getElementById("fLak").addEventListener("change", async () => {
     try {
+        if (document.getElementById("fLak").value == 0) {
+            document.getElementById("orszagMod").value = "";
+            document.getElementById("irszMod").value = "";
+            document.getElementById("varosMod").value = "";
+            document.getElementById("utcaMod").value = "";
+            return;
+        }
         let adatok = await Cimek();
         for (const cimresz of adatok) {
             document.getElementById("orszagMod").value = cimresz.orszag;
@@ -168,3 +172,11 @@ const Cimek = async () => {
         console.log("Hiba az adatok betöltésekor!", error);
     }
 }
+
+document.getElementById("btn_kij").addEventListener("click", async () => { //TODO kijelentkezés végpont...
+    try {
+        
+    } catch (error) {
+        
+    }
+});
