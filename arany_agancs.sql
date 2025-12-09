@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Nov 20. 10:14
--- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- Létrehozás ideje: 2025. Dec 09. 17:32
+-- Kiszolgáló verziója: 10.4.28-MariaDB
+-- PHP verzió: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,35 +33,42 @@ CREATE TABLE `felhasznalo` (
   `felhasznalonev` varchar(255) NOT NULL,
   `jelszo` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `szamlazasicim` varchar(255) NOT NULL,
-  `rangId` int(11) NOT NULL
+  `rangId` int(11) NOT NULL,
+  `szamlazasi_orszag` varchar(100) NOT NULL,
+  `szamlazasi_iranyitoszam` int(11) NOT NULL,
+  `szamlazasi_varos` varchar(100) NOT NULL,
+  `szamlazasi_utca` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `felhasznalo`
 --
 
-INSERT INTO `felhasznalo` (`felhasznalonev`, `jelszo`, `email`, `szamlazasicim`, `rangId`) VALUES
-('admin', 'admin123', 'admin@aranyagancs.hu', 'Budapest, Admin tér 1.', 1),
-('user1', 'pass1', 'user1@example.com', 'Budapest, Fő utca 1.', 2),
-('user10', 'pass10', 'user10@example.com', 'Veszprém, Vár utca 10.', 3),
-('user11', 'pass11', 'user11@example.com', 'Tatabánya, Fő tér 11.', 2),
-('user12', 'pass12', 'user12@example.com', 'Békéscsaba, Bartók utca 7.', 2),
-('user13', 'pass13', 'user13@example.com', 'Nagykanizsa, Erzsébet tér 9.', 3),
-('user14', 'pass14', 'user14@example.com', 'Zalaegerszeg, Rákóczi út 6.', 2),
-('user15', 'pass15', 'user15@example.com', 'Salgótarján, Madách utca 1.', 2),
-('user16', 'pass16', 'user16@example.com', 'Miskolc, Petőfi tér 5.', 3),
-('user17', 'pass17', 'user17@example.com', 'Kaposvár, Ady utca 7.', 3),
-('user18', 'pass18', 'user18@example.com', 'Szombathely, Fő tér 4.', 2),
-('user19', 'pass19', 'user19@example.com', 'Nyíregyháza, Kossuth tér 2.', 3),
-('user2', 'pass2', 'user2@example.com', 'Debrecen, Piac utca 3.', 2),
-('user3', 'pass3', 'user3@example.com', 'Győr, Baross Gábor út 5.', 3),
-('user4', 'pass4', 'user4@example.com', 'Szeged, Kossuth Lajos utca 8.', 2),
-('user5', 'pass5', 'user5@example.com', 'Pécs, Király utca 12.', 2),
-('user6', 'pass6', 'user6@example.com', 'Sopron, Deák tér 2.', 3),
-('user7', 'pass7', 'user7@example.com', 'Kecskemét, Petőfi S. utca 9.', 2),
-('user8', 'pass8', 'user8@example.com', 'Eger, Dobó tér 4.', 2),
-('user9', 'pass9', 'user9@example.com', 'Szolnok, Tisza park 3.', 3);
+INSERT INTO `felhasznalo` (`felhasznalonev`, `jelszo`, `email`, `rangId`, `szamlazasi_orszag`, `szamlazasi_iranyitoszam`, `szamlazasi_varos`, `szamlazasi_utca`) VALUES
+('admin', 'admin123', 'admin@aranyagancs.hu', 1, '', 0, '', ''),
+('testuser', '$2y$10$uOrMVbt5iRorrbdWjYLNDeS7IME59DwHkJIVAVxRt/VHyXofWUDOi', 'testuser123@gmail.com', 3, 'Magyarország', 1024, 'Budapest', 'Margit körút 15.'),
+('ujuser', '$2y$10$agdgfDyboEHLJWkSLTNOHeLDqhU3TiFg.8VMPzAlXE1ktRojxGdq.', 'ujuser@example.com', 3, '', 0, '', ''),
+('ujuser2', '$2y$10$FvGHC0JRlavCOxYCrrsgJOgmHcDHHy37GdxaTPmvahzX0BPqQ9OR6', 'ujuser@example.com', 3, '', 0, '', ''),
+('ujuser3', '$2y$10$0xkbfrG4ggDXN6oY8OiegeaxxxVYeN8GR4IJe6mMHiTn2ztlWGxGC', 'ujuser3@example.com', 3, '', 0, '', ''),
+('user1', 'pass1', 'user1@example.com', 2, '', 0, '', ''),
+('user10', 'pass10', 'user10@example.com', 3, '', 0, '', ''),
+('user11', 'pass11', 'user11@example.com', 2, '', 0, '', ''),
+('user12', 'pass12', 'user12@example.com', 2, '', 0, '', ''),
+('user13', 'pass13', 'user13@example.com', 3, '', 0, '', ''),
+('user14', 'pass14', 'user14@example.com', 2, '', 0, '', ''),
+('user15', 'pass15', 'user15@example.com', 2, '', 0, '', ''),
+('user16', 'pass16', 'user16@example.com', 3, '', 0, '', ''),
+('user17', 'pass17', 'user17@example.com', 3, '', 0, '', ''),
+('user18', 'pass18', 'user18@example.com', 2, '', 0, '', ''),
+('user19', 'pass19', 'user19@example.com', 3, '', 0, '', ''),
+('user2', 'pass2', 'user2@example.com', 2, '', 0, '', ''),
+('user3', 'pass3', 'user3@example.com', 3, '', 0, '', ''),
+('user4', 'pass4', 'user4@example.com', 2, '', 0, '', ''),
+('user5', 'pass5', 'user5@example.com', 2, '', 0, '', ''),
+('user6', 'pass6', 'user6@example.com', 3, '', 0, '', ''),
+('user7', 'pass7', 'user7@example.com', 2, '', 0, '', ''),
+('user8', 'pass8', 'user8@example.com', 2, '', 0, '', ''),
+('user9', 'pass9', 'user9@example.com', 3, '', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -236,7 +243,11 @@ INSERT INTO `szallitasicimek` (`id`, `felhasznalo`, `orszag`, `iranyitoszam`, `v
 (17, 'user17', 'Magyarország', 7400, 'Kaposvár', 'Ady utca 7.'),
 (18, 'user18', 'Magyarország', 9700, 'Szombathely', 'Fő tér 4.'),
 (19, 'user19', 'Magyarország', 4400, 'Nyíregyháza', 'Kossuth tér 2.'),
-(20, 'admin', 'Magyarország', 1011, 'Budapest', 'Admin tér 1.');
+(20, 'admin', 'Magyarország', 1011, 'Budapest', 'Admin tér 1.'),
+(21, 'ujuser', 'Magyarország', 1011, 'Budapest', 'Fő utca 10.'),
+(22, 'ujuser2', 'Magyarország', 1011, 'Budapest', 'Fő utca 10.'),
+(23, 'ujuser3', 'Magyarország', 1011, 'Budapest', 'Fő utca 10.'),
+(24, 'testuser', 'Magyarország', 1011, 'Budapest', 'Fő utca 3.');
 
 -- --------------------------------------------------------
 
@@ -254,7 +265,7 @@ CREATE TABLE `termek` (
   `kategoriaId` int(11) NOT NULL,
   `keszlet` int(11) NOT NULL,
   `learazasid` int(11) NOT NULL,
-  `kep` varchar(255) NOT NULL
+  `kep` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
@@ -413,7 +424,7 @@ ALTER TABLE `rendeles`
 -- AUTO_INCREMENT a táblához `szallitasicimek`
 --
 ALTER TABLE `szallitasicimek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT a táblához `termek`

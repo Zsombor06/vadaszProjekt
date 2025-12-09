@@ -156,7 +156,10 @@ async function felhasznaloAdatok() {
         adatok=await httpvalasz.json()
         document.getElementById("modositJelszo").value=adatok["jelszo"]
         document.getElementById("modositEmail").value=adatok["email"]
-        document.getElementById("modositSzamla").value=adatok["szamlazasicim"]
+        document.getElementById("modositorszagSzamla").value=adatok["szamlazasi_orszag"]
+        document.getElementById("modositirszSzamla").value=adatok["szamlazasi_iranyitoszam"]
+        document.getElementById("modositvarosSzamla").value=adatok["szamlazasi_varos"]
+    document.getElementById("modositutcaSzamla").value=adatok["szamlazasi_utca"]
         rangok[1].value=adatok["rangId"]
     } catch (error) {
         console.log(error)
@@ -171,7 +174,10 @@ async function felhasznaloFeltolt() {
                 "felhasznalonev":document.getElementById("ujNev").value,
                 "jelszo":document.getElementById("ujJelszo").value,
                 "email":document.getElementById("ujEmail").value,
-                "szamlazasicim":document.getElementById("ujSzamla").value,
+                "szamlazasi_orszag":document.getElementById("ujorszagSzamla").value,
+                "szamlazasi_irsz":document.getElementById("ujirszSzamla").value,
+                "szamlazasi_varos":document.getElementById("ujvarosSzamla").value,
+                "szamlazasi_utca":document.getElementById("ujutcaSzamla").value,
                 "rangId":rangok[0].value                
             })
          })
@@ -207,7 +213,10 @@ async function felhasznaloModosit() {
                 "felhasznalonev":felhasznalok[0].value,
                 "jelszo":document.getElementById("modositJelszo").value,
                 "email":document.getElementById("modositEmail").value,
-                "szamlazasicim":document.getElementById("modositSzamla").value,
+                "szamlazasi_orszag":document.getElementById("modositorszagSzamla").value,
+                "szamlazasi_irsz":document.getElementById("modositirszSzamla").value,
+                "szamlazasi_varos":document.getElementById("modositvarosSzamla").value,
+                "szamlazasi_utca":document.getElementById("modositutcaSzamla").value,
                 "rangId":rangok[1].value                
             })
          })
