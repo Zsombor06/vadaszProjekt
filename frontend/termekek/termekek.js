@@ -15,27 +15,49 @@ window.addEventListener('load', async () => {
 });
 
 termekKategoria.addEventListener('change', async () => {
-    const termekKartyaMezo = document.getElementById('termekKartyaMezo');
-    const selectedKategoria = termekKategoria.value;
-    termekKartyaMezo.innerHTML = '';
-    let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${selectedKategoria}`);
-    let termekek = await httpValasz.json();
-    for (const termek of termekek) {
-        const kartya = document.createElement('div');
-        kartya.className = 'col-md-4 mb-4';
-        kartya.innerHTML = `
-            <div class="card h-100">
-                <img src="" class="card-img-top" alt="${termek.nev}">
-                <div class="card-body">
-                    <h5 class="card-title">${termek.nev}</h5>
-                    <p class="card-text">${termek.leiras}</p>
+    try {
+        const termekKartyaMezo = document.getElementById('termekKartyaMezo');
+        const selectedKategoria = termekKategoria.value;
+        termekKartyaMezo.innerHTML = '';
+        let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${selectedKategoria}`);
+        let termekek = await httpValasz.json();
+        for (const termek of termekek) {
+            const kartya = document.createElement('div');
+            kartya.className = 'col-md-4 mb-4';
+            kartya.innerHTML = `
+                <div class="card h-100">
+                    <img src="" class="card-img-top" alt="${termek.nev}">
+                    <div class="card-body">
+                        <h5 class="card-title">${termek.nev}</h5>
+                        <p class="card-text">${termek.leiras}</p>
+                        <small class="text-muted">Alap ár: ${termek.regiar} Ft</small>
+                        <small class="text-muted">Leárazás: ${Math.round(termek.ujar, 0)} Ft</small>
+                    </div>
+                    <div class="card-footer">
+                        <input type="button" onClick="${Kosaraba(termek.id)}" value="Kosárba">
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">Alap ár: ${termek.regiar} Ft</small>
-                    <small class="text-muted">Leárazás: ${Math.round(termek.ujar, 0)} Ft</small>
-                </div>
-            </div>
-        `;
-        termekKartyaMezo.appendChild(kartya);
+            `;
+            termekKartyaMezo.appendChild(kartya);
+        }
+    } catch (error) {
+        console.error(error);
     }
 });
+
+const Kosaraba = async (termekID) => {
+    try { //fnev, termekID
+        let felhasznaloNev = "user1"; //példa felhasználónév
+        let httpValasz = await fetch(`../../backend/termekek/index.php/kosarHozzaad`, {
+            method: 'POST',
+            body: JSON.stringify({
+                nev : felhasznaloNev,
+                termek : termekID
+            }),
+        });
+        let eredmeny = await httpValasz.json();
+        console.log(eredmeny.valasz);
+    } catch (error) {
+        console.error(error);
+    }
+}
