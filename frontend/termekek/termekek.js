@@ -24,20 +24,35 @@ termekKategoria.addEventListener('change', async () => {
         for (const termek of termekek) {
             const kartya = document.createElement('div');
             kartya.className = 'col-md-4 mb-4';
-            kartya.innerHTML = `
-                <div class="card h-100">
-                    <img src="" class="card-img-top" alt="${termek.nev}">
-                    <div class="card-body">
-                        <h5 class="card-title">${termek.nev}</h5>
-                        <p class="card-text">${termek.leiras}</p>
-                        <small class="text-muted">Alap ár: ${termek.regiar} Ft</small>
-                        <small class="text-muted">Leárazás: ${Math.round(termek.ujar, 0)} Ft</small>
+            if (termek.regiar == Math.round(termek.ujar, 0)) {
+                kartya.innerHTML = `
+                    <div class="card h-100">
+                        <img src="" class="card-img-top" alt="${termek.nev}">
+                        <div class="card-body">
+                            <h5 class="card-title">${termek.nev}</h5>
+                            <p class="card-text">${termek.leiras}</p>
+                            <small class="text-muted">Ár: ${termek.regiar} Ft</small>
+                        </div>
+                        <div class="card-footer">
+                            <input type="button" onClick="${Kosaraba(termek.id)}" value="Kosárba">
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <input type="button" onClick="${Kosaraba(termek.id)}" value="Kosárba">
+                `;
+            } else {
+                kartya.innerHTML = `
+                    <div class="card h-100">
+                        <img src="" class="card-img-top" alt="${termek.nev}">
+                        <div class="card-body">
+                            <h5 class="card-title">${termek.nev}</h5>
+                            <p class="card-text">${termek.leiras}</p>
+                            <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small>
+                        </div>
+                        <div class="card-footer">
+                            <input type="button" onClick="${Kosaraba(termek.id)}" value="Kosárba">
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+                }
             termekKartyaMezo.appendChild(kartya);
         }
     } catch (error) {
