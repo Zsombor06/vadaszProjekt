@@ -258,7 +258,6 @@ async function felhasznaloTorles() {
 
 async function termekFeltolt() {
     try { 
-       var blob=URL.createObjectURL(new Blob(document.getElementById("ujKep").files,{type: "application/text"}))
         if(document.getElementById("ujKep").files.length!=0){
         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermek`,{
             method:"PUT",
@@ -271,7 +270,7 @@ async function termekFeltolt() {
                 "keszlet":document.getElementById("ujRaktar").value,
                 "kategoriaId":kategoriak[0].value,
                 "learazasId":learazasok[0].value,
-                "kep":blob.substring(5)
+                "kep":("../képek/"+(document.getElementById("ujKep").files[0].name))
             })
          })}
          else{
@@ -333,7 +332,6 @@ async function termekAdatok() {
  
 async function termekModosit() {
      try {
-        var blob=URL.createObjectURL(new Blob(document.getElementById("modositKep").files,{type: "application/text"}))
         if(document.getElementById("modositKep").files.length!=0){
          httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermek`,{
             method:"PUT",
@@ -347,7 +345,7 @@ async function termekModosit() {
                 "keszlet":document.getElementById("modositRaktar").value,
                 "kategoriaId":kategoriak[1].value,
                 "learazasId":learazasok[1].value,
-                "kep":blob.substring(5)
+                "kep":("../képek/"+(document.getElementById("modositKep").files[0].name))
             })
          })}
          else{
