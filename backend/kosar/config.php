@@ -1,0 +1,8 @@
+<?php
+$pdo = new PDO("mysql:host=localhost;dbname=arany_agancs;charset=utf8mb4", "root", "",
+    [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]
+);
+
+header("Content-Type: application/json; charset=UTF-8");
