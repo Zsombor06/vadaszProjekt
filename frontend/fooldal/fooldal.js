@@ -1,6 +1,5 @@
-import { bejelentkezesiStatus } from "../bejelentkezesiStatus.js";
-
-    const regisztralasGomb = async () => {
+console.log(localStorage.getItem('token'))
+const regisztralasGomb = async () => {
         try {
             let bStatus = bejelentkezesiStatus();
             switch (bStatus) {

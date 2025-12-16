@@ -7,10 +7,17 @@ const bejelentkezesGomb = async () => {
         }
         let Fnev = document.getElementById("FnevIn").value;
         let Fjelszo = document.getElementById("FjelszoIn").value;
-        let httpValasz = await fetch(`../../backend/bejelentkezes/index.php/bejelentkezes?felhasznalonev=${Fnev}&jelszo=${Fjelszo}`) //bejelentkezés
+        let httpValasz = await fetch(`../../backend/bejelentkezes/login.php`,{
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                "username":Fnev,
+                "password":Fjelszo}
+            )
+        }) //bejelentkezés
         let httpAdat = await httpValasz.json();
-        if (httpValasz.ok) {
-            alert(httpAdat.valasz);
+        if (httpValasz.ok) {  
+            localStorage.setItem('token', httpAdat["accessToken"])
             window.location.href = "../fooldal/fooldal.html" //főoldal
         } else {
             alert(httpAdat.valasz);

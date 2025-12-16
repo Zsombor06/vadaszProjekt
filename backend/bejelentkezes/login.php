@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-require 'config.php';
+require  'config.php';
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
