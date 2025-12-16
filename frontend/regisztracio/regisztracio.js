@@ -83,6 +83,7 @@ const Regisztracio = async () => {
 
         if (response.ok) {
             alert("Sikeres regisztráció!");
+            window.location.href = "../bejelentkezes/bejelentkezes.html";
         } else {
             alert(adat.hiba);
         }
