@@ -1,53 +1,79 @@
-let termeknev = "Nadrág";
-let mennyiseg = 2;
-let egysegar = 7999;
-
 const TermekKartyak = async () => {
     try {
-        let httpResponse = await fetch("./test.php/test");
+        let httpResponse = await fetch("../../bakcend/kosar/kosarAdatok.php?felhasznalo=user1"); //user1 tesztadat
         if (httpResponse.ok) {
             let httpAdat = await httpResponse.json();
         } else {
             alert("Hiba a termékek lekérése során");
             return;
         }
+        console.log(httpAdat)
         for (const termek of httpAdat) {
             console.log(termek);
-        }/*
-         //kellenek id-k, formázások, meg a php -- lista elem no decor
-        for (let i = 1; i < 4; i++) { //for helyett forof --> i helyett termekId
             document.getElementById("KosarTartalom").innerHTML += `
-            <li id="termek_${i}">
-                <span id="nevMezo_${i}" >${termeknev}</span>
-                <button id="minusz" data-kosar-id="${i}">−</button>
-                <span class="mennyiseg" id="mennyiseg_${i}">${mennyiseg}</span>
-                <button id="plusz" data-kosar-id="${i}">+</button>
-                <span id="arMezo_${i}">${mennyiseg * egysegar} Ft</span>
-                <button type="button" class="torlesGomb" data-id=""${i}"> Törlés </button>
+            <li id="termek_${termek.termekID}">
+                <span id="nevMezo_${termek.termekID}" >${termek.nev}</span>
+                <button id="minusz" data-kosar-id="${termek.termekID}">−</button>
+                <span class="mennyiseg" id="mennyiseg_${termek.termekID}">${termek.mennyiseg}</span>
+                <button id="plusz" data-kosar-id="${termek.termekID}">+</button>
+                <span id="arMezo_${termek.termekID}">${termek.mennyiseg * termek.ar} Ft</span>
+                <button type="button" class="torlesGomb" data-id=""${termek.termekID}"> Törlés </button>
             </li>
             `;
-        }*/
+        }
     } catch (error) {
         console.log(error);
     }
 }
-/*
-document.getElementById("minusz").addEventListener("click", (e) => {
+
+document.getElementById("minusz").addEventListener("click", async (e) => {
     const id = e.target.dataset.kosarId;
     const mennyiseg = parseInt(document.getElementById(`mennyiseg_${id}`).innerText);
     if (mennyiseg > 1) {
         document.getElementById(`mennyiseg_${id}`).innerText = mennyiseg - 1;
         document.getElementById(`arMezo_${id}`).innerText = (mennyiseg - 1) * egysegar + " Ft";
         vegosszegSzamitas();
+        try {
+            let httpResponse = await fetch("../../bakcend/kosar/csokkenMenny.php", {
+                body : JSON.stringify({
+                    "id" : id
+                })
+            });
+            if (httpResponse.ok) {
+                let httpAdat = await httpResponse.json();
+                console.log(httpAdat);
+            } else {
+                alert("Hiba a termékek mennyiségének csökkentése során");
+                return;
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 });
 
-document.getElementById("plusz").addEventListener("click", (e) => {
+document.getElementById("plusz").addEventListener("click", async (e) => {
     const id = e.target.dataset.kosarId;
     const mennyiseg = parseInt(document.getElementById(`mennyiseg_${id}`).innerText);
     document.getElementById(`mennyiseg_${id}`).innerText = mennyiseg + 1;
     document.getElementById(`arMezo_${id}`).innerText = (mennyiseg + 1) * egysegar + " Ft";
     vegosszegSzamitas();
+    try {
+        let httpResponse = await fetch("../../bakcend/kosar/novelMenny.php", {
+            body : JSON.stringify({
+                "id" : id
+            })
+        });
+        if (httpResponse.ok) {
+            let httpAdat = await httpResponse.json();
+            console.log(httpAdat);
+        } else {
+            alert("Hiba a termékek mennyiségének növelése során");
+            return;
+        }
+    } catch (error) {
+        console.error(error);
+    }
 });
 
 document.addEventListener("change", (e) => {
@@ -74,7 +100,7 @@ document.addEventListener("click", async (e) => {
     const termekId = e.target.dataset.id;
     if (!confirm("Biztosan törlöd a terméket?")) return;
     try {
-        let httpResponse = await fetch(`./test.php/delete?id=${termekId}`, { //id --> termekId
+        let httpResponse = await fetch(``, {
             method: "DELETE" });
         let httpAdat = await httpResponse.json();
         if (httpResponse.ok) {
@@ -87,6 +113,6 @@ document.addEventListener("click", async (e) => {
         console.error(error);
     }
 });
-*/
+
 window.addEventListener("load", TermekKartyak);
-//window.addEventListener("load", vegosszegSzamitas);
+window.addEventListener("load", vegosszegSzamitas);
