@@ -156,7 +156,10 @@ async function felhasznaloAdatok() {
         adatok=await httpvalasz.json()
         document.getElementById("modositJelszo").value=adatok["jelszo"]
         document.getElementById("modositEmail").value=adatok["email"]
-        document.getElementById("modositSzamla").value=adatok["szamlazasicim"]
+        document.getElementById("modositorszagSzamla").value=adatok["szamlazasi_orszag"]
+        document.getElementById("modositirszSzamla").value=adatok["szamlazasi_iranyitoszam"]
+        document.getElementById("modositvarosSzamla").value=adatok["szamlazasi_varos"]
+    document.getElementById("modositutcaSzamla").value=adatok["szamlazasi_utca"]
         rangok[1].value=adatok["rangId"]
     } catch (error) {
         console.log(error)
@@ -171,7 +174,10 @@ async function felhasznaloFeltolt() {
                 "felhasznalonev":document.getElementById("ujNev").value,
                 "jelszo":document.getElementById("ujJelszo").value,
                 "email":document.getElementById("ujEmail").value,
-                "szamlazasicim":document.getElementById("ujSzamla").value,
+                "szamlazasi_orszag":document.getElementById("ujorszagSzamla").value,
+                "szamlazasi_irsz":document.getElementById("ujirszSzamla").value,
+                "szamlazasi_varos":document.getElementById("ujvarosSzamla").value,
+                "szamlazasi_utca":document.getElementById("ujutcaSzamla").value,
                 "rangId":rangok[0].value                
             })
          })
@@ -207,7 +213,10 @@ async function felhasznaloModosit() {
                 "felhasznalonev":felhasznalok[0].value,
                 "jelszo":document.getElementById("modositJelszo").value,
                 "email":document.getElementById("modositEmail").value,
-                "szamlazasicim":document.getElementById("modositSzamla").value,
+                "szamlazasi_orszag":document.getElementById("modositorszagSzamla").value,
+                "szamlazasi_irsz":document.getElementById("modositirszSzamla").value,
+                "szamlazasi_varos":document.getElementById("modositvarosSzamla").value,
+                "szamlazasi_utca":document.getElementById("modositutcaSzamla").value,
                 "rangId":rangok[1].value                
             })
          })
@@ -249,7 +258,6 @@ async function felhasznaloTorles() {
 
 async function termekFeltolt() {
     try { 
-       var blob=URL.createObjectURL(new Blob(document.getElementById("ujKep").files,{type: "application/text"}))
         if(document.getElementById("ujKep").files.length!=0){
         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermek`,{
             method:"PUT",
@@ -262,7 +270,7 @@ async function termekFeltolt() {
                 "keszlet":document.getElementById("ujRaktar").value,
                 "kategoriaId":kategoriak[0].value,
                 "learazasId":learazasok[0].value,
-                "kep":blob.substring(5)
+                "kep":("../képek/"+(document.getElementById("ujKep").files[0].name))
             })
          })}
          else{
@@ -324,7 +332,6 @@ async function termekAdatok() {
  
 async function termekModosit() {
      try {
-        var blob=URL.createObjectURL(new Blob(document.getElementById("modositKep").files,{type: "application/text"}))
         if(document.getElementById("modositKep").files.length!=0){
          httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermek`,{
             method:"PUT",
@@ -338,7 +345,7 @@ async function termekModosit() {
                 "keszlet":document.getElementById("modositRaktar").value,
                 "kategoriaId":kategoriak[1].value,
                 "learazasId":learazasok[1].value,
-                "kep":blob.substring(5)
+                "kep":("../képek/"+(document.getElementById("modositKep").files[0].name))
             })
          })}
          else{

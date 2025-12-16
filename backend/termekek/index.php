@@ -21,6 +21,9 @@ switch(end($uri)){
         $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$_GET["kategoria"]]);
         echo json_encode($termekAdatok,JSON_UNESCAPED_UNICODE);
         return http_response_code(200);
+
+
+        //vegyen le a mennyiségből
     case "kosarHozzaad":
         if($metodus!="POST"){
             return http_response_code(405);
@@ -29,20 +32,20 @@ switch(end($uri)){
             echo json_encode(["valasz"=>"Kérem jelentkezzen be!"], JSON_UNESCAPED_UNICODE);
             return http_response_code(400);
         }
-        $ellSQL="SELECT tetelek.id FROM `tetelek` inner JOIN rendeles on rendelesId=rendeles.id WHERE felhasznalo=? && termekId=? order by rendelesId desc limit 1";
-        $ell=adatokLekerese($ellSQL,"si",[$bodyAdatok["nev"],$bodyAdatok["termek"]]);
+        $rendelesSQL="SELECT id from rendeles where felhasznalo=? order by id limit 1";
+        $rendeles=adatokLekerese($rendelesSQL,"s",[$bodyAdatok["nev"]]);
+        $ellSQL="SELECT tetelek.id FROM `tetelek` WHERE rendelesId=? && termekId=?";
+        $ell=adatokLekerese($ellSQL,"si",[$rendeles[0]["id"],$bodyAdatok["termek"]]);
         if(!empty($ell)){
             $mennyisegNovSQL="UPDATE `tetelek` set `mennyiseg`=mennyiseg+1 WHERE id=?";
             $mennyisegNov=adatokValtoztatasa($mennyisegNovSQL,"i",[$ell[0]["id"]]);
             echo json_encode(["valasz"=>"Mennyiség növelve!"], JSON_UNESCAPED_UNICODE);
             return http_response_code(200);
         }
-        $rendelesSQL="SELECT id from rendeles where felhasznalo=? order by id limit 1";
-        $rendeles=adatokLekerese($rendelesSQL,"s",[$bodyAdatok["nev"]]);
         $hozzaAdasSQL="INSERT INTO `tetelek`(`rendelesId`, `termekId`, `mennyiseg`) VALUES (?,?,1)";
         $hozzaAdas=adatokValtoztatasa($hozzaAdasSQL,"ii",[$rendeles[0]["id"],$bodyAdatok["termek"]]);
         if($hozzaAdas){
-            echo json_encode(["valasz"=>"Sikesen a kosárba kerület!"], JSON_UNESCAPED_UNICODE);
+            echo json_encode(["valasz"=>"Sikesen a kosárba került!"], JSON_UNESCAPED_UNICODE);
             return http_response_code(201);
         }
         echo json_encode(["valasz"=>"Valami hiba történt!"], JSON_UNESCAPED_UNICODE);
