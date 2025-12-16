@@ -28,3 +28,7 @@
 .text-justify {
     text-align: justify;
 }
+
+li {
+    list-style-type: none;
+}
