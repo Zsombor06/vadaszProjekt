@@ -1,4 +1,3 @@
-console.log(localStorage.getItem('token'))
 const regisztralasGomb = async () => {
         try {
             let bStatus = bejelentkezesiStatus();
