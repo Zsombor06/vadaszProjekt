@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: application/json; charset=UTF-8");
 require "config.php";
 require "kosar.php";
 
@@ -30,3 +31,4 @@ echo json_encode([
     "rendelesId" => $rendelesId,
     "tetelek" => $stmt->fetchAll(PDO::FETCH_ASSOC)
 ]);
+exit;

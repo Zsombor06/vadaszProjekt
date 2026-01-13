@@ -1,23 +1,22 @@
 const TermekKartyak = async () => {
     try {
-        let httpResponse = await fetch("../../bakcend/kosar/kosarAdatok.php?felhasznalo=user1"); //user1 tesztadat
-        if (httpResponse.ok) {
-            let httpAdat = await httpResponse.json();
-        } else {
+        let httpResponse = await fetch("../../backend/kosar/kosarAdatok.php?felhasznalo=user1"); //user1 tesztadat
+        if (!httpResponse.ok) {
             alert("Hiba a termékek lekérése során");
             return;
         }
-        console.log(httpAdat)
-        for (const termek of httpAdat) {
+        let httpAdat = await httpResponse.json();
+        console.log(httpAdat);
+        for (const termek of httpAdat.tetelek) {
             console.log(termek);
             document.getElementById("KosarTartalom").innerHTML += `
-            <li id="termek_${termek.termekID}">
+            <li id="termek_${termek.termekId}">
                 <span id="nevMezo_${termek.termekID}" >${termek.nev}</span>
-                <button id="minusz" data-kosar-id="${termek.termekID}">−</button>
-                <span class="mennyiseg" id="mennyiseg_${termek.termekID}">${termek.mennyiseg}</span>
-                <button id="plusz" data-kosar-id="${termek.termekID}">+</button>
-                <span id="arMezo_${termek.termekID}">${termek.mennyiseg * termek.ar} Ft</span>
-                <button type="button" class="torlesGomb" data-id=""${termek.termekID}"> Törlés </button>
+                <button class="minusz" data-kosar-id="${termek.termekId}">−</button>
+                <span class="mennyiseg" id="mennyiseg_${termek.termekId}">${termek.mennyiseg}</span>
+                <button class="plusz" data-kosar-id="${termek.termekId}">+</button>
+                <span id="arMezo_${termek.termekId}">${termek.mennyiseg * termek.ar} Ft</span>
+                <button type="button" class="torlesGomb" data-id="${termek.termekId}"> Törlés </button>
             </li>
             `;
         }
@@ -25,7 +24,12 @@ const TermekKartyak = async () => {
         console.log(error);
     }
 }
-
+/*
+document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("plusz")) {
+        console.log("Plusz:", e.target.dataset.kosarId);
+    }
+});
 document.getElementById("minusz").addEventListener("click", async (e) => {
     const id = e.target.dataset.kosarId;
     const mennyiseg = parseInt(document.getElementById(`mennyiseg_${id}`).innerText);
@@ -113,6 +117,6 @@ document.addEventListener("click", async (e) => {
         console.error(error);
     }
 });
-
-window.addEventListener("load", TermekKartyak);
 window.addEventListener("load", vegosszegSzamitas);
+*/
+window.addEventListener("load", TermekKartyak);

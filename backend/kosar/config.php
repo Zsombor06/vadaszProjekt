@@ -5,4 +5,3 @@ $pdo = new PDO("mysql:host=localhost;dbname=arany_agancs;charset=utf8mb4", "root
     ]
 );
 
-header("Content-Type: application/json; charset=UTF-8");
