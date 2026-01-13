@@ -7,19 +7,27 @@ $felhasznalo = $data['felhasznalo'] ?? null;
 
 if (!$felhasznalo) {
     http_response_code(400);
-    echo json_encode(["hiba" => "Felhasználó hiányzik"]);
+    echo json_encode([
+        "siker" => false,
+        "uzenet" => "Felhasználó hiányzik"
+    ]);
     exit;
 }
 
-// Aktív kosár lezárása
 $stmt = $pdo->prepare("
     UPDATE rendeles
-    SET fizetve = 1
+    SET fizetve = 1,
+        fizetesIdeje = NOW()
     WHERE felhasznalo = ? AND fizetve = 0
 ");
 $stmt->execute([$felhasznalo]);
 
-// Új, üres kosár
+// Új kosár
 getOrCreateActiveOrder($pdo, $felhasznalo);
 
-echo json_encode(["uzenet" => "Fizetés sikeres, új kosár létrehozva"]);
+echo json_encode([
+    "siker" => true,
+    "uzenet" => "Sikeres fizetés! Köszönjük a vásárlást.",
+    "datum" => date("Y-m-d H:i:s")
+]);
+

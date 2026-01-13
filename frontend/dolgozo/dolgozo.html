@@ -65,6 +65,7 @@
                         <br>
                         <label for="">Kategória:</label><br>
                         <select class="form-control" id="termekKategoria">
+                            <option value="">Kamó</option>
                         </select>
                     </div>
                     <div class="col">
@@ -80,7 +81,7 @@
                         <label for="">Raktáron:</label><br>
                         <input class="form-control" type="number" id="termekMennyiseg"><br>
                     </div>
-                    <input type="button" class="btn btn-primary" value="Küldés" id="termekKuldes">
+                    <input type="button" class="btn btn-dark" value="Küldés" id="termekKuldes">
                 </div>
             </div>
             <br>
@@ -88,19 +89,24 @@
                 <div class="row">
                     <div class="col">
                     <label for="">Kategória:</label>
-                    <select class="form-control" name="" id="learazasKategoria"></select>                      
+                    <select class="form-control" name="" id="learazasKategoria">
+                    <option value="">Kamó</option>    
+                </select>                  
                     </div>
                     <div class="col">
                     <label for="">Termék:</label>
                     <select class="form-control" name="" id="learazasTermek">
                         <option value="0">Összes</option>
+                        <option value="">Nadrág</option>
                     </select>
                     </div>
                     <div class="col">
                     <label for="">Leárazásmértéke:</label>
-                    <select class="form-control" name="" id="learazasMertek"></select>
+                    <select class="form-control" name="" id="learazasMertek">
+                        <option value="">0%</option>
+                    </select>
                     </div>
-                    <input type="button" class="btn btn-primary" value="Küldés" id="learazasKuldes">
+                    <input type="button" class="btn btn-dark" value="Küldés" id="learazasKuldes">
                 </div>
             </div>
         </div>
@@ -147,7 +153,7 @@
                 <input type="button" value="Törlés" class="col btn btn-danger">
             </div>
             <br>
-            <input type="button" class="btn btn-primary" value="Kijelentkezés">
+            <input type="button" class="btn btn-dark" value="Kijelentkezés">
         </div>
     </div>
 </div>
