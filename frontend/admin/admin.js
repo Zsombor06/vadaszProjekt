@@ -32,7 +32,7 @@ function muveletFeltolt(){
 }
 async function rangFeltoltes() {
     try {
-        let httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/rangokNeve")
+        let httpvalasz=await fetch("../../backend/admin/index.php/rangokNeve")
         let adatok=await httpvalasz.json()
         for (const rang of rangok) {
             for (const adat of adatok) {
@@ -49,7 +49,7 @@ async function felToltesek() {
     try {
 
         //rangok feltöltése select-be
-        let httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/rangokNeve")
+        let httpvalasz=await fetch("../../backend/admin/index.php/rangokNeve")
         let adatok=await httpvalasz.json()
         for (const rang of rangok) {
             for (const adat of adatok) {
@@ -59,7 +59,7 @@ async function felToltesek() {
 
 
         //nevek feltöltése select-be
-        httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/felhasznaloNevek")
+        httpvalasz=await fetch("../../backend/admin/index.php/felhasznaloNevek")
         adatok=await httpvalasz.json()
         for (const felhasznalo of felhasznalok) {
             felhasznalok.innerHTML=""
@@ -70,7 +70,7 @@ async function felToltesek() {
         }
         }
         //kategóriák feltöltése select-be
-        httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/kategoriakNeve")
+        httpvalasz=await fetch("../../backend/admin/index.php/kategoriakNeve")
         adatok=await httpvalasz.json()
         for (const kategoria of kategoriak) {
             for (const adat of adatok) {
@@ -79,7 +79,7 @@ async function felToltesek() {
         }
 
         //leárazások feltöltése select-be
-        httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/learazasokMerteke")
+        httpvalasz=await fetch("../../backend/admin/index.php/learazasokMerteke")
         adatok=await httpvalasz.json()
         for (const learazas of learazasok) {
             for (const adat of adatok) {
@@ -88,7 +88,7 @@ async function felToltesek() {
         }
 
         //leárazások feltöltése select-be
-        httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/termekNeve")
+        httpvalasz=await fetch("../../backend/admin/index.php/termekNeve")
         adatok=await httpvalasz.json()
         for (const termekNeve of termekNevek) {
             for (const adat of adatok) {
@@ -152,7 +152,7 @@ function vegpont(){
 
 async function felhasznaloAdatok() {
     try {
-        httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/felhasznaloAdatok?felhasznalo=${felhasznalok[0].value}`)
+        httpvalasz=await fetch(`../../backend/admin/index.php/felhasznaloAdatok?felhasznalo=${felhasznalok[0].value}`)
         adatok=await httpvalasz.json()
         document.getElementById("modositJelszo").value=adatok["jelszo"]
         document.getElementById("modositEmail").value=adatok["email"]
@@ -168,7 +168,7 @@ async function felhasznaloAdatok() {
 
 async function felhasznaloFeltolt() {
     try {
-         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/ujFelhasznalo`,{
+         httpvalasz=await fetch(`../../backend/admin/index.php/ujFelhasznalo`,{
             method:"POST",
             body:JSON.stringify({
                 "felhasznalonev":document.getElementById("ujNev").value,
@@ -191,7 +191,7 @@ async function felhasznaloFeltolt() {
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
             document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
         }
-         httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/felhasznaloNevek")
+         httpvalasz=await fetch("../../backend/admin/index.php/felhasznaloNevek")
         adatok=await httpvalasz.json()
         for (const felhasznalo of felhasznalok) {
             felhasznalo.innerHTML=""
@@ -207,7 +207,7 @@ async function felhasznaloFeltolt() {
 }
 async function felhasznaloModosit() {
     try {
-         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositFelhasznalo`,{
+         httpvalasz=await fetch(`../../backend/admin/index.php/modositFelhasznalo`,{
             method:"PUT",
             body:JSON.stringify({
                 "felhasznalonev":felhasznalok[0].value,
@@ -237,7 +237,7 @@ async function felhasznaloModosit() {
 
 async function felhasznaloTorles() {
     try {
-        httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/felhasznaloTorles`,{
+        httpvalasz=await fetch(`../../backend/admin/index.php/felhasznaloTorles`,{
             method:"DELETE",
             body:JSON.stringify({"felhasznalonev":felhasznalok[1].value})}
         )
@@ -259,7 +259,7 @@ async function felhasznaloTorles() {
 async function termekFeltolt() {
     try { 
         if(document.getElementById("ujKep").files.length!=0){
-        httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermek`,{
+        httpvalasz=await fetch(`../../backend/admin/index.php/modositTermek`,{
             method:"PUT",
             body:JSON.stringify({
                 "nev":document.getElementById("ujTermekNev").value,
@@ -274,7 +274,7 @@ async function termekFeltolt() {
             })
          })}
          else{
-             httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermekT`,{
+             httpvalasz=await fetch(`../../backend/admin/index.php/modositTermekT`,{
             method:"PUT",
             body:JSON.stringify({
                 "nev":document.getElementById("ujTermekNev").value,
@@ -298,7 +298,7 @@ async function termekFeltolt() {
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
             document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
         }
-         httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/termekNeve")
+         httpvalasz=await fetch("../../backend/admin/index.php/termekNeve")
         adatok=await httpvalasz.json()
         for (const termekNeve of termekNevek) {
             termekNeve.innerHTML=""
@@ -315,7 +315,7 @@ async function termekFeltolt() {
 }
 async function termekAdatok() {
     try {
-        let httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/termekAdatok?id=${termekNevek[0].value}`)
+        let httpvalasz=await fetch(`../../backend/admin/index.php/termekAdatok?id=${termekNevek[0].value}`)
         let adatok=await httpvalasz.json()
         document.getElementById("modositNev").value=adatok["nev"]
         document.getElementById("modositEnNev").value=adatok["nevEn"]
@@ -333,7 +333,7 @@ async function termekAdatok() {
 async function termekModosit() {
      try {
         if(document.getElementById("modositKep").files.length!=0){
-         httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermek`,{
+         httpvalasz=await fetch(`../../backend/admin/index.php/modositTermek`,{
             method:"PUT",
             body:JSON.stringify({
                 "id":termekNevek[0].value,
@@ -349,7 +349,7 @@ async function termekModosit() {
             })
          })}
          else{
-            httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/modositTermekT`,{
+            httpvalasz=await fetch(`../../backend/admin/index.php/modositTermekT`,{
             method:"PUT",
             body:JSON.stringify({
                 "id":termekNevek[0].value,
@@ -374,7 +374,7 @@ async function termekModosit() {
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
             document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
         }
-         httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/termekNeve")
+         httpvalasz=await fetch("../../backend/admin/index.php/termekNeve")
         adatok=await httpvalasz.json()
         for (const termekNeve of termekNevek) {
             termekNeve.innerHTML=""
@@ -391,7 +391,7 @@ async function termekModosit() {
 }
 async function termekTorles() {
     try {
-        let httpvalasz=await fetch(`http://localhost/vadaszprojekt/backend/admin/index.php/termekTorles`,{
+        let httpvalasz=await fetch(`../../backend/admin/index.php/termekTorles`,{
             method:"DELETE",
             body:JSON.stringify({
                 "termekId":termekNevek[1].value           
@@ -407,7 +407,7 @@ async function termekTorles() {
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
             document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
         }
-          httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/admin/index.php/termekNeve")
+          httpvalasz=await fetch("../../backend/admin/index.php/termekNeve")
         adatok=await httpvalasz.json()
         for (const termekNeve of termekNevek) {
             termekNeve.innerHTML=""
@@ -436,7 +436,7 @@ termekNevek[0].addEventListener("click",termekAdatok)
 
     const navbarKategoriak=async()=>{
         try {
-            let httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/navbar/index.php/kategoriakNeve")
+            let httpvalasz=await fetch("../../backend/navbar/index.php/kategoriakNeve")
             let adatok=await httpvalasz.json()
             for (const adat of adatok) {
                     document.getElementById("navbarKategoriak").innerHTML+=`<div class="btn-kat"><a href="" style="text-decoration: none; color:black;">${adat["kategoria"]}</a></div>`
