@@ -6,7 +6,7 @@ const TermekKartyak = async () => {
             return;
         }
         let httpAdat = await httpResponse.json();
-        console.log(httpAdat)
+        console.log(httpAdat);
         for (const termek of httpAdat.tetelek) {
             console.log(termek);
             document.getElementById("KosarTartalom").innerHTML += `
