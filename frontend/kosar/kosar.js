@@ -6,9 +6,9 @@ const TermekKartyak = async () => {
             return;
         }
         let httpAdat = await httpResponse.json();
-        console.log(httpAdat);
+        //console.log("httpAdat: " + Object.values(httpAdat));
         for (const termek of httpAdat.tetelek) {
-            console.log(termek);
+            //console.log("termek: " + Object.values(termek));
             document.getElementById("KosarTartalom").innerHTML += `
             <li id="termek_${termek.termekId}">
                 <span id="nevMezo_${termek.termekID}" >${termek.nev}</span>
@@ -24,12 +24,17 @@ const TermekKartyak = async () => {
         console.log(error);
     }
 }
-/*
+
 document.addEventListener("click", (e) => {
     if (e.target.classList.contains("plusz")) {
         console.log("Plusz:", e.target.dataset.kosarId);
     }
 });
+document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("minusz")) {
+        console.log("Minusz:", e.target.dataset.kosarId);
+    }
+});/*
 document.getElementById("minusz").addEventListener("click", async (e) => {
     const id = e.target.dataset.kosarId;
     const mennyiseg = parseInt(document.getElementById(`mennyiseg_${id}`).innerText);
@@ -38,7 +43,7 @@ document.getElementById("minusz").addEventListener("click", async (e) => {
         document.getElementById(`arMezo_${id}`).innerText = (mennyiseg - 1) * egysegar + " Ft";
         vegosszegSzamitas();
         try {
-            let httpResponse = await fetch("../../bakcend/kosar/csokkenMenny.php", {
+            let httpResponse = await fetch("../../backend/kosar/csokkenMenny.php", {
                 body : JSON.stringify({
                     "id" : id
                 })
@@ -63,7 +68,7 @@ document.getElementById("plusz").addEventListener("click", async (e) => {
     document.getElementById(`arMezo_${id}`).innerText = (mennyiseg + 1) * egysegar + " Ft";
     vegosszegSzamitas();
     try {
-        let httpResponse = await fetch("../../bakcend/kosar/novelMenny.php", {
+        let httpResponse = await fetch("../../backend/kosar/novelMenny.php", {
             body : JSON.stringify({
                 "id" : id
             })
