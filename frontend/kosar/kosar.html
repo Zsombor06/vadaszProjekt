@@ -45,27 +45,27 @@
     </div>
 
 
-    <div>
-         <div>
+    <div class="kosar-terulet">
+        <section class="kosar-lista">
+            <h2>Kosár tartalma</h2>
             <form>
-                <ul id="KosarTartalom">
-
-                </ul>
-
+                <ul id="KosarTartalom" class="kosar-ul"></ul>
             </form>
-         </div>
-         <div>
-            <strong>Végösszeg: </strong>
-            <span id="vegOsszeg"></span>
-         </div>
-         <div>
-            <label for="szallitasicimek">Válasszon szállítási címet:</label>
-            <select name="szallitasicimek" id="szCimMezo">
-                <option value=""></option>
-            </select>
-            <!--Fizetési módok???-->
+        </section>
+        <section class="kosar-ossz">
+            <div class="vegosszegSor">
+                <span>Végösszeg: </span>
+                <strong id="vegosszeg">0 Ft</strong>
+            </div>
+            <div class="szCimSor">
+               <label for="szallitasicimek">Válasszon szállítási címet:</label>
+               <select name="szallitasicimek" id="szCimMezo">
+                   <option value="">Válasszon szállításicímet</option>
+               </select>
+               <!--Fizetési módok???-->
+            </div>
             <button type="button"> Fizetés </button>
-         </div>
+        </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

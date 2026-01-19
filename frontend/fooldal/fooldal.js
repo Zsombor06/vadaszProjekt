@@ -50,7 +50,7 @@ const regisztralasGomb = async () => {
     }
     const navbarKategoriak=async()=>{
         try {
-            let httpvalasz=await fetch("http://localhost/vadaszprojekt/backend/navbar/index.php/kategoriakNeve")
+            let httpvalasz=await fetch("../../backend/navbar/index.php/kategoriakNeve")
             let adatok=await httpvalasz.json()
             for (const adat of adatok) {
                     document.getElementById("navbarKategoriak").innerHTML+=`<div class="btn-kat"><a href="" style="text-decoration: none; color:black;">${adat["kategoria"]}</a></div>`
