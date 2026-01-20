@@ -173,10 +173,7 @@ const Cimek = async () => {
     }
 }
 
-document.getElementById("btn_kij").addEventListener("click", async () => { //TODO kijelentkezés végpont...
-    try {
-        
-    } catch (error) {
-        
-    }
+document.getElementById("btn_kij").addEventListener("click",  () => { //TODO kijelentkezés végpont...
+       localStorage.removeItem('token')
+           window.location.href="../fooldal/fooldal.html"
 });
