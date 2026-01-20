@@ -1,0 +1,41 @@
+h2 {
+    font-weight: 600;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead {
+    background-color: #f8f9fa;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+    transition: 0.2s;
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-feldolgozas {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-elkuldve {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.status-teljesitve {
+    background-color: #d4edda;
+    color: #155724;
+}
