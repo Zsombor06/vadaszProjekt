@@ -7,23 +7,35 @@ const TermekKartyak = async () => {
         }
         let httpAdat = await httpResponse.json();
         //console.log("httpAdat: " + Object.values(httpAdat));
+        if (httpAdat.tetelek.length === 0) {
+            document.getElementById("KosarTartalom").innerHTML =
+                "<li>A kosarad üres.</li>";
+            return;
+        }
         for (const termek of httpAdat.tetelek) {
             //console.log("termek: " + Object.values(termek), termek.id);
             //<img src="${termek.kep}" alt="${termek.nev}" width="100" height="100">
             document.getElementById("KosarTartalom").innerHTML += `
             <li id="termek_${termek.id}" class="kosar-tetel"> 
-                <div class="tetel-adatok">
-                    <span class="termek-nev" id="nevMezo_${termek.id}" >${termek.nev}</span>
-                    <div class="termek-menny">
-                        <button type="button" class="minusz" data-kosar-id="${termek.id}">−</button>
-                        <span class="mennyiseg" id="mennyiseg_${termek.id}">${termek.mennyiseg}</span>
-                        <button type="button" class="plusz" data-kosar-id="${termek.id}">+</button>
+                <div class="d-flex gap-3 align-items-center">
+                    <div class="termek-kep">
+                        
                     </div>
-                    <div class="termek-ar">
-                        <span id="arMezo_${termek.id}" data-egysegar="${termek.ar}">${termek.mennyiseg * termek.ar} Ft</span>
+                    <div class="tetel-adatok flex-grow-1">
+                        <span class="termek-nev mb-2" id="nevMezo_${termek.id}" >${termek.nev}</span>
+                        <div class="d-flex align-items-center gap-3 flex-wrap mt-2">
+                            <div class="termek-menny input-group input-group-sm" style="width: 120px;">
+                                <button type="button" class="minusz input-group-text btn btn-outline-secondary" data-kosar-id="${termek.id}">−</button>
+                                <span class="mennyiseg form-control text-center" id="mennyiseg_${termek.id}">${termek.mennyiseg}</span>
+                                <button type="button" class="plusz input-group-text btn btn-outline-secondary" data-kosar-id="${termek.id}">+</button>
+                            </div>
+                            <div class="fw-bold text-nowrap fs-6 termek-ar">
+                                <span id="arMezo_${termek.id}" data-egysegar="${termek.ar}">${termek.mennyiseg * termek.ar} Ft</span>
+                            </div>
+                            <button type="button" class="torlesGomb btn btn-danger btn-sm px-2" data-id="${termek.id}"> Törlés </button>
+                        </div>
                     </div>
                 </div>
-                <button type="button" class="torlesGomb" data-id="${termek.id}"> Törlés </button>
             </li>
             `;
         }
@@ -43,7 +55,6 @@ document.getElementById("KosarTartalom").addEventListener("click", (e) => {
     }
 });
 const csokkentMennyiseg = async (id) => {
-    console.log("csokkentMennyiseg id: " + id);
     try {
         const response = await fetch("../../backend/kosar/csokkenMenny.php", {
             method: "POST",
@@ -77,7 +88,6 @@ const csokkentMennyiseg = async (id) => {
 };
 
 const novelMennyiseg = async (id) => {
-    console.log("novelMennyiseg id: " + id);
     try {
         const response = await fetch("../../backend/kosar/novelMenny.php", {
             method: "POST",
@@ -110,7 +120,6 @@ const novelMennyiseg = async (id) => {
     }
 };
 
-
 const vegosszegSzamitas = () => {
     let vegosszeg = 0;
     document.querySelectorAll("#KosarTartalom li").forEach(li => {
@@ -125,25 +134,32 @@ const vegosszegSzamitas = () => {
     document.getElementById("vegosszeg").innerText =
         `${vegosszeg} Ft`;
 }
-/*
-document.addEventListener("click", async (e) => {
-    if (!e.target.classList.contains("torlesGomb")) return;
-    const termekId = e.target.dataset.id;
-    if (!confirm("Biztosan törlöd a terméket?")) return;
+
+const tetelTorles = async (Tid) => {
     try {
-        let httpResponse = await fetch(``, {
-            method: "DELETE" });
-        let httpAdat = await httpResponse.json();
-        if (httpResponse.ok) {
-            e.target.closest("li").remove();
+        const httpValasz = await fetch("../../backend/kosar/tetelTorles.php", { 
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ "id": Tid })
+        });
+        let httpAdat = await httpValasz.json();
+        if (httpValasz.ok) {
+            document.getElementById(`termek_${Tid}`).remove();
             vegosszegSzamitas();
         } else {
-            console.error(httpAdat); //hibaüzenet
+            console.error(httpAdat.hiba);
         }
-    } catch (error) {
-        console.error(error);
+    }   catch (err) {
+        console.error(err);
+    }
+}
+document.getElementById("KosarTartalom").addEventListener("click", (e) => {
+    if (e.target.classList.contains("torlesGomb")) {
+        if (!confirm("Biztosan törölni szeretnéd ezt a terméket?")) return;
+        const Tid = e.target.dataset.id;
+        tetelTorles(Tid);
     }
 });
-window.addEventListener("load", vegosszegSzamitas);
-*/
 window.addEventListener("load", TermekKartyak);
