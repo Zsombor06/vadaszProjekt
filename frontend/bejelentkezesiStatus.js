@@ -20,9 +20,13 @@ const bejelentkezesiStatus = async () => {
                         return ;
                     }
                 
+            }
+            else{
+                window.location.href="../bejelentkezes/bejelentkezes.html"
             }}
             else{
                 window.location.href="../bejelentkezes/bejelentkezes.html"
+
             }
         } catch (error) {
             return console.log(error);
