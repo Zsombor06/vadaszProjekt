@@ -48,10 +48,10 @@
 
     <div class="container-fluid my-5 px-4">
         <div class="row">
-            <div id="felhasznaloAdatok" class="mb-3 d-flex flex-column justify-content-center align-items-center col-lg-6 col-sm-12" >
+            <div id="felhasznaloAdatok" class="mb-3 d-flex flex-column justify-content-center align-items-center col-sm-12" >
                 <h3>Adataid:</h3><br>
-                <label for="fNev"> Felhasználónév: </label> <input type="text" id="fNev" class="" disabled><br>
-                <label for="fEmail"> Email: </label> <input type="email" id="fEmail" class="" disabled><br>
+                <label for="fNev"> Felhasználónév: </label> <input type="text" id="fNev" class="w-50" disabled><br>
+                <label for="fEmail"> Email: </label> <input type="email" id="fEmail" class="w-50" disabled><br>
                 <!--<label for="fSzamla"> zállításicím: </label> <input type="text" id="fSzamla" class="" disabled><br>-->
                 <br>
                 <div class="d-flex flex-column justify-content-center align-items-center w-100">
@@ -71,7 +71,7 @@
                     <input type="button" value="Jelszó módosítás" id="btn_jMod" class="btn btn-info">
                 </div>
                 <br>
-                <div class="form-control mb-3">
+                <div class="form-control mb-3 w-50">
                     <table class="table table-striped">
                         <tr>
                             <td><label for="fLak">Szállításicím(ek) módosítása:</label></td>
@@ -98,29 +98,27 @@
                         </tr>
                     </table>
                 </div>
-            </div>
-            <div id="rendelesiAdatok" class="mb-3 d-flex flex-column align-items-center col-lg-6 col-sm-12">
-                <h3>Rendeléseid:</h3><br>
-                <select id="rendelesLista">
-                    <!-- Itt jelennek meg a rendelések -->
-                </select><br>
-                <div class="mb-3 form-control" id="rAdatok" hidden>
-                    <p class="mb-3 position-relative">Rendelés adatai:</p>
-                    <table class="table table-striped" >
-                        <thead>
-                            <tr>
-                                <th scope="col">Termék név</th>
-                                <th scope="col">Mennyiség</th>
-                                <th scope="col">Ár</th>
-                            </tr>
-                        </thead>
-                        <tbody id="rendelesReszletek">
-                            <!-- Itt jelennek meg a rendelés részletei -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            </div>    
         </div>
+
+        <div class="container mt-5">
+            <h2 class="mb-4">Rendeléseim</h2>
+
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Dátum</th>
+                        <th>Végösszeg</th>
+                        <th>Státusz</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="rendelesLista">
+                </tbody>
+            </table>
+        </div>
+
         <div class="mb-3 d-flex flex-column justify-content-center align-items-center row">
             <input type="button" value="Kijelentkezés" id="btn_kij" class="btn btn-danger">
         </div>
