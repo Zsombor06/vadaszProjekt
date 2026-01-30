@@ -50,43 +50,45 @@ window.addEventListener("load", async () => { //szallitasi cimek
         console.log("Hiba az adatok betöltésekor!", error);
     }
 });
-//rendelések betöltése:
-window.addEventListener("load", async () => {
-    try {
-        let httpValasz = await fetch(`../../backend/felhasznalo/index.php/rendelesekAdatai?nev=${userNev}`);
-        if (httpValasz.ok) {
-            let httpAdat = await httpValasz.json();
-            document.getElementById("rendelesLista").innerHTML = "<option value='0'></option>";
-            for (const rendeles of httpAdat) {
-                document.getElementById("rendelesLista").innerHTML += `<option value="${rendeles.id}">${rendeles.elkuldve}</option>`; //mikor adta fel
-            }
-        }
-    } catch (error) {
-        console.log("Hiba a rendelések betöltésekor!", error);
-    }
-});
+//rendelések betöltése: TODO->korábbi rendelések
+fetch("http://localhost/backend/rendelesHistory.php?felhasznalo=user1")
+    .then(res => res.json())
+    .then(data => {
+        const tabla = document.getElementById("rendelesLista");
+        tabla.innerHTML = "";
 
-document.getElementById("rendelesLista").addEventListener("change", async () => {
-    try {
-        if (document.getElementById("rendelesLista").value == 0) {
-            document.getElementById("rendelesReszletek").innerHTML = "";
-            document.getElementById("rAdatok").setAttribute("hidden", true);
-            return;
-        }
-        const rendelesId = document.getElementById("rendelesLista").value;
-        let httpValasz = await fetch(`../../backend/felhasznalo/index.php/rendelesTetelek?rendelesId=${rendelesId}`);
-        if (httpValasz.ok) {
-            let httpAdat = await httpValasz.json();
-            document.getElementById("rendelesReszletek").innerHTML = "";
-            document.getElementById("rAdatok").removeAttribute("hidden");
-            for (const termek of httpAdat) {
-                document.getElementById("rendelesReszletek").innerHTML += `<tr> <td>${termek.nev}</td> <td>${termek.mennyiseg} db</td> <td>${termek.ar}Ft</td> </tr>`;
+        data.rendelesek.forEach(r => {
+            let statusClass = "status-feldolgozas";
+            let statusText = "Feldolgozás alatt";
+
+            if (r.teljesitve) {
+                statusClass = "status-teljesitve";
+                statusText = "Teljesítve";
+            } else if (r.elkuldve) {
+                statusClass = "status-elkuldve";
+                statusText = "Elküldve";
             }
-        }
-    } catch (error) {
-        console.log("Hiba a rendelés részleteinek lekérésekor!", error);
-    }
-});
+
+            tabla.innerHTML += `
+                <tr>
+                    <td>#${r.rendelesId}</td>
+                    <td>${r.fizetesIdeje ?? "-"}</td>        
+                    <td>${r.vegosszeg} Ft</td>
+                    <td>
+                        <span class="status-badge ${statusClass}">
+                            ${statusText}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="rendeles_reszletek.html?rendelesId=${r.rendelesId}"
+                           class="btn btn-sm btn-primary">
+                           Részletek
+                        </a>
+                    </td>
+                </tr>
+            `;
+        });
+    });
 
 //jelszó módosítás:
 document.getElementById("btn_jMod").addEventListener("click", async () => {

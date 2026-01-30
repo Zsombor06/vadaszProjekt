@@ -2,8 +2,7 @@
 
 const bejelentkezesiStatus = async () => {
     try {
-        if(localStorage.getItem('token')!=undefined){
-            
+        if(localStorage.getItem('token')){         
             let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
             if (httpValasz.ok) {
                 let httpAdat = await httpValasz.json();
