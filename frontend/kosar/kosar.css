@@ -101,3 +101,14 @@ body {
     font-size: 1.2rem;
     font-weight: 700;
 }
+
+.kosar-body {
+    margin: auto 200;
+    justify-content: center;
+}
+
+#modalHibaMezo {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}

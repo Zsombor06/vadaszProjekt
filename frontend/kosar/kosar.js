@@ -32,7 +32,7 @@ const TermekKartyak = async () => {
                             <div class="fw-bold text-nowrap fs-6 termek-ar">
                                 <span id="arMezo_${termek.id}" data-egysegar="${termek.ar}">${termek.mennyiseg * termek.ar} Ft</span>
                             </div>
-                            <button type="button" class="torlesGomb btn btn-danger btn-sm px-2" data-id="${termek.id}"> Törlés </button>
+                            <button type="button" class="torlesGomb btn btn-danger btn-sm px-2" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#torlesModal"> Törlés </button>
                         </div>
                     </div>
                 </div>
@@ -147,19 +147,25 @@ const tetelTorles = async (Tid) => {
         let httpAdat = await httpValasz.json();
         if (httpValasz.ok) {
             document.getElementById(`termek_${Tid}`).remove();
+            document.getElementById("modalHibaMezo").innerText = httpAdat.uzenet;
             vegosszegSzamitas();
         } else {
             console.error(httpAdat.hiba);
+            document.getElementById("modalHibaMezo").innerText = httpAdat.hiba;
         }
     }   catch (err) {
         console.error(err);
+        document.getElementById("modalHibaMezo").innerText = "Hiba történt a törlés során!";
     }
 }
-document.getElementById("KosarTartalom").addEventListener("click", (e) => {
-    if (e.target.classList.contains("torlesGomb")) {
-        if (!confirm("Biztosan törölni szeretnéd ezt a terméket?")) return;
-        const Tid = e.target.dataset.id;
-        tetelTorles(Tid);
-    }
+document.getElementById("torlesModal").addEventListener("show.bs.modal", function (e) {
+    const button = e.relatedTarget;
+    const Tid = button.getAttribute("data-id");
+    document.getElementById("torlesConfirm").setAttribute("data-id", Tid);
 });
+document.getElementById("torlesConfirm").addEventListener("click", (e) => {
+    const Tid = e.target.dataset.id;
+    tetelTorles(Tid);
+});
+
 window.addEventListener("load", TermekKartyak);
