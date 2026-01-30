@@ -18,7 +18,6 @@ window.addEventListener('load', async () => {
     
     if(localStorage.getItem("kategoria")){
         let kategoria=localStorage.getItem("kategoriaId")
-        console.log(kategoria)
         let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${kategoria}`);
         let termekek = await httpValasz.json();
         for (const termek of termekek) {
@@ -34,7 +33,7 @@ window.addEventListener('load', async () => {
                             <small class="text-muted">Ár: ${termek.regiar} Ft</small>
                         </div>
                         <div class="card-footer">
-                            <input type="button" onClick="${Kosaraba(termek.id)}" value="Kosárba">
+                            <input type="button" onClick="Kosaraba(${termek.id})" value="Kosárba">
                         </div>
                     </div>
                 `;
@@ -48,7 +47,7 @@ window.addEventListener('load', async () => {
                             <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small>
                         </div>
                         <div class="card-footer">
-                            <input type="button" onClick="${Kosaraba(termek.id)}" value="Kosárba">
+                            <input type="button" onClick="Kosaraba(${termek.id})" value="Kosárba">
                         </div>
                     </div>
                 `;
@@ -80,7 +79,7 @@ termekKategoria.addEventListener('change', async () => {
                             <small class="text-muted">Ár: ${termek.regiar} Ft</small>
                         </div>
                         <div class="card-footer">
-                            <input type="button" onClick="${Kosaraba(termek.id)}" value="Kosárba">
+                            <input type="button" onClick="()=>{Kosaraba(${termek.id})}" value="Kosárba">
                         </div>
                     </div>
                 `;
@@ -94,7 +93,7 @@ termekKategoria.addEventListener('change', async () => {
                             <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small>
                         </div>
                         <div class="card-footer">
-                            <input type="button" onClick="${Kosaraba(termek.id)}" value="Kosárba">
+                            <input type="button" onClick="Kosaraba(${termek.id})" value="Kosárba">
                         </div>
                     </div>
                 `;
@@ -106,19 +105,3 @@ termekKategoria.addEventListener('change', async () => {
     }
 });
 
-const Kosaraba = async (termekID) => {
-    try { //fnev, termekID
-        let felhasznaloNev = "user1"; //példa felhasználónév
-        let httpValasz = await fetch(`../../backend/termekek/index.php/kosarHozzaad`, {
-            method: 'POST',
-            body: JSON.stringify({
-                nev : felhasznaloNev,
-                termek : termekID
-            }),
-        });
-        let eredmeny = await httpValasz.json();
-        console.log(eredmeny.valasz);
-    } catch (error) {
-        console.error(error);
-    }
-}
