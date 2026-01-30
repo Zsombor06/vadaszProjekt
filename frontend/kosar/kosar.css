@@ -106,3 +106,9 @@ body {
     margin: auto 200;
     justify-content: center;
 }
+
+#modalHibaMezo {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
