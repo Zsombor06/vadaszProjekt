@@ -11,7 +11,7 @@
 <body>
         <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid px-4">
-            <img src="../képek/aranyagancs_logo.png" alt="LOGO" width="60" class="navbar-brand"> <!-- Oldal logója-->
+        <a href="../fooldal/fooldal.html">      <img src="../képek/aranyagancs_logo.png" alt="LOGO" width="60" class="navbar-brand"></a> <!-- Oldal logója-->
 
         <div class="d-flex flex-wrap justify-content-end" id="menuElems">
             <ul class="navbar-nav me-3">
@@ -24,8 +24,9 @@
                 </li>
             </ul>
 
-            <button class="btn btn-outline-secondary me-3" onclick="window.location.href=''">  Kosár </button> <!-- Kosár oldal     Ne biztos hogy jó lesz így-->
-            <button class="btn btn-outline-success me-3" onclick="window.location.href=''">  Felhasználó </button> <!-- Felhasználói oldal -->
+            <button class="btn btn-outline-secondary me-3" id="kosarGomb">  Kosár </button> <!-- Kosár oldal     Ne biztos hogy jó lesz így-->
+                       <button class="btn btn-outline-success me-3" id="felhasznaloGomb">  Felhasználó </button> <!-- Felhasználói oldal -->
+
             <button class="btn btn-outline-dark" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"> ☰ </button>
         </div>
     </div>
@@ -148,9 +149,13 @@
 <input   type="button"  class="btn btn-dark" value="Törlés" id="torlesTermek">
 </div> <!-- Termék törlése-->
 
+<input class="btn btn-dark" type="button" value="Kijelentkezés" id="kijelentkezes">
+
 <div id="muveletEredmeny"></div>
 <img id="kepEr">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="./admin.js"></script>
+<script src="../bejelentkezesiStatus.js"></script>
+
 </body>
 </html>

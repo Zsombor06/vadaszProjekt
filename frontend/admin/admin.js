@@ -447,3 +447,8 @@ termekNevek[0].addEventListener("click",termekAdatok)
     }
 
     window.addEventListener("load",navbarKategoriak)
+
+document.getElementById("kijelentkezes").addEventListener("click",()=>{
+    localStorage.removeItem('token')
+    window.location.href="../fooldal/fooldal.html"
+})
