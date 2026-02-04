@@ -43,32 +43,35 @@ CREATE TABLE `felhasznalo` (
 --
 -- A tábla adatainak kiíratása `felhasznalo`
 --
-
-INSERT INTO `felhasznalo` (`felhasznalonev`, `jelszo`, `email`, `rangId`, `szamlazasi_orszag`, `szamlazasi_iranyitoszam`, `szamlazasi_varos`, `szamlazasi_utca`) VALUES
-('admin', 'admin123', 'admin@aranyagancs.hu', 1, '', 0, '', ''),
-('testuser', '$2y$10$uOrMVbt5iRorrbdWjYLNDeS7IME59DwHkJIVAVxRt/VHyXofWUDOi', 'testuser123@gmail.com', 3, 'Magyarország', 1024, 'Budapest', 'Margit körút 15.'),
-('ujuser', '$2y$10$agdgfDyboEHLJWkSLTNOHeLDqhU3TiFg.8VMPzAlXE1ktRojxGdq.', 'ujuser@example.com', 3, '', 0, '', ''),
-('ujuser2', '$2y$10$FvGHC0JRlavCOxYCrrsgJOgmHcDHHy37GdxaTPmvahzX0BPqQ9OR6', 'ujuser@example.com', 3, '', 0, '', ''),
-('ujuser3', '$2y$10$0xkbfrG4ggDXN6oY8OiegeaxxxVYeN8GR4IJe6mMHiTn2ztlWGxGC', 'ujuser3@example.com', 3, '', 0, '', ''),
-('user1', 'pass1', 'user1@example.com', 2, '', 0, '', ''),
-('user10', 'pass10', 'user10@example.com', 3, '', 0, '', ''),
-('user11', 'pass11', 'user11@example.com', 2, '', 0, '', ''),
-('user12', 'pass12', 'user12@example.com', 2, '', 0, '', ''),
-('user13', 'pass13', 'user13@example.com', 3, '', 0, '', ''),
-('user14', 'pass14', 'user14@example.com', 2, '', 0, '', ''),
-('user15', 'pass15', 'user15@example.com', 2, '', 0, '', ''),
-('user16', 'pass16', 'user16@example.com', 3, '', 0, '', ''),
-('user17', 'pass17', 'user17@example.com', 3, '', 0, '', ''),
-('user18', 'pass18', 'user18@example.com', 2, '', 0, '', ''),
-('user19', 'pass19', 'user19@example.com', 3, '', 0, '', ''),
-('user2', 'pass2', 'user2@example.com', 2, '', 0, '', ''),
-('user3', 'pass3', 'user3@example.com', 3, '', 0, '', ''),
-('user4', 'pass4', 'user4@example.com', 2, '', 0, '', ''),
-('user5', 'pass5', 'user5@example.com', 2, '', 0, '', ''),
-('user6', 'pass6', 'user6@example.com', 3, '', 0, '', ''),
-('user7', 'pass7', 'user7@example.com', 2, '', 0, '', ''),
-('user8', 'pass8', 'user8@example.com', 2, '', 0, '', ''),
-('user9', 'pass9', 'user9@example.com', 3, '', 0, '', '');
+INSERT INTO `felhasznalo` (`felhasznalonev`, `jelszo`, `email`, `rangId`, `szamlazasi_orszag`, `szamlazasi_iranyitoszam`, `szamlazasi_varos`, `szamlazasi_utca`) VALUES 
+('user', '$2y$10$1zHqp7Cn4s4UuUplZFobeeT/vooF3564V3pvl.e7ZVUosIfzQz1fG', 'user@user', '3', 'Magyarország', '8200', 'Veszprém', 'Valami'),
+('worker', '$2y$10$O1H/L1Ar4RgOqf4PdqcNMODM5Pg6VZkC2/ohxrp6hY4imxzqyq7oq', 'worker@worker', '2', 'Magyarország', '8200', 'Veszprém', 'Valami'),
+('admin', '$2y$10$p/VsqPDZalVnOXcz1fmLrum08lLeUN7ZWfrjbov455I8/ckrVCk.O', 'admin@admin', '1', 'Magyarország', '8200', 'Veszprém', 'Valami');
+-- INSERT INTO `felhasznalo` (`felhasznalonev`, `jelszo`, `email`, `rangId`, `szamlazasi_orszag`, `szamlazasi_iranyitoszam`, `szamlazasi_varos`, `szamlazasi_utca`) VALUES
+-- ('admin', 'admin123', 'admin@aranyagancs.hu', 1, '', 0, '', ''),
+-- ('testuser', '$2y$10$uOrMVbt5iRorrbdWjYLNDeS7IME59DwHkJIVAVxRt/VHyXofWUDOi', 'testuser123@gmail.com', 3, 'Magyarország', 1024, 'Budapest', 'Margit körút 15.'),
+-- ('ujuser', '$2y$10$agdgfDyboEHLJWkSLTNOHeLDqhU3TiFg.8VMPzAlXE1ktRojxGdq.', 'ujuser@example.com', 3, '', 0, '', ''),
+-- ('ujuser2', '$2y$10$FvGHC0JRlavCOxYCrrsgJOgmHcDHHy37GdxaTPmvahzX0BPqQ9OR6', 'ujuser@example.com', 3, '', 0, '', ''),
+-- ('ujuser3', '$2y$10$0xkbfrG4ggDXN6oY8OiegeaxxxVYeN8GR4IJe6mMHiTn2ztlWGxGC', 'ujuser3@example.com', 3, '', 0, '', ''),
+-- ('user1', 'pass1', 'user1@example.com', 2, '', 0, '', ''),
+-- ('user10', 'pass10', 'user10@example.com', 3, '', 0, '', ''),
+-- ('user11', 'pass11', 'user11@example.com', 2, '', 0, '', ''),
+-- ('user12', 'pass12', 'user12@example.com', 2, '', 0, '', ''),
+-- ('user13', 'pass13', 'user13@example.com', 3, '', 0, '', ''),
+-- ('user14', 'pass14', 'user14@example.com', 2, '', 0, '', ''),
+-- ('user15', 'pass15', 'user15@example.com', 2, '', 0, '', ''),
+-- ('user16', 'pass16', 'user16@example.com', 3, '', 0, '', ''),
+-- ('user17', 'pass17', 'user17@example.com', 3, '', 0, '', ''),
+-- ('user18', 'pass18', 'user18@example.com', 2, '', 0, '', ''),
+-- ('user19', 'pass19', 'user19@example.com', 3, '', 0, '', ''),
+-- ('user2', 'pass2', 'user2@example.com', 2, '', 0, '', ''),
+-- ('user3', 'pass3', 'user3@example.com', 3, '', 0, '', ''),
+-- ('user4', 'pass4', 'user4@example.com', 2, '', 0, '', ''),
+-- ('user5', 'pass5', 'user5@example.com', 2, '', 0, '', ''),
+-- ('user6', 'pass6', 'user6@example.com', 3, '', 0, '', ''),
+-- ('user7', 'pass7', 'user7@example.com', 2, '', 0, '', ''),
+-- ('user8', 'pass8', 'user8@example.com', 2, '', 0, '', ''),
+-- ('user9', 'pass9', 'user9@example.com', 3, '', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -183,38 +186,38 @@ CREATE TABLE `rendeles` (
 -- A tábla adatainak kiíratása `rendeles`
 --
 
-INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldve`, `teljesitve`) VALUES
-(1, 'user1', 1, NULL, '2025-11-01 10:00:00', '2025-11-03 12:00:00'),
-(2, 'user2', 1, NULL, '2025-11-02 14:00:00', '2025-11-04 16:00:00'),
-(3, 'user3', 1, NULL, '2025-11-05 09:00:00', '2025-11-06 11:00:00'),
-(4, 'user4', 1, NULL, '2025-11-06 15:00:00', '2025-11-08 10:00:00'),
-(5, 'user5', 0, NULL, '2025-11-07 12:00:00', '2025-11-08 18:00:00'),
-(6, 'user6', 1, NULL, '2025-11-03 11:00:00', '2025-11-05 13:00:00'),
-(7, 'user7', 1, NULL, '2025-11-09 13:00:00', '2025-11-11 15:00:00'),
-(8, 'user8', 0, NULL, '2025-11-10 10:30:00', '2025-11-11 12:00:00'),
-(9, 'user9', 1, NULL, '2025-11-01 08:30:00', '2025-11-02 09:00:00'),
-(10, 'user10', 1, NULL, '2025-11-04 10:00:00', '2025-11-05 11:30:00'),
-(11, 'user11', 0, NULL, '2025-11-02 13:00:00', '2025-11-03 16:00:00'),
-(12, 'user12', 1, NULL, '2025-11-05 14:00:00', '2025-11-06 18:00:00'),
-(13, 'user13', 1, NULL, '2025-11-06 10:00:00', '2025-11-07 15:00:00'),
-(14, 'user14', 0, NULL, '2025-11-07 11:00:00', '2025-11-08 12:30:00'),
-(15, 'user15', 1, NULL, '2025-11-08 12:00:00', '2025-11-09 14:00:00'),
-(16, 'user16', 0, NULL, '2025-11-09 09:00:00', '2025-11-10 10:00:00'),
-(17, 'user17', 1, NULL, '2025-11-10 14:00:00', '2025-11-11 17:00:00'),
-(18, 'user18', 1, NULL, '2025-11-11 13:00:00', '2025-11-12 15:00:00'),
-(19, 'user19', 1, NULL, '2025-11-12 10:00:00', '2025-11-13 11:00:00'),
-(20, 'admin', 1, NULL, '2025-11-01 09:00:00', '2025-11-02 10:00:00'),
-(23, 'testuser', 0, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(24, 'user1', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(25, 'user1', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(26, 'user1', 1, '2026-01-06 18:59:24', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(27, 'user2', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(28, 'user2', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(29, 'user2', 0, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(30, 'user3', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(31, 'user3', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(32, 'user3', 0, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(33, 'user1', 0, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+-- INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldve`, `teljesitve`) VALUES
+-- (1, 'user1', 1, NULL, '2025-11-01 10:00:00', '2025-11-03 12:00:00'),
+-- (2, 'user2', 1, NULL, '2025-11-02 14:00:00', '2025-11-04 16:00:00'),
+-- (3, 'user3', 1, NULL, '2025-11-05 09:00:00', '2025-11-06 11:00:00'),
+-- (4, 'user4', 1, NULL, '2025-11-06 15:00:00', '2025-11-08 10:00:00'),
+-- (5, 'user5', 0, NULL, '2025-11-07 12:00:00', '2025-11-08 18:00:00'),
+-- (6, 'user6', 1, NULL, '2025-11-03 11:00:00', '2025-11-05 13:00:00'),
+-- (7, 'user7', 1, NULL, '2025-11-09 13:00:00', '2025-11-11 15:00:00'),
+-- (8, 'user8', 0, NULL, '2025-11-10 10:30:00', '2025-11-11 12:00:00'),
+-- (9, 'user9', 1, NULL, '2025-11-01 08:30:00', '2025-11-02 09:00:00'),
+-- (10, 'user10', 1, NULL, '2025-11-04 10:00:00', '2025-11-05 11:30:00'),
+-- (11, 'user11', 0, NULL, '2025-11-02 13:00:00', '2025-11-03 16:00:00'),
+-- (12, 'user12', 1, NULL, '2025-11-05 14:00:00', '2025-11-06 18:00:00'),
+-- (13, 'user13', 1, NULL, '2025-11-06 10:00:00', '2025-11-07 15:00:00'),
+-- (14, 'user14', 0, NULL, '2025-11-07 11:00:00', '2025-11-08 12:30:00'),
+-- (15, 'user15', 1, NULL, '2025-11-08 12:00:00', '2025-11-09 14:00:00'),
+-- (16, 'user16', 0, NULL, '2025-11-09 09:00:00', '2025-11-10 10:00:00'),
+-- (17, 'user17', 1, NULL, '2025-11-10 14:00:00', '2025-11-11 17:00:00'),
+-- (18, 'user18', 1, NULL, '2025-11-11 13:00:00', '2025-11-12 15:00:00'),
+-- (19, 'user19', 1, NULL, '2025-11-12 10:00:00', '2025-11-13 11:00:00'),
+-- (20, 'admin', 1, NULL, '2025-11-01 09:00:00', '2025-11-02 10:00:00'),
+-- (23, 'testuser', 0, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+-- (24, 'user1', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+-- (25, 'user1', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+-- (26, 'user1', 1, '2026-01-06 18:59:24', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+-- (27, 'user2', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+-- (28, 'user2', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+-- (29, 'user2', 0, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+-- (30, 'user3', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+-- (31, 'user3', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+-- (32, 'user3', 0, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+-- (33, 'user1', 0, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -234,32 +237,36 @@ CREATE TABLE `szallitasicimek` (
 --
 -- A tábla adatainak kiíratása `szallitasicimek`
 --
-
 INSERT INTO `szallitasicimek` (`id`, `felhasznalo`, `orszag`, `iranyitoszam`, `varos`, `utca`) VALUES
-(1, 'user1', 'Magyarország', 1011, 'Budapest', 'Fő utca 1.'),
-(2, 'user2', 'Magyarország', 4025, 'Debrecen', 'Piac utca 3.'),
-(3, 'user3', 'Magyarország', 9022, 'Győr', 'Baross út 5.'),
-(4, 'user4', 'Magyarország', 6720, 'Szeged', 'Kossuth L. utca 8.'),
-(5, 'user5', 'Magyarország', 7621, 'Pécs', 'Király utca 12.'),
-(6, 'user6', 'Magyarország', 9400, 'Sopron', 'Deák tér 2.'),
-(7, 'user7', 'Magyarország', 6000, 'Kecskemét', 'Petőfi S. utca 9.'),
-(8, 'user8', 'Magyarország', 3300, 'Eger', 'Dobó tér 4.'),
-(9, 'user9', 'Magyarország', 5000, 'Szolnok', 'Tisza park 3.'),
-(10, 'user10', 'Magyarország', 8200, 'Veszprém', 'Vár utca 10.'),
-(11, 'user11', 'Magyarország', 2800, 'Tatabánya', 'Fő tér 11.'),
-(12, 'user12', 'Magyarország', 5600, 'Békéscsaba', 'Bartók utca 7.'),
-(13, 'user13', 'Magyarország', 8800, 'Nagykanizsa', 'Erzsébet tér 9.'),
-(14, 'user14', 'Magyarország', 8900, 'Zalaegerszeg', 'Rákóczi út 6.'),
-(15, 'user15', 'Magyarország', 3100, 'Salgótarján', 'Madách utca 1.'),
-(16, 'user16', 'Magyarország', 3525, 'Miskolc', 'Petőfi tér 5.'),
-(17, 'user17', 'Magyarország', 7400, 'Kaposvár', 'Ady utca 7.'),
-(18, 'user18', 'Magyarország', 9700, 'Szombathely', 'Fő tér 4.'),
-(19, 'user19', 'Magyarország', 4400, 'Nyíregyháza', 'Kossuth tér 2.'),
-(20, 'admin', 'Magyarország', 1011, 'Budapest', 'Admin tér 1.'),
-(21, 'ujuser', 'Magyarország', 1011, 'Budapest', 'Fő utca 10.'),
-(22, 'ujuser2', 'Magyarország', 1011, 'Budapest', 'Fő utca 10.'),
-(23, 'ujuser3', 'Magyarország', 1011, 'Budapest', 'Fő utca 10.'),
-(24, 'testuser', 'Magyarország', 1011, 'Budapest', 'Fő utca 3.');
+(1, 'user', 'Magyarország', 8200, 'Veszprém', 'Valami'),
+(2, 'admin', 'Magyarország', 8200, 'Veszprém', 'Valami');
+(3, 'worker', 'Magyarország', 8200, 'Veszprém', 'Valami');
+
+-- INSERT INTO `szallitasicimek` (`id`, `felhasznalo`, `orszag`, `iranyitoszam`, `varos`, `utca`) VALUES
+-- (1, 'user1', 'Magyarország', 1011, 'Budapest', 'Fő utca 1.'),
+-- (2, 'user2', 'Magyarország', 4025, 'Debrecen', 'Piac utca 3.'),
+-- (3, 'user3', 'Magyarország', 9022, 'Győr', 'Baross út 5.'),
+-- (4, 'user4', 'Magyarország', 6720, 'Szeged', 'Kossuth L. utca 8.'),
+-- (5, 'user5', 'Magyarország', 7621, 'Pécs', 'Király utca 12.'),
+-- (6, 'user6', 'Magyarország', 9400, 'Sopron', 'Deák tér 2.'),
+-- (7, 'user7', 'Magyarország', 6000, 'Kecskemét', 'Petőfi S. utca 9.'),
+-- (8, 'user8', 'Magyarország', 3300, 'Eger', 'Dobó tér 4.'),
+-- (9, 'user9', 'Magyarország', 5000, 'Szolnok', 'Tisza park 3.'),
+-- (10, 'user10', 'Magyarország', 8200, 'Veszprém', 'Vár utca 10.'),
+-- (11, 'user11', 'Magyarország', 2800, 'Tatabánya', 'Fő tér 11.'),
+-- (12, 'user12', 'Magyarország', 5600, 'Békéscsaba', 'Bartók utca 7.'),
+-- (13, 'user13', 'Magyarország', 8800, 'Nagykanizsa', 'Erzsébet tér 9.'),
+-- (14, 'user14', 'Magyarország', 8900, 'Zalaegerszeg', 'Rákóczi út 6.'),
+-- (15, 'user15', 'Magyarország', 3100, 'Salgótarján', 'Madách utca 1.'),
+-- (16, 'user16', 'Magyarország', 3525, 'Miskolc', 'Petőfi tér 5.'),
+-- (17, 'user17', 'Magyarország', 7400, 'Kaposvár', 'Ady utca 7.'),
+-- (18, 'user18', 'Magyarország', 9700, 'Szombathely', 'Fő tér 4.'),
+-- (19, 'user19', 'Magyarország', 4400, 'Nyíregyháza', 'Kossuth tér 2.'),
+-- (20, 'admin', 'Magyarország', 1011, 'Budapest', 'Admin tér 1.'),
+-- (21, 'ujuser', 'Magyarország', 1011, 'Budapest', 'Fő utca 10.'),
+-- (22, 'ujuser2', 'Magyarország', 1011, 'Budapest', 'Fő utca 10.'),
+-- (23, 'ujuser3', 'Magyarország', 1011, 'Budapest', 'Fő utca 10.'),
+-- (24, 'testuser', 'Magyarország', 1011, 'Budapest', 'Fő utca 3.');
 
 -- --------------------------------------------------------
 
@@ -288,7 +295,7 @@ INSERT INTO `termek` (`id`, `nev`, `nevEn`, `leiras`, `leirasEn`, `ar`, `kategor
 (1, 'Terepmintás dzseki', 'Camo Jacket', 'Meleg, vízálló vadászdzseki.', 'Warm waterproof hunting jacket.', 34990, 1, 25, 3, ''),
 (2, 'Vadászpuskatus', 'Shotgun Stock', 'Tölgyfából készült puskatus.', 'Oak shotgun stock.', 19990, 2, 10, 2, ''),
 (3, 'Távcső 10x50', 'Binoculars 10x50', 'Kiváló látótávolság vadászathoz.', 'Excellent range for hunting.', 59990, 3, 15, 5, ''),
-(4, 'Kaliber .308 lőszer', 'Caliber .308 Ammo', 'Prémium minőségű golyós lőszer.', 'Premium quality bullets.', 4990, 4, 200, 1, ''),
+(4, 'Medve csapda', 'Bear trap', 'Medvék és nagy testű állatok elleni csapda.', 'Traps against bears and large animals.', 14990, 6, 200, 1, ''),
 (5, 'Vadászkés', 'Hunting Knife', 'Rozsdamentes acél vadászkés.', 'Stainless steel hunting knife.', 12990, 5, 50, 4, ''),
 (6, 'Róka csapda', 'Fox Trap', 'Professzionális élvefogó csapda.', 'Professional live trap.', 24990, 6, 12, 2, ''),
 (7, 'Vadász sapka', 'Hunting Cap', 'Zöld terepmintás sapka.', 'Green camo hunting cap.', 3990, 1, 100, 1, ''),
