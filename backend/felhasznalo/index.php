@@ -13,7 +13,7 @@ switch(end($uri)){
         echo json_encode(["valasz"=>"Hiányzó adat!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
     }
-    $felhasznaloAdatSQL="SELECT felhasznalonev, email, szamlazasicim from felhasznalo where felhasznalonev=?";
+    $felhasznaloAdatSQL="SELECT felhasznalonev, email from felhasznalo where felhasznalonev=?";
     $felhasznaloAdat=adatokLekerese($felhasznaloAdatSQL,"s",[$_GET["nev"]]);
     echo json_encode($felhasznaloAdat,JSON_UNESCAPED_UNICODE);
     return http_response_code(200);

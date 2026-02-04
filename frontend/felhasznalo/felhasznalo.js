@@ -23,15 +23,17 @@ document.getElementById('szemecske2').addEventListener('click', function () {
 });
 
 //adatok betöltése:
-let userNev = "user1"; //bejelentkezett felhasznalo nevet ide kell betenni
+let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+let httpAdat = await httpValasz.json();
+let userNev = httpAdat["felhasznalonev"]; //bejelentkezett felhasznalo nevet ide kell betenni
 window.addEventListener("load", async () => {
     try {
         let httpValasz = await fetch(`../../backend/felhasznalo/index.php/felhasznaloAdat?nev=${userNev}`); //felhasznalo nevet at kell adni
         if (httpValasz.ok) {
             let httpAdat = await httpValasz.json();
             for (const adat of httpAdat) {
-                document.getElementById("fNev").value = adat.felhasznalonev;
-                document.getElementById("fEmail").value = adat.email;
+                document.getElementById("fNev").value = adat["felhasznalonev"];
+                document.getElementById("fEmail").value = adat["email"];
                 //document.getElementById("fSzamla").value = adat.szamlazasicim;
             }
         }
@@ -51,44 +53,44 @@ window.addEventListener("load", async () => { //szallitasi cimek
     }
 });
 //rendelések betöltése: TODO->korábbi rendelések
-fetch("http://localhost/backend/rendelesHistory.php?felhasznalo=user1")
-    .then(res => res.json())
-    .then(data => {
-        const tabla = document.getElementById("rendelesLista");
-        tabla.innerHTML = "";
+// fetch("http://localhost/backend/rendelesHistory.php?felhasznalo=user1")
+//     .then(res => res.json())
+//     .then(data => {
+//         const tabla = document.getElementById("rendelesLista");
+//         tabla.innerHTML = "";
 
-        data.rendelesek.forEach(r => {
-            let statusClass = "status-feldolgozas";
-            let statusText = "Feldolgozás alatt";
+//         data.rendelesek.forEach(r => {
+//             let statusClass = "status-feldolgozas";
+//             let statusText = "Feldolgozás alatt";
 
-            if (r.teljesitve) {
-                statusClass = "status-teljesitve";
-                statusText = "Teljesítve";
-            } else if (r.elkuldve) {
-                statusClass = "status-elkuldve";
-                statusText = "Elküldve";
-            }
+//             if (r.teljesitve) {
+//                 statusClass = "status-teljesitve";
+//                 statusText = "Teljesítve";
+//             } else if (r.elkuldve) {
+//                 statusClass = "status-elkuldve";
+//                 statusText = "Elküldve";
+//             }
 
-            tabla.innerHTML += `
-                <tr>
-                    <td>#${r.rendelesId}</td>
-                    <td>${r.fizetesIdeje ?? "-"}</td>        
-                    <td>${r.vegosszeg} Ft</td>
-                    <td>
-                        <span class="status-badge ${statusClass}">
-                            ${statusText}
-                        </span>
-                    </td>
-                    <td>
-                        <a href="rendeles_reszletek.html?rendelesId=${r.rendelesId}"
-                           class="btn btn-sm btn-primary">
-                           Részletek
-                        </a>
-                    </td>
-                </tr>
-            `;
-        });
-    });
+//             tabla.innerHTML += `
+//                 <tr>
+//                     <td>#${r.rendelesId}</td>
+//                     <td>${r.fizetesIdeje ?? "-"}</td>        
+//                     <td>${r.vegosszeg} Ft</td>
+//                     <td>
+//                         <span class="status-badge ${statusClass}">
+//                             ${statusText}
+//                         </span>
+//                     </td>
+//                     <td>
+//                         <a href="rendeles_reszletek.html?rendelesId=${r.rendelesId}"
+//                            class="btn btn-sm btn-primary">
+//                            Részletek
+//                         </a>
+//                     </td>
+//                 </tr>
+//             `;
+//         });
+//     });
 
 //jelszó módosítás:
 document.getElementById("btn_jMod").addEventListener("click", async () => {
