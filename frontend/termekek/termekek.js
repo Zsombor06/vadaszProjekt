@@ -26,7 +26,7 @@ window.addEventListener('load', async () => {
                 if (termek.regiar == Math.round(termek.ujar, 0)) {
                     kartya.innerHTML = `
                         <div class="card h-100">
-                            <img src="" class="card-img-top" alt="${termek.nev}">
+                            <img src="${termek.kep}" class="card-img-top" alt="${termek.nev}">
                             <div class="card-body">
                                 <h5 class="card-title">${termek.nev}</h5>
                                 <p class="card-text">${termek.leiras}</p>
@@ -40,7 +40,7 @@ window.addEventListener('load', async () => {
                 } else {
                     kartya.innerHTML = `
                         <div class="card h-100">
-                            <img src="" class="card-img-top" alt="${termek.nev}">
+                            <img src="${termek.kep}" class="card-img-top" alt="${termek.nev}">
                             <div class="card-body">
                                 <h5 class="card-title">${termek.nev}</h5>
                                 <p class="card-text">${termek.leiras}</p>
@@ -77,7 +77,7 @@ termekKategoria.addEventListener('change', async () => {
             if (termek.regiar == Math.round(termek.ujar, 0)) {
                 kartya.innerHTML = `
                     <div class="card h-100">
-                        <img src="" class="card-img-top" alt="${termek.nev}">
+                        <img src="${termek.kep}" class="card-img-top" alt="${termek.nev}">
                         <div class="card-body">
                             <h5 class="card-title">${termek.nev}</h5>
                             <p class="card-text">${termek.leiras}</p>
@@ -91,7 +91,7 @@ termekKategoria.addEventListener('change', async () => {
             } else {
                 kartya.innerHTML = `
                     <div class="card h-100">
-                        <img src="" class="card-img-top" alt="${termek.nev}">
+                        <img src="${termek.kep}" class="card-img-top" alt="${termek.nev}">
                         <div class="card-body">
                             <h5 class="card-title">${termek.nev}</h5>
                             <p class="card-text">${termek.leiras}</p>
