@@ -28,3 +28,15 @@
 .text-justify {
     text-align: justify;
 }
+
+
+
+/*termékek rész*/
+.termek-kep {
+    width: 400px !important;
+    height: 400px !important;
+    background: #f0f0f0;
+    border-radius: 6px;
+    flex-shrink: 0;
+    object-fit: cover;
+}

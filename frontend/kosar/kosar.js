@@ -1,6 +1,6 @@
 const TermekKartyak = async () => {
     try {
-        let httpResponse = await fetch("../../backend/kosar/kosarAdatok.php?felhasznalo=user1"); //user1 tesztadat
+        let httpResponse = await fetch("../../backend/kosar/kosarAdatok.php?felhasznalo=user"); //user1 tesztadat
         if (!httpResponse.ok) {
             alert("Hiba a termékek lekérése során");
             return;
@@ -19,7 +19,7 @@ const TermekKartyak = async () => {
             <li id="termek_${termek.id}" class="kosar-tetel"> 
                 <div class="d-flex gap-3 align-items-center">
                     <div class="termek-kep">
-                        <img src="${termek.kep}" alt="${termek.nev}">
+                        <img class="termek-kep" src="${termek.kep}" alt="${termek.nev}">
                     </div>
                     <div class="tetel-adatok flex-grow-1">
                         <span class="termek-nev mb-2" id="nevMezo_${termek.id}" >${termek.nev}</span>

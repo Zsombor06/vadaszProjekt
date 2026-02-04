@@ -296,7 +296,7 @@ INSERT INTO `termek` (`id`, `nev`, `nevEn`, `leiras`, `leirasEn`, `ar`, `kategor
 (2, 'Vadászpuskatus', 'Shotgun Stock', 'Tölgyfából készült puskatus.', 'Oak shotgun stock.', 19990, 2, 10, 2, '../képek/puskatus.png'),
 (3, 'Távcső 10x50', 'Binoculars 10x50', 'Kiváló látótávolság vadászathoz.', 'Excellent range for hunting.', 59990, 3, 15, 5, '../képek/tavcso.png'),
 (4, 'Medve csapda', 'Bear trap', 'Medvék és nagy testű állatok elleni csapda.', 'Traps against bears and large animals.', 14990, 6, 200, 1, '../képek/medvecsapda.png'),
-(5, 'Vadászkés', 'Hunting Knife', 'Rozsdamentes acél vadászkés.', 'Stainless steel hunting knife.', 12990, 5, 50, 4, '../képek/vadaszkes'),
+(5, 'Vadászkés', 'Hunting Knife', 'Rozsdamentes acél vadászkés.', 'Stainless steel hunting knife.', 12990, 5, 50, 4, '../képek/vadaszkes.png'),
 (6, 'Róka csapda', 'Fox Trap', 'Professzionális élvefogó csapda.', 'Professional live trap.', 24990, 6, 12, 2, '../képek/csapda.png'),
 (7, 'Vadász sapka', 'Hunting Cap', 'Zöld terepmintás sapka.', 'Green camo hunting cap.', 3990, 1, 100, 1, '../képek/vadaszkalap.png'),
 (8, 'Terep hátizsák', 'Field Backpack', '50 literes vadászhátizsák.', '50L hunting backpack.', 17990, 8, 60, 3, '../képek/hatizsak.png'),
