@@ -284,7 +284,7 @@ CREATE TABLE `termek` (
   `kategoriaId` int(11) NOT NULL,
   `keszlet` int(11) NOT NULL,
   `learazasid` int(11) NOT NULL,
-  `kep` blob NOT NULL
+  `kep` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
@@ -292,26 +292,26 @@ CREATE TABLE `termek` (
 --
 
 INSERT INTO `termek` (`id`, `nev`, `nevEn`, `leiras`, `leirasEn`, `ar`, `kategoriaId`, `keszlet`, `learazasid`, `kep`) VALUES
-(1, 'Terepmintás dzseki', 'Camo Jacket', 'Meleg, vízálló vadászdzseki.', 'Warm waterproof hunting jacket.', 34990, 1, 25, 3, ''),
-(2, 'Vadászpuskatus', 'Shotgun Stock', 'Tölgyfából készült puskatus.', 'Oak shotgun stock.', 19990, 2, 10, 2, ''),
-(3, 'Távcső 10x50', 'Binoculars 10x50', 'Kiváló látótávolság vadászathoz.', 'Excellent range for hunting.', 59990, 3, 15, 5, ''),
-(4, 'Medve csapda', 'Bear trap', 'Medvék és nagy testű állatok elleni csapda.', 'Traps against bears and large animals.', 14990, 6, 200, 1, ''),
-(5, 'Vadászkés', 'Hunting Knife', 'Rozsdamentes acél vadászkés.', 'Stainless steel hunting knife.', 12990, 5, 50, 4, ''),
-(6, 'Róka csapda', 'Fox Trap', 'Professzionális élvefogó csapda.', 'Professional live trap.', 24990, 6, 12, 2, ''),
-(7, 'Vadász sapka', 'Hunting Cap', 'Zöld terepmintás sapka.', 'Green camo hunting cap.', 3990, 1, 100, 1, ''),
-(8, 'Terep hátizsák', 'Field Backpack', '50 literes vadászhátizsák.', '50L hunting backpack.', 17990, 8, 60, 3, ''),
-(9, 'Vadászlámpa', 'Hunting Flashlight', 'Erős LED lámpa 300 méteres hatótávval.', 'Powerful 300m LED flashlight.', 14990, 8, 40, 5, ''),
-(10, 'Optikai irányzék', 'Rifle Scope', '4-16x50 távcső irányzék.', '4-16x50 rifle scope.', 69990, 9, 20, 7, ''),
-(11, 'Fegyvertisztító készlet', 'Gun Cleaning Kit', 'Teljes tisztító szett puskákhoz.', 'Complete cleaning kit for rifles.', 8990, 12, 80, 2, ''),
-(12, 'Trófea tartó falap', 'Trophy Mount Board', 'Tölgyfából készült trófeaalap.', 'Oak trophy mount board.', 4990, 18, 150, 1, ''),
-(13, 'Kutyanyakörv fényvisszaverővel', 'Reflective Dog Collar', 'Biztonságos és kényelmes.', 'Safe and comfortable.', 6990, 16, 60, 2, ''),
-(14, 'Őz síp', 'Deer Caller', 'Őzhívó síp természetes hanggal.', 'Deer caller with natural tone.', 2990, 17, 200, 3, ''),
-(15, 'Éjjellátó monokulár', 'Night Vision Monocular', 'Digitális éjjellátó készülék.', 'Digital night vision device.', 119990, 13, 8, 8, ''),
-(16, 'Vadász bakancs', 'Hunting Boots', 'Vízálló, csúszásmentes talppal.', 'Waterproof non-slip boots.', 44990, 1, 30, 4, ''),
-(17, 'Fegyvertok', 'Gun Case', 'Párnázott fegyvertok.', 'Padded gun case.', 15990, 11, 35, 5, ''),
-(18, 'Kézmelegítő párna', 'Hand Warmer', 'Terepen hasznos hőpárna.', 'Field-use heat pack.', 1990, 15, 120, 1, ''),
-(19, 'Vadászkalap', 'Hunting Hat', 'Gyapjúból készült kalap.', 'Woolen hunting hat.', 7990, 1, 50, 2, ''),
-(20, 'Trófea tisztító folyadék', 'Trophy Cleaning Solution', 'Kíméletes csonttisztító szer.', 'Gentle bone cleaning fluid.', 2490, 18, 90, 3, '');
+(1, 'Terepmintás dzseki', 'Camo Jacket', 'Meleg, vízálló vadászdzseki.', 'Warm waterproof hunting jacket.', 34990, 1, 25, 3, '../képek/kabat.png'),
+(2, 'Vadászpuskatus', 'Shotgun Stock', 'Tölgyfából készült puskatus.', 'Oak shotgun stock.', 19990, 2, 10, 2, '../képek/puskatus.png'),
+(3, 'Távcső 10x50', 'Binoculars 10x50', 'Kiváló látótávolság vadászathoz.', 'Excellent range for hunting.', 59990, 3, 15, 5, '../képek/tavcso.png'),
+(4, 'Medve csapda', 'Bear trap', 'Medvék és nagy testű állatok elleni csapda.', 'Traps against bears and large animals.', 14990, 6, 200, 1, '../képek/medvecsapda.png'),
+(5, 'Vadászkés', 'Hunting Knife', 'Rozsdamentes acél vadászkés.', 'Stainless steel hunting knife.', 12990, 5, 50, 4, '../képek/vadaszkes'),
+(6, 'Róka csapda', 'Fox Trap', 'Professzionális élvefogó csapda.', 'Professional live trap.', 24990, 6, 12, 2, '../képek/csapda.png'),
+(7, 'Vadász sapka', 'Hunting Cap', 'Zöld terepmintás sapka.', 'Green camo hunting cap.', 3990, 1, 100, 1, '../képek/vadaszkalap.png'),
+(8, 'Terep hátizsák', 'Field Backpack', '50 literes vadászhátizsák.', '50L hunting backpack.', 17990, 8, 60, 3, '../képek/hatizsak.png'),
+(9, 'Vadászlámpa', 'Hunting Flashlight', 'Erős LED lámpa 300 méteres hatótávval.', 'Powerful 300m LED flashlight.', 14990, 8, 40, 5, '../képek/lampa.png'),
+(10, 'Optikai irányzék', 'Rifle Scope', '4-16x50 távcső irányzék.', '4-16x50 rifle scope.', 69990, 9, 20, 7, '../képek/puskatavcso.png'),
+(11, 'Fegyvertisztító készlet', 'Gun Cleaning Kit', 'Teljes tisztító szett puskákhoz.', 'Complete cleaning kit for rifles.', 8990, 12, 80, 2, '../képek/fegyvertisztito.png'),
+(12, 'Trófea tartó falap', 'Trophy Mount Board', 'Tölgyfából készült trófeaalap.', 'Oak trophy mount board.', 4990, 18, 150, 1, '../képek/trofealap.png'),
+(13, 'Kutyanyakörv fényvisszaverővel', 'Reflective Dog Collar', 'Biztonságos és kényelmes.', 'Safe and comfortable.', 6990, 16, 60, 2, '../képek/nyakkorv.png'),
+(14, 'Őz síp', 'Deer Caller', 'Őzhívó síp természetes hanggal.', 'Deer caller with natural tone.', 2990, 17, 200, 3, '../képek/ozsip.png'),
+(15, 'Éjjellátó monokulár', 'Night Vision Monocular', 'Digitális éjjellátó készülék.', 'Digital night vision device.', 119990, 13, 8, 8, '../képek/ejjellato.png'),
+(16, 'Vadász bakancs', 'Hunting Boots', 'Vízálló, csúszásmentes talppal.', 'Waterproof non-slip boots.', 44990, 1, 30, 4, '../képek/vadaszbakancs.png'),
+(17, 'Fegyvertok', 'Gun Case', 'Párnázott fegyvertok.', 'Padded gun case.', 15990, 11, 35, 5, '../képek/fegyvertok.png'),
+(18, 'Kézmelegítő párna', 'Hand Warmer', 'Terepen hasznos hőpárna.', 'Field-use heat pack.', 1990, 15, 120, 1, '../képek/kezmelegito.png'),
+(19, 'Vadászkalap', 'Hunting Hat', 'Gyapjúból készült kalap.', 'Woolen hunting hat.', 7990, 1, 50, 2, '../képek/vadaszsapka.png'),
+(20, 'Trófea tisztító folyadék', 'Trophy Cleaning Solution', 'Kíméletes csonttisztító szer.', 'Gentle bone cleaning fluid.', 2490, 18, 90, 3, '../képek/trofeatisztito.png');
 
 -- --------------------------------------------------------
 
