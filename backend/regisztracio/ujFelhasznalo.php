@@ -63,7 +63,14 @@ $stmt->execute([
     $data->szamlazasi_varos,
     $data->szamlazasi_utca
 ]);
-
+$stmt = $pdo->prepare("
+    INSERT INTO rendeles 
+    (felhasznalo, fizetve)
+    VALUES (?, 0)
+");
+$stmt->execute([
+    $data->felhasznalonev
+]);
 // szállítási cím mentése
 $stmt = $pdo->prepare("
     INSERT INTO szallitasicimek (felhasznalo, orszag, iranyitoszam, varos, utca)

@@ -165,7 +165,7 @@ CREATE TABLE `rang` (
 INSERT INTO `rang` (`id`, `rang`) VALUES
 (1, 'Admin'),
 (2, 'Dolgozó'),
-(3, 'Vásáréó');
+(3, 'Vásárló');
 
 -- --------------------------------------------------------
 
@@ -186,8 +186,8 @@ CREATE TABLE `rendeles` (
 -- A tábla adatainak kiíratása `rendeles`
 --
 
--- INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldve`, `teljesitve`) VALUES
--- (1, 'user1', 1, NULL, '2025-11-01 10:00:00', '2025-11-03 12:00:00'),
+INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldve`, `teljesitve`) VALUES
+(1, 'user', 0, NULL, NULL, NULL),
 -- (2, 'user2', 1, NULL, '2025-11-02 14:00:00', '2025-11-04 16:00:00'),
 -- (3, 'user3', 1, NULL, '2025-11-05 09:00:00', '2025-11-06 11:00:00'),
 -- (4, 'user4', 1, NULL, '2025-11-06 15:00:00', '2025-11-08 10:00:00'),
