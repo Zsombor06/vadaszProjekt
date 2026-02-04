@@ -50,3 +50,16 @@ const kosarBejelentkezes=async()=>{
 
     document.getElementById("felhasznaloGomb").addEventListener("click",bejelentkezesiStatus)
     document.getElementById("kosarGomb").addEventListener("click",kosarBejelentkezes)
+    const navbarKategoriak=async()=>{
+        try {
+            let httpvalasz=await fetch("../../backend/navbar/index.php/kategoriakNeve")
+            let adatok=await httpvalasz.json()
+            for (const adat of adatok) {
+                    document.getElementById("navbarKategoriak").innerHTML+=`<div class="btn-kat" onclick=" localStorage.setItem('kategoria','${adat["kategoria"]}')
+        window.location.href='../termekek/termekek.html'" style="text-decoration: none; color:black;">${adat["kategoria"]}</div>`
+                }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    window.addEventListener("load",navbarKategoriak)
