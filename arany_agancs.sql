@@ -187,7 +187,7 @@ CREATE TABLE `rendeles` (
 --
 
 INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldve`, `teljesitve`) VALUES
-(1, 'user', 0, NULL, NULL, NULL),
+(1, 'user', 0, NULL, NULL, NULL);
 -- (2, 'user2', 1, NULL, '2025-11-02 14:00:00', '2025-11-04 16:00:00'),
 -- (3, 'user3', 1, NULL, '2025-11-05 09:00:00', '2025-11-06 11:00:00'),
 -- (4, 'user4', 1, NULL, '2025-11-06 15:00:00', '2025-11-08 10:00:00'),
@@ -239,7 +239,7 @@ CREATE TABLE `szallitasicimek` (
 --
 INSERT INTO `szallitasicimek` (`id`, `felhasznalo`, `orszag`, `iranyitoszam`, `varos`, `utca`) VALUES
 (1, 'user', 'Magyarország', 8200, 'Veszprém', 'Valami'),
-(2, 'admin', 'Magyarország', 8200, 'Veszprém', 'Valami');
+(2, 'admin', 'Magyarország', 8200, 'Veszprém', 'Valami'),
 (3, 'worker', 'Magyarország', 8200, 'Veszprém', 'Valami');
 
 -- INSERT INTO `szallitasicimek` (`id`, `felhasznalo`, `orszag`, `iranyitoszam`, `varos`, `utca`) VALUES
@@ -330,32 +330,32 @@ CREATE TABLE `tetelek` (
 -- A tábla adatainak kiíratása `tetelek`
 --
 
-INSERT INTO `tetelek` (`id`, `rendelesId`, `termekId`, `mennyiseg`) VALUES
-(1, 1, 1, 2),
-(2, 1, 5, 1),
-(3, 2, 3, 1),
-(4, 3, 4, 2),
-(6, 5, 2, 1),
-(7, 6, 7, 1),
-(8, 7, 10, 2),
-(9, 8, 8, 1),
-(10, 9, 11, 1),
-(11, 10, 12, 1),
-(12, 11, 13, 2),
-(13, 12, 14, 1),
-(14, 13, 15, 2),
-(15, 14, 16, 1),
-(16, 15, 17, 3),
-(17, 16, 18, 2),
-(18, 17, 19, 1),
-(19, 18, 20, 4),
-(20, 19, 9, 1),
-(21, 23, 3, 6),
-(22, 26, 5, 1),
-(23, 26, 3, 1),
-(24, 26, 2, 1),
-(25, 33, 5, 2),
-(26, 33, 6, 1);
+-- INSERT INTO `tetelek` (`id`, `rendelesId`, `termekId`, `mennyiseg`) VALUES
+-- (1, 1, 1, 2),
+-- (2, 1, 5, 1),
+-- (3, 2, 3, 1),
+-- (4, 3, 4, 2),
+-- (6, 5, 2, 1),
+-- (7, 6, 7, 1),
+-- (8, 7, 10, 2),
+-- (9, 8, 8, 1),
+-- (10, 9, 11, 1),
+-- (11, 10, 12, 1),
+-- (12, 11, 13, 2),
+-- (13, 12, 14, 1),
+-- (14, 13, 15, 2),
+-- (15, 14, 16, 1),
+-- (16, 15, 17, 3),
+-- (17, 16, 18, 2),
+-- (18, 17, 19, 1),
+-- (19, 18, 20, 4),
+-- (20, 19, 9, 1),
+-- (21, 23, 3, 6),
+-- (22, 26, 5, 1),
+-- (23, 26, 3, 1),
+-- (24, 26, 2, 1),
+-- (25, 33, 5, 2),
+-- (26, 33, 6, 1);
 
 --
 -- Indexek a kiírt táblákhoz
