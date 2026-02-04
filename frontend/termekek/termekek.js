@@ -16,48 +16,53 @@ window.addEventListener('load', async () => {
         }
     
     
-    if(localStorage.getItem("kategoria")){
-        let kategoria=localStorage.getItem("kategoriaId")
-        let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${kategoria}`);
-        let termekek = await httpValasz.json();
-        for (const termek of termekek) {
-            const kartya = document.createElement('div');
-            kartya.className = 'col-md-4 mb-4';
-            if (termek.regiar == Math.round(termek.ujar, 0)) {
-                kartya.innerHTML = `
-                    <div class="card h-100">
-                        <img src="" class="card-img-top" alt="${termek.nev}">
-                        <div class="card-body">
-                            <h5 class="card-title">${termek.nev}</h5>
-                            <p class="card-text">${termek.leiras}</p>
-                            <small class="text-muted">Ár: ${termek.regiar} Ft</small>
+        if(localStorage.getItem("kategoria")){
+            let kategoria=localStorage.getItem("kategoriaId")
+            let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${kategoria}`);
+            let termekek = await httpValasz.json();
+            for (const termek of termekek) {
+                const kartya = document.createElement('div');
+                kartya.className = 'col-md-4 mb-4';
+                if (termek.regiar == Math.round(termek.ujar, 0)) {
+                    kartya.innerHTML = `
+                        <div class="card h-100">
+                            <img src="" class="card-img-top" alt="${termek.nev}">
+                            <div class="card-body">
+                                <h5 class="card-title">${termek.nev}</h5>
+                                <p class="card-text">${termek.leiras}</p>
+                                <small class="text-muted">Ár: ${termek.regiar} Ft</small>
+                            </div>
+                            <div class="card-footer">
+                                <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}">
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <input type="button" onClick="Kosaraba(${termek.id})" value="Kosárba">
+                    `;
+                } else {
+                    kartya.innerHTML = `
+                        <div class="card h-100">
+                            <img src="" class="card-img-top" alt="${termek.nev}">
+                            <div class="card-body">
+                                <h5 class="card-title">${termek.nev}</h5>
+                                <p class="card-text">${termek.leiras}</p>
+                                <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small>
+                            </div>
+                            <div class="card-footer">
+                                <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}">
+                            </div>
                         </div>
-                    </div>
-                `;
-            } else {
-                kartya.innerHTML = `
-                    <div class="card h-100">
-                        <img src="" class="card-img-top" alt="${termek.nev}">
-                        <div class="card-body">
-                            <h5 class="card-title">${termek.nev}</h5>
-                            <p class="card-text">${termek.leiras}</p>
-                            <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small>
-                        </div>
-                        <div class="card-footer">
-                            <input type="button" onClick="Kosaraba(${termek.id})" value="Kosárba">
-                        </div>
-                    </div>
-                `;
+                    `;
                 }
-            termekKartyaMezo.appendChild(kartya);
+                termekKartyaMezo.appendChild(kartya);
+            }
         }
-    }}
-     catch (error) {
+        document.querySelectorAll(".kosarbaGomb").forEach(btn => {
+          btn.addEventListener("click", async (e) => {
+            await Kosaraba(e);
+          });
+        });
+    } catch (error) {
         console.error('Hiba a termékek lekérésekor:', error);
-}});
+    }});
 
 termekKategoria.addEventListener('change', async () => {
     try {
@@ -79,7 +84,7 @@ termekKategoria.addEventListener('change', async () => {
                             <small class="text-muted">Ár: ${termek.regiar} Ft</small>
                         </div>
                         <div class="card-footer">
-                            <input type="button" onClick="()=>{Kosaraba(${termek.id})}" value="Kosárba">
+                            <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}">
                         </div>
                     </div>
                 `;
@@ -93,15 +98,52 @@ termekKategoria.addEventListener('change', async () => {
                             <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small>
                         </div>
                         <div class="card-footer">
-                            <input type="button" onClick="Kosaraba(${termek.id})" value="Kosárba">
+                            <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}">
                         </div>
                     </div>
                 `;
-                }
+            }
             termekKartyaMezo.appendChild(kartya);
         }
+        document.querySelectorAll(".kosarbaGomb").forEach(btn => {
+          btn.addEventListener("click", async (e) => {
+            await Kosaraba(e);
+          });
+        });
     } catch (error) {
         console.error(error);
     }
 });
+
+const Kosaraba = async (e) => {
+    let id = e.target.getAttribute('data-id');
+    console.log('Kosárba gomb kattintva, termék ID: ' + id);
+    if(localStorage.getItem('token')) {
+        let httpResponse = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`);
+        if (httpResponse.ok) {
+            let httpAdat = await httpResponse.json();
+            httpResponse = await fetch('../../backend/termekek/index.php/kosarHozzaad', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "nev" : httpAdat["felhasznalonev"],
+                    "termek": id
+                })
+            });
+            if (httpResponse.ok) {
+                alert('Termék hozzáadva a kosárhoz!');
+                let httpAdat = await httpResponse.json();
+                console.log(httpAdat);
+            } else {
+                alert('Hiba történt a kosárhoz adás során.');
+            }
+        }
+    } else {
+        window.location.href="../bejelentkezes/bejelentkezes.html"
+        return;
+    }
+}
+
 
