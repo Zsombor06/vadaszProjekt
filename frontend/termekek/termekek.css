@@ -1,5 +1,21 @@
+/* FŐ SZÍNEK 
+--hunter-green: #2f3e2b;   navbar, sötét elemek 
+--hunter-gold:  #c49e3c;   logó, CTA, hover 
+--hunter-sand:  #f4f1ea;   háttér 
+--hunter-brown: #4a3f35;   szöveg 
+*/
 .navbar {
-    border-bottom: 2px solid #FFF;
+    background-color: #2f3e2b;
+    border-bottom: 2px solid #c49e3c;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #f4f1ea;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #c49e3c;
 }
 
 .navbar .dropdown-menu {
@@ -11,31 +27,46 @@
     width: 260px;
 }
 .btn-kat {
-    border-radius: 15px;
-    border: 1px solid #ccc;
+    border-radius: 12px;
+    border: 1px solid #2f3e2b;
     padding: 10px;
     text-align: center;
     margin-bottom: 10px;
-    background: #f5f5f5;
+    background: #ffffff;
     transition: 0.2s;
 }
 
 .btn-kat:hover {
-    background: #e1e1e1;
+    background: #2f3e2b;
+    color: #c49e3c;
     cursor: pointer;
 }
+
+.btn-navbar {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-navbar:hover {
+    background-color: #b08b32;
+}
+
 
 .text-justify {
     text-align: justify;
 }
 
-
-
-
 body {
-    background-color: #dfca95;
+    background-color: #f4f1ea;
+    color: #2f3e2b;
 }
 
+/*termek oldal resz:*/
 .kategoriavalaszto {
     max-width: 280px;
     margin: 0 auto;
@@ -45,9 +76,9 @@ body {
 .card {
     border: none;
     border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background-color: #CFDF95;
+    background-color: #ffffff;
 }
 
 .card:hover {
@@ -69,23 +100,15 @@ body {
 }
 
 .card-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    color: #2f3e2b;
 }
 
 .card-text {
-    font-size: 0.9rem;
-    color: #6c757d;
-    min-height: 48px;
+    color: #4a3f35;
 }
 
 .card-body small {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #198754;
+    color: #c49e3c;
 }
 
 .card-footer {
@@ -100,25 +123,12 @@ body {
     padding: 0.6rem;
     border-radius: 8px;
     border: none;
-    background-color: #DFA695;
-    color: white;
-    font-weight: 600;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 700;
     transition: background-color 0.2s ease;
 }
 
 .kosarbaGomb:hover {
-    background-color: #e09d88;
-}
-
-.btn {
-    padding: 0.6rem;
-    border-radius: 8px;
-    border: none;
-    background-color: #95AADF;
-    color: white;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-}
- .btn:hover {
-    background-color: #7a92c4;
+    background-color: #b08b32;
 }
