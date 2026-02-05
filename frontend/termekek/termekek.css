@@ -1,5 +1,5 @@
 .navbar {
-    border-bottom: 2px solid #ddd;
+    border-bottom: 2px solid #FFF;
 }
 
 .navbar .dropdown-menu {
@@ -31,12 +31,94 @@
 
 
 
-/*termékek rész*/
+
+body {
+    background-color: #dfca95;
+}
+
+.kategoriavalaszto {
+    max-width: 280px;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+.card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #CFDF95;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+}
+
 .termek-kep {
-    width: 400px !important;
-    height: 400px !important;
-    background: #f0f0f0;
-    border-radius: 6px;
-    flex-shrink: 0;
-    object-fit: cover;
+    height: 200px;
+    object-fit: contain;
+    padding: 1rem;
+    background-color: #fff;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+    min-height: 48px;
+}
+
+.card-body small {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #198754;
+}
+
+.card-footer {
+    background-color: transparent;
+    border-top: none;
+    padding: 1rem;
+    text-align: center;
+}
+
+.kosarbaGomb {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #DFA695;
+    color: white;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.kosarbaGomb:hover {
+    background-color: #e09d88;
+}
+
+.btn {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #95AADF;
+    color: white;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+ .btn:hover {
+    background-color: #7a92c4;
 }

@@ -22,7 +22,7 @@ window.addEventListener('load', async () => {
             let termekek = await httpValasz.json();
             for (const termek of termekek) {
                 const kartya = document.createElement('div');
-                kartya.className = 'col-md-4 mb-4';
+                kartya.className = 'mb-4 col-sm-6 col-md-4 col-lg-3';
                 if (termek.regiar == Math.round(termek.ujar, 0)) {
                     kartya.innerHTML = `
                         <div class="card h-100">
@@ -73,7 +73,7 @@ termekKategoria.addEventListener('change', async () => {
         let termekek = await httpValasz.json();
         for (const termek of termekek) {
             const kartya = document.createElement('div');
-            kartya.className = 'col-md-4 mb-4';
+            kartya.className = 'mb-4 col-sm-6 col-md-4 col-lg-3';
             if (termek.regiar == Math.round(termek.ujar, 0)) {
                 kartya.innerHTML = `
                     <div class="card h-100">
