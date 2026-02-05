@@ -1,11 +1,13 @@
 const TermekKartyak = async () => {
     try {
-        let httpResponse = await fetch("../../backend/kosar/kosarAdatok.php?felhasznalo=user"); //user1 tesztadat
+         let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+         let httpAdat = await httpValasz.json();
+        httpResponse = await fetch(`../../backend/kosar/kosarAdatok.php?felhasznalo=${httpAdat["felhasznalonev"]}`); //user1 tesztadat
         if (!httpResponse.ok) {
             alert("Hiba a termékek lekérése során");
             return;
         }
-        let httpAdat = await httpResponse.json();
+         httpAdat = await httpResponse.json();
         //console.log("httpAdat: " + Object.values(httpAdat));
         if (httpAdat.tetelek.length === 0) {
             document.getElementById("KosarTartalom").innerHTML =
