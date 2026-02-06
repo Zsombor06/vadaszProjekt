@@ -1,5 +1,15 @@
 .navbar {
-    border-bottom: 2px solid #ddd;
+    background-color: #2f3e2b;
+    border-bottom: 2px solid #c49e3c;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #f4f1ea;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #c49e3c;
 }
 
 .navbar .dropdown-menu {
@@ -11,105 +21,209 @@
     width: 260px;
 }
 .btn-kat {
-    border-radius: 15px;
-    border: 1px solid #ccc;
+    border-radius: 12px;
+    border: 1px solid #2f3e2b;
     padding: 10px;
     text-align: center;
     margin-bottom: 10px;
-    background: #f5f5f5;
+    background: #ffffff;
     transition: 0.2s;
 }
 
 .btn-kat:hover {
-    background: #e1e1e1;
+    background: #2f3e2b;
+    color: #c49e3c;
     cursor: pointer;
 }
+
+.btn-navbar {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-navbar:hover {
+    background-color: #b08b32;
+}
+
 
 .text-justify {
     text-align: justify;
 }
 
-/*kosár rész*/
 body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
+    background-color: #f4f1ea;
+    color: #2f3e2b;
+}
+
+
+/*kosár rész*/
+.kosar-body {
+    background-color: #f4f1ea;
+    padding: 1rem;
 }
 
 .kosar-terulet {
-    margin: 30px auto;
-    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .kosar-lista, .kosar-ossz {
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
+    background-color: #ffffff;
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.kosar-lista h2, .kosar-ossz h2 {
+    color: #2f3e2b;
+    border-bottom: 2px solid #c49e3c;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .kosar-ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 1rem 0;
 }
 
 .kosar-tetel {
-    padding: 16px 0;
-    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(47,62,43,0.15);
 }
-
 .kosar-tetel:last-child {
     border-bottom: none;
 }
-
-.termek-kep {
-    width: 80px !important;
-    height: 80px !important;
-    background: #f0f0f0;
-    border-radius: 6px;
-    flex-shrink: 0;
-    object-fit: cover;
+.kosar-tetel .termek-kep img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 6px;
 }
 
 .termek-nev {
     font-weight: 600;
-    margin-bottom: 1rem;
+    color: #2f3e2b;
 }
 
-.fizetes-gomb {
-    padding: 12px;
-    background: #2c7be5;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
+.termek-menny .input-group-text {
+    background-color: #ffffff;
+    border-color: #2f3e2b;
+    color: #2f3e2b;
     cursor: pointer;
 }
-
-.fizetes-gomb:hover {
-    background: #1a68d1;
+.termek-menny .form-control {
+    border-color: #2f3e2b;
+    font-weight: 600;
+}
+.termek-menny .input-group-text:hover {
+    background-color: #2f3e2b;
+    color: #c49e3c;
 }
 
+
 .termek-ar {
+    color: #c49e3c;
     font-weight: 700;
-    font-size: 1.05rem;
+}
+
+.torlesGomb {
+    background-color: transparent;
+    border: 1px solid #8b2e2e;
+    color: #8b2e2e;
+}
+.torlesGomb:hover {
+    background-color: #8b2e2e;
+    color: #ffffff;
+}
+
+.vegosszegSor .input-group-text, .szCimSor .input-group-text {
+    background-color: #2f3e2b;
+    color: #f4f1ea;
+    border: none;
+}
+#vegosszeg {
+    font-weight: 700;
+    color: #c49e3c;
 }
 
 .fizetes-gomb {
-    font-size: 1.1rem;
-    font-weight: 600;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem;
+    transition: background-color 0.2s ease;
+}
+.fizetes-gomb:hover {
+    background-color: #b08b32;
 }
 
-#vegosszeg {
-    font-size: 1.2rem;
+.kosar-lista .btn-success {
+    background-color: #2f3e2b;
+    border: none;
+}
+.kosar-lista .btn-success:hover {
+    background-color: #1f2a1d;
+}
+
+/*felugró ablak*/
+.modal-content {
+    border-radius: 16px;
+    border: none;
+    background-color: #ffffff;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+}
+.modal-header {
+    background-color: #2f3e2b;
+    color: #f4f1ea;
+    border-bottom: 2px solid #c49e3c;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+.modal-title {
     font-weight: 700;
 }
-
-.kosar-body {
-    margin: auto 200;
-    justify-content: center;
+.modal-header .btn-close {
+    filter: invert(1);
 }
-
+.modal-body {
+    color: #4a3f35;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
 #modalHibaMezo {
-    color: red;
-    font-weight: bold;
-    margin-top: 10px;
+    margin-top: 0.5rem;
+    color: #8b2e2e;
+    font-weight: 600;
+}
+.modal-footer {
+    border-top: 1px solid rgba(47,62,43,0.15);
+}
+.modal-footer .btn-secondary {
+    background-color: transparent;
+    color: #2f3e2b;
+    border: 1px solid #2f3e2b;
+}
+.modal-footer .btn-secondary:hover {
+    background-color: #2f3e2b;
+    color: #c49e3c;
+}
+#torlesConfirm {
+    background-color: #8b2e2e;
+    border: none;
+    font-weight: 600;
+}
+#torlesConfirm:hover {
+    background-color: #6f2424;
+}
+.modal-backdrop.show {
+    opacity: 0.85;
 }
