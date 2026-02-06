@@ -23,12 +23,13 @@ document.getElementById('szemecske2').addEventListener('click', function () {
 });
 
 //adatok betöltése:
-let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
-let httpAdat = await httpValasz.json();
-let userNev = httpAdat["felhasznalonev"]; //bejelentkezett felhasznalo nevet ide kell betenni
+
 window.addEventListener("load", async () => {
     try {
-        let httpValasz = await fetch(`../../backend/felhasznalo/index.php/felhasznaloAdat?nev=${userNev}`); //felhasznalo nevet at kell adni
+        let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+        let httpAdat = await httpValasz.json();
+        let userNev = httpAdat["felhasznalonev"]; //bejelentkezett felhasznalo nevet ide kell betenni
+         httpValasz = await fetch(`../../backend/felhasznalo/index.php/felhasznaloAdat?nev=${userNev}`); //felhasznalo nevet at kell adni
         if (httpValasz.ok) {
             let httpAdat = await httpValasz.json();
             for (const adat of httpAdat) {
@@ -43,6 +44,7 @@ window.addEventListener("load", async () => {
 });
 window.addEventListener("load", async () => { //szallitasi cimek
     try {
+
         let httpAdat = await Cimek();
         document.getElementById("fLak").innerHTML = "<option value='0'></option>";
         for (const cim of httpAdat) {
@@ -167,7 +169,10 @@ document.getElementById("cimMod").addEventListener("click", async () => {
 
 const Cimek = async () => {
     try {
-        let httpValasz = await fetch(`../../backend/felhasznalo/index.php/szallitasiCimek?nev=${userNev}`); //felhasznalo nevet at kell adni
+        let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+        let httpAdat = await httpValasz.json();
+        let userNev = httpAdat["felhasznalonev"];
+         httpValasz = await fetch(`../../backend/felhasznalo/index.php/szallitasiCimek?nev=${userNev}`); //felhasznalo nevet at kell adni
         if (httpValasz.ok) {
             let httpAdat = await httpValasz.json();
             return httpAdat;
