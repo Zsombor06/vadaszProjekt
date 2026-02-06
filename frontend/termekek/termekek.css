@@ -132,3 +132,55 @@ body {
 .kosarbaGomb:hover {
     background-color: #b08b32;
 }
+
+/*felugró ablak*/
+.modal-content {
+    border-radius: 16px;
+    border: none;
+    background-color: #ffffff;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+}
+.modal-header {
+    background-color: #2f3e2b;
+    color: #f4f1ea;
+    border-bottom: 2px solid #c49e3c;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+.modal-title {
+    font-weight: 700;
+}
+.btn-close {
+    filter: invert(1);
+}
+.modal-body {
+    color: #4a3f35;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+}
+.modal-footer {
+    border-top: 1px solid rgba(47,62,43,0.15);
+}
+.btn-ok {
+    background-color: transparent;
+    color: #2f3e2b;
+    border: 1px solid #2f3e2b;
+    font-weight: 600;
+}
+.btn-ok:hover {
+    background-color: #2f3e2b;
+    color: #c49e3c;
+}
+.btn-kosar {
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    border: none;
+    font-weight: 700;
+}
+.btn-kosar:hover {
+    background-color: #b08b32;
+}
+.modal-backdrop.show {
+    opacity: 0.85;
+}

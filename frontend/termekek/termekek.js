@@ -33,7 +33,7 @@ window.addEventListener('load', async () => {
                                 <small class="text-muted">Ár: ${termek.regiar} Ft</small>
                             </div>
                             <div class="card-footer">
-                                <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}">
+                                <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
                             </div>
                         </div>
                     `;
@@ -47,7 +47,7 @@ window.addEventListener('load', async () => {
                                 <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small>
                             </div>
                             <div class="card-footer">
-                                <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}">
+                                <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
                             </div>
                         </div>
                     `;
@@ -84,7 +84,7 @@ termekKategoria.addEventListener('change', async () => {
                             <small class="text-muted">Ár: ${termek.regiar} Ft</small>
                         </div>
                         <div class="card-footer">
-                            <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}">
+                            <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
                         </div>
                     </div>
                 `;
@@ -98,7 +98,7 @@ termekKategoria.addEventListener('change', async () => {
                             <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small>
                         </div>
                         <div class="card-footer">
-                            <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}">
+                            <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
                         </div>
                     </div>
                 `;
@@ -133,7 +133,6 @@ const Kosaraba = async (e) => {
                 })
             });
             if (httpResponse.ok) {
-                alert('Termék hozzáadva a kosárhoz!');
                 let httpAdat = await httpResponse.json();
                 console.log(httpAdat);
             } else {
@@ -147,3 +146,7 @@ const Kosaraba = async (e) => {
 }
 
 
+document.getElementById("hozzaadasConfirm").addEventListener('click', (e) => {
+    window.location.href="../kosar/kosar.html";
+    return;
+});
