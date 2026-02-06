@@ -15,8 +15,8 @@ function getOrCreateActiveOrder(PDO $pdo, string $felhasznalo): int {
 
     // ÚJ RENDES BESZÚRÁS (NULL HELYETT 0)
     $stmt = $pdo->prepare("
-        INSERT INTO rendeles (felhasznalo, fizetve, elkuldve, teljesitve)
-        VALUES (?, 0, 0, 0)
+        INSERT INTO rendeles (felhasznalo, fizetve, elkuldve, teljesitve,szallitasId)
+        VALUES (?, 0, null, null, NULL)
     ");
     $stmt->execute([$felhasznalo]);
 

@@ -4,7 +4,7 @@ require "kosar.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
 $felhasznalo = $data['felhasznalo'] ?? null;
-
+$szallitasId=$data["szallitasId"] ?? null;
 if (!$felhasznalo) {
     http_response_code(400);
     echo json_encode([
@@ -17,10 +17,11 @@ if (!$felhasznalo) {
 $stmt = $pdo->prepare("
     UPDATE rendeles
     SET fizetve = 1,
-        fizetesIdeje = NOW()
+        fizetesIdeje = NOW(),
+        szallitasId=?
     WHERE felhasznalo = ? AND fizetve = 0
 ");
-$stmt->execute([$felhasznalo]);
+$stmt->execute([$szallitasId,$felhasznalo]);
 
 // Új kosár
 getOrCreateActiveOrder($pdo, $felhasznalo);

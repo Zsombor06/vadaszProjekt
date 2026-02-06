@@ -32,7 +32,7 @@ switch(end($uri)){
             echo json_encode(["valasz"=>"Kérem jelentkezzen be!"], JSON_UNESCAPED_UNICODE);
             return http_response_code(400);
         }
-        $rendelesSQL="SELECT id from rendeles where felhasznalo=? order by id limit 1";
+        $rendelesSQL="SELECT id from rendeles where felhasznalo=? order by id desc limit 1";
         $rendeles=adatokLekerese($rendelesSQL,"s",[$bodyAdatok["nev"]]);
         $ellSQL="SELECT tetelek.id FROM `tetelek` WHERE rendelesId=? && termekId=?";
         $ell=adatokLekerese($ellSQL,"si",[$rendeles[0]["id"],$bodyAdatok["termek"]]);

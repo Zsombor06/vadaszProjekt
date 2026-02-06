@@ -171,3 +171,35 @@ document.getElementById("torlesConfirm").addEventListener("click", (e) => {
 });
 
 window.addEventListener("load", TermekKartyak);
+window.addEventListener("load", async () => { //szallitasi cimek
+   
+        let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+        let httpAdat = await httpValasz.json();
+        let userNev = httpAdat["felhasznalonev"];
+         httpValasz = await fetch(`../../backend/felhasznalo/index.php/szallitasiCimek?nev=${userNev}`); //felhasznalo nevet at kell adni
+        httpAdat = await httpValasz.json();
+        for (const cim of httpAdat) {
+            document.getElementById("szCimMezo").innerHTML += `<option value="${cim.id}">${cim.orszag}, ${cim.iranyitoszam} ${cim.varos}, ${cim.utca}</option>`;
+        }
+});
+document.getElementById("fizetesGomb").addEventListener("click",async()=>{
+    try {
+         let httpResponse = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+        let httpAdat = await httpResponse.json();
+        console.log(httpAdat["felhasznalonev"])
+         httpResponse=await fetch('../../backend/kosar/kosarFizetes.php',{
+            method:"PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ "felhasznalo" : httpAdat["felhasznalonev"],
+                "szallitasId":document.getElementById("szCimMezo").value
+             })
+
+        })
+        httpAdat=await httpResponse.json()
+        console.log(httpAdat)
+    } catch (error) {
+        console.log(error)
+    }
+})
