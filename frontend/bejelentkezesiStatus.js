@@ -56,7 +56,7 @@ const kosarBejelentkezes=async()=>{
             let adatok=await httpvalasz.json()
             for (const adat of adatok) {
                     document.getElementById("navbarKategoriak").innerHTML+=`<div class="btn-kat" onclick=" localStorage.setItem('kategoria','${adat["kategoria"]}')
-        window.location.href='../termekek/termekek.html'" style="text-decoration: none; color:black;">${adat["kategoria"]}</div>`
+        window.location.href='../termekek/termekek.html'" style="text-decoration: none;">${adat["kategoria"]}</div>`
                 }
         } catch (error) {
             console.log(error)

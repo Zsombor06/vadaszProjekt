@@ -1,36 +1,61 @@
 body {
     font-family: Arial, sans-serif;
-    background: url("../képek/banner_kep_fooldal.png") no-repeat center; /*valami kép a bannerbe*/
+    background: url("../képek/banner_kep_fooldal.png") no-repeat center;
 }
 
 .hero {
-    height: 350px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-shadow: 2px 2px 5px black;
+    color: #f4f1ea;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .info-block {
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
+    max-width: 800px;
+    background-color: #f4f1ea;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.info-block h3 {
+    color: #2f3e2b;
+}
+
+.info-block p {
+    color: #4a3f35;
 }
 
 .btn-reg {
-    background-color: #10510c;
-    color: white;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: all 0.2s ease;
 }
 
 .btn-reg:hover {
-    background-color: #0a3509;
-    color: white;
+    background-color: #b08b32;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
-/*Navbar css része*/
+/*navbar*/
 .navbar {
-    border-bottom: 2px solid #ddd;
+    background-color: #2f3e2b;
+    border-bottom: 2px solid #c49e3c;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #f4f1ea;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #c49e3c;
 }
 
 .navbar .dropdown-menu {
@@ -41,23 +66,43 @@ body {
 .offcanvas {
     width: 260px;
 }
-
 .btn-kat {
-    border-radius: 15px;
-    border: 1px solid #ccc;
+    border-radius: 12px;
+    border: 1px solid #2f3e2b;
     padding: 10px;
     text-align: center;
     margin-bottom: 10px;
-    background: #f5f5f5;
+    background: #ffffff;
     transition: 0.2s;
+    color: #2f3e2b;
 }
 
 .btn-kat:hover {
-    background: #e1e1e1;
+    background: #2f3e2b;
+    color: #c49e3c;
     cursor: pointer;
 }
+
+.btn-navbar {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-navbar:hover {
+    background-color: #b08b32;
+}
+
 
 .text-justify {
     text-align: justify;
 }
-/*navbar*/
+
+body {
+    background-color: #f4f1ea;
+    color: #2f3e2b;
+}
