@@ -14,15 +14,13 @@
         <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid px-4">
         <div class="justify-content-start">
-            <a href="../fooldal/fooldal.html" style="text-decoration: none;"><img src="../képek/aranyagancs_logo.png" alt="LOGO" width="60" class="navbar-brand"> </a><!-- Oldal logója-->
+            <a href="../fooldal/fooldal.html" style="text-decoration: none;"><img src="../képek/aranyagancs_logo.png"  alt="LOGO" width="60" class="navbar-brand"></a> <!-- Oldal logója-->
             <a href="../fooldal/fooldal.html"><img src="../képek/aranyagancs_szoveg.png" alt="SZOVEG" width="150" class="navbar-brand"></a>
         </div>
-
-    
             <div class="d-flex flex-wrap justify-content-end" id="menuElems">
                 <ul class="navbar-nav me-3">
                     <li class="nav-item dropdown">
-                        <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" data-bs-auto-close="outside"> Nyelv </button>
+                        <button class="btn btn-navbar dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" data-bs-auto-close="outside"> Nyelv </button>
                         <ul class="dropdown-menu dropdown-menu-start">
                             <li><a class="dropdown-item" href="#"> Angol </a></li> <!-- Nyelvek -->
                             <li><a class="dropdown-item" href="#"> Magyar </a></li> 
@@ -30,9 +28,9 @@
                     </li>
                 </ul>
     
-                <button class="btn btn-outline-secondary me-3" id="kosarGomb">  Kosár </button> <!-- Kosár oldal     Ne biztos hogy jó lesz így-->
-                <button class="btn btn-outline-success me-3" id="felhasznaloGomb" onclick="tagret = '_blank'">  Felhasználó </button> <!-- Felhasználói oldal -->
-                <button class="btn btn-outline-dark" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"> ☰ </button>
+                <button class="btn btn-navbar me-3" id="kosarGomb">  Kosár </button> <!-- Kosár oldal     Ne biztos hogy jó lesz így-->
+                <button class="btn btn-navbar me-3" id="felhasznaloGomb">  Felhasználó </button> <!-- Felhasználói oldal -->
+                <button class="btn btn-navbar" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"> ☰ </button>
             </div>
         </div>
     </nav>
@@ -71,33 +69,33 @@
                             <i class="bi bi-eye-slash fs-4" id="szembigyo2"></i>
                         </button>
                     </div>
-                    <input type="button" value="Jelszó módosítás" id="btn_jMod" class="btn btn-info">
+                    <input type="button" value="Jelszó módosítás" id="btn_jMod" >
                 </div>
                 <br>
                 <div class="form-control mb-3 w-50">
-                    <table class="table table-striped">
+                    <table class="table table-striped ">
                         <tr>
                             <td><label for="fLak">Szállításicím(ek) módosítása:</label></td>
-                            <td><select name="fLak" id="fLak"></select></td>
+                            <td><select class="lCim" name="fLak" id="fLak"></select></td>
                         </tr>
                         <tr>
                             <td><label for="orszagMod">Ország:</label></td>
-                            <td><input id="orszagMod" type="text"></td>
+                            <td><input class="lCim" id="orszagMod" type="text"></td>
                         </tr>
                         <tr>
                             <td><label for="irszMod">Irányítószám:</label></td>
-                            <td><input id="irszMod" type="number"></td>
+                            <td><input class="lCim" id="irszMod" type="number"></td>
                         </tr>
                         <tr>
                             <td><label for="varosMod">Város:</label></td>
-                            <td><input id="varosMod" type="text"></td>
+                            <td><input class="lCim" id="varosMod" type="text"></td>
                         </tr>
                         <tr>
                             <td><label for="utcaMod">Utca, házszám:</label></td>
-                            <td><input id="utcaMod" type="text"></td>
+                            <td><input class="lCim" id="utcaMod" type="text"></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><input type="button" id="cimMod" value="Módosítás" class="btn btn-info"></td>
+                            <td colspan="2"><input type="button" id="cimMod" value="Hozzáadás" ></td>
                         </tr>
                     </table>
                 </div>

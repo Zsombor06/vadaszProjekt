@@ -1,5 +1,15 @@
 .navbar {
-    border-bottom: 2px solid #ddd;
+    background-color: #2f3e2b;
+    border-bottom: 2px solid #c49e3c;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #f4f1ea;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #c49e3c;
 }
 
 .navbar .dropdown-menu {
@@ -11,32 +21,74 @@
     width: 260px;
 }
 .btn-kat {
-    border-radius: 15px;
-    border: 1px solid #ccc;
+    border-radius: 12px;
+    border: 1px solid #2f3e2b;
     padding: 10px;
     text-align: center;
     margin-bottom: 10px;
-    background: #f5f5f5;
+    background: #ffffff;
     transition: 0.2s;
+    color: #2f3e2b;
 }
 
 .btn-kat:hover {
-    background: #e1e1e1;
+    background: #2f3e2b;
+    color: #c49e3c;
     cursor: pointer;
 }
+
+.btn-navbar {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-navbar:hover {
+    background-color: #b08b32;
+}
+
 
 .text-justify {
     text-align: justify;
 }
 
-input[disabled] {
-    background-color: #e9ecef;
-    opacity: 1;
-    width: 75%;
+body {
+    background-color: #f4f1ea;
+    color: #2f3e2b;
 }
 
-label {
-    font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 5px;
+/*termek oldal resz:*/
+.kategoriavalaszto {
+    max-width: 280px;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+
+#btn_jMod {
+    width: 20%;
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+}
+#cimMod {
+    width: 25%;
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+}
+.lCim{
+    width: 75%;
 }

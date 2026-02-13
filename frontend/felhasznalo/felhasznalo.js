@@ -129,6 +129,7 @@ document.getElementById("fLak").addEventListener("change", async () => {
             document.getElementById("irszMod").value = "";
             document.getElementById("varosMod").value = "";
             document.getElementById("utcaMod").value = "";
+            document.getElementById("cimMod").value="Hozzáadás"
             return;
         }
         let adatok = await Cimek();
@@ -137,6 +138,8 @@ document.getElementById("fLak").addEventListener("change", async () => {
             document.getElementById("irszMod").value = cimresz.iranyitoszam;
             document.getElementById("varosMod").value = cimresz.varos;
             document.getElementById("utcaMod").value = cimresz.utca;
+            document.getElementById("cimMod").value="Módosítás"
+
             CimID = cimresz.id;
         }
     } catch (error) {
@@ -146,7 +149,29 @@ document.getElementById("fLak").addEventListener("change", async () => {
 
 document.getElementById("cimMod").addEventListener("click", async () => {
     try {
-        let httpValasz = await fetch("../../backend/felhasznalo/index.php/modositSzallitasiCim", {
+        if(document.getElementById("fLak").value == 0){
+         let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+        let httpAdat = await httpValasz.json();
+        let userNev = httpAdat["felhasznalonev"];
+        httpValasz=await fetch('../../backend/felhasznalo/index.php/ujSzallitasiCim',{
+            method : "POST",
+            body : JSON.stringify({
+                "nev" : userNev,
+                "orszag" : document.getElementById("orszagMod").value,
+                "irsz": document.getElementById("irszMod").value ,
+                "varos" :document.getElementById("varosMod").value,
+                "utca" : document.getElementById("utcaMod").value 
+            })
+        })
+        httpAdat = await httpValasz.json();
+        if (httpValasz.ok) {
+            window.location.href=window.location.href
+        } else {
+            console.log(httpAdat.valasz);
+        }
+        }
+        else{
+            let httpValasz = await fetch("../../backend/felhasznalo/index.php/modositSzallitasiCim", {
             method : "PUT",
             body : JSON.stringify({
                 "id" : CimID,
@@ -162,6 +187,8 @@ document.getElementById("cimMod").addEventListener("click", async () => {
         } else {
             console.log(httpAdat.valasz);
         }
+        }
+        
     } catch (error) {
         
     }
