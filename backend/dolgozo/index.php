@@ -137,4 +137,12 @@ switch(end($uri)){
         }
           echo json_encode(["valasz"=>"Sikertelen módosítva"],JSON_UNESCAPED_UNICODE);
           return http_response_code(400);
+    case "rendelesiCim":
+        if($metodus!="GET"){
+            return http_response_code(405);
+        }
+        $rendelesiCimSQL="SELECT * from szallitasicimek where id=? limit 1";
+        $rendelesiCim=adatokLekerese($rendelesiCimSQL,"i",[$_GET["szallitasId"]]);
+        echo json_encode($rendelesiCim[0], JSON_UNESCAPED_UNICODE);
+        return http_response_code(200);
 }

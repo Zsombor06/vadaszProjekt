@@ -209,7 +209,7 @@ const Cimek = async () => {
     }
 }
 
-document.getElementById("btn_kij").addEventListener("click",  () => { //TODO kijelentkezés végpont...
+document.getElementById("btn_kij").addEventListener("click",  () => { 
        localStorage.removeItem('token')
            window.location.href="../fooldal/fooldal.html"
 });

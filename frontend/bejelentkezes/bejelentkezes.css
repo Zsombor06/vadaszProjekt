@@ -1,5 +1,16 @@
+/*navbar*/
 .navbar {
-    border-bottom: 2px solid #ddd;
+    background-color: #2f3e2b;
+    border-bottom: 2px solid #c49e3c;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #f4f1ea;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #c49e3c;
 }
 
 .navbar .dropdown-menu {
@@ -19,7 +30,15 @@
     background: #f5f5f5;
     transition: 0.2s;
 }
-
+.btn{
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
 .btn-kat:hover {
     background: #e1e1e1;
     cursor: pointer;
@@ -31,7 +50,7 @@
 
 .login-box {
     width: 450px;
-    border: 2px solid #000;
+    border: 2px solid #b08b32;
     border-radius: 15px;
 }
 
@@ -57,8 +76,31 @@
     text-align: center;
 }
 input{
-    border: 1px black solid;
+    border: 1px #b08b32;
 }
 .inline{
     display: inline-block;
+}
+.btn-navbar {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-navbar:hover {
+    background-color: #b08b32;
+}
+body {
+    background-color: #f4f1ea;
+    color: #2f3e2b;
+}
+#bejelentkezesDoboz{
+    background-color: white;
+}
+.btn:hover{
+    background-color: #7e6324;
 }

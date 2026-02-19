@@ -24,11 +24,14 @@ const selectFeltoltes=async()=>{
     httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesekAdatai`)
     adatok=await httpvalasz.json()
     for (const adat of adatok) {
+        let httpValasz2=await fetch(`../../backend/dolgozo/index.php/rendelesiCim?szallitasId=${adat.szallitasId}`)
+        let adat2=await httpValasz2.json()
         let sor=tabla.insertRow()
         let cell1=sor.insertCell()
         let cell2=sor.insertCell()
         let cell3=sor.insertCell()
         let cell4=sor.insertCell()
+        let cell5=sor.insertCell()
         cell1.innerHTML=adat.felhasznalo
         cell2.innerHTML=adat.id
         if(adat.elkuldve==null){
@@ -37,10 +40,12 @@ const selectFeltoltes=async()=>{
         else{
         cell3.innerHTML=adat.elkuldve
         }
-        cell4.innerHTML="0000-00-00"       
+        cell4.innerHTML="0000-00-00"    
+        cell5.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}`  
 }}
 document.getElementById("Kijelentkezes").addEventListener("click",()=>{
-    
+        localStorage.removeItem('token')
+           window.location.href="../fooldal/fooldal.html"
 })
 const termekSelectFeltoltes=async()=>{
     let httpvalasz=await fetch(`../../backend/dolgozo/index.php/termekNeve?kategoriaId=${kategorialearazSelect.value}`)
@@ -147,11 +152,14 @@ const rendelesKuldes=async()=>{
             adatok=await httpvalasz.json()
             tabla.innerHTML=""
             for (const adat of adatok) {
+            let httpValasz2=await fetch(`../../backend/dolgozo/index.php/rendelesiCim?szallitasId=${adat.szallitasId}`)
+            let adat2=await httpValasz2.json()
             let sor=tabla.insertRow()
             let cell1=sor.insertCell()
             let cell2=sor.insertCell()
             let cell3=sor.insertCell()
             let cell4=sor.insertCell()
+            let cell5=sor.insertCell()
             cell1.innerHTML=adat.felhasznalo
             cell2.innerHTML=adat.id
             if(adat.elkuldve==null){
@@ -161,6 +169,7 @@ const rendelesKuldes=async()=>{
             cell3.innerHTML=adat.elkuldve
             }
             cell4.innerHTML="0000-00-00"
+            cell5.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}`  
             }
         }
         else{
@@ -188,11 +197,14 @@ const rendelesTeljesitve=async()=>{
             adatok=await httpvalasz.json()
             tabla.innerHTML=""
             for (const adat of adatok) {
+            let httpValasz2=await fetch(`../../backend/dolgozo/index.php/rendelesiCim?szallitasId=${adat.szallitasId}`)
+            let adat2=await httpValasz2.json()
             let sor=tabla.insertRow()
             let cell1=sor.insertCell()
             let cell2=sor.insertCell()
             let cell3=sor.insertCell()
             let cell4=sor.insertCell()
+            let cell5=sor.insertCell()
             cell1.innerHTML=adat.felhasznalo
             cell2.innerHTML=adat.id
             if(adat.elkuldve==null){
@@ -202,7 +214,8 @@ const rendelesTeljesitve=async()=>{
             cell3.innerHTML=adat.elkuldve
             }
             cell4.innerHTML="0000-00-00"
-            }
+            cell5.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}` 
+        }
         }
         else{
             let adatok=await httpvalasz.json()
@@ -229,11 +242,14 @@ const rendelesTorles=async()=>{
             adatok=await httpvalasz.json()
             tabla.innerHTML=""
             for (const adat of adatok) {
+            let httpValasz2=await fetch(`../../backend/dolgozo/index.php/rendelesiCim?szallitasId=${adat.szallitasId}`)
+            let adat2=await httpValasz2.json()
             let sor=tabla.insertRow()
             let cell1=sor.insertCell()
             let cell2=sor.insertCell()
             let cell3=sor.insertCell()
             let cell4=sor.insertCell()
+            let cell5=sor.insertCell()
             cell1.innerHTML=adat.felhasznalo
             cell2.innerHTML=adat.id
             if(adat.elkuldve==null){
@@ -243,6 +259,7 @@ const rendelesTorles=async()=>{
             cell3.innerHTML=adat.elkuldve
             }
             cell4.innerHTML="0000-00-00"
+            cell5.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}` 
             }
         }
         else{
