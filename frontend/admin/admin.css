@@ -48,7 +48,74 @@
     font-weight: 600;
     transition: background-color 0.2s ease;
 }
+
+/*body:*/
 body {
     background-color: #f4f1ea;
     color: #2f3e2b;
+}
+.admin-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+.admin-panel {
+    width: 100%;
+    max-width: 750px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.admin-wrapper {
+    max-width: 900px;
+}
+.admin-topbar {
+    border-radius: 15px;
+    border: none;
+}
+.admin-card {
+    margin: 40px auto;
+    border-radius: 18px;
+    border: none;
+    background: #ffffff;
+}
+.admin-card label {
+    font-weight: 600;
+    margin-top: 10px;
+}
+.admin-card .form-control,
+.admin-card .form-select {
+    max-width: 500px;
+}
+.btn-admin {
+    margin-top: 20px;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+.btn-admin:hover {
+    background-color: #b08b32;
+}
+#kijelentkezes {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 12px;
+    background-color: #8b2f2f;
+    color: white;
+}
+#muveletEredmeny {
+    margin-top: 30px;
+}
+.admin-card {
+    animation: fadeIn 0.25s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

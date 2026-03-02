@@ -1,7 +1,7 @@
 /*navbar*/
 .navbar {
     background-color: #2f3e2b;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #c49e3c;
 }
 
 .navbar-brand,
@@ -22,22 +22,22 @@
     width: 260px;
 }
 .btn-kat {
-    border-radius: 15px;
-    border: 1px solid #ccc;
+    border-radius: 12px;
+    border: 1px solid #2f3e2b;
     padding: 10px;
     text-align: center;
     margin-bottom: 10px;
-    background: #f5f5f5;
+    background: #ffffff;
     transition: 0.2s;
+    color: #2f3e2b;
 }
 
 .btn-kat:hover {
-    background: #e1e1e1;
+    background: #2f3e2b;
+    color: #c49e3c;
     cursor: pointer;
 }
-.inline{
-    display: inline-block;
-}
+
 .btn-navbar {
     padding: 0.6rem;
     border-radius: 8px;
@@ -51,14 +51,68 @@
 .btn-navbar:hover {
     background-color: #b08b32;
 }
+
+.btn-navbar:hover {
+    background-color: #b08b32;
+}
+
+/* body: */
 body {
     background-color: #f4f1ea;
+}
+.dolgozo-title {
+    color: #2f3e2b;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+.dolgozo-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: 0.25s ease;
+    border-top: 4px solid #c49e3c;
+}
+.dolgozo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 35px rgba(0,0,0,0.08);
+}
+.dolgozo-card h3 {
+    color: #2f3e2b;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+.dolgozo-card .form-control {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 0.7rem;
+}
+.dolgozo-card .form-control:focus {
+    border-color: #c49e3c;
+    box-shadow: 0 0 0 0.15rem rgba(196,158,60,0.25);
+}
+.dolgozo-card table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+.dolgozo-card thead {
+    background-color: #2f3e2b;
+    color: white;
+}
+.dolgozo-btn {
+    background-color: #2f3e2b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+.dolgozo-btn:hover {
+    background-color: #c49e3c;
     color: #2f3e2b;
 }
-.form-control {
-    border-radius: 15px;
-    border: 2px solid #000;
-}
+
 .btn {
     border-width: 2px;
 }
@@ -75,4 +129,15 @@ input{
 }
 #learazasKuldes{
     background-color: #c49e3c;
+}
+#Kijelentkezes {
+    padding: 0.7rem 1.5rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 12px;
+    background-color: #8b2f2f;
+    color: white;
 }

@@ -50,67 +50,62 @@
 <!-- navbar vége-->
     
 <!--body __ Bejelentkezés-->
-<div>
+<div style="margin-top: 10px; margin-bottom: 10px;" class="container">
     <div class="row">
         <div class="col"> 
-            <div class="form-control">
+            <div class="dolgozo-card">
                 <h3>Termék</h3>
                 <div class="row">
                     <div class="col">
                         <label for="">Név:</label><br>
                         <input  class="form-control" type="text" id="termekNev"><br>
-                        <br>
+                         <br>
                         <label for="">Leírás:</label><br>
                         <input  class="form-control" type="text" id="termekLeiras"><br>
-                        <br>
+                         <br>
                         <label for="">Ár:</label><br>
                         <input  class="form-control" type="number" id="termekAr"><br>
-                        <br>
+                         <br>
                         <label for="">Kategória:</label><br>
                         <select class="form-control" id="termekKategoria">
-                            
                         </select>
                     </div>
                     <div class="col">
                         <label for="">Angol név:</label><br>
                         <input  class="form-control" type="text" id="termekNevEn"><br>
-                        <br>
-                         <label for="">Angol Leírás:</label><br>
+                         <br>
+                        <label for="">Angol Leírás:</label><br>
                         <input class="form-control" type="text" id="termekLeirasEn"><br>
-                        <br>
-                         <label for="">Kép:</label><br>
+                         <br>
+                        <label for="">Kép:</label><br>
                         <input class="form-control" type="file" id="termekKep"><br>
-                        <br>
+                         <br>
                         <label for="">Raktáron:</label><br>
                         <input class="form-control" type="number" id="termekMennyiseg"><br>
                     </div>
-                    <input type="button" class="btn" value="Küldés" id="termekKuldes">
+                    <input type="button" class="btn dolgozo-btn" value="Küldés" id="termekKuldes">
                     <div id="termekEredmeny"></div>
                 </div>
             </div>
             <br>
-            <div class="form-control">
+            <div class="dolgozo-card" style="margin-bottom: 10px;">
                 <div class="row">
                     <div class="col">
-                    <label for="">Kategória:</label>
-                    <select class="form-control" name="" id="learazasKategoria">
-                </select>                  
+                        <label for="">Kategória:</label>
+                        <select class="form-control" name="" id="learazasKategoria"></select>                  
                     </div>
                     <div class="col">
-                    <label for="">Termék:</label>
-                    <select class="form-control" name="" id="learazasTermek">
-                        <option value="0">Összes</option>
-                    </select>
+                        <label for="">Termék:</label>
+                        <select class="form-control" name="" id="learazasTermek">
+                            <option value="0">Összes</option>
+                        </select>
                     </div>
                     <div class="col">
-                    <label for="">Leárazásmértéke:</label>
-                    <select class="form-control" name="" id="learazasMertek">
-
-                    </select>
+                        <label for="">Leárazásmértéke:</label>
+                        <select class="form-control" name="" id="learazasMertek"></select>
                     </div>
-                    <input type="button" class="btn" value="Küldés" id="learazasKuldes">
+                    <input type="button" class="btn dolgozo-btn" value="Küldés" id="learazasKuldes">
                     <div id="learazasEredmeny"></div>
-
                 </div>
             </div>
         </div>
@@ -141,17 +136,19 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row">
-                <input type="button" id="Kuldes" value="Elküldve" class="col btn btn-warning">
-                <input type="button" id="Teljesites" value="Teljesítve" class="col btn btn-success">
-                <input type="button" id="Torles" value="Törlés" class="col btn btn-danger">
+            <div class="form-control" style="background-color: #f4f1ea; border: none; ">
+                <div class="row">
+                    <input type="button" id="Kuldes" value="Elküldve" class="col btn dolgozo-btn"> <!-- Ezt a 3 gombot akarom hogy egymás mellett legyenek és legyen köztük egy pici hely (csak hogy ne érintkezzenek), azt is szeretném hogy a felette lévő résznél le legyenek szélesebbek (ezért most ebbe tettem őket: div class="form-control" style="background-color: #f4f1ea; border: none; )-->
+                    <input style="margin-left: 10px; margin-right: 10px;" type="button" id="Teljesites" value="Teljesítve" class="col dolgozo-btn">
+                    <input type="button" id="Torles" value="Törlés" class="col btn dolgozo-btn">
+                </div>
             </div>
-                    <div id="rendelesEredmeny"></div>
+            <div id="rendelesEredmeny"></div>
             <br>
-            <input type="button" id="Kijelentkezes" class="btn btn-danger" value="Kijelentkezés">
         </div>
     </div>
 </div>
+<input type="button" id="Kijelentkezes" class="btn dolgozo-btn" value="Kijelentkezés">
 
 <!--footer-->
 </body>
