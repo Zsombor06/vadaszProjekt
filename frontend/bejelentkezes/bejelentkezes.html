@@ -53,7 +53,7 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100">
     <form id="bejelentkezesDoboz" class="p-4 rounded shadow login-box">
         <div class="mb-3">
-            <input type="text" id="FnevIn" class="form-control form-control-lg text-center" placeholder="felhasználó név">
+            <input type="text" id="FnevIn" class="form-control form-control-lg text-center" placeholder="Felhasználó név">
         </div>
         <div class="mb-3 position-relative">
             <input type="password" id="FjelszoIn" class="form-control form-control-lg text-center" placeholder="jelszó">
@@ -73,12 +73,18 @@
         </div>
 
         <div class="d-grid">
-           <input type="button" value="Bejelentkezés" id="BejGomb" class="btn">
+           <input lang="hu" type="button" value="Bejelentkezés" id="BejGomb" class="btn">
+           <input lang="en" type="button" value="Login" id="BejGombEn" class="btn">
+
        </div>
 
-        <label for="RegGomb" class="form-label text-center w-100 mt-2">Nincs még fiókod? Regisztrálj: </label>
-        <div class="d-grid mb-3">
-            <input type="button" name="RegGomb" value="Regisztráció" id="RegGomb" class="btn">
+        <label lang="hu" for="RegGomb" class="form-label text-center w-100 mt-2">Nincs még fiókod? Regisztrálj: </label>
+        <div  class="d-grid mb-3">
+            <input lang="hu" type="button" name="RegGomb" value="Regisztráció" id="RegGomb" class="btn">
+        </div>
+        <label lang="en" for="RegGomb" class="form-label text-center w-100 mt-2">Don't have an account? Register: </label>
+        <div  class="d-grid mb-3">
+            <input lang="en" type="button" name="RegGomb" value="Register" id="RegGombEn" class="btn">
         </div>
     </form>
 </div>
