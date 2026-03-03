@@ -28,7 +28,7 @@ const bejelentkezesiStatus = async () => {
 
             }
         } catch (error) {
-            return console.log(error);
+             window.location.href="../bejelentkezes/bejelentkezes.html"
         }
     }
 const kosarBejelentkezes=async()=>{
@@ -42,7 +42,10 @@ const kosarBejelentkezes=async()=>{
                     window.location.href="../kosar/kosar.html"
                     }
                 
-            }
+                    else{
+                        window.location.href="../bejelentkezes/bejelentkezes.html"
+                    }
+                }
             else{
                 window.location.href="../bejelentkezes/bejelentkezes.html"
             }
@@ -50,13 +53,17 @@ const kosarBejelentkezes=async()=>{
 
     document.getElementById("felhasznaloGomb").addEventListener("click",bejelentkezesiStatus)
     document.getElementById("kosarGomb").addEventListener("click",kosarBejelentkezes)
+    document.getElementById("felhasznaloGombEn").addEventListener("click",bejelentkezesiStatus)
+    document.getElementById("kosarGombEn").addEventListener("click",kosarBejelentkezes)
     const navbarKategoriak=async()=>{
         try {
             let httpvalasz=await fetch("../../backend/navbar/index.php/kategoriakNeve")
             let adatok=await httpvalasz.json()
             for (const adat of adatok) {
-                    document.getElementById("navbarKategoriak").innerHTML+=`<div class="btn-kat" onclick=" localStorage.setItem('kategoria','${adat["kategoria"]}')
+                    document.getElementById("navbarKategoriak").innerHTML+=`<div lang="hu" class="btn-kat" onclick=" localStorage.setItem('kategoria','${adat["kategoria"]}')
         window.location.href='../termekek/termekek.html'" style="text-decoration: none;">${adat["kategoria"]}</div>`
+                    document.getElementById("navbarKategoriak").innerHTML+=`<div lang="en" class="btn-kat" onclick=" localStorage.setItem('kategoria','${adat["kategoria"]}')
+        window.location.href='../termekek/termekek.html'" style="text-decoration: none;">${adat["kategoriaEn"]}</div>`
                 }
         } catch (error) {
             console.log(error)

@@ -8,10 +8,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
     <link rel="stylesheet" href="./kosar.css">
+    <link id="nyelv" rel="stylesheet" type="text/css" href="../nyelv/magyar.css">
 </head>
-
 <body>
-
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid px-4">
         <div class="justify-content-start">
@@ -21,22 +20,33 @@
 
 
             <div class="d-flex flex-wrap justify-content-end" id="menuElems">
-                <ul class="navbar-nav me-3">
+                <ul  class="navbar-nav me-3">
                     <li class="nav-item dropdown">
-                        <button class="btn btn-navbar dropdown-toggle" data-bs-toggle="dropdown"> Nyelv </button>
+                        <button class="btn btn-navbar dropdown-toggle" data-bs-toggle="dropdown"> Nyelv/Language </button>
                         <ul class="dropdown-menu dropdown-menu-start">
-                            <li><a class="dropdown-item" href="#">Angol</a></li>
-                            <li><a class="dropdown-item" href="#">Magyar</a></li>
+                            <li id="magyar"><a class="dropdown-item" href="#">Magyar</a></li>
+                            <li id="angol"><a class="dropdown-item" href="#">English</a></li>
                         </ul>
                     </li>
                 </ul>
-
-                <button class="btn btn-navbar me-3" id="kosarGomb">Kosár</button>
-                <button class="btn btn-navbar me-3" id="felhasznaloGomb">Felhasználó</button>
+                <button lang="hu" class="btn btn-navbar me-3" id="kosarGomb">Kosár</button>
+                <button lang="en" class="btn btn-navbar me-3" id="kosarGombEn">Basket</button>
+                <button lang="hu" class="btn btn-navbar me-3" id="felhasznaloGomb">Felhasználó</button>
+                <button lang="en" class="btn btn-navbar me-3" id="felhasznaloGombEn">User</button>
                 <button class="btn btn-navbar" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">☰</button>
             </div>
         </div>
     </nav>
+
+    <div class="offcanvas offcanvas-end" id="sidebarMenu">
+        <div class="offcanvas-header">
+            <h5 lang="hu">Kategóriák</h5>
+            <h5 lang="en">Categories</h5>
+            <button class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body" id="navbarKategoriak">
+        </div>
+    </div>
 
     <div class="offcanvas offcanvas-end" id="sidebarMenu">
         <div class="offcanvas-header">
