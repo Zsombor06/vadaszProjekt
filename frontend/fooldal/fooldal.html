@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Főoldal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./fooldal.css">
+    <link id="nyelv" rel="stylesheet" type="text/css" href="../nyelv/magyar.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid px-4">
         <div class="justify-content-start">
-           <a href="fooldal.html" style="text-decoration: none;"> <img src="../képek/aranyagancs_logo.png" alt="LOGO" width="60" class="navbar-brand"> </a><!-- Oldal logója-->
-            <a href="fooldal.html"><img src="../képek/aranyagancs_szoveg.png" alt="SZOVEG" width="150" class="navbar-brand"></a>
+           <a href="../fooldal/fooldal.html" style="text-decoration: none;"> <img src="../képek/aranyagancs_logo.png" alt="LOGO" width="60" class="navbar-brand"> </a><!-- Oldal logója-->
+            <a href="../fooldal/fooldal.html"><img src="../képek/aranyagancs_szoveg.png" alt="SZOVEG" width="150" class="navbar-brand"></a>
         </div>
 
 
             <div class="d-flex flex-wrap justify-content-end" id="menuElems">
-                <ul class="navbar-nav me-3">
+                <ul  class="navbar-nav me-3">
                     <li class="nav-item dropdown">
-                        <button class="btn btn-navbar dropdown-toggle" data-bs-toggle="dropdown"> Nyelv </button>
+                        <button class="btn btn-navbar dropdown-toggle" data-bs-toggle="dropdown"> Nyelv/Language </button>
                         <ul class="dropdown-menu dropdown-menu-start">
-                            <li><a class="dropdown-item" href="#">Angol</a></li>
-                            <li><a class="dropdown-item" href="#">Magyar</a></li>
+                            <li id="magyar"><a class="dropdown-item" href="#">Magyar</a></li>
+                            <li id="angol"><a class="dropdown-item" href="#">English</a></li>
                         </ul>
                     </li>
                 </ul>
-
-                <button class="btn btn-navbar me-3" id="kosarGomb">Kosár</button>
-                <button class="btn btn-navbar me-3" id="felhasznaloGomb">Felhasználó</button>
+                <button lang="hu" class="btn btn-navbar me-3" id="kosarGomb">Kosár</button>
+                <button lang="en" class="btn btn-navbar me-3" id="kosarGombEn">Basket</button>
+                <button lang="hu" class="btn btn-navbar me-3" id="felhasznaloGomb">Felhasználó</button>
+                <button lang="en" class="btn btn-navbar me-3" id="felhasznaloGombEn">User</button>
                 <button class="btn btn-navbar" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">☰</button>
             </div>
         </div>
@@ -36,7 +38,8 @@
 
     <div class="offcanvas offcanvas-end" id="sidebarMenu">
         <div class="offcanvas-header">
-            <h5>Kategóriák</h5>
+            <h5 lang="hu">Kategóriák</h5>
+            <h5 lang="en">Categories</h5>
             <button class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body" id="navbarKategoriak">
@@ -45,11 +48,13 @@
 <!-- navbar vége-->
 
 <section class="hero text-center">
-    <h1 class="fw-bold display-5">„Az erdő hív – mi felszerelünk rá.”</h1>
+    <h1 lang="hu" class="fw-bold display-5">„Az erdő hív – mi felszerelünk rá.”</h1>
+    <h1 lang="en" class="fw-bold display-5">„The forest calls – we answer it.”</h1>
+
 </section>
 
 <div class="container my-5">
-    <div class="info-block text-center mx-auto">
+    <div lang="hu" class="info-block text-center mx-auto">
         <h3 class="fw-bold">Üdvözlünk az Arany Agancsnál!</h3>
         <p class="mt-3 text-justify"> <!-- valami köszöntő/ bevezető-bemutató szöveg -- lehet akár több mező is -->
             Az Arany Agancs vadászfelszerelés szaküzlet célja, hogy a természetben töltött idő valódi élmény legyen. Kínálatunkban megtalálod a megbízható ruházatot, kiegészítőket és felszereléseket, amelyekre minden vadásznak szüksége lehet – legyen szó kezdőről vagy tapasztalt erdőjáróról.
@@ -57,15 +62,28 @@
             Hiszünk a minőségben, a hagyományban és abban, hogy a megfelelő felszerelés nem luxus, hanem alapfeltétel. Az erdő kiszámíthatatlan – mi segítünk felkészülten érkezni.
         </p>
     </div>
+    <div lang="en" class="info-block text-center mx-auto">
+        <h3 class="fw-bold">We welcome you to Arany Agancs!</h3>
+        <p class="mt-3 text-justify"> <!-- valami köszöntő/ bevezető-bemutató szöveg -- lehet akár több mező is -->
+            The goal of the Arany Agancs hunting equipment store is to make time spent in nature a real experience. In our offer you will find reliable clothing, accessories and equipment that every hunter needs - whether you are a beginner or an experienced hiker.
+            <br>
+            We believe in quality, tradition and that proper equipment is not a luxury, but a basic requirement. The forest is unpredictable - we help you arrive prepared.
+        </p>
+    </div>
 </div>
-<div class="container mb-5 text-center">
-   <button id="Regisztralas" class="btn btn-reg px-5 py-3">Regisztráció</button>
+<div lang="hu" class="container mb-5 text-center">
+   <button  id="Regisztralas" class="btn btn-reg px-5 py-3">Regisztráció</button>
 </div>
+<div lang="en"  class="container mb-5 text-center">
+   <button id="RegisztralasEn" class="btn btn-reg px-5 py-3">Register</button>
+</div>
+
+
 <!--footer-->
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../bejelentkezesiStatus.js"></script>
 <script type="module" src="./fooldal.js">
-    
 </script>
+<script src="../nyelv/nyelv.js"></script>
 </html>

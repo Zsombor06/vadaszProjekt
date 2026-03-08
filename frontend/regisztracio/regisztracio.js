@@ -29,7 +29,13 @@ document.getElementById("BejGomb").addEventListener("click", function () {
         console.log(error);
     }
 });
-
+document.getElementById("BejGombEn").addEventListener("click", function () {
+    try {
+        window.location.href = "../bejelentkezes/bejelentkezes.html";
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 const Regisztracio = async () => {
      try {
@@ -95,3 +101,25 @@ const Regisztracio = async () => {
 }
 
 document.getElementById("RegGomb").addEventListener("click", Regisztracio);
+document.getElementById("RegGombEn").addEventListener("click", Regisztracio);
+
+window.addEventListener("load",()=>{
+     if(localStorage.getItem("nyelv")=="en"){
+        document.getElementById("FnevIn").placeholder="User name";
+        document.getElementById("FjelszoIn").placeholder="Password";
+        document.getElementById("FjelszoUjraIn").placeholder="Password conformation";
+        document.getElementById("FemailIn").placeholder="E-mail";
+
+        document.getElementById("SzamlOrszag").placeholder="Country";
+        document.getElementById("SzamlIr").placeholder="ZIP code";
+        document.getElementById("SzamlVaros").placeholder="City";
+        document.getElementById("SzamlUtca").placeholder="Street";
+
+        document.getElementById("FlakOrszag").placeholder="Country";
+        document.getElementById("FlakIr").placeholder="ZIP code";
+        document.getElementById("FlakVaros").placeholder="City";
+        document.getElementById("FlakUtca").placeholder="Street";
+    }else{
+        
+    }
+})

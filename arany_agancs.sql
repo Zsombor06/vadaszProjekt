@@ -57,34 +57,35 @@ INSERT INTO `felhasznalo` (`felhasznalonev`, `jelszo`, `email`, `rangId`, `szaml
 
 CREATE TABLE `kategoria` (
   `id` int(11) NOT NULL,
-  `kategoria` varchar(255) NOT NULL
+  `kategoria` varchar(255) NOT NULL,
+  `kategoriaEn` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `kategoria`
 --
 
-INSERT INTO `kategoria` (`id`, `kategoria`) VALUES
-(1, 'Vadászruházat'),
-(2, 'Fegyverek'),
-(3, 'Távcsövek'),
-(4, 'Lőszer'),
-(5, 'Kések'),
-(6, 'Csapdák'),
-(7, 'Kiegészítők'),
-(8, 'Terepfelszerelés'),
-(9, 'Optika'),
-(10, 'Vadászautó kiegészítők'),
-(11, 'Táskák és tokok'),
-(12, 'Karbantartás'),
-(13, 'Éjjellátók'),
-(14, 'Terepszínezés'),
-(15, 'Kézmelegítők'),
-(16, 'Kutyafelszerelés'),
-(17, 'Hívók és sípok'),
-(18, 'Trófea tartók'),
-(19, 'Vadász könyvek'),
-(20, 'Ajándéktárgyak');
+INSERT INTO `kategoria` (`id`, `kategoria`,`kategoriaEn`) VALUES
+(1, 'Vadászruházat','Hunting Clothes'),
+(2, 'Fegyverek','Weapons'),
+(3, 'Távcsövek','Binoculors'),
+(4, 'Lőszer','Ammo'),
+(5, 'Kések','Knifes'),
+(6, 'Csapdák','Traps'),
+(7, 'Kiegészítők','Accessories'),
+(8, 'Terepfelszerelés','Field equipment'),
+(9, 'Optika','Optics'),
+(10, 'Vadászautó kiegészítők','Hunting vehicle accessories'),
+(11, 'Táskák és tokok','Backpacks and cases'),
+(12, 'Karbantartás','Maintenance'),
+(13, 'Éjjellátók','Nightvison'),
+(14, 'Terepszínezés','Camoflage'),
+(15, 'Kézmelegítők','Handwarmers'),
+(16, 'Kutyafelszerelés','Dog equipment'),
+(17, 'Hívók és sípok','Whistles'),
+(18, 'Trófea tartók','Trophy holders'),
+(19, 'Vadász könyvek','Hunting Books'),
+(20, 'Ajándéktárgyak','Gift items');
 
 -- --------------------------------------------------------
 

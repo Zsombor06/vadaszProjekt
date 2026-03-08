@@ -33,5 +33,7 @@ const regisztralasGomb = async () => {
 
 
     document.getElementById("Regisztralas").addEventListener("click", regisztralasGomb);
+    document.getElementById("RegisztralasEn").addEventListener("click", regisztralasGomb);
+
 
     

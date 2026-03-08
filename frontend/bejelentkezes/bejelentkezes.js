@@ -43,6 +43,13 @@ document.getElementById("RegGomb").addEventListener("click", function() {
         console.log(error);
     }
 });
+document.getElementById("RegGombEn").addEventListener("click", function() {
+    try {
+        window.location.href = "../regisztracio/regisztracio.html" //regisztracios oldal
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 document.getElementById('szemecske').addEventListener('click', function () {
     const jelszoIn = document.getElementById('FjelszoIn');
@@ -81,3 +88,14 @@ window.addEventListener("load", kapcsaGen);
 
 document.getElementById("felhasznaloGomb").addEventListener("click", felhasznaloGomb);
 document.getElementById("BejGomb").addEventListener("click", bejelentkezesGomb);
+document.getElementById("BejGombEn").addEventListener("click", bejelentkezesGomb);
+
+window.addEventListener("load",()=>{
+    if(localStorage.getItem("nyelv")=="en"){
+        document.getElementById("FnevIn").placeholder="Username";
+        document.getElementById("FjelszoIn").placeholder="Password";
+    }else{
+        document.getElementById("FnevIn").placeholder="Felhasználónév";
+        document.getElementById("FjelszoIn").placeholder="Jelszó";
+    }
+})
