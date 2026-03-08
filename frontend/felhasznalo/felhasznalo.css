@@ -51,44 +51,78 @@
     background-color: #b08b32;
 }
 
-
 .text-justify {
     text-align: justify;
 }
-
 body {
     background-color: #f4f1ea;
     color: #2f3e2b;
 }
 
-/*termek oldal resz:*/
-.kategoriavalaszto {
-    max-width: 280px;
-    margin: 0 auto;
-    border-radius: 8px;
+.felhasznalo-container{
+max-width:1100px;
+}
+.felhasznalo-card{
+border:none;
+border-radius:16px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+background:#ffffff;
+}
+.felhasznalo-card h4{
+font-weight:700;
+margin-bottom:20px;
+}
+.felhasznalo-btn{
+background:#c49e3c;
+color:#2f3e2b;
+font-weight:700;
+border:none;
+border-radius:10px;
+padding:8px 20px;
+}
+.felhasznalo-btn:hover{
+background:#b08e34;
 }
 
+#kijelentkezes {
+    margin-top: 20px;
+    padding: 0.7rem 1.5rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 12px;
+    background-color: #8b2f2f;
+    color: white;
+}
 
-#btn_jMod {
-    width: 20%;
-    padding: 0.6rem;
-    border-radius: 8px;
-    border: none;
-    background-color: #c49e3c;
-    color: #2f3e2b;
-    font-weight: 700;
-    transition: background-color 0.2s ease;
+/*modal:*/
+.rendeles-modal .modal-content{
+    border-radius:16px;
+    border:none;
+    background:#f4f1ea;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
 }
-#cimMod {
-    width: 25%;
-    padding: 0.6rem;
-    border-radius: 8px;
-    border: none;
-    background-color: #c49e3c;
-    color: #2f3e2b;
-    font-weight: 700;
-    transition: background-color 0.2s ease;
+.rendeles-modal .modal-header{
+    background:#2f3e2b;
+    color:#c49e3c;
+    border-bottom:none;
 }
-.lCim{
-    width: 75%;
+.rendeles-modal .modal-title{
+    font-weight:700;
+}
+.rendeles-modal .modal-body{
+    color:#2f3e2b;
+}
+.rendeles-modal .table{
+    margin-bottom:0;
+}
+.rendeles-modal .table thead{
+    background:#2f3e2b;
+    color:#c49e3c;
+}
+.rendeles-modal .table td,
+.rendeles-modal .table th{
+    vertical-align:middle;
 }

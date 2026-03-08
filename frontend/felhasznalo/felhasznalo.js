@@ -170,7 +170,7 @@ const Cimek = async () => {
     }
 }
 
-document.getElementById("btn_kij").addEventListener("click",  () => { 
+document.getElementById("kijelentkezes").addEventListener("click",  () => { 
        localStorage.removeItem('token')
            window.location.href="../fooldal/fooldal.html"
 });
@@ -215,7 +215,7 @@ window.addEventListener("load", async () => {
                     <td>${r.vegosszeg} Ft</td>
                     <td>${statusz}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary" data-id="${r.rendelesId}">
+                        <button class="btn btn-sm felhasznalo-btn" data-id="${r.rendelesId}">
                             Részletek
                         </button>
                     </td>
