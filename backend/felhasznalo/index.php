@@ -53,27 +53,37 @@ case "rendelesTetelek":
     $tetelek=adatokLekerese($tetelekSQL,"s",[$_GET["rendelesId"]]);
     echo json_encode($tetelek,JSON_UNESCAPED_UNICODE);
     return http_response_code(200);
+
 case "jelszoModositas":
     if($metodus!="PUT"){
         return http_response_code(405);
     }
-    if(empty($bodyAdatok["nev"])||empty($bodyAdatok["regiJelszo"]) || empty($bodyAdatok["ujJelszo"])){
-        echo json_encode(["valasz"=>"Hiányzó adat!"],JSON_UNESCAPED_UNICODE);
+    if(empty($bodyAdatok["nev"]) || empty($bodyAdatok["regiJelszo"]) || empty($bodyAdatok["ujJelszo"])){
+        echo json_encode(["valasz"=>"Hiányzó adat!"], JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
     }
-    $ellenorzesSQL="SELECT * from felhasznalo where jelszo=? and felhasznalonev=?";
-    $ellenorzes=adatokLekerese($ellenorzesSQL,"ss",[$bodyAdatok["regiJelszo"],$bodyAdatok["nev"]]);
-    if(empty($ellenorzes)){
-        echo json_encode(["valasz"=>"Hibás jelszó!"],JSON_UNESCAPED_UNICODE);
+    // Felhasználó lekérése
+    $sql = "SELECT jelszo FROM felhasznalo WHERE felhasznalonev=?";
+    $user = adatokLekerese($sql,"s",[$bodyAdatok["nev"]]);
+    if(empty($user)){
+        echo json_encode(["valasz"=>"Felhasználó nem létezik!"], JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
     }
-    $jelszoModositasSQL="UPDATE `felhasznalo` SET `jelszo`=? WHERE `felhasznalonev`=?";
-    $jelszoModositas=adatokValtoztatasa($jelszoModositasSQL,"ss",[$bodyAdatok["ujJelszo"],$bodyAdatok["nev"]]);
+    $hash = $user[0]["jelszo"];
+    // Régi jelszó ellenőrzése
+    if(!password_verify($bodyAdatok["regiJelszo"], $hash)){
+        echo json_encode(["valasz"=>"Hibás jelszó!"], JSON_UNESCAPED_UNICODE);
+        return http_response_code(400);
+    }
+    // Új jelszó hash-elése
+    $ujHash = password_hash($bodyAdatok["ujJelszo"], PASSWORD_DEFAULT);
+    $jelszoModositasSQL = "UPDATE felhasznalo SET jelszo=? WHERE felhasznalonev=?";
+    $jelszoModositas = adatokValtoztatasa($jelszoModositasSQL,"ss",[$ujHash,$bodyAdatok["nev"]]);
     if($jelszoModositas){
-         echo json_encode(["valasz"=>"Sikeres módosítás!"],JSON_UNESCAPED_UNICODE);
+        echo json_encode(["valasz"=>"Sikeres módosítás!"], JSON_UNESCAPED_UNICODE);
         return http_response_code(200);
     }
-     echo json_encode(["valasz"=>"Ugyanaz jelszó megadva!"],JSON_UNESCAPED_UNICODE);
+    echo json_encode(["valasz"=>"Hiba történt!"], JSON_UNESCAPED_UNICODE);
     return http_response_code(400);
 case "ujSzallitasiCim":
     if($metodus!="POST"){
