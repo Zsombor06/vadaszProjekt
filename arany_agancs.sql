@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Már 10. 17:46
+-- Létrehozás ideje: 2026. Már 10. 17:51
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `arany_agancs`
 --
+CREATE DATABASE IF NOT EXISTS `arany_agancs` DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+USE `arany_agancs`;
 
 -- --------------------------------------------------------
 
