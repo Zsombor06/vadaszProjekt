@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
     <link rel="stylesheet" href="./kosar.css">
-    <link id="nyelv" rel="stylesheet" type="text/css" href="../nyelv/magyar.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -29,10 +28,8 @@
                         </ul>
                     </li>
                 </ul>
-                <button lang="hu" class="btn btn-navbar me-3" id="kosarGomb">Kosár</button>
-                <button lang="en" class="btn btn-navbar me-3" id="kosarGombEn">Basket</button>
-                <button lang="hu" class="btn btn-navbar me-3" id="felhasznaloGomb">Felhasználó</button>
-                <button lang="en" class="btn btn-navbar me-3" id="felhasznaloGombEn">User</button>
+                <button  class="btn btn-navbar me-3" id="kosarGomb">Kosár</button>
+                <button  class="btn btn-navbar me-3" id="felhasznaloGomb">Felhasználó</button>
                 <button class="btn btn-navbar" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">☰</button>
             </div>
         </div>
@@ -40,43 +37,34 @@
 
     <div class="offcanvas offcanvas-end" id="sidebarMenu">
         <div class="offcanvas-header">
-            <h5 lang="hu">Kategóriák</h5>
-            <h5 lang="en">Categories</h5>
+            <h5 id="szoveg3">Kategóriák</h5>
             <button class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body" id="navbarKategoriak">
         </div>
     </div>
 
-    <div class="offcanvas offcanvas-end" id="sidebarMenu">
-        <div class="offcanvas-header">
-            <h5>Kategóriák</h5>
-            <button class="btn-close" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body" id="navbarKategoriak">
-        </div>
-    </div>
 
     <div class="kosar-body">
         <div class="kosar-terulet g-4 my-4">
             <div class="col-12 mb-3">
                 <section class="kosar-lista">
-                    <h2>Kosár tartalma</h2>
+                    <h2 id="szoveg4">Kosár tartalma</h2>
                     <form>
                         <ul id="KosarTartalom" class="kosar-ul"></ul>
-                        <button type="button" class="btn btn-success" onclick="window.location.href='../termekek/termekek.html'">További termék hozzáadása</button>
+                        <button type="button" id="szoveg5" class="btn btn-success" onclick="window.location.href='../termekek/termekek.html'">További termék hozzáadása</button>
                     </form>
                 </section>
             </div>
             <div class="col-12 mb-3">
                 <section class="kosar-ossz">
-                    <h2 class="mb-3">Összegzés</h2>
+                    <h2 class="mb-3" id="szoveg6">Összegzés</h2>
                     <div class="vegosszegSor input-group mb-3">
-                        <span class="input-group-text">Végösszeg: </span>
+                        <span class="input-group-text" id="szoveg7">Végösszeg: </span>
                         <strong class="form-control" id="vegosszeg">0 Ft</strong>
                     </div>
                     <div class="szCimSor input-group mb-3">
-                       <label class="input-group-text" for="szallitasicimek">Válasszon szállítási címet:</label>
+                       <label class="input-group-text" for="szallitasicimek" id="szoveg8">Válasszon szállítási címet:</label>
                        <select name="szallitasicimek" id="szCimMezo" class="form-control">
 
                        </select>
@@ -97,13 +85,13 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" id="szoveg9">
             Biztosan törölni szeretné a terméket a kosárból? <br>
             Ezt a műveletet nem lehet visszavonni! <br>
             <p id="modalHibaMezo"></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégsem</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="szoveg10">Mégsem</button>
             <button type="button" class="btn btn-danger" id="torlesConfirm">Törlés</button>
           </div>
         </div>
@@ -114,7 +102,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../bejelentkezesiStatus.js"></script>
     <script type="module" src="./kosar.js"></script>
-<script src="../nyelv/nyelv.js"></script>
 
 </body>
 </html>

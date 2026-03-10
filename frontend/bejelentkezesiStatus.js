@@ -53,20 +53,27 @@ const kosarBejelentkezes=async()=>{
 
     document.getElementById("felhasznaloGomb").addEventListener("click",bejelentkezesiStatus)
     document.getElementById("kosarGomb").addEventListener("click",kosarBejelentkezes)
-    document.getElementById("felhasznaloGombEn").addEventListener("click",bejelentkezesiStatus)
-    document.getElementById("kosarGombEn").addEventListener("click",kosarBejelentkezes)
+
     const navbarKategoriak=async()=>{
         try {
             let httpvalasz=await fetch("../../backend/navbar/index.php/kategoriakNeve")
             let adatok=await httpvalasz.json()
+            document.getElementById("navbarKategoriak").innerHTML=""
             for (const adat of adatok) {
-                    document.getElementById("navbarKategoriak").innerHTML+=`<div lang="hu" class="btn-kat" onclick=" localStorage.setItem('kategoria','${adat["kategoria"]}')
+                  if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
+                    document.getElementById("navbarKategoriak").innerHTML+=`<div lang="hu" class="btn-kat" onclick=" localStorage.setItem('kategoria','${adat["id"]}')
         window.location.href='../termekek/termekek.html'" style="text-decoration: none;">${adat["kategoria"]}</div>`
-                    document.getElementById("navbarKategoriak").innerHTML+=`<div lang="en" class="btn-kat" onclick=" localStorage.setItem('kategoria','${adat["kategoria"]}')
+    }
+        else{
+                    document.getElementById("navbarKategoriak").innerHTML+=`<div lang="en" class="btn-kat" onclick=" localStorage.setItem('kategoria','${adat["id"]}')
         window.location.href='../termekek/termekek.html'" style="text-decoration: none;">${adat["kategoriaEn"]}</div>`
+        }
+                   
                 }
         } catch (error) {
             console.log(error)
         }
     }
     window.addEventListener("load",navbarKategoriak)
+    document.getElementById("magyar").addEventListener("click",navbarKategoriak)
+    document.getElementById("angol").addEventListener("click",navbarKategoriak)

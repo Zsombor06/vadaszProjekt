@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Jan 06. 19:10
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.2.4
+-- Létrehozás ideje: 2026. Már 10. 17:46
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `arany_agancs`
 --
-CREATE DATABASE IF NOT EXISTS `arany_agancs` DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
-USE `arany_agancs`;
 
 -- --------------------------------------------------------
 
@@ -43,11 +41,11 @@ CREATE TABLE `felhasznalo` (
 --
 -- A tábla adatainak kiíratása `felhasznalo`
 --
-INSERT INTO `felhasznalo` (`felhasznalonev`, `jelszo`, `email`, `rangId`, `szamlazasi_orszag`, `szamlazasi_iranyitoszam`, `szamlazasi_varos`, `szamlazasi_utca`) VALUES 
-('user', '$2y$10$1zHqp7Cn4s4UuUplZFobeeT/vooF3564V3pvl.e7ZVUosIfzQz1fG', 'user@user', '3', 'Magyarország', '8200', 'Veszprém', 'Valami'),
-('worker', '$2y$10$O1H/L1Ar4RgOqf4PdqcNMODM5Pg6VZkC2/ohxrp6hY4imxzqyq7oq', 'worker@worker', '2', 'Magyarország', '8200', 'Veszprém', 'Valami'),
-('admin', '$2y$10$p/VsqPDZalVnOXcz1fmLrum08lLeUN7ZWfrjbov455I8/ckrVCk.O', 'admin@admin', '1', 'Magyarország', '8200', 'Veszprém', 'Valami');
 
+INSERT INTO `felhasznalo` (`felhasznalonev`, `jelszo`, `email`, `rangId`, `szamlazasi_orszag`, `szamlazasi_iranyitoszam`, `szamlazasi_varos`, `szamlazasi_utca`) VALUES
+('admin', '$2y$10$p/VsqPDZalVnOXcz1fmLrum08lLeUN7ZWfrjbov455I8/ckrVCk.O', 'admin@admin', 1, 'Magyarország', 8200, 'Veszprém', 'Valami'),
+('user', '$2y$10$1zHqp7Cn4s4UuUplZFobeeT/vooF3564V3pvl.e7ZVUosIfzQz1fG', 'user@user', 3, 'Magyarország', 8200, 'Veszprém', 'Valami'),
+('worker', '$2y$10$O1H/L1Ar4RgOqf4PdqcNMODM5Pg6VZkC2/ohxrp6hY4imxzqyq7oq', 'worker@worker', 2, 'Magyarország', 8200, 'Veszprém', 'Valami');
 
 -- --------------------------------------------------------
 
@@ -65,27 +63,27 @@ CREATE TABLE `kategoria` (
 -- A tábla adatainak kiíratása `kategoria`
 --
 
-INSERT INTO `kategoria` (`id`, `kategoria`,`kategoriaEn`) VALUES
-(1, 'Vadászruházat','Hunting Clothes'),
-(2, 'Fegyverek','Weapons'),
-(3, 'Távcsövek','Binoculors'),
-(4, 'Lőszer','Ammo'),
-(5, 'Kések','Knifes'),
-(6, 'Csapdák','Traps'),
-(7, 'Kiegészítők','Accessories'),
-(8, 'Terepfelszerelés','Field equipment'),
-(9, 'Optika','Optics'),
-(10, 'Vadászautó kiegészítők','Hunting vehicle accessories'),
-(11, 'Táskák és tokok','Backpacks and cases'),
-(12, 'Karbantartás','Maintenance'),
-(13, 'Éjjellátók','Nightvison'),
-(14, 'Terepszínezés','Camoflage'),
-(15, 'Kézmelegítők','Handwarmers'),
-(16, 'Kutyafelszerelés','Dog equipment'),
-(17, 'Hívók és sípok','Whistles'),
-(18, 'Trófea tartók','Trophy holders'),
-(19, 'Vadász könyvek','Hunting Books'),
-(20, 'Ajándéktárgyak','Gift items');
+INSERT INTO `kategoria` (`id`, `kategoria`, `kategoriaEn`) VALUES
+(1, 'Vadászruházat', 'Hunting Clothing'),
+(2, 'Fegyverek', 'Weapons'),
+(3, 'Távcsövek', 'Binoculors'),
+(4, 'Túlélési felszerelés', 'Survival gear'),
+(5, 'Kések', 'Knifes'),
+(6, 'Csapdák', 'Traps'),
+(7, 'Kiegészítők', 'Accessories'),
+(8, 'Terepfelszerelés', 'Field equipment'),
+(9, 'Optika', 'Optics'),
+(10, 'Vadászautó kiegészítők', 'Hunting vehicle accessories'),
+(11, 'Táskák és tokok', 'Backpacks and cases'),
+(12, 'Karbantartás', 'Maintenance'),
+(13, 'Éjjellátók', 'Nightvison'),
+(14, 'Terepszínezés', 'Camoflage'),
+(15, 'Kézmelegítők', 'Handwarmers'),
+(16, 'Kutyafelszerelés', 'Dog equipment'),
+(17, 'Hívók és sípok', 'Whistles'),
+(18, 'Trófea tartók', 'Trophy holders'),
+(19, 'Vadász könyvek', 'Hunting Books'),
+(20, 'Ajándéktárgyak', 'Gift items');
 
 -- --------------------------------------------------------
 
@@ -164,8 +162,10 @@ CREATE TABLE `rendeles` (
 -- A tábla adatainak kiíratása `rendeles`
 --
 
-INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldve`, `teljesitve`) VALUES
-(1, 'user', 0, NULL, NULL, NULL);
+INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldve`, `teljesitve`, `szallitasId`) VALUES
+(1, 'user', 1, '2026-03-03 17:01:30', NULL, NULL, 1),
+(35, 'user', 0, NULL, NULL, NULL, NULL),
+(36, 'admin', 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -185,11 +185,55 @@ CREATE TABLE `szallitasicimek` (
 --
 -- A tábla adatainak kiíratása `szallitasicimek`
 --
+
 INSERT INTO `szallitasicimek` (`id`, `felhasznalo`, `orszag`, `iranyitoszam`, `varos`, `utca`) VALUES
 (1, 'user', 'Magyarország', 8200, 'Veszprém', 'Valami'),
 (2, 'admin', 'Magyarország', 8200, 'Veszprém', 'Valami'),
 (3, 'worker', 'Magyarország', 8200, 'Veszprém', 'Valami');
 
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `szoveg`
+--
+
+CREATE TABLE `szoveg` (
+  `id` int(255) NOT NULL,
+  `szoveg` varchar(500) NOT NULL,
+  `szoveg_en` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `szoveg`
+--
+
+INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
+(1, 'Kosár', 'Cart'),
+(2, 'Felhasználó', 'User'),
+(3, 'Kategóriák', 'Categories'),
+(4, '„Az erdő hív – mi felszerelünk rá.”', '„The forest calls – we answer it.”'),
+(5, 'Üdvözlünk az Arany Agancsnál!', 'We welcome you to Arany Agancs!'),
+(6, 'Az Arany Agancs vadászfelszerelés szaküzlet célja, hogy a természetben töltött idő valódi élmény legyen. Kínálatunkban megtalálod a megbízható ruházatot, kiegészítőket és felszereléseket, amelyekre minden vadásznak szüksége lehet – legyen szó kezdőről vagy tapasztalt erdőjáróról.<br>Hiszünk a minőségben, a hagyományban és abban, hogy a megfelelő felszerelés nem luxus, hanem alapfeltétel. Az erdő kiszámíthatatlan – mi segítünk felkészülten érkezni.', 'The goal of the Arany Agancs hunting equipment store is to make time spent in nature a real experience. In our offer you will find reliable clothing, accessories and equipment that every hunter needs - whether you are a beginner or an experienced hiker\r\n.<br>We believe in quality, tradition and that proper equipment is not a luxury, but a basic requirement. The forest is unpredictable - we help you arrive prepared.'),
+(7, 'Regisztráció', 'Register'),
+(8, 'Termék hozzáadása', 'Add product'),
+(9, ' A termék sikeresen hozzáadva a kosarához!', 'The product has been successfully added to your cart!'),
+(10, 'Rendben', 'Alright'),
+(11, 'Kosár megtekintése', 'View Cart'),
+(12, 'Bejelentkezés', 'Login'),
+(13, 'Nincs még fiókod? Regisztrálj:', 'Don\'t have an account yet? Register:'),
+(14, 'Már van fiókod? Jelentkezz be:', 'Already have an account? Log in:'),
+(15, 'Számlázási cím', 'Billing Address'),
+(16, 'Szállítási cím', 'Shipping address'),
+(17, 'Kosár tartalma', 'Contents of the cart'),
+(18, 'További termék hozzáadása', 'Add another product'),
+(19, 'Összegzés', 'Summary'),
+(20, 'Végösszeg', 'Total amount'),
+(21, 'Válasszon szállítási címet:', 'Choose shipping address:'),
+(22, 'Fizetés', 'Pay'),
+(23, 'Törlés megerősítése', 'Confirm deletion'),
+(24, ' Biztosan törölni szeretné a terméket a kosárból? <br>\r\n            Ezt a műveletet nem lehet visszavonni! <br>', 'Are you sure you want to remove the product from the cart? <br>This action cannot be undone! <br>'),
+(25, 'Mégsem', 'Cancel'),
+(26, 'Törlés', 'Delete');
 
 -- --------------------------------------------------------
 
@@ -253,7 +297,10 @@ CREATE TABLE `tetelek` (
 -- A tábla adatainak kiíratása `tetelek`
 --
 
+INSERT INTO `tetelek` (`id`, `rendelesId`, `termekId`, `mennyiseg`) VALUES
+(31, 35, 2, 1);
 
+--
 -- Indexek a kiírt táblákhoz
 --
 
@@ -298,6 +345,12 @@ ALTER TABLE `szallitasicimek`
   ADD KEY `felhasznalo` (`felhasznalo`);
 
 --
+-- A tábla indexei `szoveg`
+--
+ALTER TABLE `szoveg`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- A tábla indexei `termek`
 --
 ALTER TABLE `termek`
@@ -339,13 +392,19 @@ ALTER TABLE `rang`
 -- AUTO_INCREMENT a táblához `rendeles`
 --
 ALTER TABLE `rendeles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT a táblához `szallitasicimek`
 --
 ALTER TABLE `szallitasicimek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT a táblához `szoveg`
+--
+ALTER TABLE `szoveg`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT a táblához `termek`
@@ -357,7 +416,7 @@ ALTER TABLE `termek`
 -- AUTO_INCREMENT a táblához `tetelek`
 --
 ALTER TABLE `tetelek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -375,7 +434,6 @@ ALTER TABLE `felhasznalo`
 ALTER TABLE `rendeles`
   ADD CONSTRAINT `rendeles_ibfk_1` FOREIGN KEY (`felhasznalo`) REFERENCES `felhasznalo` (`felhasznalonev`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rendeles_ibfk_2` FOREIGN KEY (`szallitasId`) REFERENCES `szallitasicimek` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
 
 --
 -- Megkötések a táblához `szallitasicimek`

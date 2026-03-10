@@ -9,21 +9,11 @@ switch(end($uri)){
     if($metodus!="GET"){
         return http_response_code(405);
     }
-    $termekAdatokSQL="SELECT termek.id as id ,nev,`leiras`, kep, ar as regiar, (`ar`-ar*(LearazasMerteke/100)) as ujar,`keszlet` FROM `termek` inner JOIN learazas on learazasid=learazas.id where `kategoriaId`=?;";
+    $termekAdatokSQL="SELECT termek.id as id ,nev,nevEn,`leiras`,leirasEn, kep, ar as regiar, (`ar`-ar*(LearazasMerteke/100)) as ujar,`keszlet` FROM `termek` inner JOIN learazas on learazasid=learazas.id where `kategoriaId`=?;";
     $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$_GET["kategoria"]]);
     echo json_encode($termekAdatok,JSON_UNESCAPED_UNICODE);
     return http_response_code(200);
-    case "termekAdatokEn":
-        if($metodus!="GET"){
-            return http_response_code(405);
-        }
-        $termekAdatokSQL="SELECT termek.id as id,nevEn,`leirasEn`, kep, ar as regiar, (`ar`-ar*(LearazasMerteke/100)) as ujar,`keszlet` FROM `termek` inner JOIN learazas on learazasid=learazas.id where `kategoriaId`=?;";
-        $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$_GET["kategoria"]]);
-        echo json_encode($termekAdatok,JSON_UNESCAPED_UNICODE);
-        return http_response_code(200);
 
-
-        //vegyen le a mennyiségből
     case "kosarHozzaad":
         if($metodus!="POST"){
             return http_response_code(405);

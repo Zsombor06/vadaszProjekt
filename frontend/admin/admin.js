@@ -434,20 +434,7 @@ document.getElementById("torlesTermek").addEventListener("click",termekTorles)
 document.getElementById("modositTermek").addEventListener("click",termekModosit)
 termekNevek[0].addEventListener("click",termekAdatok)
 
-    const navbarKategoriak=async()=>{
-        try {
-            let httpvalasz=await fetch("../../backend/navbar/index.php/kategoriakNeve")
-            let adatok=await httpvalasz.json()
-            for (const adat of adatok) {
-                    document.getElementById("navbarKategoriak").innerHTML+=`<div class="btn-kat"><a href="" style="text-decoration: none; color:black;">${adat["kategoria"]}</a></div>`
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    window.addEventListener("load",navbarKategoriak)
-
+   
 document.getElementById("kijelentkezes").addEventListener("click",()=>{
     localStorage.removeItem('token')
     window.location.href="../fooldal/fooldal.html"

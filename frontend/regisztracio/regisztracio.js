@@ -29,13 +29,7 @@ document.getElementById("BejGomb").addEventListener("click", function () {
         console.log(error);
     }
 });
-document.getElementById("BejGombEn").addEventListener("click", function () {
-    try {
-        window.location.href = "../bejelentkezes/bejelentkezes.html";
-    } catch (error) {
-        console.log(error);
-    }
-});
+
 
 const Regisztracio = async () => {
      try {
@@ -101,25 +95,80 @@ const Regisztracio = async () => {
 }
 
 document.getElementById("RegGomb").addEventListener("click", Regisztracio);
-document.getElementById("RegGombEn").addEventListener("click", Regisztracio);
 
 window.addEventListener("load",()=>{
      if(localStorage.getItem("nyelv")=="en"){
-        document.getElementById("FnevIn").placeholder="User name";
-        document.getElementById("FjelszoIn").placeholder="Password";
-        document.getElementById("FjelszoUjraIn").placeholder="Password conformation";
-        document.getElementById("FemailIn").placeholder="E-mail";
-
-        document.getElementById("SzamlOrszag").placeholder="Country";
-        document.getElementById("SzamlIr").placeholder="ZIP code";
-        document.getElementById("SzamlVaros").placeholder="City";
-        document.getElementById("SzamlUtca").placeholder="Street";
-
-        document.getElementById("FlakOrszag").placeholder="Country";
-        document.getElementById("FlakIr").placeholder="ZIP code";
-        document.getElementById("FlakVaros").placeholder="City";
-        document.getElementById("FlakUtca").placeholder="Street";
+        
     }else{
         
     }
 })
+const szoveg=async()=>{
+    try {
+        let httpvalasz=await fetch("../../backend/szoveg/szoveg.php/szoveg")
+        let adatok=await httpvalasz.json()
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
+            document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg"]
+            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
+            document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg"]
+            document.getElementById("FnevIn").placeholder="Felhasználónév";
+            document.getElementById("FjelszoIn").placeholder="Jelszó";
+            document.getElementById("FjelszoUjraIn").placeholder="Jelszó megerősítés";
+
+
+            document.getElementById("SzamlOrszag").placeholder="Ország";
+            document.getElementById("SzamlIr").placeholder="Irányítószán";
+            document.getElementById("SzamlVaros").placeholder="Város";
+            document.getElementById("SzamlUtca").placeholder="Utca";
+
+            document.getElementById("FlakOrszag").placeholder="Country";
+            document.getElementById("FlakIr").placeholder="Irányítószán";
+            document.getElementById("FlakVaros").placeholder="Város";
+            document.getElementById("FlakUtca").placeholder="Utca";
+
+            document.getElementById("RegGomb").value=adatok[6]["szoveg"];
+            document.getElementById("szoveg6").innerHTML=adatok[13]["szoveg"];
+            document.getElementById("BejGomb").value=adatok[11]["szoveg"];    
+            document.getElementById("szoveg4").innerHTML=adatok[14]["szoveg"];
+            document.getElementById("szoveg5").innerHTML=adatok[15]["szoveg"];
+
+        }
+        else{
+            document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
+            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
+            document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg_en"]
+            document.getElementById("FnevIn").placeholder="User name";
+            document.getElementById("FjelszoIn").placeholder="Password";
+            document.getElementById("FjelszoUjraIn").placeholder="Password conformation";
+
+
+            document.getElementById("SzamlOrszag").placeholder="Country";
+            document.getElementById("SzamlIr").placeholder="ZIP code";
+            document.getElementById("SzamlVaros").placeholder="City";
+            document.getElementById("SzamlUtca").placeholder="Street";
+
+            document.getElementById("FlakOrszag").placeholder="Country";
+            document.getElementById("FlakIr").placeholder="ZIP code";
+            document.getElementById("FlakVaros").placeholder="City";
+            document.getElementById("FlakUtca").placeholder="Street";
+            document.getElementById("RegGomb").value=adatok[6]["szoveg_en"];
+            document.getElementById("szoveg6").innerHTML=adatok[13]["szoveg_en"];
+            document.getElementById("BejGomb").value=adatok[11]["szoveg_en"];
+            document.getElementById("szoveg4").innerHTML=adatok[14]["szoveg_en"];
+            document.getElementById("szoveg5").innerHTML=adatok[15]["szoveg_en"];
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+window.addEventListener("load",szoveg)
+const beallitMagyar=()=>{
+    localStorage.setItem("nyelv","hu")
+    szoveg()
+}
+document.getElementById("magyar").addEventListener("click",beallitMagyar)
+const beallitAngol=()=>{
+    localStorage.setItem("nyelv","en")
+    szoveg()
+}
+document.getElementById("angol").addEventListener("click",beallitAngol)

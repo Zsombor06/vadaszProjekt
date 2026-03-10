@@ -8,7 +8,9 @@ const TermekKartyak = async () => {
             return;
         }
         httpAdat = await httpResponse.json();
+        document.getElementById("KosarTartalom").innerHTML=""
         //console.log("httpAdat: " + Object.values(httpAdat));
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
         if (httpAdat.tetelek.length === 0) {
             document.getElementById("KosarTartalom").innerHTML =
                 "<li>A kosarad üres.</li>";
@@ -40,6 +42,40 @@ const TermekKartyak = async () => {
                 </div>
             </li>
             `;
+        }}
+        else{
+            if (httpAdat.tetelek.length === 0) {
+            document.getElementById("KosarTartalom").innerHTML =
+                "<li>Your cart is empty.</li>";
+            return;
+        }
+        for (const termek of httpAdat.tetelek) {
+            //console.log("termek: " + Object.values(termek), termek.id);
+            //<img src="${termek.kep}" alt="${termek.nev}" width="100" height="100">
+            document.getElementById("KosarTartalom").innerHTML += `
+            <li id="termek_${termek.id}" class="kosar-tetel"> 
+                <div class="d-flex gap-3 align-items-center">
+                    <div class="termek-kep">
+                        <img class="termek-kep" src="${termek.kep}" alt="${termek.nevEn}">
+                    </div>
+                    <div class="tetel-adatok flex-grow-1">
+                        <span class="termek-nev mb-2" id="nevMezo_${termek.id}" >${termek.nevEn}</span>
+                        <div class="d-flex align-items-center gap-3 flex-wrap mt-2">
+                            <div class="termek-menny input-group input-group-sm" style="width: 120px;">
+                                <button type="button" class="minusz input-group-text btn btn-outline-secondary" data-kosar-id="${termek.id}">−</button>
+                                <span class="mennyiseg form-control text-center" id="mennyiseg_${termek.id}">${termek.mennyiseg}</span>
+                                <button type="button" class="plusz input-group-text btn btn-outline-secondary" data-kosar-id="${termek.id}">+</button>
+                            </div>
+                            <div class="fw-bold text-nowrap fs-6 termek-ar">
+                                <span id="arMezo_${termek.id}" data-egysegar="${termek.ar}">${termek.mennyiseg * termek.ar} Ft</span>
+                            </div>
+                            <button type="button" class="torlesGomb btn btn-danger btn-sm px-2" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#torlesModal"> Delete </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            `;
+        }
         }
         vegosszegSzamitas();
     } catch (error) {
@@ -203,3 +239,54 @@ document.getElementById("fizetesGomb").addEventListener("click",async()=>{
         console.log(error)
     }
 })
+const szoveg=async()=>{
+    try {
+        let httpvalasz=await fetch("../../backend/szoveg/szoveg.php/szoveg")
+        let adatok=await httpvalasz.json()
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
+            document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg"]
+            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
+            document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg"]
+            document.getElementById("szoveg4").innerHTML=adatok[16]["szoveg"]
+            document.getElementById("szoveg5").innerHTML=adatok[17]["szoveg"]
+            document.getElementById("szoveg6").innerHTML=adatok[18]["szoveg"]
+            document.getElementById("szoveg7").innerHTML=adatok[19]["szoveg"]
+            document.getElementById("szoveg8").innerHTML=adatok[20]["szoveg"]
+            document.getElementById("fizetesGomb").innerHTML=adatok[21]["szoveg"]
+            document.getElementById("torlesModalLabel").innerHTML=adatok[22]["szoveg"]
+            document.getElementById("szoveg9").innerHTML=adatok[23]["szoveg"]
+            document.getElementById("szoveg10").innerHTML=adatok[24]["szoveg"]
+            document.getElementById("torlesConfirm").innerHTML=adatok[25]["szoveg"]
+     TermekKartyak()
+        }
+        else{
+            document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
+            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
+            document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg_en"]
+            document.getElementById("szoveg4").innerHTML=adatok[16]["szoveg_en"]
+            document.getElementById("szoveg5").innerHTML=adatok[17]["szoveg_en"]
+            document.getElementById("szoveg6").innerHTML=adatok[18]["szoveg_en"]
+            document.getElementById("szoveg7").innerHTML=adatok[19]["szoveg_en"]
+            document.getElementById("szoveg8").innerHTML=adatok[20]["szoveg_en"]
+            document.getElementById("fizetesGomb").innerHTML=adatok[21]["szoveg_en"]
+            document.getElementById("torlesModalLabel").innerHTML=adatok[22]["szoveg_en"]
+            document.getElementById("szoveg9").innerHTML=adatok[23]["szoveg_en"]
+            document.getElementById("szoveg10").innerHTML=adatok[24]["szoveg_en"]
+            document.getElementById("torlesConfirm").innerHTML=adatok[25]["szoveg_en"]
+TermekKartyak()
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+window.addEventListener("load",szoveg)
+const beallitMagyar=()=>{
+    localStorage.setItem("nyelv","hu")
+    szoveg()
+}
+document.getElementById("magyar").addEventListener("click",beallitMagyar)
+const beallitAngol=()=>{
+    localStorage.setItem("nyelv","en")
+    szoveg()
+}
+document.getElementById("angol").addEventListener("click",beallitAngol)
