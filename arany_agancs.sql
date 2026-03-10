@@ -222,7 +222,7 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (10, 'Rendben', 'Alright'),
 (11, 'Kosár megtekintése', 'View Cart'),
 (12, 'Bejelentkezés', 'Login'),
-(13, 'Nincs még fiókod? Regisztrálj:', 'Don\'t have an account yet? Register:'),
+(13, 'Nincs még fiókod? Regisztrálj:', 'Dont have an account yet? Register:'),
 (14, 'Már van fiókod? Jelentkezz be:', 'Already have an account? Log in:'),
 (15, 'Számlázási cím', 'Billing Address'),
 (16, 'Szállítási cím', 'Shipping address'),
