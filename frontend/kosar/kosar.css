@@ -144,7 +144,7 @@ body {
     color: #ffffff;
 }
 
-.vegosszegSor .input-group-text, .szCimSor .input-group-text {
+.vegosszegSor .input-group-text, .szCimSor .input-group-text, .fizModSor .input-group-text {
     background-color: #2f3e2b;
     color: #f4f1ea;
     border: none;

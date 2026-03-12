@@ -218,9 +218,20 @@ window.addEventListener("load", async () => { //szallitasi cimek
             document.getElementById("szCimMezo").innerHTML += `<option value="${cim.id}">${cim.orszag}, ${cim.iranyitoszam} ${cim.varos}, ${cim.utca}</option>`;
         }
 });
-document.getElementById("fizetesGomb").addEventListener("click",async()=>{
+document.getElementById("fizetesGomb").addEventListener("show.bs.modal", () => {
+    if(document.getElementById("szCimMezo").value=="0"){
+        alert("Kérem válasszon szállítási címet!")
+        return;
+    }
+    if(document.getElementById("fizModMezo").value=="0"){
+        alert("Kérem válasszon fizetési módot!")
+        return;
+    }
+})
+
+document.getElementById("fizetesConfirm").addEventListener("click",async()=>{
     try {
-         let httpResponse = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+        let httpResponse = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
         let httpAdat = await httpResponse.json();
         console.log(httpAdat["felhasznalonev"])
          httpResponse=await fetch('../../backend/kosar/kosarFizetes.php',{

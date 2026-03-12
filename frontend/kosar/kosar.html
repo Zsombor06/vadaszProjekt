@@ -66,11 +66,20 @@
                     <div class="szCimSor input-group mb-3">
                        <label class="input-group-text" for="szallitasicimek" id="szoveg8">Válasszon szállítási címet:</label>
                        <select name="szallitasicimek" id="szCimMezo" class="form-control">
-
+                            <option value="0">...</option>
                        </select>
-                       <!--Fizetési módok???-->
                     </div>
-                    <button type="button" id="fizetesGomb" class="fizetes-gomb w-100"> Fizetés </button>
+                    <div class="fizModSor input-group mb-3">
+                       <label class="input-group-text" for="fizetesimod" id="szoveg11">Válasszon fizetési módot:</label>
+                       <select name="fizetesimod" id="fizModMezo" class="form-control">
+                           <option value="0">...</option>
+                            <option value="bankkartya">Bankártya</option>
+                            <option value="applepay">Apple Pay</option>
+                            <option value="simplepay">Simple Pay</option>
+                            <option value="paypal">Paypal</option>
+                       </select>
+                    </div>
+                    <button type="button" id="fizetesGomb" class="fizetes-gomb w-100" data-bs-toggle="modal" data-bs-target="#fizetesModal"> Fizetés </button>
                 </section>
             </div>
         </div>
@@ -85,9 +94,11 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body" id="szoveg9">
-            Biztosan törölni szeretné a terméket a kosárból? <br>
-            Ezt a műveletet nem lehet visszavonni! <br>
+          <div class="modal-body">
+            <div id="szoveg9">
+                Biztosan törölni szeretné a terméket a kosárból? <br>
+                Ezt a műveletet nem lehet visszavonni! <br>
+            </div>
             <p id="modalHibaMezo"></p>
           </div>
           <div class="modal-footer">
@@ -98,6 +109,29 @@
       </div>
     </div>
     
+    <div class="modal fade" id="fizetesModal" tabindex="-1" role="dialog" aria-labelledby="fizetesModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="fizetesModalLabel">Fizetés megerősítése</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" >
+            <div id="szoveg12">
+                Biztosan véglegesíteni szeretné a rendelést? <br>
+                Ezt a műveletet nem lehet visszavonni! <br>
+            </div>
+            <p id="FmodalHibaMezo"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="szoveg13">Mégsem</button>
+            <button type="button" class="btn btn-danger" id="fizetesConfirm">Fizetés</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../bejelentkezesiStatus.js"></script>
