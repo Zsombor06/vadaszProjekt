@@ -28,9 +28,7 @@
                     </li>
                 </ul>
                 <button  class="btn btn-navbar me-3" id="kosarGomb">Kosár</button>
-                <button  class="btn btn-navbar me-3" id="kosarGombEn">Basket</button>
                 <button  class="btn btn-navbar me-3" id="felhasznaloGomb">Felhasználó</button>
-                <button  class="btn btn-navbar me-3" id="felhasznaloGombEn">User</button>
                 <button class="btn btn-navbar" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">☰</button>
             </div>
         </div>
@@ -38,8 +36,7 @@
 
     <div class="offcanvas offcanvas-end" id="sidebarMenu">
         <div class="offcanvas-header">
-            <h5 >Kategóriák</h5>
-            <h5 >Categories</h5>
+            <h5 id="szoveg3">Kategóriák</h5>
             <button class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body" id="navbarKategoriak">
@@ -71,7 +68,6 @@
         
         <div class="card admin-card p-4 shadow-sm" id="ujFelhasznaloDiv" hidden>
             <label>Név:</label>     <input class="form-control" style="width:auto;" type="text" id="ujNev"><br>
-            <label>Jelszó:</label>  <input class="form-control" style="width:auto;" type="password" id="ujJelszo"><br>
             <label>Email:</label>   <input class="form-control" style="width:auto;" type="email" id="ujEmail"><br>
             <label><b>Számlázásicím:</b></label><br>
             <label>Ország:</label>  <input class="form-control" style="width:auto;" type="text" id="ujorszagSzamla"><br>
@@ -88,7 +84,6 @@
             <label for="">Felhasználó neve:</label>
             <select class="form-select" style="width:auto;" name="" id="felhasznalok"></select>
             <br>
-            <label >Jelszó:</label><input  class="form-control" style="width:auto;" type="password" id="modositJelszo"><br>
             <label >Email:</label><input  class="form-control" style="width:auto;" type="email" id="modositEmail"><br>
             <label ><b>Számlázásicím:</b></label><br>
             <label >Ország:</label><input  class="form-control" style="width:auto;" type="text" id="modositorszagSzamla"><br>

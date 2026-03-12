@@ -154,7 +154,6 @@ async function felhasznaloAdatok() {
     try {
         httpvalasz=await fetch(`../../backend/admin/index.php/felhasznaloAdatok?felhasznalo=${felhasznalok[0].value}`)
         adatok=await httpvalasz.json()
-        document.getElementById("modositJelszo").value=adatok["jelszo"]
         document.getElementById("modositEmail").value=adatok["email"]
         document.getElementById("modositorszagSzamla").value=adatok["szamlazasi_orszag"]
         document.getElementById("modositirszSzamla").value=adatok["szamlazasi_iranyitoszam"]
@@ -172,7 +171,6 @@ async function felhasznaloFeltolt() {
             method:"POST",
             body:JSON.stringify({
                 "felhasznalonev":document.getElementById("ujNev").value,
-                "jelszo":document.getElementById("ujJelszo").value,
                 "email":document.getElementById("ujEmail").value,
                 "szamlazasi_orszag":document.getElementById("ujorszagSzamla").value,
                 "szamlazasi_irsz":document.getElementById("ujirszSzamla").value,
@@ -211,7 +209,6 @@ async function felhasznaloModosit() {
             method:"PUT",
             body:JSON.stringify({
                 "felhasznalonev":felhasznalok[0].value,
-                "jelszo":document.getElementById("modositJelszo").value,
                 "email":document.getElementById("modositEmail").value,
                 "szamlazasi_orszag":document.getElementById("modositorszagSzamla").value,
                 "szamlazasi_irsz":document.getElementById("modositirszSzamla").value,
@@ -237,21 +234,27 @@ async function felhasznaloModosit() {
 
 async function felhasznaloTorles() {
     try {
-        httpvalasz=await fetch(`../../backend/admin/index.php/felhasznaloTorles`,{
+        if(felhasznalok[1].value!="admin"){
+            httpvalasz=await fetch(`../../backend/admin/index.php/felhasznaloTorles`,{
             method:"DELETE",
             body:JSON.stringify({"felhasznalonev":felhasznalok[1].value})}
         )
          if(httpvalasz.ok){
-            adatok=await httpvalasz.json()
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
-            document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+            document.getElementById("muveletEredmeny").innerHTML="Sikers törlés"
         }
         else{
             adatok=await httpvalasz.json()
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
             document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
+        }}
+        else{
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML="Admin felhasználót nem lehet törölni!"
         }
-    } catch (error) {
+        
+        }
+     catch (error) {
         console.log(error)
     }
 }
@@ -439,3 +442,33 @@ document.getElementById("kijelentkezes").addEventListener("click",()=>{
     localStorage.removeItem('token')
     window.location.href="../fooldal/fooldal.html"
 })
+
+const szoveg=async()=>{
+    try {
+        let httpvalasz=await fetch("../../backend/szoveg/szoveg.php/szoveg")
+        let adatok=await httpvalasz.json()
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
+            document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg"]
+            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
+            document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg"]
+            }
+        else{
+            document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
+            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
+            document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg_en"]
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+window.addEventListener("load",szoveg)
+const beallitMagyar=()=>{
+    localStorage.setItem("nyelv","hu")
+    szoveg()
+}
+document.getElementById("magyar").addEventListener("click",beallitMagyar)
+const beallitAngol=()=>{
+    localStorage.setItem("nyelv","en")
+    szoveg()
+}
+document.getElementById("angol").addEventListener("click",beallitAngol)
