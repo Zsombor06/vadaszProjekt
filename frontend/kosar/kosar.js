@@ -218,13 +218,17 @@ window.addEventListener("load", async () => { //szallitasi cimek
             document.getElementById("szCimMezo").innerHTML += `<option value="${cim.id}">${cim.orszag}, ${cim.iranyitoszam} ${cim.varos}, ${cim.utca}</option>`;
         }
 });
-document.getElementById("fizetesGomb").addEventListener("show.bs.modal", () => {
-    if(document.getElementById("szCimMezo").value=="0"){
-        alert("Kérem válasszon szállítási címet!")
+document.getElementById("fizetesGomb").addEventListener("click", () => {
+    document.getElementById("fizetesConfirm").disabled = false;
+    document.getElementById("FmodalHibaMezo").innerText = "";
+    if(document.getElementById("szCimMezo").value==0){
+        document.getElementById("FmodalHibaMezo").innerText = "Kérem válasszon szállítási címet!"
+        document.getElementById("fizetesConfirm").disabled = true;
         return;
     }
-    if(document.getElementById("fizModMezo").value=="0"){
-        alert("Kérem válasszon fizetési módot!")
+    if(document.getElementById("fizModMezo").value==0){
+        document.getElementById("FmodalHibaMezo").innerText = "Kérem válasszon fizetési módot!"
+        document.getElementById("fizetesConfirm").disabled = true;
         return;
     }
 })
@@ -239,10 +243,10 @@ document.getElementById("fizetesConfirm").addEventListener("click",async()=>{
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ "felhasznalo" : httpAdat["felhasznalonev"],
+            body: JSON.stringify({
+                "felhasznalo" : httpAdat["felhasznalonev"],
                 "szallitasId":document.getElementById("szCimMezo").value
              })
-
         })
         httpAdat=await httpResponse.json()
         console.log(httpAdat)

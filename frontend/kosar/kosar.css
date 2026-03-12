@@ -200,7 +200,7 @@ body {
     font-size: 0.95rem;
     line-height: 1.6;
 }
-#modalHibaMezo {
+#modalHibaMezo, #FmodalHibaMezo {
     margin-top: 0.5rem;
     color: #8b2e2e;
     font-weight: 600;
