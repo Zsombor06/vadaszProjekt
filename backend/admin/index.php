@@ -42,16 +42,16 @@ switch(end($uri)){
     if($metodus!="POST"){
         return http_response_code(405);
     }
-    if(empty($bodyAdatok["felhasznalonev"]) || empty($bodyAdatok["jelszo"]) || empty($bodyAdatok["email"]) ||empty($bodyAdatok["szamlazasi_irsz"]) ||empty($bodyAdatok["szamlazasi_orszag"]) ||empty($bodyAdatok["szamlazasi_varos"]) ||empty($bodyAdatok["szamlazasi_utca"]) ||empty($bodyAdatok["rangId"]))
+    if(empty($bodyAdatok["felhasznalonev"])  || empty($bodyAdatok["email"]) ||empty($bodyAdatok["szamlazasi_irsz"]) ||empty($bodyAdatok["szamlazasi_orszag"]) ||empty($bodyAdatok["szamlazasi_varos"]) ||empty($bodyAdatok["szamlazasi_utca"]) ||empty($bodyAdatok["rangId"]))
     {
         echo json_encode(["valasz"=>"Hianyzo adat!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
     }
-    $ujFelhasznaloSQL="INSERT INTO `felhasznalo`(`felhasznalonev`, `jelszo`, `email`, `szamlazasi_orszag`, `szamlazasi_iranyitoszam`, `szamlazasi_varos`, `szamlazasi_utca`, `rangId`) VALUES (?,?,?,?,?,?,?,?);";
-    $ujFelhasznalo=adatokValtoztatasa($ujFelhasznaloSQL,"sssisssi",[$bodyAdatok["felhasznalonev"],$bodyAdatok["jelszo"],$bodyAdatok["email"],$bodyAdatok["szamlazasi_irsz"],$bodyAdatok["szamlazasi_orszag"] ,$bodyAdatok["szamlazasi_varos"] ,$bodyAdatok["szamlazasi_utca"] ,$bodyAdatok["rangId"]]);
-    if($ujFelhasznalo){
+    $ujFelhasznaloSQL="INSERT INTO `felhasznalo`(`felhasznalonev`, `email`, `szamlazasi_orszag`, `szamlazasi_iranyitoszam`, `szamlazasi_varos`, `szamlazasi_utca`, `rangId`) VALUES (?,?,?,?,?,?,?,?);";
+    $ujFelhasznalo=adatokValtoztatasa($ujFelhasznaloSQL,"ssisssi",[$bodyAdatok["felhasznalonev"],$bodyAdatok["email"],$bodyAdatok["szamlazasi_irsz"],$bodyAdatok["szamlazasi_orszag"] ,$bodyAdatok["szamlazasi_varos"] ,$bodyAdatok["szamlazasi_utca"] ,$bodyAdatok["rangId"]]);
+    if($ujFelhasznalo == true){
         echo json_encode(["valasz"=>"Sikeres feltoltes!"],JSON_UNESCAPED_UNICODE);
-        return http_response_code(201);
+        return http_response_code(204);
     }
     echo json_encode(["valasz"=>"Sikertelen feltoltes!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
@@ -61,13 +61,13 @@ switch(end($uri)){
     if($metodus!="PUT"){
         return http_response_code(405);
     }
-     if(empty($bodyAdatok["felhasznalonev"]) || empty($bodyAdatok["jelszo"]) || empty($bodyAdatok["email"])||empty($bodyAdatok["szamlazasi_irsz"]) ||empty($bodyAdatok["szamlazasi_orszag"]) ||empty($bodyAdatok["szamlazasi_varos"]) ||empty($bodyAdatok["szamlazasi_utca"]) ||empty($bodyAdatok["rangId"]))
+     if(empty($bodyAdatok["felhasznalonev"]) || empty($bodyAdatok["email"])||empty($bodyAdatok["szamlazasi_irsz"]) ||empty($bodyAdatok["szamlazasi_orszag"]) ||empty($bodyAdatok["szamlazasi_varos"]) ||empty($bodyAdatok["szamlazasi_utca"]) ||empty($bodyAdatok["rangId"]))
     {
         echo json_encode(["valasz"=>"Hiányzó adat!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
     }
-    $modositFelhasznaloSQL="UPDATE felhasznalo SET jelszo=?, email=?, szamlazasi_iranyitoszam=?,szamlazasi_orszag=?,szamlazasi_varos=?,szamlazasi_utca=?,rangId=? WHERE felhasznalonev=?";
-    $modositFelhasznalo=adatokValtoztatasa($modositFelhasznaloSQL,"ssisssis",[$bodyAdatok["jelszo"],$bodyAdatok["email"],$bodyAdatok["szamlazasi_irsz"],$bodyAdatok["szamlazasi_orszag"] ,$bodyAdatok["szamlazasi_varos"] ,$bodyAdatok["szamlazasi_utca"] ,$bodyAdatok["rangId"],$bodyAdatok["felhasznalonev"]]);
+    $modositFelhasznaloSQL="UPDATE felhasznalo SET email=?, szamlazasi_iranyitoszam=?,szamlazasi_orszag=?,szamlazasi_varos=?,szamlazasi_utca=?,rangId=? WHERE felhasznalonev=?";
+    $modositFelhasznalo=adatokValtoztatasa($modositFelhasznaloSQL,"sisssis",[$bodyAdatok["email"],$bodyAdatok["szamlazasi_irsz"],$bodyAdatok["szamlazasi_orszag"] ,$bodyAdatok["szamlazasi_varos"] ,$bodyAdatok["szamlazasi_utca"] ,$bodyAdatok["rangId"],$bodyAdatok["felhasznalonev"]]);
     if($modositFelhasznalo){
         echo json_encode(["valasz"=>"Sikeres modositas!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(201);
