@@ -231,3 +231,19 @@ body {
 img[alt] {
     font-size:0.5rem;
 }
+
+.tolto-pontok {
+    font-size: 1.5rem;
+}
+.tolto-pontok::after {
+    content: ".";
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 1.6rem;
+    animation: pontok 1s steps(3, end) infinite;
+}
+@keyframes pontok {
+    0% { content: "."; opacity: 0.5; }
+    33% { content: ".."; opacity: 0.7; }
+    66% { content: "..."; opacity: 1; }
+}

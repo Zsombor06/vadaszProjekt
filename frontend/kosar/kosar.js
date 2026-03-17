@@ -220,21 +220,26 @@ window.addEventListener("load", async () => { //szallitasi cimek
 });
 document.getElementById("fizetesGomb").addEventListener("click", () => {
     document.getElementById("fizetesConfirm").disabled = false;
-    document.getElementById("FmodalHibaMezo").innerText = "";
+    document.getElementById("FmodalHibaMezo").innerHTML = "";
     if(document.getElementById("szCimMezo").value==0){
-        document.getElementById("FmodalHibaMezo").innerText = "Kérem válasszon szállítási címet!"
+        document.getElementById("FmodalHibaMezo").innerHTML += "Kérem válasszon szállítási címet! <br>";
         document.getElementById("fizetesConfirm").disabled = true;
-        return;
     }
     if(document.getElementById("fizModMezo").value==0){
-        document.getElementById("FmodalHibaMezo").innerText = "Kérem válasszon fizetési módot!"
+        document.getElementById("FmodalHibaMezo").innerHTML += "Kérem válasszon fizetési módot! <br>";
         document.getElementById("fizetesConfirm").disabled = true;
-        return;
     }
 })
 
 document.getElementById("fizetesConfirm").addEventListener("click",async()=>{
+    const statusz = document.getElementById("fizetesStatusz");
+    const gomb = document.getElementById("fizetesConfirm");
     try {
+        gomb.disabled = true;
+        document.getElementById("szoveg12").innerHTML = "Fizetés folyamatban, kérem várjon!";
+        statusz.classList.add("tolto-pontok");
+        statusz.style.color = "#2f3e2b";
+
         let httpResponse = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
         let httpAdat = await httpResponse.json();
         console.log(httpAdat["felhasznalonev"])
@@ -249,9 +254,25 @@ document.getElementById("fizetesConfirm").addEventListener("click",async()=>{
              })
         })
         httpAdat=await httpResponse.json()
+        if (httpResponse.ok) {
+            setTimeout(() => {
+                statusz.classList.remove("tolto-pontok");
+                statusz.textContent = "✔ Sikeres fizetés";
+                statusz.style.color = "green";
+            }, 5000);
+            setTimeout(() => {
+                let modalEl = document.getElementById("fizetesModal");
+                let modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                modal.hide();
+                location.reload();
+            }, 6500);
+        }
         console.log(httpAdat)
     } catch (error) {
         console.log(error)
+        statusz.classList.remove("tolto-pontok");
+        statusz.textContent = "Hiba történt!";
+        statusz.style.color = "red";
     }
 })
 const szoveg=async()=>{
