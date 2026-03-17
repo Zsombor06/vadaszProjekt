@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Már 10. 17:51
+-- Létrehozás ideje: 2026. Már 17. 16:24
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -165,7 +165,7 @@ CREATE TABLE `rendeles` (
 --
 
 INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldve`, `teljesitve`, `szallitasId`) VALUES
-(1, 'user', 1, '2026-03-03 17:01:30', NULL, NULL, 1),
+(1, 'user', 1, '2026-03-03 17:01:30', '2026-03-17 16:14:58', NULL, 1),
 (35, 'user', 0, NULL, NULL, NULL, NULL),
 (36, 'admin', 0, NULL, NULL, NULL, NULL);
 
@@ -260,7 +260,22 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (48, 'Egységár', 'Unit price'),
 (49, 'Mennyiség', 'Amount'),
 (50, 'Részösszeg', 'Subtotal'),
-(54, 'Kijelentkezés', 'Log out');
+(54, 'Kijelentkezés', 'Log out'),
+(55, 'Név:', 'Hungarian name:'),
+(56, 'Leírás:', 'Hungarian description:'),
+(57, 'Ár:', 'Price:'),
+(58, 'Kategória:', 'Category:'),
+(59, 'Angol név:', 'Name:'),
+(60, 'Angol leírás:', 'Description:'),
+(61, 'Kép:', 'Picture:'),
+(62, 'Raktáron:', 'In stock:'),
+(63, 'Küldés', 'Send'),
+(64, 'Termék:', 'Product:'),
+(65, 'Leárazásmértéke:', 'Discount rate:'),
+(66, 'Rendelő neve', 'Customer name'),
+(67, 'Rendelés azonosítója', "Order's ID"),
+(68, 'Elküldés dátuma', 'Date of sending'),
+(69, 'Teljesítés dátuma', 'Date of completion');
 
 -- --------------------------------------------------------
 
@@ -431,7 +446,7 @@ ALTER TABLE `szallitasicimek`
 -- AUTO_INCREMENT a táblához `szoveg`
 --
 ALTER TABLE `szoveg`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT a táblához `termek`
