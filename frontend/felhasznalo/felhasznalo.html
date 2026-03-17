@@ -37,7 +37,7 @@
 
     <div class="offcanvas offcanvas-end" id="sidebarMenu">
         <div class="offcanvas-header">
-            <h5 >Kategóriák</h5>
+            <h5 id="szoveg3">Kategóriák</h5>
             <button class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body" id="navbarKategoriak">
@@ -50,8 +50,8 @@
         <div class="row g-4">
             <div class="col-md-6">
                 <div class="card felhasznalo-card p-4">
-                    <h4>Adataid</h4>
-                    <label>Felhasználónév</label>
+                    <h4 id="szoveg4">Adataid</h4>
+                    <label id="szoveg5">Felhasználónév</label>
                     <input type="text" id="fNev" class="form-control text-center" disabled>    
                     <label class="mt-3">Email</label>
                     <input type="email" id="fEmail" class="form-control text-center" disabled>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-6">
                 <div class="card felhasznalo-card p-4">
-                    <h4>Jelszó módosítás</h4>
+                    <h4 id="szoveg6">Jelszó módosítás</h4>
                     <div class="mb-3 position-relative">
                         <input type="password" id="regiJelszo" class="form-control text-center" placeholder="Régi jelszó">
                         <button type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2" id="szemecske">
@@ -77,7 +77,7 @@
             </div>
             <div class="col-md-6">
                 <div class="card felhasznalo-card p-4">
-                    <h4>Szállítási címek</h4>
+                    <h4 id="szoveg7">Szállítási címek</h4>
                     <select class="form-select mb-3" id="fLak"></select>
                     <input class="form-control mb-2" id="orszagMod" placeholder="Ország">
                     <input class="form-control mb-2" id="irszMod" placeholder="Irányítószám">
@@ -88,14 +88,14 @@
             </div>
             <div class="col-md-12">
                 <div class="card felhasznalo-card p-4">
-                    <h4 class="mb-4">Rendeléseim</h4>
+                    <h4 class="mb-4" id="szoveg8">Rendeléseim</h4>
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Dátum</th>
-                                <th>Végösszeg</th>
-                                <th>Státusz</th>
+                                <th id="szoveg9">Dátum</th>
+                                <th id="szoveg10">Végösszeg</th>
+                                <th id="szoveg11">Státusz</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -112,17 +112,17 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Rendelés részletei</h5>
+            <h5 class="modal-title" id="szoveg12">Rendelés részletei</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th>Termék</th>
-                  <th>Egységár</th>
-                  <th>Mennyiség</th>
-                  <th>Részösszeg</th>
+                  <th id="szoveg13">Termék</th>
+                  <th id="szoveg14">Egységár</th>
+                  <th id="szoveg15">Mennyiség</th>
+                  <th id="szoveg16">Részösszeg</th>
                 </tr>
               </thead>
               <tbody id="rendelesReszletTbody">

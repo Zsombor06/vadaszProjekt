@@ -12,6 +12,7 @@ if (!$rendelesId) {
 $stmt = $pdo->prepare("
     SELECT
         tr.nev,
+        tr.nevEn,
         tr.ar,
         t.mennyiseg,
         (tr.ar * t.mennyiseg) AS reszosszeg

@@ -90,7 +90,12 @@ document.getElementById("fLak").addEventListener("change", async () => {
             document.getElementById("irszMod").value = "";
             document.getElementById("varosMod").value = "";
             document.getElementById("utcaMod").value = "";
-            document.getElementById("cimMod").value="Hozzáadás"
+            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
+                document.getElementById("cimMod").value="Hozzáadás"
+            }
+            else{
+                document.getElementById("cimMod").value="Add address"
+            }
             return;
         }
         let adatok = await Cimek();
@@ -99,7 +104,12 @@ document.getElementById("fLak").addEventListener("change", async () => {
             document.getElementById("irszMod").value = cimresz.iranyitoszam;
             document.getElementById("varosMod").value = cimresz.varos;
             document.getElementById("utcaMod").value = cimresz.utca;
-            document.getElementById("cimMod").value="Módosítás"
+            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
+                document.getElementById("cimMod").value="Módosítás"
+            }
+            else{
+                document.getElementById("cimMod").value="Change address"
+            }
 
             CimID = cimresz.id;
         }
@@ -202,26 +212,36 @@ window.addEventListener("load", async () => {
         tbody.innerHTML = "";
 
         for (const r of rendelesek) {
-
-            let statusz = "Folyamatban";
+            var statusz
+            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
+                statusz = "Folyamatban";
 
             if (r.teljesitve == 1) statusz = "Teljesítve";
             if (r.elkuldve == 1 && r.teljesitve == 0) statusz = "Elküldve";
+              }
+              else{
+             statusz = "In progress";
+
+            if (r.teljesitve == 1) statusz = "Completed";
+            if (r.elkuldve == 1 && r.teljesitve == 0) statusz = "Sent";
+              }
+
 
             tbody.innerHTML += `
                 <tr>
                     <td>${r.rendelesId}</td>
                     <td>${r.fizetesIdeje}</td>
                     <td>${r.vegosszeg} Ft</td>
-                    <td>${statusz}</td>
+                    <td id="statusz">${statusz}</td>
                     <td>
-                        <button class="btn btn-sm felhasznalo-btn" data-id="${r.rendelesId}">
+                        <button id="rendelesGomb" class="btn btn-sm felhasznalo-btn" data-id="${r.rendelesId}">
                             Részletek
                         </button>
                     </td>
                 </tr>
             `;
         }
+        szoveg()
 
     } catch (error) {
         console.log("Hiba a rendelések betöltésekor:", error);
@@ -248,7 +268,7 @@ async function rendelesReszletek(id) {
 
         let tbody = document.getElementById("rendelesReszletTbody");
         tbody.innerHTML = "";
-
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
         for (const tetel of adat.tetelek) {
 
             tbody.innerHTML += `
@@ -260,7 +280,20 @@ async function rendelesReszletek(id) {
                 </tr>
             `;
         }
+    }
+    else{
+          for (const tetel of adat.tetelek) {
 
+            tbody.innerHTML += `
+                <tr>
+                    <td>${tetel.nevEn}</td>
+                    <td>${tetel.ar} Ft</td>
+                    <td>${tetel.mennyiseg}</td>
+                    <td>${tetel.reszosszeg} Ft</td>
+                </tr>
+            `;
+        }
+    }
         // Modal megjelenítése
         let modal = new bootstrap.Modal(document.getElementById("rendelesModal"));
         modal.show();
@@ -280,3 +313,105 @@ document.addEventListener("click", function(e){
         }
 
         });
+
+const szoveg=async()=>{
+    try {
+        let httpvalasz=await fetch("../../backend/szoveg/szoveg.php/szoveg")
+        let adatok=await httpvalasz.json()
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
+            document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg"]
+            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
+            document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg"]
+            document.getElementById("szoveg4").innerHTML=adatok[26]["szoveg"]
+            document.getElementById("szoveg5").innerHTML=adatok[27]["szoveg"]
+            document.getElementById("szoveg6").innerHTML=adatok[28]["szoveg"]
+            document.getElementById("regiJelszo").placeholder=adatok[29]["szoveg"]
+            document.getElementById("ujJelszo").placeholder=adatok[30]["szoveg"]
+            document.getElementById("btn_jMod").innerHTML=adatok[28]["szoveg"]
+            document.getElementById("szoveg7").innerHTML=adatok[31]["szoveg"]
+            document.getElementById("orszagMod").placeholder=adatok[32]["szoveg"]
+            document.getElementById("irszMod").placeholder=adatok[33]["szoveg"]
+            document.getElementById("varosMod").placeholder=adatok[34]["szoveg"]
+            document.getElementById("utcaMod").placeholder=adatok[35]["szoveg"]
+           if(document.getElementById("cimMod").value==adatok[36]["szoveg_en"] || document.getElementById("cimMod").value==adatok[36]["szoveg"])
+            document.getElementById("cimMod").value=adatok[36]["szoveg"]
+        else{
+            document.getElementById("cimMod").value=adatok[37]["szoveg"]
+        }
+            document.getElementById("szoveg8").innerHTML=adatok[38]["szoveg"]
+            document.getElementById("szoveg9").innerHTML=adatok[39]["szoveg"]
+            document.getElementById("szoveg10").innerHTML=adatok[19]["szoveg"]
+            document.getElementById("szoveg11").innerHTML=adatok[40]["szoveg"]
+            for (const statusz of document.querySelectorAll("#statusz")) {
+                if(statusz.innerHTML==adatok[41]["szoveg"] || statusz.innerHTML==adatok[41]["szoveg_en"] )statusz.innerHTML=adatok[41]["szoveg"]
+                if(statusz.innerHTML==adatok[42]["szoveg"] || statusz.innerHTML==adatok[42]["szoveg_en"] )statusz.innerHTML=adatok[42]["szoveg"];
+                if(statusz.innerHTML==adatok[43]["szoveg"] || statusz.innerHTML==adatok[43]["szoveg_en"] )statusz.innerHTML=adatok[43]["szoveg"];
+            }
+            for (const rendelesGomb of document.querySelectorAll("#rendelesGomb")) {
+                rendelesGomb.innerHTML=adatok[44]["szoveg"]
+            }
+            document.getElementById("szoveg12").innerHTML=adatok[45]["szoveg"]
+            document.getElementById("szoveg13").innerHTML=adatok[46]["szoveg"]
+            document.getElementById("szoveg14").innerHTML=adatok[47]["szoveg"]
+            document.getElementById("szoveg15").innerHTML=adatok[48]["szoveg"]
+            document.getElementById("szoveg16").innerHTML=adatok[49]["szoveg"]
+            document.getElementById("kijelentkezes").value=adatok[50]["szoveg"]
+
+
+
+        }
+        else{
+            document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
+            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
+            document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg_en"]
+            document.getElementById("szoveg4").innerHTML=adatok[26]["szoveg_en"]
+            document.getElementById("szoveg5").innerHTML=adatok[27]["szoveg_en"]
+            document.getElementById("szoveg6").innerHTML=adatok[28]["szoveg_en"]
+            document.getElementById("regiJelszo").placeholder=adatok[29]["szoveg_en"]
+            document.getElementById("ujJelszo").placeholder=adatok[30]["szoveg_en"]
+            document.getElementById("btn_jMod").innerHTML=adatok[28]["szoveg_en"]
+            document.getElementById("szoveg7").innerHTML=adatok[31]["szoveg_en"]
+            document.getElementById("orszagMod").placeholder=adatok[32]["szoveg_en"]
+            document.getElementById("irszMod").placeholder=adatok[33]["szoveg_en"]
+            document.getElementById("varosMod").placeholder=adatok[34]["szoveg_en"]
+            document.getElementById("utcaMod").placeholder=adatok[35]["szoveg_en"]
+           if(document.getElementById("cimMod").value==adatok[36]["szoveg_en"] || document.getElementById("cimMod").value==adatok[36]["szoveg"])
+            document.getElementById("cimMod").value=adatok[36]["szoveg_en"]
+        else{
+            document.getElementById("cimMod").value=adatok[37]["szoveg_en"]
+        }
+            document.getElementById("szoveg8").innerHTML=adatok[38]["szoveg_en"]
+            document.getElementById("szoveg9").innerHTML=adatok[39]["szoveg_en"]
+            document.getElementById("szoveg10").innerHTML=adatok[19]["szoveg_en"]
+            document.getElementById("szoveg11").innerHTML=adatok[40]["szoveg_en"]
+            for (const statusz of document.querySelectorAll("#statusz")) {
+                if(statusz.innerHTML==adatok[41]["szoveg"] || statusz.innerHTML==adatok[41]["szoveg_en"] )statusz.innerHTML=adatok[41]["szoveg_en"]
+                if(statusz.innerHTML==adatok[42]["szoveg"] || statusz.innerHTML==adatok[42]["szoveg_en"] )statusz.innerHTML=adatok[42]["szoveg_en"];
+                if(statusz.innerHTML==adatok[43]["szoveg"] || statusz.innerHTML==adatok[43]["szoveg_en"] )statusz.innerHTML=adatok[43]["szoveg_en"];
+            }
+            for (const rendelesGomb of document.querySelectorAll("#rendelesGomb")) {
+                rendelesGomb.innerHTML=adatok[44]["szoveg_en"]
+            }
+            document.getElementById("szoveg12").innerHTML=adatok[45]["szoveg_en"]
+            document.getElementById("szoveg13").innerHTML=adatok[46]["szoveg_en"]
+            document.getElementById("szoveg14").innerHTML=adatok[47]["szoveg_en"]
+            document.getElementById("szoveg15").innerHTML=adatok[48]["szoveg_en"]
+            document.getElementById("szoveg16").innerHTML=adatok[49]["szoveg_en"]
+            document.getElementById("kijelentkezes").value=adatok[50]["szoveg_en"]
+
+            
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+const beallitMagyar=()=>{
+    localStorage.setItem("nyelv","hu")
+    szoveg()
+}
+document.getElementById("magyar").addEventListener("click",beallitMagyar)
+const beallitAngol=()=>{
+    localStorage.setItem("nyelv","en")
+    szoveg()
+}
+document.getElementById("angol").addEventListener("click",beallitAngol)
