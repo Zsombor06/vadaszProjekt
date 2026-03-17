@@ -106,3 +106,63 @@ body {
     background-color: #f4f1ea;
     color: #2f3e2b;
 }
+
+/*footer*/
+.footer {
+    background-color: #2f3e2b; 
+    color: #f4f1ea;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-top: 4px solid #c49e3c;
+}
+
+.footer-brand {
+    color: #c49e3c;
+    display: flex;
+    align-items: center;
+}
+
+.footer-heading {
+    color: #c49e3c;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.footer-text {
+    color: #d1cdc4;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.footer-link {
+    color: #f4f1ea;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #c49e3c;
+    padding-left: 5px; /* Kis mozgás effekt hoverre */
+}
+
+.footer-divider {
+    border-top: 1px solid rgba(196, 158, 60, 0.3);
+}
+
+.footer-copy {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.footer-social-link {
+    color: #c49e3c;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.footer-social-link:hover {
+    text-decoration: underline;
+}
