@@ -1,0 +1,98 @@
+.navbar {
+    background-color: #2f3e2b;
+    border-bottom: 2px solid #c49e3c;
+}
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #f4f1ea;
+}
+.navbar-nav .nav-link:hover {
+    color: #c49e3c;
+}
+.navbar .dropdown-menu {
+    position: absolute;
+    z-index: 2000;
+}
+.offcanvas {
+    width: 260px;
+}
+.btn-kat {
+    border-radius: 12px;
+    border: 1px solid #2f3e2b;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    background: #ffffff;
+    transition: 0.2s;
+    color: #2f3e2b;
+}
+.btn-kat:hover {
+    background: #2f3e2b;
+    color: #c49e3c;
+    cursor: pointer;
+}
+.btn-navbar {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+.btn-navbar:hover {
+    background-color: #b08b32;
+}
+.text-justify {
+    text-align: justify;
+}
+body {
+    background-color: #f4f1ea;
+    color: #2f3e2b;
+}
+
+.rolunk-hero{
+    height: 300px;
+    background: linear-gradient(rgba(47,62,43,0.85), rgba(47,62,43,0.85)),
+                url('../képek/erdo.jpeg');
+    background-size: cover;
+    background-position: center;
+    color: #c49e3c;
+}
+.rolunk-hero h1{
+    font-size: 3rem;
+    font-weight: 700;
+}
+.rolunk-card{
+    max-width: 800px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    color: #2f3e2b;
+    padding: 2rem;
+    margin-top: -80px;
+    position: relative;
+    z-index: 2;
+    text-align: justify;
+    text-justify: inter-word;
+}
+.rolunk-box{
+    background: #f4f1ea;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.25s ease;
+    cursor: default;
+}
+.rolunk-box:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.rolunk-card p{
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+.rolunk-hero h1{
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
