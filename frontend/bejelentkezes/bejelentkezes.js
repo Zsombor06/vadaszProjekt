@@ -95,7 +95,7 @@ const szoveg=async()=>{
             document.getElementById("FnevIn").placeholder="Felhasználónév";
         document.getElementById("FjelszoIn").placeholder="Jelszó";
         document.getElementById("BejGomb").value=adatok[11]["szoveg"]
-        document.getElementById("szoveg5").value=adatok[12]["szoveg"]
+        document.getElementById("szoveg5").innerHTML=adatok[12]["szoveg"]
         document.getElementById("RegGomb").value=adatok[6]["szoveg"]
         }
         else{

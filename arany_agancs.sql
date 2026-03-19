@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Már 17. 19:27
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.2.4
+-- Létrehozás ideje: 2026. Már 19. 11:44
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -166,8 +166,10 @@ CREATE TABLE `rendeles` (
 
 INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldve`, `teljesitve`, `szallitasId`) VALUES
 (1, 'user', 1, '2026-03-03 17:01:30', NULL, NULL, 1),
-(35, 'user', 0, NULL, NULL, NULL, NULL),
-(36, 'admin', 0, NULL, NULL, NULL, NULL);
+(35, 'user', 1, '2026-03-19 10:53:35', NULL, NULL, 1),
+(36, 'admin', 1, '2026-03-19 11:43:27', NULL, NULL, 2),
+(37, 'user', 0, NULL, NULL, NULL, NULL),
+(38, 'admin', 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -275,7 +277,11 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (66, 'Rendelő neve', 'Customer name'),
 (67, 'Rendelés azonosítója', 'Orders ID'),
 (68, 'Elküldés dátuma', 'Date of sending'),
-(69, 'Teljesítés dátuma', 'Date of completion');
+(69, 'Teljesítés dátuma', 'Date of completion'),
+(70, 'Válasszon fizetési módot:', 'Choose payment method:'),
+(71, 'Bankkártya', 'Bank card'),
+(72, 'Fizetés megerősítése', 'Payment confirmation'),
+(73, 'Biztosan véglegesíteni szeretné a rendelést? <br>Ezt a műveletet nem lehet visszavonni! <br>', 'Are you sure you want to finalize the order? <br>This action cannot be undone! <br>');
 
 -- --------------------------------------------------------
 
@@ -416,7 +422,8 @@ CREATE TABLE `tetelek` (
 --
 
 INSERT INTO `tetelek` (`id`, `rendelesId`, `termekId`, `mennyiseg`) VALUES
-(31, 35, 2, 1);
+(31, 35, 2, 1),
+(32, 36, 2, 1);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -510,7 +517,7 @@ ALTER TABLE `rang`
 -- AUTO_INCREMENT a táblához `rendeles`
 --
 ALTER TABLE `rendeles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT a táblához `szallitasicimek`
@@ -522,7 +529,7 @@ ALTER TABLE `szallitasicimek`
 -- AUTO_INCREMENT a táblához `szoveg`
 --
 ALTER TABLE `szoveg`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT a táblához `termek`
@@ -534,7 +541,7 @@ ALTER TABLE `termek`
 -- AUTO_INCREMENT a táblához `tetelek`
 --
 ALTER TABLE `tetelek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Megkötések a kiírt táblákhoz

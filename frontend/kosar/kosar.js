@@ -222,11 +222,13 @@ document.getElementById("fizetesGomb").addEventListener("click", () => {
     document.getElementById("fizetesConfirm").disabled = false;
     document.getElementById("FmodalHibaMezo").innerHTML = "";
     if(document.getElementById("szCimMezo").value==0){
-        document.getElementById("FmodalHibaMezo").innerHTML += "Kérem válasszon szállítási címet! <br>";
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("FmodalHibaMezo").innerHTML += "Kérem válasszon szállítási címet! <br>";
+        else document.getElementById("FmodalHibaMezo").innerHTML += "Please choose a shipping address! <br>";
         document.getElementById("fizetesConfirm").disabled = true;
     }
     if(document.getElementById("fizModMezo").value==0){
-        document.getElementById("FmodalHibaMezo").innerHTML += "Kérem válasszon fizetési módot! <br>";
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("FmodalHibaMezo").innerHTML += "Kérem válasszon egy fizetési módot! <br>";
+        else document.getElementById("FmodalHibaMezo").innerHTML += "Please choose a payment method! <br>";
         document.getElementById("fizetesConfirm").disabled = true;
     }
 })
@@ -257,7 +259,8 @@ document.getElementById("fizetesConfirm").addEventListener("click",async()=>{
         if (httpResponse.ok) {
             setTimeout(() => {
                 statusz.classList.remove("tolto-pontok");
-                statusz.textContent = "✔ Sikeres fizetés";
+                if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")statusz.textContent = "✔ Sikeres fizetés";
+                else statusz.textContent = "✔ Successful payment";
                 statusz.style.color = "green";
             }, 5000);
             setTimeout(() => {
@@ -293,6 +296,15 @@ const szoveg=async()=>{
             document.getElementById("szoveg9").innerHTML=adatok[23]["szoveg"]
             document.getElementById("szoveg10").innerHTML=adatok[24]["szoveg"]
             document.getElementById("torlesConfirm").innerHTML=adatok[25]["szoveg"]
+            document.getElementById("szoveg11").innerHTML=adatok[66]["szoveg"]
+            document.getElementById("szoveg12").innerHTML=adatok[67]["szoveg"]
+            document.getElementById("fizetesModalLabel").innerHTML=adatok[68]["szoveg"]
+            document.getElementById("szoveg13").innerHTML=adatok[69]["szoveg"]
+            document.getElementById("szoveg14").innerHTML=adatok[24]["szoveg"]
+            document.getElementById("fizetesConfirm").innerHTML=adatok[21]["szoveg"]
+
+
+
      TermekKartyak()
         }
         else{
@@ -309,6 +321,16 @@ const szoveg=async()=>{
             document.getElementById("szoveg9").innerHTML=adatok[23]["szoveg_en"]
             document.getElementById("szoveg10").innerHTML=adatok[24]["szoveg_en"]
             document.getElementById("torlesConfirm").innerHTML=adatok[25]["szoveg_en"]
+            document.getElementById("szoveg11").innerHTML=adatok[66]["szoveg_en"]
+            document.getElementById("szoveg12").innerHTML=adatok[67]["szoveg_en"]
+            document.getElementById("fizetesModalLabel").innerHTML=adatok[68]["szoveg_en"]
+            document.getElementById("szoveg13").innerHTML=adatok[69]["szoveg_en"]
+            document.getElementById("szoveg14").innerHTML=adatok[24]["szoveg_en"]
+            document.getElementById("fizetesConfirm").innerHTML=adatok[21]["szoveg_en"]
+
+
+
+
 TermekKartyak()
         }
     } catch (error) {
