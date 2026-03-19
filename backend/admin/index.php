@@ -163,7 +163,7 @@ switch(end($uri)){
         if($metodus!="GET"){
             return http_response_code(405);
         }
-        $gettermekNevSQL="SELECT id,nev from termek";
+        $gettermekNevSQL="SELECT id,nev, nevEn from termek";
         $gettermekNev=adatokLekerese($gettermekNevSQL);
         echo json_encode($gettermekNev,JSON_UNESCAPED_UNICODE);
         return http_response_code(200);
