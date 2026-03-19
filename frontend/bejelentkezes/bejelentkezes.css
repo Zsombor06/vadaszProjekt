@@ -1,35 +1,56 @@
-/*navbar*/
 .navbar {
     background-color: #2f3e2b;
     border-bottom: 2px solid #c49e3c;
 }
-
 .navbar-brand,
 .navbar-nav .nav-link {
     color: #f4f1ea;
 }
-
 .navbar-nav .nav-link:hover {
     color: #c49e3c;
 }
-
 .navbar .dropdown-menu {
     position: absolute;
     z-index: 2000;
 }
-
 .offcanvas {
     width: 260px;
 }
 .btn-kat {
-    border-radius: 15px;
-    border: 1px solid #ccc;
+    border-radius: 12px;
+    border: 1px solid #2f3e2b;
     padding: 10px;
     text-align: center;
     margin-bottom: 10px;
-    background: #f5f5f5;
+    background: #ffffff;
     transition: 0.2s;
+    color: #2f3e2b;
 }
+.btn-kat:hover {
+    background: #2f3e2b;
+    color: #c49e3c;
+    cursor: pointer;
+}
+.btn-navbar {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #c49e3c;
+    color: #2f3e2b;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+.btn-navbar:hover {
+    background-color: #b08b32;
+}
+.text-justify {
+    text-align: justify;
+}
+body {
+    background-color: #f4f1ea;
+    color: #2f3e2b;
+}
+
 .btn{
     padding: 0.6rem;
     border-radius: 8px;
@@ -39,30 +60,18 @@
     font-weight: 600;
     transition: background-color 0.2s ease;
 }
-.btn-kat:hover {
-    background: #e1e1e1;
-    cursor: pointer;
-}
-
-.text-justify {
-    text-align: justify;
-}
-
 .login-box {
     width: 450px;
     border: 2px solid #b08b32;
     border-radius: 15px;
 }
-
 .login-box .form-control {
     border-radius: 15px;
     border: 2px solid #000;
 }
-
 .login-box .btn {
     border-width: 2px;
 }
-
 #kapcsaKep{
     width: 100%;
     font-weight: 400;
@@ -80,23 +89,6 @@ input{
 }
 .inline{
     display: inline-block;
-}
-.btn-navbar {
-    padding: 0.6rem;
-    border-radius: 8px;
-    border: none;
-    background-color: #c49e3c;
-    color: #2f3e2b;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-}
-
-.btn-navbar:hover {
-    background-color: #b08b32;
-}
-body {
-    background-color: #f4f1ea;
-    color: #2f3e2b;
 }
 #bejelentkezesDoboz{
     background-color: white;
