@@ -13,6 +13,18 @@ if (!$felhasznalo) {
     ]);
     exit;
 }
+$stmt1= $pdo->prepare("SELECT id from rendeles WHERE felhasznalo=? order by id desc limit 2;");
+$stmt1->execute([$felhasznalo]);
+$eredmeny=$stmt1->fetchAll(PDO::FETCH_ASSOC);
+$stmt2=$pdo->prepare("SELECT termekId FROM `rendeles` inner join tetelek on rendelesId=rendeles.id WHERE rendeles.id=?;");
+$stmt2->execute([$eredmeny[1]["id"]]);
+$eredmeny=$stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($eredmeny as $termekId) {
+$stmt=$pdo->prepare("UPDATE `termek` SET keszlet=(`keszlet`- (select mennyiseg from termek inner join tetelek on termek.id=termekId inner join rendeles on rendeles.id=rendelesId where termekId=? and felhasznalo=? order by tetelek.id desc limit 1)) where `id`=?;");
+$stmt->execute([$termekId["termekId"],$felhasznalo,$termekId["termekId"]]);
+
+}
 
 $stmt = $pdo->prepare("
     UPDATE rendeles
