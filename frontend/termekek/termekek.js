@@ -38,8 +38,10 @@ const kategoriakBetoltese=async() => {
                             <div class="card-body">
                                 <h5 class="card-title">${termek.nev}</h5>
                                 <p class="card-text">${termek.leiras}</p>
-                                <small class="text-muted">Ár: ${termek.regiar} Ft</small> <br>
-                                <small class="text-muted">Raktáron: ${termek.keszlet} db </small>
+                                <div class="mt-auto">
+                                    <small class="text-muted">Ár: ${termek.regiar} Ft</small> <br>
+                                    <small class="text-muted">Raktáron: ${termek.keszlet} db </small>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
@@ -53,8 +55,10 @@ const kategoriakBetoltese=async() => {
                             <div class="card-body">
                                 <h5 class="card-title">${termek.nev}</h5>
                                 <p class="card-text">${termek.leiras}</p>
-                                <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br>
-                                <small class="text-muted">Raktáron: ${termek.keszlet} db </small>
+                                <div class="mt-auto">
+                                    <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br>
+                                    <small class="text-muted">Raktáron: ${termek.keszlet} db </small>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
@@ -70,8 +74,10 @@ const kategoriakBetoltese=async() => {
                             <div class="card-body">
                                 <h5 class="card-title">${termek.nevEn}</h5>
                                 <p class="card-text">${termek.leirasEn}</p>
-                                <small class="text-muted">Price: ${termek.regiar} Ft</small> <br>
-                                <small class="text-muted">In store: ${termek.keszlet} </small>
+                                <div class="mt-auto">
+                                    <small class="text-muted">Price: ${await arfolyam(termek.regiar)} €</small> <br>
+                                    <small class="text-muted">In store: ${termek.keszlet} </small>
+                                </div>    
                             </div>
                             <div class="card-footer">
                                 <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
@@ -85,8 +91,10 @@ const kategoriakBetoltese=async() => {
                             <div class="card-body">
                                 <h5 class="card-title">${termek.nevEn}</h5>
                                 <p class="card-text">${termek.leirasEn}</p>
-                                <small class="text-muted">Marked down price: ${Math.round(termek.ujar, 0)} Ft</small> <br>
-                                <small class="text-muted">In store: ${termek.keszlet} </small>
+                                <div class="mt-auto">    
+                                    <small class="text-muted">Marked down price: ${await arfolyam(Math.round(termek.ujar, 0))} €</small> <br>
+                                    <small class="text-muted">In store: ${termek.keszlet} </small>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
@@ -126,8 +134,10 @@ termekKategoria.addEventListener('change', async () => {
                             <div class="card-body">
                                 <h5 class="card-title">${termek.nev}</h5>
                                 <p class="card-text">${termek.leiras}</p>
-                                <small class="text-muted">Ár: ${termek.regiar} Ft</small> <br>
-                                <small class="text-muted">Raktáron: ${termek.keszlet} </small>
+                                <div class="mt-auto">
+                                    <small class="text-muted">Ár: ${termek.regiar} Ft</small> <br>
+                                    <small class="text-muted">Raktáron: ${termek.keszlet} </small>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
@@ -141,8 +151,10 @@ termekKategoria.addEventListener('change', async () => {
                             <div class="card-body">
                                 <h5 class="card-title">${termek.nev}</h5>
                                 <p class="card-text">${termek.leiras}</p>
-                                <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br>
-                                <small class="text-muted">Raktáron: ${termek.keszlet} </small>
+                                <div class="mt-auto">
+                                    <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br>
+                                    <small class="text-muted">Raktáron: ${termek.keszlet} </small>
+                                <div>
                             </div>
                             <div class="card-footer">
                                 <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
@@ -158,8 +170,10 @@ termekKategoria.addEventListener('change', async () => {
                             <div class="card-body">
                                 <h5 class="card-title">${termek.nevEn}</h5>
                                 <p class="card-text">${termek.leirasEn}</p>
-                                <small class="text-muted">Price: ${termek.regiar} Ft</small> <br>
-                                <small class="text-muted">In store: ${termek.keszlet} </small>
+                                <div class="mt-auto">
+                                    <small class="text-muted">Price: ${await arfolyam(termek.regiar)} €</small> <br>
+                                    <small class="text-muted">In store: ${termek.keszlet} </small>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
@@ -173,8 +187,10 @@ termekKategoria.addEventListener('change', async () => {
                             <div class="card-body">
                                 <h5 class="card-title">${termek.nevEn}</h5>
                                 <p class="card-text">${termek.leirasEn}</p>
-                                <small class="text-muted">Marked down price: ${Math.round(termek.ujar, 0)} Ft</small> <br>
-                                <small class="text-muted">In store: ${termek.keszlet} </small>
+                                <div class="mt-auto">
+                                    <small class="text-muted">Marked down price: ${await arfolyam(Math.round(termek.ujar, 0))} €</small> <br>
+                                    <small class="text-muted">In store: ${termek.keszlet} </small>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
@@ -271,3 +287,15 @@ const beallitAngol=()=>{
     kategoriakBetoltese()
 }
 document.getElementById("angol").addEventListener("click",beallitAngol)
+
+const arfolyam = async (arHUF) => {
+    try {
+        let response = await fetch("../../backend/arfolyam.php");
+        if (response.ok) {
+            let data = await response.json();
+            return (data['rate']*arHUF).toFixed(2);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

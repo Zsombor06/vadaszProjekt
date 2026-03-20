@@ -8,21 +8,17 @@
     background-color: #2f3e2b;
     border-bottom: 2px solid #c49e3c;
 }
-
 .navbar-brand,
 .navbar-nav .nav-link {
     color: #f4f1ea;
 }
-
 .navbar-nav .nav-link:hover {
     color: #c49e3c;
 }
-
 .navbar .dropdown-menu {
     position: absolute;
     z-index: 2000;
 }
-
 .offcanvas {
     width: 260px;
 }
@@ -36,13 +32,11 @@
     transition: 0.2s;
     color: #2f3e2b;
 }
-
 .btn-kat:hover {
     background: #2f3e2b;
     color: #c49e3c;
     cursor: pointer;
 }
-
 .btn-navbar {
     padding: 0.6rem;
     border-radius: 8px;
@@ -52,16 +46,12 @@
     font-weight: 600;
     transition: background-color 0.2s ease;
 }
-
 .btn-navbar:hover {
     background-color: #b08b32;
 }
-
-
 .text-justify {
     text-align: justify;
 }
-
 body {
     background-color: #f4f1ea;
     color: #2f3e2b;
@@ -73,7 +63,6 @@ body {
     margin: 0 auto;
     border-radius: 8px;
 }
-
 .card {
     border: none;
     border-radius: 14px;
@@ -81,12 +70,10 @@ body {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     background-color: #ffffff;
 }
-
 .card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(0,0,0,0.1);
 }
-
 .termek-kep {
     height: 200px;
     object-fit: contain;
@@ -95,30 +82,40 @@ body {
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
 }
-
 .card-body {
     text-align: center;
+    flex-direction: column;
+    display: flex;
 }
-
 .card-title {
     color: #2f3e2b;
+    min-height: 48px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
-
 .card-text {
     color: #4a3f35;
+    min-height: 48px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
-
+.card-text:hover {
+    overflow: visible;
+    -webkit-line-clamp: unset;
+}
 .card-body small {
     color: #c49e3c;
 }
-
 .card-footer {
     background-color: transparent;
     border-top: none;
     padding: 1rem;
     text-align: center;
 }
-
 .kosarbaGomb {
     width: 100%;
     padding: 0.6rem;
@@ -129,7 +126,6 @@ body {
     font-weight: 700;
     transition: background-color 0.2s ease;
 }
-
 .kosarbaGomb:hover {
     background-color: #b08b32;
 }
