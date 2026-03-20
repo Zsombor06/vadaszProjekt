@@ -144,7 +144,7 @@ body {
 
 .footer-link:hover {
     color: #c49e3c;
-    padding-left: 5px; /* Kis mozgás effekt hoverre */
+    padding-left: 5px;
 }
 
 .footer-divider {
