@@ -121,6 +121,7 @@ termekKategoria.addEventListener('change', async () => {
         const termekKartyaMezo = document.getElementById('termekKartyaMezo');
         const selectedKategoria = termekKategoria.value;
         termekKartyaMezo.innerHTML = '';
+        localStorage.setItem("kategoria", selectedKategoria);
         let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${selectedKategoria}`);
         let termekek = await httpValasz.json();
         for (const termek of termekek) {
