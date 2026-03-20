@@ -17,8 +17,6 @@ const TermekKartyak = async () => {
             return;
         }
         for (const termek of httpAdat.tetelek) {
-            //console.log("termek: " + Object.values(termek), termek.id);
-            //<img src="${termek.kep}" alt="${termek.nev}" width="100" height="100">
             document.getElementById("KosarTartalom").innerHTML += `
             <li id="termek_${termek.id}" class="kosar-tetel"> 
                 <div class="d-flex gap-3 align-items-center">
@@ -50,8 +48,6 @@ const TermekKartyak = async () => {
             return;
         }
         for (const termek of httpAdat.tetelek) {
-            //console.log("termek: " + Object.values(termek), termek.id);
-            //<img src="${termek.kep}" alt="${termek.nev}" width="100" height="100">
             document.getElementById("KosarTartalom").innerHTML += `
             <li id="termek_${termek.id}" class="kosar-tetel"> 
                 <div class="d-flex gap-3 align-items-center">
@@ -67,7 +63,7 @@ const TermekKartyak = async () => {
                                 <button type="button" class="plusz input-group-text btn btn-outline-secondary" data-kosar-id="${termek.id}">+</button>
                             </div>
                             <div class="fw-bold text-nowrap fs-6 termek-ar">
-                                <span id="arMezo_${termek.id}" data-egysegar="${termek.ar}">${termek.mennyiseg * termek.ar} Ft</span>
+                                <span id="arMezo_${termek.id}" data-egysegar="${await arfolyam(termek.ar)}">${termek.mennyiseg * await arfolyam(termek.ar)} €</span>
                             </div>
                             <button type="button" class="torlesGomb btn btn-danger btn-sm px-2" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#torlesModal"> Delete </button>
                         </div>
@@ -109,15 +105,19 @@ const csokkentMennyiseg = async (id) => {
 
         const adat = await response.json();
         const mennyisegSpan = document.getElementById(`mennyiseg_${id}`);
-        let aktualis = parseInt(mennyisegSpan.innerText);
+        let aktualis = parseFloat(mennyisegSpan.innerText);
         if (aktualis > 1) {
             aktualis--;
             mennyisegSpan.innerText = aktualis;
-            const ar = parseInt(
+            const ar = parseFloat(
                 document.getElementById(`arMezo_${id}`).dataset.egysegar
             );
-            document.getElementById(`arMezo_${id}`).innerText =
-                `${aktualis * ar} Ft`;
+            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") {
+                document.getElementById(`arMezo_${id}`).innerText = `${aktualis * ar} Ft`;
+            } else {
+                document.getElementById(`arMezo_${id}`).innerText = `${aktualis * ar} €`;
+            }
+            
             vegosszegSzamitas();
         }
     } catch (err) {
@@ -142,15 +142,18 @@ const novelMennyiseg = async (id) => {
 
         const adat = await response.json();
         const mennyisegSpan = document.getElementById(`mennyiseg_${id}`);
-        let aktualis = parseInt(mennyisegSpan.innerText);
+        let aktualis = parseFloat(mennyisegSpan.innerText);
         if (aktualis < 100) {
             aktualis++;
             mennyisegSpan.innerText = aktualis;
-            const ar = parseInt(
+            const ar = parseFloat(
                 document.getElementById(`arMezo_${id}`).dataset.egysegar
             );
-            document.getElementById(`arMezo_${id}`).innerText =
-                `${aktualis * ar} Ft`;
+            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") {
+                document.getElementById(`arMezo_${id}`).innerText = `${aktualis * ar} Ft`;
+            } else {
+                document.getElementById(`arMezo_${id}`).innerText = `${(aktualis * ar)} €`;
+            }
             vegosszegSzamitas();
         }
     } catch (err) {
@@ -161,16 +164,19 @@ const novelMennyiseg = async (id) => {
 const vegosszegSzamitas = () => {
     let vegosszeg = 0;
     document.querySelectorAll("#KosarTartalom li").forEach(li => {
-        const mennyiseg = parseInt(
+        const mennyiseg = parseFloat(
             li.querySelector(".mennyiseg").innerText
         );
-        const egysegar = parseInt(
+        const egysegar = parseFloat(
             li.querySelector("[data-egysegar]").dataset.egysegar
         );
         vegosszeg += mennyiseg * egysegar;
     });
-    document.getElementById("vegosszeg").innerText =
-        `${vegosszeg} Ft`;
+    if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") {
+        document.getElementById("vegosszeg").innerText = `${vegosszeg} Ft`;
+    } else {
+        document.getElementById("vegosszeg").innerText = `${vegosszeg} €`;
+    }
 }
 
 const tetelTorles = async (Tid) => {
@@ -305,7 +311,7 @@ const szoveg=async()=>{
 
 
 
-     TermekKartyak()
+            TermekKartyak()
         }
         else{
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
@@ -315,6 +321,7 @@ const szoveg=async()=>{
             document.getElementById("szoveg5").innerHTML=adatok[17]["szoveg_en"]
             document.getElementById("szoveg6").innerHTML=adatok[18]["szoveg_en"]
             document.getElementById("szoveg7").innerHTML=adatok[19]["szoveg_en"]
+            document.getElementById("vegosszeg").innerHTML="0 €"
             document.getElementById("szoveg8").innerHTML=adatok[20]["szoveg_en"]
             document.getElementById("fizetesGomb").innerHTML=adatok[21]["szoveg_en"]
             document.getElementById("torlesModalLabel").innerHTML=adatok[22]["szoveg_en"]
@@ -331,7 +338,7 @@ const szoveg=async()=>{
 
 
 
-TermekKartyak()
+            TermekKartyak()
         }
     } catch (error) {
         console.log(error)
@@ -348,3 +355,15 @@ const beallitAngol=()=>{
     szoveg()
 }
 document.getElementById("angol").addEventListener("click",beallitAngol)
+
+const arfolyam = async (arHUF) => {
+    try {
+        let response = await fetch("../../backend/arfolyam.php");
+        if (response.ok) {
+            let data = await response.json();
+            return (data['rate']*arHUF).toFixed(2);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

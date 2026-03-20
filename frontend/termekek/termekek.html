@@ -46,13 +46,19 @@
 <!-- navbar vége-->
 
 <div class="container my-5">
-    <div class="mb-4 text-center">
-        <label for="termekKategoria" class="form-label fw-semibold">
-            Válasszon kategóriát
-        </label>
-        <select name="kategoriaSelect" id="termekKategoria" class="form-select kategoriavalaszto">
-            <option value=""></option>
-        </select>
+    <div class="row justify-content-center mb-4">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="input-group kategoriavalaszto-wrapper">
+                <span class="input-group-text fw-bold">
+                    Válasszon kategóriát:
+                </span>
+                <select name="kategoriaSelect"
+                        id="termekKategoria"
+                        class="form-select kategoriavalaszto">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="row g-4" id="termekKartyaMezo"></div>
 </div>
