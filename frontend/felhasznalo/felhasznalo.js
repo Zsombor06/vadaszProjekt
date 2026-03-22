@@ -415,3 +415,77 @@ const beallitAngol=()=>{
     szoveg()
 }
 document.getElementById("angol").addEventListener("click",beallitAngol)
+
+
+async function kategoriChart() {
+    try {
+        const canvas = document.getElementById('kategoriChart');
+        if (!canvas) return;
+
+        let auth = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`);
+        let authAdat = await auth.json();
+        let userNev = authAdat.felhasznalonev;
+
+        let valasz = await fetch(`../../backend/felhasznalo/index.php/kategoriStat?nev=${userNev}`);
+        let adat = await valasz.json();
+        
+
+        if (!adat || adat.length === 0) {
+            console.warn("Nincs megjeleníthető adat a diagramhoz.");
+            return;
+        }
+
+        const labels = adat.map(a => a.kategoria);
+        const values = adat.map(a => a.szazalek);
+
+        const ctx = canvas.getContext("2d");
+        
+        if (window.myChart instanceof Chart) {
+            window.myChart.destroy();
+        }
+
+        window.myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: [
+                    '#c09e44', 
+                    '#3498db', 
+                    '#e74c3c', 
+                    '#2ecc71', 
+                    '#f1c40f', 
+                    '#9b59b6', 
+                    '#1abc9c', 
+                    '#e67e22', 
+                    '#34495e',
+                    '#7f8c8d'  
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        color: '#333'
+                    }
+                }
+            }
+        }
+    });
+
+    } catch (error) {
+        console.error("Diagram hiba:", error);
+    }
+}
+
+window.addEventListener("load", async () => {
+    await kategoriChart();
+});

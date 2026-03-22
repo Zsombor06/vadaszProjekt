@@ -123,4 +123,48 @@ case "modositSzallitasiCim":
     }
         echo json_encode(["valasz"=>"Sikerestelen módosítás!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
+case "kategoriStat":
+    if($metodus != "GET"){
+        return http_response_code(405);
+    }
+
+    if(empty($_GET["nev"])){
+        echo json_encode(["valasz"=>"Hiányzó felhasználónév!"]);
+        return http_response_code(400);
+    }
+
+    $nev = $_GET["nev"];
+
+    $sql = "
+        SELECT k.kategoria, SUM(t.mennyiseg) as ossz
+        FROM rendeles r
+        JOIN tetelek t ON r.id = t.rendelesId
+        JOIN termek te ON t.termekId = te.id
+        JOIN kategoria k ON te.kategoriaId = k.id
+        WHERE r.felhasznalo = ?
+        GROUP BY k.kategoria
+    ";
+
+    $eredmeny = adatokLekerese($sql, "s", [$nev]);
+
+    if(empty($eredmeny)){
+        echo json_encode([]);
+        return http_response_code(200);
+    }
+
+    $osszes = 0;
+    foreach($eredmeny as $sor){
+        $osszes += $sor["ossz"];
+    }
+
+    $valasz = [];
+    foreach($eredmeny as $sor){
+        $valasz[] = [
+            "kategoria" => $sor["kategoria"],
+            "szazalek" => round(($sor["ossz"] / $osszes) * 100, 2)
+        ];
+    }
+
+    echo json_encode($valasz, JSON_UNESCAPED_UNICODE);
+    return http_response_code(200);
 }
