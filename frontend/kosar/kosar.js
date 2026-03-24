@@ -308,7 +308,17 @@ const szoveg=async()=>{
             document.getElementById("szoveg13").innerHTML=adatok[69]["szoveg"]
             document.getElementById("szoveg14").innerHTML=adatok[24]["szoveg"]
             document.getElementById("fizetesConfirm").innerHTML=adatok[21]["szoveg"]
-
+            document.getElementById("footer1").innerHTML=adatok[82]["szoveg"]
+            document.getElementById("footer2").innerHTML=adatok[83]["szoveg"]
+            document.getElementById("footer3").innerHTML=adatok[84]["szoveg"]
+            document.getElementById("footer4").innerHTML=adatok[85]["szoveg"]
+            document.getElementById("footer5").innerHTML=adatok[86]["szoveg"]
+            document.getElementById("footer6").innerHTML=adatok[87]["szoveg"]
+            document.getElementById("footer7").innerHTML=adatok[88]["szoveg"]
+            document.getElementById("footer8").innerHTML=adatok[89]["szoveg"]
+            document.getElementById("footer9").innerHTML=adatok[90]["szoveg"]
+            document.getElementById("footer10").innerHTML=adatok[91]["szoveg"]
+            document.getElementById("footer11").innerHTML=adatok[92]["szoveg"]
 
 
             TermekKartyak()
@@ -334,7 +344,17 @@ const szoveg=async()=>{
             document.getElementById("szoveg13").innerHTML=adatok[69]["szoveg_en"]
             document.getElementById("szoveg14").innerHTML=adatok[24]["szoveg_en"]
             document.getElementById("fizetesConfirm").innerHTML=adatok[21]["szoveg_en"]
-
+            document.getElementById("footer1").innerHTML=adatok[82]["szoveg_en"]
+            document.getElementById("footer2").innerHTML=adatok[83]["szoveg_en"]
+            document.getElementById("footer3").innerHTML=adatok[84]["szoveg_en"]
+            document.getElementById("footer4").innerHTML=adatok[85]["szoveg_en"]
+            document.getElementById("footer5").innerHTML=adatok[86]["szoveg_en"]
+            document.getElementById("footer6").innerHTML=adatok[87]["szoveg_en"]
+            document.getElementById("footer7").innerHTML=adatok[88]["szoveg_en"]
+            document.getElementById("footer8").innerHTML=adatok[89]["szoveg_en"]
+            document.getElementById("footer9").innerHTML=adatok[90]["szoveg_en"]
+            document.getElementById("footer10").innerHTML=adatok[91]["szoveg_en"]
+            document.getElementById("footer11").innerHTML=adatok[92]["szoveg_en"]
 
 
 

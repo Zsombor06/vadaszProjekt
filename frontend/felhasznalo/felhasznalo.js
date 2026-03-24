@@ -356,8 +356,19 @@ const szoveg=async()=>{
             document.getElementById("szoveg15").innerHTML=adatok[48]["szoveg"]
             document.getElementById("szoveg16").innerHTML=adatok[49]["szoveg"]
             document.getElementById("kijelentkezes").value=adatok[50]["szoveg"]
-
-
+            document.getElementById("szoveg17").innerHTML=adatok[71]["szoveg"]
+            await kategoriChart()
+            document.getElementById("footer1").innerHTML=adatok[82]["szoveg"]
+            document.getElementById("footer2").innerHTML=adatok[83]["szoveg"]
+            document.getElementById("footer3").innerHTML=adatok[84]["szoveg"]
+            document.getElementById("footer4").innerHTML=adatok[85]["szoveg"]
+            document.getElementById("footer5").innerHTML=adatok[86]["szoveg"]
+            document.getElementById("footer6").innerHTML=adatok[87]["szoveg"]
+            document.getElementById("footer7").innerHTML=adatok[88]["szoveg"]
+            document.getElementById("footer8").innerHTML=adatok[89]["szoveg"]
+            document.getElementById("footer9").innerHTML=adatok[90]["szoveg"]
+            document.getElementById("footer10").innerHTML=adatok[91]["szoveg"]
+            document.getElementById("footer11").innerHTML=adatok[92]["szoveg"]
 
         }
         else{
@@ -398,7 +409,19 @@ const szoveg=async()=>{
             document.getElementById("szoveg15").innerHTML=adatok[48]["szoveg_en"]
             document.getElementById("szoveg16").innerHTML=adatok[49]["szoveg_en"]
             document.getElementById("kijelentkezes").value=adatok[50]["szoveg_en"]
-
+            document.getElementById("szoveg17").innerHTML=adatok[71]["szoveg_en"]
+            await kategoriChart()
+                        document.getElementById("footer1").innerHTML=adatok[82]["szoveg_en"]
+            document.getElementById("footer2").innerHTML=adatok[83]["szoveg_en"]
+            document.getElementById("footer3").innerHTML=adatok[84]["szoveg_en"]
+            document.getElementById("footer4").innerHTML=adatok[85]["szoveg_en"]
+            document.getElementById("footer5").innerHTML=adatok[86]["szoveg_en"]
+            document.getElementById("footer6").innerHTML=adatok[87]["szoveg_en"]
+            document.getElementById("footer7").innerHTML=adatok[88]["szoveg_en"]
+            document.getElementById("footer8").innerHTML=adatok[89]["szoveg_en"]
+            document.getElementById("footer9").innerHTML=adatok[90]["szoveg_en"]
+            document.getElementById("footer10").innerHTML=adatok[91]["szoveg_en"]
+            document.getElementById("footer11").innerHTML=adatok[92]["szoveg_en"]
             
         }
     } catch (error) {
@@ -434,8 +457,10 @@ async function kategoriChart() {
             console.warn("Nincs megjeleníthető adat a diagramhoz.");
             return;
         }
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") var labels = adat.map(a => a.kategoria);
+        else  var labels = adat.map(a => a.kategoriaEn);
 
-        const labels = adat.map(a => a.kategoria);
+       
         const values = adat.map(a => a.szazalek);
 
         const ctx = canvas.getContext("2d");

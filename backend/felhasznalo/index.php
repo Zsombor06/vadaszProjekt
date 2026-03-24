@@ -136,7 +136,7 @@ case "kategoriStat":
     $nev = $_GET["nev"];
 
     $sql = "
-        SELECT k.kategoria, SUM(t.mennyiseg) as ossz
+        SELECT k.kategoria,kategoriaEn, SUM(t.mennyiseg) as ossz
         FROM rendeles r
         JOIN tetelek t ON r.id = t.rendelesId
         JOIN termek te ON t.termekId = te.id
@@ -161,6 +161,7 @@ case "kategoriStat":
     foreach($eredmeny as $sor){
         $valasz[] = [
             "kategoria" => $sor["kategoria"],
+            "kategoriaEn"=>$sor["kategoriaEn"],
             "szazalek" => round(($sor["ossz"] / $osszes) * 100, 2)
         ];
     }

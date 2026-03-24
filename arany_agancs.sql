@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Már 19. 11:44
+-- Létrehozás ideje: 2026. Már 24. 17:23
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -168,8 +168,9 @@ INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldv
 (1, 'user', 1, '2026-03-03 17:01:30', NULL, NULL, 1),
 (35, 'user', 1, '2026-03-19 10:53:35', NULL, NULL, 1),
 (36, 'admin', 1, '2026-03-19 11:43:27', NULL, NULL, 2),
-(37, 'user', 0, NULL, NULL, NULL, NULL),
-(38, 'admin', 0, NULL, NULL, NULL, NULL);
+(37, 'user', 1, '2026-03-24 16:39:52', NULL, NULL, 1),
+(38, 'admin', 0, NULL, NULL, NULL, NULL),
+(39, 'user', 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -281,7 +282,30 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (70, 'Válasszon fizetési módot:', 'Choose payment method:'),
 (71, 'Bankkártya', 'Bank card'),
 (72, 'Fizetés megerősítése', 'Payment confirmation'),
-(73, 'Biztosan véglegesíteni szeretné a rendelést? <br>Ezt a műveletet nem lehet visszavonni! <br>', 'Are you sure you want to finalize the order? <br>This action cannot be undone! <br>');
+(73, 'Biztosan véglegesíteni szeretné a rendelést? <br>Ezt a műveletet nem lehet visszavonni! <br>', 'Are you sure you want to finalize the order? <br>This action cannot be undone! <br>'),
+(74, 'Válasszon kategóriát:', 'Choose a category:'),
+(75, 'Vásárlási statisztika', 'Purchase statistics'),
+(76, 'Rólunk', 'About us'),
+(77, '  Az Arany Agancs egy olyan közösségből született, ahol a természet tisztelete és a vadászat hagyománya alapérték.Küldetésünk, hogy minden vadász számára megbízható és minőségi felszerelést biztosítsunk.', 'Arany Agancs was born from a community where respect for nature and the tradition of hunting are core values. Our mission is to provide every hunter with reliable and quality equipment.'),
+(78, 'Termékeinket gondosan válogatjuk, hogy azok megfeleljenek a valós terepi kihívásoknak. Számunkra a minőség és a tartósság nem opció, hanem alapelv.', 'We carefully select our products to ensure they meet real field challenges. For us, quality and durability are not an option, but a principle.'),
+(79, ' Legyen szó kezdő vagy tapasztalt vadászról, nálunk mindenki megtalálja a megfelelő eszközöket.', 'Whether you are a beginner or an experienced hunter, everyone can find the right tools with us.'),
+(80, 'Minőség', 'Quality'),
+(81, 'Csak bevált felszerelések', 'Only proven equipment'),
+(82, 'Tapasztalat', 'Experience'),
+(83, 'Valódi terepi tudás', 'Real field knowledge'),
+(84, 'Megbízhatóság', 'Reliability'),
+(85, 'Gyors és biztos kiszállítás', 'Fast and reliable delivery'),
+(86, 'Prémium vadászfelszerelések és kiegészítők. Minőség, hagyomány és szakértelem az erdő szerelmeseinek.', 'Premium hunting equipment and accessories. Quality, tradition, and expertise for lovers of the forest.'),
+(87, 'Linkek', 'Links'),
+(88, 'Főoldal', 'Main page'),
+(89, 'Rólunk', 'About us'),
+(90, 'Termékek', 'Products'),
+(91, 'Kapcsolatok', 'Contacts'),
+(92, 'Nyitvatartás', 'Opening hours'),
+(93, 'Hétfő - Péntek:', 'Monday - Friday'),
+(94, 'Szombat:', 'Saturday:'),
+(95, 'Vasárnap', 'Sunday:'),
+(96, '2025 Arany Agancs Vadászbolt. Minden jog fenntartva.', '2025 Arany Agancs Vadászbolt. All rights reserved.');
 
 -- --------------------------------------------------------
 
@@ -372,7 +396,7 @@ INSERT INTO `termek` (`id`, `nev`, `nevEn`, `leiras`, `leirasEn`, `ar`, `kategor
 (65, 'Álcázó szalag (terepmintás)', 'Camo Stealth Tape', 'Távcsövek és fegyverek álcázásához.', 'For camouflaging optics and guns.', 2500, 14, 50, 1, '../képek/alcaszalag.png'),
 (66, 'Narancssárga láthatósági sapka', 'High-Visibility Orange Cap', 'Hajtóvadászatokhoz kötelező, állítható méret.', 'Mandatory for drive hunts, adjustable size.', 4500, 1, 50, 1, '../képek/sapka.png'),
 (67, 'Vízlepergető vadásznadrág', 'Water-Repellent Hunting Pants', 'Erősített térdrész, csendes anyagból.', 'Reinforced knees, made of silent material.', 18900, 1, 15, 2, '../képek/nadrag.png'),
-(68, 'Kompakt keresőtávcső 8x42', 'Compact Binoculars 8x42', 'Nitrogén töltésű, páramentes lencsék.', 'Nitrogen-filled, fog-proof lenses.', 29900, 3, 10, 1, '../képek/tavcso_8x42.png'),
+(68, 'Kompakt keresőtávcső 8x42', 'Compact Binoculars 8x42', 'Nitrogén töltésű, páramentes lencsék.', 'Nitrogen-filled, fog-proof lenses.', 29900, 3, 8, 1, '../képek/tavcso_8x42.png'),
 (69, 'Távcső lencsetisztító toll', 'Binocular Lens Cleaning Pen', 'Kefe és karbonhegy a tökéletes tisztaságért.', 'Brush and carbon tip for perfect clarity.', 3200, 3, 25, 1, '../képek/tisztitotoll.png'),
 (70, 'Zsigerelő kés szett', 'Field Dressing Knife Set', '3 részes készlet cserélhető pengékkel.', '3-piece set with replaceable blades.', 16500, 5, 12, 1, '../képek/kesszett.png'),
 (71, 'Élező kő (kombinált)', 'Combination Sharpening Stone', 'Kétoldalú finomság a borotvaéles pengékért.', 'Double-sided grit for razor-sharp blades.', 5800, 5, 20, 1, '../képek/elezo.png'),
@@ -423,7 +447,8 @@ CREATE TABLE `tetelek` (
 
 INSERT INTO `tetelek` (`id`, `rendelesId`, `termekId`, `mennyiseg`) VALUES
 (31, 35, 2, 1),
-(32, 36, 2, 1);
+(32, 36, 2, 1),
+(33, 37, 68, 2);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -517,7 +542,7 @@ ALTER TABLE `rang`
 -- AUTO_INCREMENT a táblához `rendeles`
 --
 ALTER TABLE `rendeles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT a táblához `szallitasicimek`
@@ -529,7 +554,7 @@ ALTER TABLE `szallitasicimek`
 -- AUTO_INCREMENT a táblához `szoveg`
 --
 ALTER TABLE `szoveg`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT a táblához `termek`
@@ -541,7 +566,7 @@ ALTER TABLE `termek`
 -- AUTO_INCREMENT a táblához `tetelek`
 --
 ALTER TABLE `tetelek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Megkötések a kiírt táblákhoz

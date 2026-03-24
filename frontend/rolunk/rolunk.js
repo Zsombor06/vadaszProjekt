@@ -1,39 +1,3 @@
-const regisztralasGomb = async () => {
-        try {
-            console.log("A")
-            if(localStorage.getItem('token')){         
-            let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
-            if (httpValasz.ok) {
-                let httpAdat = await httpValasz.json();
-              
-                    switch (httpAdat["rangId"]) {
-                        case 1: //rangId 1 az admin
-                        window.location.href="../admin/admin.html"
-                        return
-                        case 2: //rangId 2 a dolgozó
-                        window.location.href="../dolgozo/dolgozo.html"
-                        return
-                        default: //rangId 3 a regisztrált felhasználó
-                        window.location.href="../felhasznalo/felhasznalo.html"
-                        return ;
-                    }
-                
-            }
-            else{
-                window.location.href="../regisztracio/regisztracio.html"
-            }}
-            else{
-                window.location.href="../regisztracio/regisztracio.html"
-
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-
-    document.getElementById("Regisztralas").addEventListener("click", regisztralasGomb);
-
 const szoveg=async()=>{
     try {
         let httpvalasz=await fetch("../../backend/szoveg/szoveg.php/szoveg")
@@ -42,10 +6,17 @@ const szoveg=async()=>{
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
             document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg"]
-            document.getElementById("szoveg4").innerHTML=adatok[3]["szoveg"]
-            document.getElementById("szoveg5").innerHTML=adatok[4]["szoveg"]
-            document.getElementById("szoveg6").innerHTML=adatok[5]["szoveg"]
-            document.getElementById("Regisztralas").innerHTML=adatok[6]["szoveg"]
+            document.getElementById("szoveg4").innerHTML=adatok[72]["szoveg"]
+            document.getElementById("szoveg5").innerHTML=adatok[3]["szoveg"]
+            document.getElementById("szoveg6").innerHTML=adatok[73]["szoveg"]
+            document.getElementById("szoveg7").innerHTML=adatok[74]["szoveg"]
+            document.getElementById("szoveg8").innerHTML=adatok[75]["szoveg"]
+            document.getElementById("szoveg9").innerHTML=adatok[76]["szoveg"]
+            document.getElementById("szoveg10").innerHTML=adatok[77]["szoveg"]
+            document.getElementById("szoveg11").innerHTML=adatok[78]["szoveg"]
+            document.getElementById("szoveg12").innerHTML=adatok[79]["szoveg"]
+            document.getElementById("szoveg13").innerHTML=adatok[80]["szoveg"]
+            document.getElementById("szoveg14").innerHTML=adatok[81]["szoveg"]
             document.getElementById("footer1").innerHTML=adatok[82]["szoveg"]
             document.getElementById("footer2").innerHTML=adatok[83]["szoveg"]
             document.getElementById("footer3").innerHTML=adatok[84]["szoveg"]
@@ -57,15 +28,23 @@ const szoveg=async()=>{
             document.getElementById("footer9").innerHTML=adatok[90]["szoveg"]
             document.getElementById("footer10").innerHTML=adatok[91]["szoveg"]
             document.getElementById("footer11").innerHTML=adatok[92]["szoveg"]
+
         }
         else{
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
             document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg_en"]
-            document.getElementById("szoveg4").innerHTML=adatok[3]["szoveg_en"]
-            document.getElementById("szoveg5").innerHTML=adatok[4]["szoveg_en"]
-            document.getElementById("szoveg6").innerHTML=adatok[5]["szoveg_en"]
-            document.getElementById("Regisztralas").innerHTML=adatok[6]["szoveg_en"]
+            document.getElementById("szoveg4").innerHTML=adatok[72]["szoveg_en"]
+            document.getElementById("szoveg5").innerHTML=adatok[3]["szoveg_en"]
+            document.getElementById("szoveg6").innerHTML=adatok[73]["szoveg_en"]
+            document.getElementById("szoveg7").innerHTML=adatok[74]["szoveg_en"]
+            document.getElementById("szoveg8").innerHTML=adatok[75]["szoveg_en"]
+            document.getElementById("szoveg9").innerHTML=adatok[76]["szoveg_en"]
+            document.getElementById("szoveg10").innerHTML=adatok[77]["szoveg_en"]
+            document.getElementById("szoveg11").innerHTML=adatok[78]["szoveg_en"]
+            document.getElementById("szoveg12").innerHTML=adatok[79]["szoveg_en"]
+            document.getElementById("szoveg13").innerHTML=adatok[80]["szoveg_en"]
+            document.getElementById("szoveg14").innerHTML=adatok[81]["szoveg_en"]
             document.getElementById("footer1").innerHTML=adatok[82]["szoveg_en"]
             document.getElementById("footer2").innerHTML=adatok[83]["szoveg_en"]
             document.getElementById("footer3").innerHTML=adatok[84]["szoveg_en"]
@@ -77,6 +56,7 @@ const szoveg=async()=>{
             document.getElementById("footer9").innerHTML=adatok[90]["szoveg_en"]
             document.getElementById("footer10").innerHTML=adatok[91]["szoveg_en"]
             document.getElementById("footer11").innerHTML=adatok[92]["szoveg_en"]
+
         }
     } catch (error) {
         console.log(error)
