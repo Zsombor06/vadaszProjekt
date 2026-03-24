@@ -1,4 +1,129 @@
+let osszesTermek = [];
+let minAr = document.getElementById("minAr")
+let maxAr = document.getElementById("maxAr")
+let kereso = document.getElementById("kereso")
+let akcios = document.getElementById("akcios")
+let raktaron = document.getElementById("raktaron")
+let termekKartyaMezo = document.getElementById("termekKartyaMezo");
+let rendezes = document.getElementById("rendezes");
 
+const termekekBetoltese = async (termekek) => {
+    termekKartyaMezo.innerHTML = "";
+    for (const termek of termekek) {
+        const kartya = document.createElement('div');
+        kartya.className = 'mb-4 col-sm-6 col-md-4 col-lg-3';
+        await kategoriaKartya(kartya, termek);
+        termekKartyaMezo.appendChild(kartya);
+    }
+    document.querySelectorAll(".kosarbaGomb").forEach(btn => {
+        btn.addEventListener("click", Kosaraba);
+    });
+};
+
+const termekSzures = (termekek) => {
+    const min = parseInt(minAr.value) || 0;
+    const max = parseInt(maxAr.value) || Infinity;
+    const keresett = kereso.value.toLowerCase();
+    const csakAkcios = akcios.checked;
+    const csakRaktaron = raktaron.checked;
+    const nyelv = localStorage.getItem("nyelv");
+
+    const nevNyelv = nyelv === "en" ? "nevEn" : "nev";
+    const leirasNyelv = nyelv === "en" ? "leirasEn" : "leiras";
+
+    let eredmeny = termekek.filter(t => {
+        const ar = Math.round(t.ujar, 0);
+        return (
+            ar >= min &&
+            ar <= max &&
+            (!csakAkcios || t.regiar != ar) &&
+            (!csakRaktaron || t.keszlet > 0) &&
+            (
+                t[nevNyelv].toLowerCase().includes(keresett) ||
+                t[leirasNyelv].toLowerCase().includes(keresett)
+            )
+        );
+    });
+    if (rendezes.value === "arNovekvo") {
+        eredmeny.sort((a, b) => a.ujar - b.ujar);
+    }
+    if (rendezes.value === "arCsokkeno") {
+        eredmeny.sort((a, b) => b.ujar - a.ujar);
+    }
+    return eredmeny;
+};
+
+const frissites = async () => {
+    const szurt = termekSzures(osszesTermek);
+    document.getElementById("talalatokSzama").innerText = szurt.length > 0 ? `${szurt.length} találat` : "Nincs találat";
+    await termekekBetoltese(szurt);
+};
+
+[minAr, maxAr, kereso, rendezes, akcios, raktaron].forEach(elem => {
+    elem.addEventListener("input", frissites);
+});
+
+const kategoriaKartya = async (kartya, termek) => {
+    try {
+        let htmlBelso = "";
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
+            htmlBelso = `
+                            <div class="card h-100">
+                                <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nev}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${termek.nev}</h5>
+                                    <p class="card-text">${termek.leiras}</p>
+                                    <div class="mt-auto"> `;
+            if (termek.regiar != Math.round(termek.ujar, 0)) {
+                htmlBelso += `
+                                        <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br>
+                `;
+            } else {
+                htmlBelso += `
+                                        <small class="text-muted">Ár: ${termek.regiar} Ft</small> <br>
+                `;
+            }
+            htmlBelso += `
+                                        <small class="text-muted">Raktáron: ${termek.keszlet} db </small>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
+                                </div>
+                            </div>
+                        `;
+        } else {
+            htmlBelso = `
+                            <div class="card h-100">
+                                <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nevEn}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${termek.nevEn}</h5>
+                                    <p class="card-text">${termek.leirasEn}</p>
+                                    <div class="mt-auto">`;
+            if (termek.regiar != Math.round(termek.ujar, 0)) {
+                htmlBelso += `
+                                        <small class="text-muted">Marked down price: ${await arfolyam(Math.round(termek.ujar, 0))} €</small> <br>
+                `;
+            } else {
+                htmlBelso += `
+                                        <small class="text-muted">Price: ${await arfolyam(termek.regiar)} €</small> <br>
+                `;
+            }
+            htmlBelso += `
+                                        <small class="text-muted">In store: ${termek.keszlet} </small>
+                                    </div>    
+                                </div>
+                                <div class="card-footer">
+                                    <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
+                                </div>
+                            </div>
+                        `;
+        }
+        kartya.innerHTML = htmlBelso;
+    } catch (error) {
+        console.log(error);
+    }
+}
 const kategoriakBetoltese=async() => {
     const termekKategoria = document.getElementById('termekKategoria');
     termekKategoria.innerHTML=""
@@ -10,10 +135,10 @@ const kategoriakBetoltese=async() => {
             const option = document.createElement('option');
             option.value = kat["id"];
             if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
-            option.textContent = kat["kategoria"];
+                option.textContent = kat["kategoria"];
             }
             else{
-            option.textContent = kat["kategoriaEn"];
+                option.textContent = kat["kategoriaEn"];
             }
             termekKategoria.appendChild(option);
             if(kat["id"]==localStorage.getItem("kategoria")){
@@ -21,96 +146,12 @@ const kategoriakBetoltese=async() => {
                 localStorage.setItem("kategoriaId",kat["id"])
             }
         }
-    
-    
         if(localStorage.getItem("kategoria")){
             let kategoria=localStorage.getItem("kategoriaId")
             let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${kategoria}`);
-            let termekek = await httpValasz.json();
-            for (const termek of termekek) {
-                const kartya = document.createElement('div');
-                kartya.className = 'mb-4 col-sm-6 col-md-4 col-lg-3';
-                if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
-                if (termek.regiar == Math.round(termek.ujar, 0)) {
-                    kartya.innerHTML = `
-                        <div class="card h-100">
-                            <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nev}">
-                            <div class="card-body">
-                                <h5 class="card-title">${termek.nev}</h5>
-                                <p class="card-text">${termek.leiras}</p>
-                                <div class="mt-auto">
-                                    <small class="text-muted">Ár: ${termek.regiar} Ft</small> <br>
-                                    <small class="text-muted">Raktáron: ${termek.keszlet} db </small>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    kartya.innerHTML = `
-                        <div class="card h-100">
-                            <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nev}">
-                            <div class="card-body">
-                                <h5 class="card-title">${termek.nev}</h5>
-                                <p class="card-text">${termek.leiras}</p>
-                                <div class="mt-auto">
-                                    <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br>
-                                    <small class="text-muted">Raktáron: ${termek.keszlet} db </small>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
-                            </div>
-                        </div>
-                    `;
-                }}
-                else{
-                    if (termek.regiar == Math.round(termek.ujar, 0)) {
-                    kartya.innerHTML = `
-                        <div class="card h-100">
-                            <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nevEn}">
-                            <div class="card-body">
-                                <h5 class="card-title">${termek.nevEn}</h5>
-                                <p class="card-text">${termek.leirasEn}</p>
-                                <div class="mt-auto">
-                                    <small class="text-muted">Price: ${await arfolyam(termek.regiar)} €</small> <br>
-                                    <small class="text-muted">In store: ${termek.keszlet} </small>
-                                </div>    
-                            </div>
-                            <div class="card-footer">
-                                <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    kartya.innerHTML = `
-                        <div class="card h-100">
-                            <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nev}">
-                            <div class="card-body">
-                                <h5 class="card-title">${termek.nevEn}</h5>
-                                <p class="card-text">${termek.leirasEn}</p>
-                                <div class="mt-auto">    
-                                    <small class="text-muted">Marked down price: ${await arfolyam(Math.round(termek.ujar, 0))} €</small> <br>
-                                    <small class="text-muted">In store: ${termek.keszlet} </small>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
-                            </div>
-                        </div>
-                    `;
-                }
-                }
-                termekKartyaMezo.appendChild(kartya);
-            }
+            osszesTermek = await httpValasz.json();
+            await frissites();
         }
-        document.querySelectorAll(".kosarbaGomb").forEach(btn => {
-          btn.addEventListener("click", async (e) => {
-            await Kosaraba(e);
-          });
-        });
     } catch (error) {
         console.error('Hiba a termékek lekérésekor:', error);
     }};
@@ -118,95 +159,12 @@ window.addEventListener('load',kategoriakBetoltese)
 
 termekKategoria.addEventListener('change', async () => {
     try {
-        const termekKartyaMezo = document.getElementById('termekKartyaMezo');
         const selectedKategoria = termekKategoria.value;
         termekKartyaMezo.innerHTML = '';
         localStorage.setItem("kategoria", selectedKategoria);
         let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${selectedKategoria}`);
-        let termekek = await httpValasz.json();
-        for (const termek of termekek) {
-            const kartya = document.createElement('div');
-                kartya.className = 'mb-4 col-sm-6 col-md-4 col-lg-3';
-                if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
-                if (termek.regiar == Math.round(termek.ujar, 0)) {
-                    kartya.innerHTML = `
-                        <div class="card h-100">
-                            <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nev}">
-                            <div class="card-body">
-                                <h5 class="card-title">${termek.nev}</h5>
-                                <p class="card-text">${termek.leiras}</p>
-                                <div class="mt-auto">
-                                    <small class="text-muted">Ár: ${termek.regiar} Ft</small> <br>
-                                    <small class="text-muted">Raktáron: ${termek.keszlet} </small>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    kartya.innerHTML = `
-                        <div class="card h-100">
-                            <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nev}">
-                            <div class="card-body">
-                                <h5 class="card-title">${termek.nev}</h5>
-                                <p class="card-text">${termek.leiras}</p>
-                                <div class="mt-auto">
-                                    <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br>
-                                    <small class="text-muted">Raktáron: ${termek.keszlet} </small>
-                                <div>
-                            </div>
-                            <div class="card-footer">
-                                <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
-                            </div>
-                        </div>
-                    `;
-                }}
-                else{
-                    if (termek.regiar == Math.round(termek.ujar, 0)) {
-                    kartya.innerHTML = `
-                        <div class="card h-100">
-                            <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nevEn}">
-                            <div class="card-body">
-                                <h5 class="card-title">${termek.nevEn}</h5>
-                                <p class="card-text">${termek.leirasEn}</p>
-                                <div class="mt-auto">
-                                    <small class="text-muted">Price: ${await arfolyam(termek.regiar)} €</small> <br>
-                                    <small class="text-muted">In store: ${termek.keszlet} </small>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    kartya.innerHTML = `
-                        <div class="card h-100">
-                            <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nev}">
-                            <div class="card-body">
-                                <h5 class="card-title">${termek.nevEn}</h5>
-                                <p class="card-text">${termek.leirasEn}</p>
-                                <div class="mt-auto">
-                                    <small class="text-muted">Marked down price: ${await arfolyam(Math.round(termek.ujar, 0))} €</small> <br>
-                                    <small class="text-muted">In store: ${termek.keszlet} </small>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
-                            </div>
-                        </div>
-                    `;
-                }
-                }
-                termekKartyaMezo.appendChild(kartya);
-        }
-        document.querySelectorAll(".kosarbaGomb").forEach(btn => {
-          btn.addEventListener("click", async (e) => {
-            await Kosaraba(e);
-          });
-        });
+        osszesTermek = await httpValasz.json();
+        await frissites();
     } catch (error) {
         console.error(error);
     }
@@ -323,3 +281,13 @@ const arfolyam = async (arHUF) => {
         console.log(error);
     }
 }
+
+document.getElementById("szurokTorlese").addEventListener("click", () => {
+    minAr.value = "";
+    maxAr.value = "";
+    kereso.value = "";
+    akcios.checked = false;
+    raktaron.checked = false;
+    rendezes.value = "";
+    frissites();
+});

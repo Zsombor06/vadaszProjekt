@@ -17,7 +17,6 @@
             <a href="../fooldal/fooldal.html"><img src="../képek/aranyagancs_szoveg.png" alt="SZOVEG" width="150" class="navbar-brand"></a>
         </div>
 
-
             <div class="d-flex flex-wrap justify-content-end" id="menuElems">
                 <ul  class="navbar-nav me-3">
                     <li class="nav-item dropdown">
@@ -45,23 +44,70 @@
     </div>
 <!-- navbar vége-->
 
-<div class="container my-5">
-    <div class="row justify-content-center mb-4">
-        <div class="col-12 col-md-8 col-lg-6">
-            <div class="input-group kategoriavalaszto-wrapper">
-                <span id="szoveg6" class="input-group-text fw-bold">
-                    Válasszon kategóriát:
-                </span>
-                <select name="kategoriaSelect"
-                        id="termekKategoria"
-                        class="form-select kategoriavalaszto">
-                    <option value=""></option>
-                </select>
+    <div class="container my-5">
+        <div class="row justify-content-center mb-4">
+            <div class="col-12 col-lg-10 col-xl-8">
+                <div class="row justify-content-center mb-3">
+                    <div class="col-12 col-lg-8">
+                        <div class="input-group kategoriavalaszto-wrapper">
+                            <span id="szoveg6" class="input-group-text fw-bold">
+                                Válasszon kategóriát:
+                            </span>
+                            <select id="termekKategoria" class="form-select kategoriavalaszto"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-12 col-lg-10 col-xl-8">                    
+                        <div class="szuro p-3">                        
+                            <div class="row g-3 align-items-end">                            
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <label class="form-label">Keresés</label>
+                                    <input type="text" id="kereso" class="form-control" placeholder="Termék neve...">
+                                </div>                            
+                                <div class="col-6 col-md-3 col-lg-2">
+                                    <label class="form-label">Min ár</label>
+                                    <input type="number" id="minAr" class="form-control">
+                                </div>                            
+                                <div class="col-6 col-md-3 col-lg-2">
+                                    <label class="form-label">Max ár</label>
+                                    <input type="number" id="maxAr" class="form-control">
+                                </div>                            
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <label class="form-label">Rendezés</label>
+                                    <select id="rendezes" class="form-select">
+                                        <option value="">Nincs</option>
+                                        <option value="arNovekvo">Ár ↑</option>
+                                        <option value="arCsokkeno">Ár ↓</option>
+                                    </select>
+                                </div>                            
+                                <div class="col-6 col-md-4 col-lg-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="akcios">
+                                        <label class="form-check-label">Akciós</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="raktaron">
+                                        <label class="form-check-label">Raktáron</label>
+                                    </div>
+                                </div>                        
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <p id="talalatokSzama" class="mb-0 fw-semibold"></p>
+                                <small class="text-muted">Szűrők automatikusan frissülnek</small>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <button id="szurokTorlese" class="btn btn-navbar w-100">
+                                Szűrők törlése
+                            </button>
+                        </div>
+                    </div>
+                </div>  
             </div>
         </div>
+        <div class="row g-4" id="termekKartyaMezo"></div>
     </div>
-    <div class="row g-4" id="termekKartyaMezo"></div>
-</div>
 
     <footer class="footer mb-0">
         <div class="px-5 py-4">
