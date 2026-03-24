@@ -472,3 +472,203 @@ const beallitAngol=()=>{
     szoveg()
 }
 document.getElementById("angol").addEventListener("click",beallitAngol)
+
+async function termekChart(){
+    try {
+        const canvas = document.getElementById('termekChart');
+        if (!canvas) return;
+
+        let valasz = await fetch(`../../backend/admin/index.php/legkellendobbStat`);
+        let adat = await valasz.json();
+        
+
+        if (!adat || adat.length === 0) {
+            console.warn("Nincs megjeleníthető adat a diagramhoz.");
+            return;
+        }
+
+        const labels = adat.map(a => a.nev);
+        const values = adat.map(a => a.mennyiseg);
+
+        const ctx = canvas.getContext("2d");
+        
+        if (Chart.getChart(ctx) instanceof Chart) {
+            Chart.getChart(ctx).destroy();
+        }
+
+        new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: [
+                    '#c09e44', 
+                    '#3498db', 
+                    '#e74c3c', 
+                    '#2ecc71', 
+                    '#f1c40f', 
+                    '#9b59b6', 
+                    '#1abc9c', 
+                    '#e67e22', 
+                    '#34495e',
+                    '#7f8c8d'  
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        color: '#333'
+                    }
+                }
+            }
+        }
+    });
+
+    } catch (error) {
+        console.error("Diagram hiba:", error);
+    }
+}
+window.addEventListener("load", async () => {
+    await termekChart();
+});
+
+async function koltoChart(){
+    try {
+        const canvas = document.getElementById('koltoChart');
+        if (!canvas) return;
+
+        let valasz = await fetch(`../../backend/admin/index.php/koltokStat`);
+        let adat = await valasz.json();
+        
+
+        if (!adat || adat.length === 0) {
+            console.warn("Nincs megjeleníthető adat a diagramhoz.");
+            return;
+        }
+
+        const labels = adat.map(a => a.felhasznalo);
+        const values = adat.map(a => a.mennyiseg);
+
+        const ctx = canvas.getContext("2d");
+        if (Chart.getChart(ctx) instanceof Chart) {
+            Chart.getChart(ctx).destroy();
+        }
+
+        new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: [
+                    '#c09e44', 
+                    '#3498db', 
+                    '#e74c3c', 
+                    '#2ecc71', 
+                    '#f1c40f', 
+                    '#9b59b6', 
+                    '#1abc9c', 
+                    '#e67e22', 
+                    '#34495e',
+                    '#7f8c8d'  
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display:false
+                    }
+                }
+            }
+        }
+    );
+
+    } catch (error) {
+        console.error("Diagram hiba:", error);
+    }
+}
+window.addEventListener("load", async () => {
+    await koltoChart();
+});
+
+async function termekChart(){
+    try {
+        const canvas = document.getElementById('termekChart');
+        if (!canvas) return;
+
+        let valasz = await fetch(`../../backend/admin/index.php/legkellendobbStat`);
+        let adat = await valasz.json();
+        
+
+        if (!adat || adat.length === 0) {
+            console.warn("Nincs megjeleníthető adat a diagramhoz.");
+            return;
+        }
+
+        const labels = adat.map(a => a.nev);
+        const values = adat.map(a => a.mennyiseg);
+
+        const ctx = canvas.getContext("2d");
+        
+        if (Chart.getChart(ctx) instanceof Chart) {
+            Chart.getChart(ctx).destroy();
+        }
+
+        new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: [
+                    '#c09e44', 
+                    '#3498db', 
+                    '#e74c3c', 
+                    '#2ecc71', 
+                    '#f1c40f', 
+                    '#9b59b6', 
+                    '#1abc9c', 
+                    '#e67e22', 
+                    '#34495e',
+                    '#7f8c8d'  
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        color: '#333'
+                    }
+                }
+            }
+        }
+    });
+
+    } catch (error) {
+        console.error("Diagram hiba:", error);
+    }
+}
+window.addEventListener("load", async () => {
+    await termekChart();
+});

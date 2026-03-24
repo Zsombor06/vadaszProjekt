@@ -13,11 +13,11 @@ if (!$felhasznalo) {
     ]);
     exit;
 }
-$stmt1= $pdo->prepare("SELECT id from rendeles WHERE felhasznalo=? order by id desc limit 2;");
+$stmt1= $pdo->prepare("SELECT id from rendeles WHERE felhasznalo=? order by id desc limit 1;");
 $stmt1->execute([$felhasznalo]);
 $eredmeny=$stmt1->fetchAll(PDO::FETCH_ASSOC);
 $stmt2=$pdo->prepare("SELECT termekId FROM `rendeles` inner join tetelek on rendelesId=rendeles.id WHERE rendeles.id=?;");
-$stmt2->execute([$eredmeny[1]["id"]]);
+$stmt2->execute([$eredmeny[0]["id"]]);
 $eredmeny=$stmt2->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($eredmeny as $termekId) {

@@ -219,6 +219,23 @@ case "modositTermekT"://Admin oldal termek adatainak modositasa
         }
         echo json_encode(["valasz"=>"Sikertelen torles!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
+    case "legkellendobbStat":
+        if($metodus!="GET"){
+            return http_response_code(405);
+        }
+        $legkellendobbSQL="SELECT termek.nev, sum(mennyiseg) as mennyiseg FROM tetelek inner join rendeles on rendeles.id=rendelesId inner JOIN termek on termek.id=termekId WHERE `fizetve`=1 GROUP by termekId limit 10;";
+        $legkellendobb=adatokLekerese($legkellendobbSQL);
+        echo json_encode($legkellendobb,JSON_UNESCAPED_UNICODE);
+        break;
+    case "koltokStat":
+        if($metodus!="GET"){
+            return http_response_code(405);
+        }
+        $koltokSQL="SELECT felhasznalo, sum((ar-learazasMerteke/100*ar)*mennyiseg) as mennyiseg FROM tetelek inner join rendeles on rendeles.id=rendelesId inner JOIN termek on termek.id=termekId inner join learazas on learazasid=learazas.id WHERE `fizetve`=1 GROUP by felhasznalo limit 10;";
+        $koltok=adatokLekerese($koltokSQL);
+        echo json_encode($koltok,JSON_UNESCAPED_UNICODE);
+        
 
+    break;
 }
 ?>
