@@ -302,10 +302,11 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (90, 'Termékek', 'Products'),
 (91, 'Kapcsolatok', 'Contacts'),
 (92, 'Nyitvatartás', 'Opening hours'),
-(93, 'Hétfő - Péntek:', 'Monday - Friday'),
+(93, 'Hétfő - Péntek:', 'Monday - Friday:'),
 (94, 'Szombat:', 'Saturday:'),
 (95, 'Vasárnap', 'Sunday:'),
-(96, '2025 Arany Agancs Vadászbolt. Minden jog fenntartva.', '2025 Arany Agancs Vadászbolt. All rights reserved.');
+(96, '©2025 Arany Agancs Vadászbolt. Minden jog fenntartva.', '©2025 Arany Agancs Vadászbolt. All rights reserved.'),
+(97,"Zárva","Closed");
 
 -- --------------------------------------------------------
 

@@ -319,6 +319,7 @@ const szoveg=async()=>{
             document.getElementById("footer9").innerHTML=adatok[90]["szoveg"]
             document.getElementById("footer10").innerHTML=adatok[91]["szoveg"]
             document.getElementById("footer11").innerHTML=adatok[92]["szoveg"]
+            document.getElementById("footer12").innerHTML=adatok[93]["szoveg"]
 
 
             TermekKartyak()
@@ -355,6 +356,7 @@ const szoveg=async()=>{
             document.getElementById("footer9").innerHTML=adatok[90]["szoveg_en"]
             document.getElementById("footer10").innerHTML=adatok[91]["szoveg_en"]
             document.getElementById("footer11").innerHTML=adatok[92]["szoveg_en"]
+            document.getElementById("footer12").innerHTML=adatok[93]["szoveg_en"]
 
 
 
