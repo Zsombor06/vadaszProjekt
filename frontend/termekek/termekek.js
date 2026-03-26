@@ -67,59 +67,66 @@ const kategoriaKartya = async (kartya, termek) => {
     try {
         let htmlBelso = "";
         if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
-            htmlBelso = `
-                            <div class="card h-100">
-                                <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nev}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${termek.nev}</h5>
-                                    <p class="card-text">${termek.leiras}</p>
-                                    <div class="mt-auto"> `;
-            if (termek.regiar != Math.round(termek.ujar, 0)) {
-                htmlBelso += `
-                                        <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br>
-                `;
+            if (termek.keszlet == 0) {
+                htmlBelso = `   <div class="card h-100 nincs-raktaron">`;
             } else {
-                htmlBelso += `
-                                        <small class="text-muted">Ár: ${termek.regiar} Ft</small> <br>
-                `;
+                htmlBelso = `   <div class="card h-100">`;
             }
-            htmlBelso += `
-                                        <small class="text-muted">Raktáron: ${termek.keszlet} db </small>
+            htmlBelso += `          <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nev}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${termek.nev}</h5>
+                                        <p class="card-text">${termek.leiras}</p>
+                                        <div class="mt-auto"> `;
+            if (termek.regiar != Math.round(termek.ujar, 0)) {
+                htmlBelso += `              <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br> `;
+            } else {
+                htmlBelso += `              <small class="text-muted">Ár: ${termek.regiar} Ft</small> <br>`;
+            }
+            htmlBelso += `                  <small class="text-muted">Raktáron: ${termek.keszlet} db </small>                        
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-footer">
-                                    <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
-                                </div>
-                            </div>
-                        `;
-        } else {
-            htmlBelso = `
-                            <div class="card h-100">
-                                <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nevEn}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${termek.nevEn}</h5>
-                                    <p class="card-text">${termek.leirasEn}</p>
-                                    <div class="mt-auto">`;
-            if (termek.regiar != Math.round(termek.ujar, 0)) {
-                htmlBelso += `
-                                        <small class="text-muted">Marked down price: ${await arfolyam(Math.round(termek.ujar, 0))} €</small> <br>
-                `;
+                                    <div class="card-footer">`;
+            if (termek.keszlet == 0) {
+                htmlBelso += `          <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" disabled>
+                                    </div>
+                                </div>`;
             } else {
-                htmlBelso += `
-                                        <small class="text-muted">Price: ${await arfolyam(termek.regiar)} €</small> <br>
-                `;
+                htmlBelso += `          <input type="button" class="kosarbaGomb" value="Kosárba" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
+                                    </div>
+                                </div>`;
+            } 
+        } else {
+            if (termek.keszlet == 0) {
+                htmlBelso = `   <div class="card h-100 nincs-raktaron">`;
+            } else {
+                htmlBelso = `   <div class="card h-100">`;
             }
-            htmlBelso += `
-                                        <small class="text-muted">In store: ${termek.keszlet} </small>
-                                    </div>    
-                                </div>
-                                <div class="card-footer">
-                                    <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
-                                </div>
-                            </div>
-                        `;
+            htmlBelso = `           <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nevEn}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${termek.nevEn}</h5>
+                                        <p class="card-text">${termek.leirasEn}</p>
+                                        <div class="mt-auto">`;
+            if (termek.regiar != Math.round(termek.ujar, 0)) {
+                htmlBelso += `              <small class="text-muted">Marked down price: ${await arfolyam(Math.round(termek.ujar, 0))} €</small> <br>`;
+            } else {
+                htmlBelso += `              <small class="text-muted">Price: ${await arfolyam(termek.regiar)} €</small> <br>`;
+            }
+            htmlBelso += `                  <small class="text-muted">In store: ${termek.keszlet} </small>
+                                        </div>    
+                                    </div>
+                                    <div class="card-footer">`
+            if (termek.keszlet == 0) {
+                htmlBelso += `          <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" disabled>
+                                    </div>
+                                </div>`;
+            } else {
+                htmlBelso += `          <input type="button" class="kosarbaGomb" value="To cart" data-id="${termek.id}" data-bs-toggle="modal" data-bs-target="#hozzaadasModal">
+                                    </div>
+                                </div>`;
+            }
         }
         kartya.innerHTML = htmlBelso;
+        
     } catch (error) {
         console.log(error);
     }

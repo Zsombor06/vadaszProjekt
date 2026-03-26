@@ -1,0 +1,7 @@
+hiba -- alertek (bejelentkezes, reg oldalak) -->Cs/S
+fölös kódok (pl console.log -ok, kommentek)
+Levi statisztikája -->Levi
+maradék nyelv --> Simi
+termék kártya design change ha nincs raktáron --> Cs
+raktárból levonás --> Simi
+ha kosár üres ne tudjon fizetni -->Cs

@@ -81,6 +81,7 @@ body {
     box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     background-color: #ffffff;
+    position: relative;
 }
 .card:hover {
     transform: translateY(-4px);
@@ -140,6 +141,33 @@ body {
 }
 .kosarbaGomb:hover {
     background-color: #b08b32;
+}
+.nincs-raktaron {
+    opacity: 0.6;
+}
+.nincs-raktaron .termek-kep {
+    filter: grayscale(100%);
+}
+.nincs-raktaron::after {
+    content: "Nincs raktáron";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(196, 158, 60, 0.95);
+    color: #2f3e2b;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+.nincs-raktaron:hover {
+    transform: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.kosarbaGomb:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
 }
 
 /*Szűrő*/

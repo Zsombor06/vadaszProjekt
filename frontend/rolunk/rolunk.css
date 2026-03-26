@@ -53,8 +53,7 @@ body {
 
 .rolunk-hero{
     height: 300px;
-    background: linear-gradient(rgba(47,62,43,0.85), rgba(47,62,43,0.85)),
-                url('../képek/erdo.jpeg');
+    background: linear-gradient(rgba(47,62,43,0.85), rgba(47,62,43,0.85)), url('../képek/erdo_rolunk.png');
     background-size: cover;
     background-position: center;
     color: #c49e3c;
