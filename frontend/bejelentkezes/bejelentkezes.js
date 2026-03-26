@@ -1,7 +1,9 @@
 const bejelentkezesGomb = async () => {
     try {
         if (!kapcsaEllenorzes()) {
-            alert("Helytelen kapcsa!");
+            document.getElementById("hiba").hidden=false
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Helytelen Captcha"
+        else document.getElementById("hiba").innerHTML="Incorrect Captcha"
             kapcsaGen();
             return;
         }
@@ -20,17 +22,10 @@ const bejelentkezesGomb = async () => {
             localStorage.setItem('token', httpAdat["accessToken"])
             window.location.href = "../fooldal/fooldal.html" //főoldal
         } else {
-            alert(httpAdat.valasz);
-            kapcsaGen();
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Helytelen felhasználónév vagy jelszó"
+        else document.getElementById("hiba").innerHTML="Incorrect username or password"
+        kapcsaGen();
         }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-const felhasznaloGomb = async () => {
-    try {
-        //window.location.href = "../felhasznalo/felhasznalo.html" //felhasználói oldal
     } catch (error) {
         console.log(error);
     }
@@ -93,20 +88,25 @@ const szoveg=async()=>{
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
             document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg"]
             document.getElementById("FnevIn").placeholder="Felhasználónév";
-        document.getElementById("FjelszoIn").placeholder="Jelszó";
-        document.getElementById("BejGomb").value=adatok[11]["szoveg"]
-        document.getElementById("szoveg5").innerHTML=adatok[12]["szoveg"]
-        document.getElementById("RegGomb").value=adatok[6]["szoveg"]
-        }
-        else{
+            document.getElementById("FjelszoIn").placeholder="Jelszó";
+            document.getElementById("BejGomb").value=adatok[11]["szoveg"]
+            document.getElementById("szoveg5").innerHTML=adatok[12]["szoveg"]
+            document.getElementById("RegGomb").value=adatok[6]["szoveg"]
+            if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[94]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[94]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[94]["szoveg"]
+            if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[95]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[95]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[95]["szoveg"]
+
+
+        } else {
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
             document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg_en"]
-                    document.getElementById("FnevIn").placeholder="Username";
-        document.getElementById("FjelszoIn").placeholder="Password";
-        document.getElementById("BejGomb").value=adatok[11]["szoveg_en"]
-        document.getElementById("szoveg5").innerHTML=adatok[12]["szoveg_en"]
-        document.getElementById("RegGomb").value=adatok[6]["szoveg_en"]
+            document.getElementById("FnevIn").placeholder="Username";
+            document.getElementById("FjelszoIn").placeholder="Password";
+            document.getElementById("BejGomb").value=adatok[11]["szoveg_en"]
+            document.getElementById("szoveg5").innerHTML=adatok[12]["szoveg_en"]
+            document.getElementById("RegGomb").value=adatok[6]["szoveg_en"]
+            if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[94]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[94]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[94]["szoveg_en"]
+            if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[95]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[95]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[95]["szoveg_en"]
         }
     } catch (error) {
         console.log(error)

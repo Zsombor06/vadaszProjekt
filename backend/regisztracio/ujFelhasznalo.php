@@ -6,22 +6,22 @@ $data = json_decode(file_get_contents("php://input"));
 
 // mezők ellenőrzése
 if (
-    !isset($data->felhasznalonev) ||
-    !isset($data->jelszo) ||
-    !isset($data->email) ||
+    empty($data->felhasznalonev) ||
+    empty($data->jelszo) ||
+    empty($data->email) ||
     
-    !isset($data->szamlazasi_orszag) ||
-    !isset($data->szamlazasi_iranyitoszam) ||
-    !isset($data->szamlazasi_varos) ||
-    !isset($data->szamlazasi_utca) ||
+    empty($data->szamlazasi_orszag) ||
+    empty($data->szamlazasi_iranyitoszam) ||
+    empty($data->szamlazasi_varos) ||
+    empty($data->szamlazasi_utca) ||
 
-    !isset($data->orszag) ||
-    !isset($data->iranyitoszam) ||
-    !isset($data->varos) ||
-    !isset($data->utca)
+    empty($data->orszag) ||
+    empty($data->iranyitoszam) ||
+    empty($data->varos) ||
+    empty($data->utca)
 ) {
     http_response_code(400);
-    echo json_encode(["hiba" => "Minden mező kitöltése kötelező!"]);
+    echo json_encode(["hiba" => 1]);
     exit;
 }
 
@@ -31,7 +31,7 @@ $stmt->execute([$data->felhasznalonev]);
 
 if ($stmt->fetch()) {
     http_response_code(409);
-    echo json_encode(["hiba" => "A felhasználónév már létezik!"]);
+    echo json_encode(["hiba" => 2]);
     exit;
 }
 
@@ -41,7 +41,7 @@ $stmt->execute([$data->email]);
 
 if ($stmt->fetch()) {
     http_response_code(409);
-    echo json_encode(["hiba" => "Az email cím már foglalt!"]);
+    echo json_encode(["hiba" => 3]);
     exit;
 }
 

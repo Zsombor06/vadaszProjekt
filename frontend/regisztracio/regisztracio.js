@@ -51,7 +51,9 @@ const Regisztracio = async () => {
         let utca = document.getElementById("FlakUtca").value;
 
         if (jelszo !== jelszoUjra) {
-            alert("A jelszavak nem egyeznek!");
+            document.getElementById("hiba").hidden=false
+            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Jelszók nem egyeznek meg"
+            else document.getElementById("hiba").innerHTML="The passwords dont match"
             return;
         }
 
@@ -82,27 +84,32 @@ const Regisztracio = async () => {
         let adat = await response.json();
 
         if (response.ok) {
-            alert("Sikeres regisztráció!");
             window.location.href = "../bejelentkezes/bejelentkezes.html";
         } else {
-            alert(adat.hiba);
+            document.getElementById("hiba").hidden=false
+            if(adat.hiba==1){
+            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Minden mező kitöltése kötelező"
+            else document.getElementById("hiba").innerHTML="All fields are required!"
+            }
+            else if(adat.hiba==2){
+            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Felhasználónév már foglalt!"
+            else document.getElementById("hiba").innerHTML="Username already in use!"    
+            }
+            else{
+            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Email cím már foglat!"
+            else document.getElementById("hiba").innerHTML="Email address already in use!"   
+            }
         }
 
     } catch (err) {
-        console.error(err);
-        alert("Hálózati hiba!");
+        document.getElementById("hiba").hidden=false
+        document.getElementById("hiba").innerHTML="ERROR 404"
+
     }
 }
 
 document.getElementById("RegGomb").addEventListener("click", Regisztracio);
 
-window.addEventListener("load",()=>{
-     if(localStorage.getItem("nyelv")=="en"){
-        
-    }else{
-        
-    }
-})
 const szoveg=async()=>{
     try {
         let httpvalasz=await fetch("../../backend/szoveg/szoveg.php/szoveg")
@@ -131,6 +138,11 @@ const szoveg=async()=>{
             document.getElementById("BejGomb").value=adatok[11]["szoveg"];    
             document.getElementById("szoveg4").innerHTML=adatok[14]["szoveg"];
             document.getElementById("szoveg5").innerHTML=adatok[15]["szoveg"];
+            if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[96]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[96]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[96]["szoveg"]
+            if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[97]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[97]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[97]["szoveg"]
+            if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[98]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[98]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[98]["szoveg"]
+
+
 
         }
         else{
@@ -156,6 +168,12 @@ const szoveg=async()=>{
             document.getElementById("BejGomb").value=adatok[11]["szoveg_en"];
             document.getElementById("szoveg4").innerHTML=adatok[14]["szoveg_en"];
             document.getElementById("szoveg5").innerHTML=adatok[15]["szoveg_en"];
+            if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[96]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[96]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[96]["szoveg_en"]
+            if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[97]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[97]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[97]["szoveg_en"]
+            if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[98]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[98]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[98]["szoveg_en"]
+
+
+
         }
     } catch (error) {
         console.log(error)
