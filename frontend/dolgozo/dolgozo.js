@@ -52,8 +52,7 @@ const selectFeltoltes = async () => {
         cell2.innerHTML=adat.id
         if(adat.elkuldve==null){
             cell3.innerHTML="0000-00-00"
-        }
-        else{
+        } else {
             cell3.innerHTML=adat.elkuldve
         }
         cell4.innerHTML="0000-00-00"    
@@ -246,11 +245,10 @@ const rendelesTorles = async () => {
         body:JSON.stringify({"rendelesId":cellak[1].textContent})
     })
     if(httpvalasz.ok){
-        let adatok=await httpvalasz.json()
         document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
-        document.getElementById("rendelesEredmeny").innerHTML=Object.values(adatok)
+        document.getElementById("rendelesEredmeny").innerHTML="Sikeres törlés"
         httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesekAdatai`)
-        adatok=await httpvalasz.json()
+        let adatok=await httpvalasz.json()
         tabla.innerHTML=""
         for (const adat of adatok) {
             let httpValasz2=await fetch(`../../backend/dolgozo/index.php/rendelesiCim?szallitasId=${adat.szallitasId}`)
@@ -277,7 +275,7 @@ const rendelesTorles = async () => {
         document.getElementById("rendelesEredmeny").innerHTML=Object.values(adatok)
     }
 }
-window.addEventListener("load",selectFeltoltes)
+
 kategorialearazSelect.addEventListener("change",termekSelectFeltoltes)
 document.getElementById("termekKuldes").addEventListener("click",termekFeltolt)
 document.getElementById("learazasKuldes").addEventListener("click",learazasValtoztatas)
