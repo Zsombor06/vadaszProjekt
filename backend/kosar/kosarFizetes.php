@@ -13,6 +13,25 @@ if (!$felhasznalo) {
     ]);
     exit;
 }
+$stmt=$pdo->prepare("
+    SELECT
+    mennyiseg, 
+    keszlet 
+    FROM `tetelek` 
+    inner JOIN rendeles on rendelesId=rendeles.id 
+    inner JOIN termek on termekId=termek.id 
+    where rendeles.felhasznalo=? 
+    and fizetve=0");
+$stmt->execute([$felhasznalo]);
+$eredmeny=$stmt->fetchAll(PDO::FETCH_ASSOC);
+if($eredmeny[0]["mennyiseg"] > $eredmeny[0]["keszlet"]){
+    http_response_code(400);
+    echo json_encode([
+        "siker" => false,
+        "uzenet" => "Nincs elég termék raktáron"
+    ]);
+    exit;
+}
 $stmt1= $pdo->prepare("SELECT id from rendeles WHERE felhasznalo=? order by id desc limit 1;");
 $stmt1->execute([$felhasznalo]);
 $eredmeny=$stmt1->fetchAll(PDO::FETCH_ASSOC);
