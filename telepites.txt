@@ -1,0 +1,10 @@
+c:/xampp/htdocs/vadaszProjekt
+útvonalban elhelyezés
+
+Főoldal linkje:
+http://localhost/vadaszprojekt/frontend/fooldal/fooldal.html
+
+Létező felhasználók:
+Felhasználónév:user Jelszo:user 
+Felhasználónév:worker Jelszo:worker dolgozó szintű hozzáférés
+Felhasználónév:admin Jelszo:admin admin szintű hozzáférés
