@@ -224,9 +224,19 @@ window.addEventListener("load", async () => { //szallitasi cimek
             document.getElementById("szCimMezo").innerHTML += `<option value="${cim.id}">${cim.orszag}, ${cim.iranyitoszam} ${cim.varos}, ${cim.utca}</option>`;
         }
 });
-document.getElementById("fizetesGomb").addEventListener("click", () => {
+document.getElementById("fizetesGomb").addEventListener("click",async () => {
+    let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+    let httpAdat = await httpValasz.json();
+    let userNev = httpAdat["felhasznalonev"];
+    httpValasz=await fetch(`../../backend/kosar/kosarEll.php?felhasznalo=${userNev}`)
+    httpAdat = await httpValasz.json();
     document.getElementById("fizetesConfirm").disabled = false;
     document.getElementById("FmodalHibaMezo").innerHTML = "";
+    if(httpAdat[0][0]["id"]==null){
+        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("FmodalHibaMezo").innerHTML += "Kérem adjon terméket kosarába! <br>";
+        else document.getElementById("FmodalHibaMezo").innerHTML += "Please add any product to your cart! <br>";
+        document.getElementById("fizetesConfirm").disabled = true;
+    }
     if(document.getElementById("szCimMezo").value==0){
         if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("FmodalHibaMezo").innerHTML += "Kérem válasszon szállítási címet! <br>";
         else document.getElementById("FmodalHibaMezo").innerHTML += "Please choose a shipping address! <br>";
@@ -250,7 +260,6 @@ document.getElementById("fizetesConfirm").addEventListener("click",async()=>{
 
         let httpResponse = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
         let httpAdat = await httpResponse.json();
-        console.log(httpAdat["felhasznalonev"])
          httpResponse=await fetch('../../backend/kosar/kosarFizetes.php',{
             method:"PUT",
             headers: {
@@ -276,7 +285,14 @@ document.getElementById("fizetesConfirm").addEventListener("click",async()=>{
                 location.reload();
             }, 6500);
         }
-        console.log(httpAdat)
+        else{
+              statusz.classList.remove("tolto-pontok");
+                if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")statusz.textContent = "Több termék van a kosárban, mint raktáron!";
+                else statusz.textContent = "More products in cart, then in storage!";
+                statusz.style.color = "red";
+            
+        }
+        
     } catch (error) {
         console.log(error)
         statusz.classList.remove("tolto-pontok");
