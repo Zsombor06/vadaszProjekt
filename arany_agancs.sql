@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Már 24. 17:23
+-- Létrehozás ideje: 2026. Már 31. 11:08
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -67,7 +67,7 @@ CREATE TABLE `kategoria` (
 
 INSERT INTO `kategoria` (`id`, `kategoria`, `kategoriaEn`) VALUES
 (1, 'Vadászruházat', 'Hunting Clothing'),
-(2, 'Fegyverek', 'Weapons'),
+(2, 'Fegyver alkatrészek', 'Weapon parts'),
 (3, 'Távcsövek', 'Binoculors'),
 (4, 'Túlélési felszerelés', 'Survival gear'),
 (5, 'Kések', 'Knifes'),
@@ -306,12 +306,27 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (94, 'Szombat:', 'Saturday:'),
 (95, 'Vasárnap', 'Sunday:'),
 (96, '©2025 Arany Agancs Vadászbolt. Minden jog fenntartva.', '©2025 Arany Agancs Vadászbolt. All rights reserved.'),
-(97,"Zárva","Closed"),
+(97, 'Zárva', 'Closed'),
 (98, 'Helytelen Captcha', 'Incorrect Captcha'),
 (99, 'Helytelen felhasználónév vagy jelszó', 'Incorrect username or password'),
 (100, 'Minden mező kitöltése kötelező!', 'All fields are required!'),
 (101, 'Felhasználónév már foglalt!', 'Username already in use!'),
-(102, 'Email cím már foglalt!', 'Email address already in use!');
+(102, 'Email cím már foglalt!', 'Email address already in use!'),
+(103, 'Keresés', 'Search'),
+(104, 'Min ár', 'Min price'),
+(105, 'Max ár', 'Max price'),
+(106, 'Termék neve...', 'Products name...'),
+(107, 'Rendezés', 'Order'),
+(108, 'Nincs', 'None'),
+(109, 'Ár ↑', 'Price ↑'),
+(110, 'Ár ↓', 'Price ↓'),
+(111, 'Akciós', 'On sale'),
+(112, 'Raktáron', 'In stock'),
+(113, 'találat', 'products found'),
+(114, 'Nincs találat', 'No products found'),
+(115, 'Szűrők automatikusan frissülnek', 'Filters update automatically'),
+(116, 'Szűrők törlése', 'Clear filters');
+
 -- --------------------------------------------------------
 
 --
@@ -559,7 +574,7 @@ ALTER TABLE `szallitasicimek`
 -- AUTO_INCREMENT a táblához `szoveg`
 --
 ALTER TABLE `szoveg`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT a táblához `termek`

@@ -22,29 +22,26 @@ document.getElementById('szemecske2').addEventListener('click', function () {
     }
 });
 
-//adatok betöltése:
-
 window.addEventListener("load", async () => {
     try {
         let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
         let httpAdat = await httpValasz.json();
-        let userNev = httpAdat["felhasznalonev"]; //bejelentkezett felhasznalo nevet ide kell betenni
-         httpValasz = await fetch(`../../backend/felhasznalo/index.php/felhasznaloAdat?nev=${userNev}`); //felhasznalo nevet at kell adni
+        let userNev = httpAdat["felhasznalonev"];
+         httpValasz = await fetch(`../../backend/felhasznalo/index.php/felhasznaloAdat?nev=${userNev}`);
         if (httpValasz.ok) {
             let httpAdat = await httpValasz.json();
             for (const adat of httpAdat) {
                 document.getElementById("fNev").value = adat["felhasznalonev"];
                 document.getElementById("fEmail").value = adat["email"];
-                //document.getElementById("fSzamla").value = adat.szamlazasicim;
             }
         }
     } catch (error) {
         console.log("Hiba az adatok betöltésekor!", error);
     }
 });
-window.addEventListener("load", async () => { //szallitasi cimek
-    try {
 
+window.addEventListener("load", async () => {
+    try {
         let httpAdat = await Cimek();
         document.getElementById("fLak").innerHTML = "<option value='0'></option>";
         for (const cim of httpAdat) {
@@ -55,12 +52,11 @@ window.addEventListener("load", async () => { //szallitasi cimek
     }
 });
 
-//jelszó módosítás:
 document.getElementById("btn_jMod").addEventListener("click", async () => {
     try {
         const ujJelszo = document.getElementById("ujJelszo").value;
         const regiJelszo = document.getElementById("regiJelszo").value;
-        const felhasznalonev = document.getElementById("fNev").value; //majd máshonnan kell (userNev)
+        const felhasznalonev = document.getElementById("fNev").value;
         let httpValasz = await fetch("../../backend/felhasznalo/index.php/jelszoModositas", {
             method: "PUT",
             body: JSON.stringify({ 
@@ -110,7 +106,6 @@ document.getElementById("fLak").addEventListener("change", async () => {
             else{
                 document.getElementById("cimMod").value="Change address"
             }
-
             CimID = cimresz.id;
         }
     } catch (error) {
@@ -121,47 +116,45 @@ document.getElementById("fLak").addEventListener("change", async () => {
 document.getElementById("cimMod").addEventListener("click", async () => {
     try {
         if(document.getElementById("fLak").value == 0){
-         let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
-        let httpAdat = await httpValasz.json();
-        let userNev = httpAdat["felhasznalonev"];
-        httpValasz=await fetch('../../backend/felhasznalo/index.php/ujSzallitasiCim',{
-            method : "POST",
-            body : JSON.stringify({
-                "nev" : userNev,
-                "orszag" : document.getElementById("orszagMod").value,
-                "irsz": document.getElementById("irszMod").value ,
-                "varos" :document.getElementById("varosMod").value,
-                "utca" : document.getElementById("utcaMod").value 
+            let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+            let httpAdat = await httpValasz.json();
+            let userNev = httpAdat["felhasznalonev"];
+            httpValasz=await fetch('../../backend/felhasznalo/index.php/ujSzallitasiCim',{
+                method : "POST",
+                body : JSON.stringify({
+                    "nev" : userNev,
+                    "orszag" : document.getElementById("orszagMod").value,
+                    "irsz": document.getElementById("irszMod").value ,
+                    "varos" :document.getElementById("varosMod").value,
+                    "utca" : document.getElementById("utcaMod").value 
+                })
             })
-        })
-        httpAdat = await httpValasz.json();
-        if (httpValasz.ok) {
-            window.location.href=window.location.href
+            httpAdat = await httpValasz.json();
+            if (httpValasz.ok) {
+                window.location.href=window.location.href
+            } else {
+                console.log(httpAdat.valasz);
+            }
         } else {
-            console.log(httpAdat.valasz);
-        }
-        }
-        else{
             let httpValasz = await fetch("../../backend/felhasznalo/index.php/modositSzallitasiCim", {
-            method : "PUT",
-            body : JSON.stringify({
-                "id" : CimID,
-                "orszag" : document.getElementById("orszagMod").value,
-                "irsz": document.getElementById("irszMod").value ,
-                "varos" :document.getElementById("varosMod").value,
-                "utca" : document.getElementById("utcaMod").value 
-            })
-        });
-        let httpAdat = await httpValasz.json();
-        if (httpValasz.ok) {
-            console.log(httpAdat.valasz);
-        } else {
-            console.log(httpAdat.valasz);
+                method : "PUT",
+                body : JSON.stringify({
+                    "id" : CimID,
+                    "orszag" : document.getElementById("orszagMod").value,
+                    "irsz": document.getElementById("irszMod").value ,
+                    "varos" :document.getElementById("varosMod").value,
+                    "utca" : document.getElementById("utcaMod").value 
+                })
+            });
+            let httpAdat = await httpValasz.json();
+            if (httpValasz.ok) {
+                console.log(httpAdat.valasz);
+            } else {
+                console.log(httpAdat.valasz);
+            }
         }
-        }
-        
     } catch (error) {
-        
+        console.log(error);
     }
 });
 
@@ -170,7 +163,7 @@ const Cimek = async () => {
         let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
         let httpAdat = await httpValasz.json();
         let userNev = httpAdat["felhasznalonev"];
-         httpValasz = await fetch(`../../backend/felhasznalo/index.php/szallitasiCimek?nev=${userNev}`); //felhasznalo nevet at kell adni
+        httpValasz = await fetch(`../../backend/felhasznalo/index.php/szallitasiCimek?nev=${userNev}`);
         if (httpValasz.ok) {
             let httpAdat = await httpValasz.json();
             return httpAdat;
@@ -181,52 +174,35 @@ const Cimek = async () => {
 }
 
 document.getElementById("kijelentkezes").addEventListener("click",  () => { 
-       localStorage.removeItem('token')
-           window.location.href="../fooldal/fooldal.html"
+    localStorage.removeItem('token')
+    window.location.href="../fooldal/fooldal.html"
 });
-
-
-// Rendelések betöltése
-
 
 window.addEventListener("load", async () => {
     try {
-
-        // tokenből user név lekérése
         let auth = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`);
         let authAdat = await auth.json();
         let userNev = authAdat.felhasznalonev;
-
-        // rendelés history lekérés
         let valasz = await fetch(`../../backend/kosar/rendelesHistory.php?felhasznalo=${userNev}`);
-
         if (!valasz.ok) {
             console.log("Nem sikerült betölteni a rendeléseket");
             return;
         }
-
         let adat = await valasz.json();
         let rendelesek = adat.rendelesek;
-
         let tbody = document.getElementById("rendelesLista");
         tbody.innerHTML = "";
-
         for (const r of rendelesek) {
             var statusz
             if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
                 statusz = "Folyamatban";
-
-            if (r.teljesitve == 1) statusz = "Teljesítve";
-            if (r.elkuldve == 1 && r.teljesitve == 0) statusz = "Elküldve";
-              }
-              else{
-             statusz = "In progress";
-
-            if (r.teljesitve == 1) statusz = "Completed";
-            if (r.elkuldve == 1 && r.teljesitve == 0) statusz = "Sent";
-              }
-
-
+                if (r.teljesitve == 1) statusz = "Teljesítve";
+                if (r.elkuldve == 1 && r.teljesitve == 0) statusz = "Elküldve";
+            } else {
+                statusz = "In progress";
+                if (r.teljesitve == 1) statusz = "Completed";
+                if (r.elkuldve == 1 && r.teljesitve == 0) statusz = "Sent";
+            }
             tbody.innerHTML += `
                 <tr>
                     <td>${r.rendelesId}</td>
@@ -242,35 +218,23 @@ window.addEventListener("load", async () => {
             `;
         }
         szoveg()
-
     } catch (error) {
         console.log("Hiba a rendelések betöltésekor:", error);
     }
 });
 
-
-
-// Rendelés részletek betöltése
-
-
 async function rendelesReszletek(id) {
-
     try {
-
         let valasz = await fetch(`../../backend/kosar/rendelesReszletek.php?rendelesId=${id}`);
-
         if (!valasz.ok) {
             alert("Nem sikerült betölteni a részleteket");
             return;
         }
-
         let adat = await valasz.json();
-
         let tbody = document.getElementById("rendelesReszletTbody");
         tbody.innerHTML = "";
         if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
         for (const tetel of adat.tetelek) {
-
             tbody.innerHTML += `
                 <tr>
                     <td>${tetel.nev}</td>
@@ -280,10 +244,8 @@ async function rendelesReszletek(id) {
                 </tr>
             `;
         }
-    }
-    else{
-          for (const tetel of adat.tetelek) {
-
+    } else {
+        for (const tetel of adat.tetelek) {
             tbody.innerHTML += `
                 <tr>
                     <td>${tetel.nevEn}</td>
@@ -294,25 +256,19 @@ async function rendelesReszletek(id) {
             `;
         }
     }
-        // Modal megjelenítése
-        let modal = new bootstrap.Modal(document.getElementById("rendelesModal"));
-        modal.show();
-
-        
-
+    let modal = new bootstrap.Modal(document.getElementById("rendelesModal"));
+    modal.show();
     } catch (error) {
         console.log("Hiba a részletek betöltésekor:", error);
     }
 }
 
 document.addEventListener("click", function(e){
-
         if(e.target && e.target.matches("button[data-id]")){
             let id = e.target.getAttribute("data-id");
             rendelesReszletek(id);
         }
-
-        });
+});
 
 const szoveg=async()=>{
     try {
@@ -333,11 +289,11 @@ const szoveg=async()=>{
             document.getElementById("irszMod").placeholder=adatok[33]["szoveg"]
             document.getElementById("varosMod").placeholder=adatok[34]["szoveg"]
             document.getElementById("utcaMod").placeholder=adatok[35]["szoveg"]
-           if(document.getElementById("cimMod").value==adatok[36]["szoveg_en"] || document.getElementById("cimMod").value==adatok[36]["szoveg"])
-            document.getElementById("cimMod").value=adatok[36]["szoveg"]
-        else{
-            document.getElementById("cimMod").value=adatok[37]["szoveg"]
-        }
+            if(document.getElementById("cimMod").value==adatok[36]["szoveg_en"] || document.getElementById("cimMod").value==adatok[36]["szoveg"]) {
+               document.getElementById("cimMod").value=adatok[36]["szoveg"]
+            } else {
+                document.getElementById("cimMod").value=adatok[37]["szoveg"]
+            }
             document.getElementById("szoveg8").innerHTML=adatok[38]["szoveg"]
             document.getElementById("szoveg9").innerHTML=adatok[39]["szoveg"]
             document.getElementById("szoveg10").innerHTML=adatok[19]["szoveg"]
@@ -370,8 +326,6 @@ const szoveg=async()=>{
             document.getElementById("footer10").innerHTML=adatok[91]["szoveg"]
             document.getElementById("footer11").innerHTML=adatok[92]["szoveg"]
             document.getElementById("footer12").innerHTML=adatok[93]["szoveg"]
-
-
         }
         else{
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
@@ -388,11 +342,11 @@ const szoveg=async()=>{
             document.getElementById("irszMod").placeholder=adatok[33]["szoveg_en"]
             document.getElementById("varosMod").placeholder=adatok[34]["szoveg_en"]
             document.getElementById("utcaMod").placeholder=adatok[35]["szoveg_en"]
-           if(document.getElementById("cimMod").value==adatok[36]["szoveg_en"] || document.getElementById("cimMod").value==adatok[36]["szoveg"])
-            document.getElementById("cimMod").value=adatok[36]["szoveg_en"]
-        else{
-            document.getElementById("cimMod").value=adatok[37]["szoveg_en"]
-        }
+            if(document.getElementById("cimMod").value==adatok[36]["szoveg_en"] || document.getElementById("cimMod").value==adatok[36]["szoveg"]) {
+                document.getElementById("cimMod").value=adatok[36]["szoveg_en"]
+            } else {
+                document.getElementById("cimMod").value=adatok[37]["szoveg_en"]
+            }
             document.getElementById("szoveg8").innerHTML=adatok[38]["szoveg_en"]
             document.getElementById("szoveg9").innerHTML=adatok[39]["szoveg_en"]
             document.getElementById("szoveg10").innerHTML=adatok[19]["szoveg_en"]
@@ -413,7 +367,7 @@ const szoveg=async()=>{
             document.getElementById("kijelentkezes").value=adatok[50]["szoveg_en"]
             document.getElementById("szoveg17").innerHTML=adatok[71]["szoveg_en"]
             await kategoriChart()
-                        document.getElementById("footer1").innerHTML=adatok[82]["szoveg_en"]
+            document.getElementById("footer1").innerHTML=adatok[82]["szoveg_en"]
             document.getElementById("footer2").innerHTML=adatok[83]["szoveg_en"]
             document.getElementById("footer3").innerHTML=adatok[84]["szoveg_en"]
             document.getElementById("footer4").innerHTML=adatok[85]["szoveg_en"]
@@ -425,7 +379,6 @@ const szoveg=async()=>{
             document.getElementById("footer10").innerHTML=adatok[91]["szoveg_en"]
             document.getElementById("footer11").innerHTML=adatok[92]["szoveg_en"]
             document.getElementById("footer12").innerHTML=adatok[93]["szoveg_en"]
-            
         }
     } catch (error) {
         console.log(error)
@@ -442,73 +395,62 @@ const beallitAngol=()=>{
 }
 document.getElementById("angol").addEventListener("click",beallitAngol)
 
-
 async function kategoriChart() {
     try {
         const canvas = document.getElementById('kategoriChart');
         if (!canvas) return;
-
         let auth = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`);
         let authAdat = await auth.json();
         let userNev = authAdat.felhasznalonev;
-
         let valasz = await fetch(`../../backend/felhasznalo/index.php/kategoriStat?nev=${userNev}`);
         let adat = await valasz.json();
-        
-
         if (!adat || adat.length === 0) {
             console.warn("Nincs megjeleníthető adat a diagramhoz.");
             return;
         }
         if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") var labels = adat.map(a => a.kategoria);
-        else  var labels = adat.map(a => a.kategoriaEn);
-
-       
+        else var labels = adat.map(a => a.kategoriaEn);
         const values = adat.map(a => a.szazalek);
-
         const ctx = canvas.getContext("2d");
-        
         if (window.myChart instanceof Chart) {
             window.myChart.destroy();
         }
-
         window.myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: labels,
-            datasets: [{
-                data: values,
-                backgroundColor: [
-                    '#c09e44', 
-                    '#3498db', 
-                    '#e74c3c', 
-                    '#2ecc71', 
-                    '#f1c40f', 
-                    '#9b59b6', 
-                    '#1abc9c', 
-                    '#e67e22', 
-                    '#34495e',
-                    '#7f8c8d'  
-                ],
-                borderColor: '#ffffff',
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        padding: 20,
-                        color: '#333'
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: [
+                        '#c09e44', 
+                        '#3498db', 
+                        '#e74c3c', 
+                        '#2ecc71', 
+                        '#f1c40f', 
+                        '#9b59b6', 
+                        '#1abc9c', 
+                        '#e67e22', 
+                        '#34495e',
+                        '#7f8c8d'  
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            color: '#333'
+                        }
                     }
                 }
             }
-        }
-    });
-
+        });
     } catch (error) {
         console.error("Diagram hiba:", error);
     }

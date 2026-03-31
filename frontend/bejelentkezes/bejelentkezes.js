@@ -2,7 +2,7 @@ const bejelentkezesGomb = async () => {
     try {
         if (!kapcsaEllenorzes()) {
             document.getElementById("hiba").hidden=false
-        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Helytelen Captcha"
+        if (localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") document.getElementById("hiba").innerHTML="Helytelen Captcha"
         else document.getElementById("hiba").innerHTML="Incorrect Captcha"
             kapcsaGen();
             return;
@@ -16,13 +16,13 @@ const bejelentkezesGomb = async () => {
                 "username":Fnev,
                 "password":Fjelszo}
             )
-        }) //bejelentkezés
+        })
         let httpAdat = await httpValasz.json();
         if (httpValasz.ok) {  
             localStorage.setItem('token', httpAdat["accessToken"])
-            window.location.href = "../fooldal/fooldal.html" //főoldal
+            window.location.href = "../fooldal/fooldal.html"
         } else {
-        if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Helytelen felhasználónév vagy jelszó"
+        if (localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") document.getElementById("hiba").innerHTML="Helytelen felhasználónév vagy jelszó"
         else document.getElementById("hiba").innerHTML="Incorrect username or password"
         kapcsaGen();
         }
@@ -33,12 +33,11 @@ const bejelentkezesGomb = async () => {
 
 document.getElementById("RegGomb").addEventListener("click", function() {
     try {
-        window.location.href = "../regisztracio/regisztracio.html" //regisztracios oldal
+        window.location.href = "../regisztracio/regisztracio.html" 
     } catch (error) {
         console.log(error);
     }
 });
-
 
 document.getElementById('szemecske').addEventListener('click', function () {
     const jelszoIn = document.getElementById('FjelszoIn');
@@ -52,7 +51,6 @@ document.getElementById('szemecske').addEventListener('click', function () {
     }
 });
 
-//kapcsa::
 const kapcsaGen = () => {
     document.getElementById("kapcsaIn").value = "";
     let karakterek = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -78,11 +76,10 @@ window.addEventListener("load", kapcsaGen);
 document.getElementById("felhasznaloGomb").addEventListener("click", felhasznaloGomb);
 document.getElementById("BejGomb").addEventListener("click", bejelentkezesGomb);
 
-
-const szoveg=async()=>{
+const szoveg = async () => {
     try {
-        let httpvalasz=await fetch("../../backend/szoveg/szoveg.php/szoveg")
-        let adatok=await httpvalasz.json()
+        let httpvalasz = await fetch("../../backend/szoveg/szoveg.php/szoveg")
+        let adatok = await httpvalasz.json()
         if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
@@ -94,8 +91,6 @@ const szoveg=async()=>{
             document.getElementById("RegGomb").value=adatok[6]["szoveg"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[94]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[94]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[94]["szoveg"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[95]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[95]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[95]["szoveg"]
-
-
         } else {
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
@@ -113,12 +108,12 @@ const szoveg=async()=>{
     }
 }
 window.addEventListener("load",szoveg)
-const beallitMagyar=()=>{
+const beallitMagyar = () => {
     localStorage.setItem("nyelv","hu")
     szoveg()
 }
 document.getElementById("magyar").addEventListener("click",beallitMagyar)
-const beallitAngol=()=>{
+const beallitAngol = () => {
     localStorage.setItem("nyelv","en")
     szoveg()
 }

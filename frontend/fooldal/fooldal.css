@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: url("../képek/fo_hatter.png") no-repeat center;
+    background: url("../képek/foHatter.png") no-repeat center;
     background-size: cover;
 }
 
@@ -12,6 +12,7 @@ body {
 .hero h1 {
     max-width: 800px;
     margin: 0 auto;
+    color: #2f3e2b;
 }
 
 .info-block {
