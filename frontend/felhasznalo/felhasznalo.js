@@ -431,7 +431,17 @@ async function kategoriChart() {
                         '#1abc9c', 
                         '#e67e22', 
                         '#34495e',
-                        '#7f8c8d'  
+                        '#7f8c8d',
+                        '#520972',
+                        '#0e7438',
+                        '#8f3900',
+                        '#165f91',
+                        '#c45f54',
+                        '#16a085',
+                        '#f39c12',
+                        '#d8dadb',
+                        '#78d4f8',
+                        '#ff8585'  
                     ],
                     borderColor: '#ffffff',
                     borderWidth: 2
