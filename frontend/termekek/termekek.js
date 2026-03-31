@@ -55,7 +55,8 @@ const termekSzures = (termekek) => {
 
 const frissites = async () => {
     const szurt = termekSzures(osszesTermek);
-    document.getElementById("talalatokSzama").innerText = szurt.length > 0 ? `${szurt.length} találat` : "Nincs találat";
+    if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("talalatokSzama").innerText = szurt.length > 0 ? `${szurt.length} találat` : "Nincs találat";
+    else document.getElementById("talalatokSzama").innerText = szurt.length > 0 ? `${szurt.length} products found` : "No products found";
     await termekekBetoltese(szurt);
 };
 
@@ -101,7 +102,7 @@ const kategoriaKartya = async (kartya, termek) => {
             } else {
                 htmlBelso = `   <div class="card h-100">`;
             }
-            htmlBelso = `           <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nevEn}">
+            htmlBelso += `           <img src="${termek.kep}" class="card-img-top termek-kep" alt="${termek.nevEn}">
                                     <div class="card-body">
                                         <h5 class="card-title">${termek.nevEn}</h5>
                                         <p class="card-text">${termek.leirasEn}</p>
@@ -237,6 +238,18 @@ const szoveg=async()=>{
             document.getElementById("footer10").innerHTML=adatok[91]["szoveg"]
             document.getElementById("footer11").innerHTML=adatok[92]["szoveg"]
             document.getElementById("footer12").innerHTML=adatok[93]["szoveg"]
+            document.getElementById("szoveg7").innerHTML=adatok[99]["szoveg"]
+            document.getElementById("kereso").placeholder=adatok[102]["szoveg"]
+            document.getElementById("szoveg8").innerHTML=adatok[100]["szoveg"]
+            document.getElementById("szoveg9").innerHTML=adatok[101]["szoveg"]
+            document.getElementById("szoveg10").innerHTML=adatok[103]["szoveg"]
+            document.getElementById("szoveg11").innerHTML=adatok[104]["szoveg"]
+            document.getElementById("szoveg12").innerHTML=adatok[105]["szoveg"]
+            document.getElementById("szoveg13").innerHTML=adatok[106]["szoveg"]
+            document.getElementById("szoveg14").innerHTML=adatok[107]["szoveg"]
+            document.getElementById("szoveg15").innerHTML=adatok[108]["szoveg"]
+            document.getElementById("szoveg16").innerHTML=adatok[111]["szoveg"]
+            document.getElementById("szurokTorlese").innerHTML=adatok[112]["szoveg"]
 
         }
         else{
@@ -260,7 +273,19 @@ const szoveg=async()=>{
             document.getElementById("footer10").innerHTML=adatok[91]["szoveg_en"]
             document.getElementById("footer11").innerHTML=adatok[92]["szoveg_en"]
             document.getElementById("footer12").innerHTML=adatok[93]["szoveg_en"]
-
+            document.getElementById("szoveg6").innerHTML=adatok[70]["szoveg_en"]
+            document.getElementById("szoveg7").innerHTML=adatok[99]["szoveg_en"]
+            document.getElementById("kereso").placeholder=adatok[102]["szoveg_en"]
+            document.getElementById("szoveg8").innerHTML=adatok[100]["szoveg_en"]
+            document.getElementById("szoveg9").innerHTML=adatok[101]["szoveg_en"]
+            document.getElementById("szoveg10").innerHTML=adatok[103]["szoveg_en"]
+            document.getElementById("szoveg11").innerHTML=adatok[104]["szoveg_en"]
+            document.getElementById("szoveg12").innerHTML=adatok[105]["szoveg_en"]
+            document.getElementById("szoveg13").innerHTML=adatok[106]["szoveg_en"]
+            document.getElementById("szoveg14").innerHTML=adatok[107]["szoveg_en"]
+            document.getElementById("szoveg15").innerHTML=adatok[108]["szoveg_en"]
+            document.getElementById("szoveg16").innerHTML=adatok[111]["szoveg_en"]
+            document.getElementById("szurokTorlese").innerHTML=adatok[112]["szoveg_en"]
         }
     } catch (error) {
         console.log(error)
