@@ -16,11 +16,11 @@ const bejelentkezesGomb = async () => {
                 "username":Fnev,
                 "password":Fjelszo}
             )
-        }) //bejelentkezés
+        })
         let httpAdat = await httpValasz.json();
         if (httpValasz.ok) {  
             localStorage.setItem('token', httpAdat["accessToken"])
-            window.location.href = "../fooldal/fooldal.html" //főoldal
+            window.location.href = "../fooldal/fooldal.html"
         } else {
         if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Helytelen felhasználónév vagy jelszó"
         else document.getElementById("hiba").innerHTML="Incorrect username or password"
@@ -33,7 +33,7 @@ const bejelentkezesGomb = async () => {
 
 document.getElementById("RegGomb").addEventListener("click", function() {
     try {
-        window.location.href = "../regisztracio/regisztracio.html" //regisztracios oldal
+        window.location.href = "../regisztracio/regisztracio.html" 
     } catch (error) {
         console.log(error);
     }
@@ -52,7 +52,7 @@ document.getElementById('szemecske').addEventListener('click', function () {
     }
 });
 
-//kapcsa::
+
 const kapcsaGen = () => {
     document.getElementById("kapcsaIn").value = "";
     let karakterek = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
