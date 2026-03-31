@@ -141,7 +141,7 @@ case "kategoriStat":
         JOIN tetelek t ON r.id = t.rendelesId
         JOIN termek te ON t.termekId = te.id
         JOIN kategoria k ON te.kategoriaId = k.id
-        WHERE r.felhasznalo = ?
+        WHERE r.felhasznalo = ? AND fizetve = 1
         GROUP BY k.kategoria
     ";
 

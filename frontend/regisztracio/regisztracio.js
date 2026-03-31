@@ -30,7 +30,6 @@ document.getElementById("BejGomb").addEventListener("click", function () {
     }
 });
 
-
 const Regisztracio = async () => {
      try {
         let fnev = document.getElementById("FnevIn").value;
@@ -38,13 +37,11 @@ const Regisztracio = async () => {
         let jelszoUjra = document.getElementById("FjelszoUjraIn").value;
         let email = document.getElementById("FemailIn").value;
 
-        // számlázási cím
         let szaml_or = document.getElementById("SzamlOrszag").value;
         let szaml_ir = document.getElementById("SzamlIr").value;
         let szaml_varos = document.getElementById("SzamlVaros").value;
         let szaml_utca = document.getElementById("SzamlUtca").value;
 
-        // szállítási cím
         let orszag = document.getElementById("FlakOrszag").value;
         let irsz = document.getElementById("FlakIr").value;
         let varos = document.getElementById("FlakVaros").value;
@@ -56,33 +53,27 @@ const Regisztracio = async () => {
             else document.getElementById("hiba").innerHTML="The passwords dont match"
             return;
         }
-
         let regAdatok = {
             felhasznalonev: fnev,
             jelszo: jelszo,
             email: email,
 
-            // számlázási cím
             szamlazasi_orszag: szaml_or,
             szamlazasi_iranyitoszam: szaml_ir,
             szamlazasi_varos: szaml_varos,
             szamlazasi_utca: szaml_utca,
 
-            // szállítási cím
             orszag: orszag,
             iranyitoszam: irsz,
             varos: varos,
             utca: utca
         };
-
         let response = await fetch("../../backend/regisztracio/ujFelhasznalo.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(regAdatok)
         });
-
         let adat = await response.json();
-
         if (response.ok) {
             window.location.href = "../bejelentkezes/bejelentkezes.html";
         } else {
@@ -100,11 +91,9 @@ const Regisztracio = async () => {
             else document.getElementById("hiba").innerHTML="Email address already in use!"   
             }
         }
-
     } catch (err) {
         document.getElementById("hiba").hidden=false
         document.getElementById("hiba").innerHTML="ERROR 404"
-
     }
 }
 
@@ -141,18 +130,13 @@ const szoveg=async()=>{
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[96]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[96]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[96]["szoveg"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[97]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[97]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[97]["szoveg"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[98]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[98]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[98]["szoveg"]
-
-
-
-        }
-        else{
+        } else {
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
             document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg_en"]
             document.getElementById("FnevIn").placeholder="User name";
             document.getElementById("FjelszoIn").placeholder="Password";
             document.getElementById("FjelszoUjraIn").placeholder="Password conformation";
-
 
             document.getElementById("SzamlOrszag").placeholder="Country";
             document.getElementById("SzamlIr").placeholder="ZIP code";
@@ -171,22 +155,19 @@ const szoveg=async()=>{
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[96]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[96]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[96]["szoveg_en"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[97]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[97]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[97]["szoveg_en"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[98]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[98]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[98]["szoveg_en"]
-
-
-
         }
     } catch (error) {
         console.log(error)
     }
 }
 window.addEventListener("load",szoveg)
-const beallitMagyar=()=>{
-    localStorage.setItem("nyelv","hu")
+const beallitMagyar = () => {
+    localStorage.setItem("nyelv", "hu")
     szoveg()
 }
 document.getElementById("magyar").addEventListener("click",beallitMagyar)
-const beallitAngol=()=>{
-    localStorage.setItem("nyelv","en")
+const beallitAngol = () => {
+    localStorage.setItem("nyelv", "en")
     szoveg()
 }
 document.getElementById("angol").addEventListener("click",beallitAngol)
