@@ -412,7 +412,7 @@ INSERT INTO `termek` (`id`, `nev`, `nevEn`, `leiras`, `leirasEn`, `ar`, `kategor
 (61, 'Digitális éjjellátó monokulár', 'Digital Night Vision Monocular', '5x optikai zoom, videórögzítési lehetőség.', '5x optical zoom, video recording capability.', 68000, 13, 5, 5, '../képek/ejjellato_mono.png'),
 (62, 'Zselés kézmelegítő párna', 'Gel Hand Warmer Pad', 'Gombnyomásra melegszik, újrafelhasználható.', 'Heats up at a click, reusable.', 1200, 15, 100, 1, '../képek/zseles_melegito.png'),
 (63, 'Élvefogó nyestcsapda', 'Live Marten Trap', 'Humanitárius megoldás kártevők ellen.', 'Humane solution against pests.', 19500, 6, 7, 1, '../képek/nyestcsapda.png'),
-(64, 'Párnázott fegyvertok (130cm)', 'Padded Rifle Case', 'Vízlepergető anyag, extra zsebekkel.', 'Water-repellent material with extra pockets.', 14900, 11, 15, 1, '../képek/fegyvertok.png'),
+(64, 'Párnázott fegyvertok (130cm)', 'Padded Rifle Case', 'Vízlepergető anyag, extra zsebekkel.', 'Water-repellent material with extra pockets.', 14900, 11, 15, 1, '../képek/fegyvertok_parnazott.png'),
 (65, 'Álcázó szalag (terepmintás)', 'Camo Stealth Tape', 'Távcsövek és fegyverek álcázásához.', 'For camouflaging optics and guns.', 2500, 14, 50, 1, '../képek/alcaszalag.png'),
 (66, 'Narancssárga láthatósági sapka', 'High-Visibility Orange Cap', 'Hajtóvadászatokhoz kötelező, állítható méret.', 'Mandatory for drive hunts, adjustable size.', 4500, 1, 50, 1, '../képek/sapka.png'),
 (67, 'Vízlepergető vadásznadrág', 'Water-Repellent Hunting Pants', 'Erősített térdrész, csendes anyagból.', 'Reinforced knees, made of silent material.', 18900, 1, 15, 2, '../képek/nadrag.png'),
