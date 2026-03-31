@@ -144,8 +144,7 @@ const kategoriakBetoltese=async() => {
             option.value = kat["id"];
             if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
                 option.textContent = kat["kategoria"];
-            }
-            else{
+            } else {
                 option.textContent = kat["kategoriaEn"];
             }
             termekKategoria.appendChild(option);
@@ -250,7 +249,6 @@ const szoveg=async()=>{
             document.getElementById("szoveg15").innerHTML=adatok[108]["szoveg"]
             document.getElementById("szoveg16").innerHTML=adatok[111]["szoveg"]
             document.getElementById("szurokTorlese").innerHTML=adatok[112]["szoveg"]
-
         }
         else{
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]

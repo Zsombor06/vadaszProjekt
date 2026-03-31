@@ -16,8 +16,6 @@
            <a href="../fooldal/fooldal.html" style="text-decoration: none;"> <img src="../képek/aranyagancs_logo.png" alt="LOGO" width="60" class="navbar-brand"> </a><!-- Oldal logója-->
             <a href="../fooldal/fooldal.html"><img src="../képek/aranyagancs_szoveg.png" alt="SZOVEG" width="150" class="navbar-brand"></a>
         </div>
-
-
             <div class="d-flex flex-wrap justify-content-end" id="menuElems">
                 <ul  class="navbar-nav me-3">
                     <li class="nav-item dropdown">
@@ -43,47 +41,46 @@
         <div class="offcanvas-body" id="navbarKategoriak">
         </div>
     </div>
-<!-- navbar vége-->
-    
-<!--body __ Bejelentkezés-->
-<div class="d-flex justify-content-center align-items-center min-vh-100">
-    <form id="bejelentkezesDoboz" class="p-4 rounded shadow login-box">
-        <div class="mb-3">
-            <input type="text" id="FnevIn" class="form-control form-control-lg text-center" placeholder="Felhasználó név">
-        </div>
-        <div class="mb-3 position-relative">
-            <input type="password" id="FjelszoIn" class="form-control form-control-lg text-center" placeholder="jelszó">
-            <button type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2" id="szemecske" style="border: none; background: none;">
-                <i class="bi bi-eye-slash fs-4" id="szembigyo"></i>
-            </button>
-        </div>
 
-        <div class="mb-3" id="captcha">
+
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <form id="bejelentkezesDoboz" class="p-4 rounded shadow login-box">
+            <div class="mb-3">
+                <input type="text" id="FnevIn" class="form-control form-control-lg text-center" placeholder="Felhasználó név">
+            </div>
             <div class="mb-3 position-relative">
-                <input type="text" id="kapcsaIn" placeholder="Captcha" class="form-control form-control-lg text-center">
-                <button  type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2" id="ujkapcsa" style="border: none; background: none;">
-                    <i class="fas fa-sync"></i>
+                <input type="password" id="FjelszoIn" class="form-control form-control-lg text-center" placeholder="jelszó">
+                <button type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2" id="szemecske" style="border: none; background: none;">
+                    <i class="bi bi-eye-slash fs-4" id="szembigyo"></i>
                 </button>
             </div>
-            <div id="kapcsaKep" class="inline" selectable="False"></div>
-        </div>
 
-        <div class="d-grid">
-           <input  type="button" value="Bejelentkezés" id="BejGomb" class="btn">
+            <div class="mb-3" id="captcha">
+                <div class="mb-3 position-relative">
+                    <input type="text" id="kapcsaIn" placeholder="Captcha" class="form-control form-control-lg text-center">
+                    <button  type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2" id="ujkapcsa" style="border: none; background: none;">
+                        <i class="fas fa-sync"></i>
+                    </button>
+                </div>
+                <div id="kapcsaKep" class="inline" selectable="False"></div>
+            </div>
 
-       </div>
+            <div class="d-grid">
+               <input  type="button" value="Bejelentkezés" id="BejGomb" class="btn">
 
-        <label  for="RegGomb" class="form-label text-center w-100 mt-2" id="szoveg5">Nincs még fiókod? Regisztrálj: </label>
-        <div  class="d-grid mb-3">
-            <input  type="button" name="RegGomb" value="Regisztráció" id="RegGomb" class="btn">
-        </div>
-        <div class="alert alert-danger text-center" id="hiba" hidden="true">
+           </div>
 
-        </div>
-    </form>
-</div>
+            <label  for="RegGomb" class="form-label text-center w-100 mt-2" id="szoveg5">Nincs még fiókod? Regisztrálj: </label>
+            <div  class="d-grid mb-3">
+                <input  type="button" name="RegGomb" value="Regisztráció" id="RegGomb" class="btn">
+            </div>
+            <div class="alert alert-danger text-center" id="hiba" hidden="true">
 
-<!--footer-->
+            </div>
+        </form>
+    </div>
+
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../bejelentkezesiStatus.js"></script>
