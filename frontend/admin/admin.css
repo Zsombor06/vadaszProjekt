@@ -53,6 +53,7 @@
 body {
     background-color: #f4f1ea;
     color: #2f3e2b;
+    overflow-x: hidden;
 }
 .admin-container {
     display: flex;

@@ -7,6 +7,20 @@ let raktaron = document.getElementById("raktaron")
 let termekKartyaMezo = document.getElementById("termekKartyaMezo");
 let rendezes = document.getElementById("rendezes");
 
+let euroArfolyam = null;
+const arfolyam = async () => {
+    try {
+        let response = await fetch("../../backend/arfolyam.php");
+        if (response.ok) {
+            let data = await response.json();
+            euroArfolyam = data['rate'];
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+window.addEventListener("load", arfolyam);
+
 const termekekBetoltese = async (termekek) => {
     termekKartyaMezo.innerHTML = "";
     for (const termek of termekek) {
@@ -32,11 +46,12 @@ const termekSzures = (termekek) => {
     const leirasNyelv = nyelv === "en" ? "leirasEn" : "leiras";
 
     let eredmeny = termekek.filter(t => {
-        const ar = Math.round(t.ujar, 0);
+        const ar = nyelv === "en" ? Math.round(Math.round(t.ujar, 0) * euroArfolyam, 2) : Math.round(t.ujar, 0);
+        const regiar = nyelv === "en" ? Math.round(Math.round(t.regiar, 0) * euroArfolyam, 2) : Math.round(t.regiar, 0);
         return (
             ar >= min &&
             ar <= max &&
-            (!csakAkcios || t.regiar != ar) &&
+            (!csakAkcios || regiar != ar) &&
             (!csakRaktaron || t.keszlet > 0) &&
             (
                 t[nevNyelv].toLowerCase().includes(keresett) ||
@@ -62,6 +77,16 @@ const frissites = async () => {
 
 [minAr, maxAr, kereso, rendezes, akcios, raktaron].forEach(elem => {
     elem.addEventListener("input", frissites);
+});
+
+document.getElementById("szurokTorlese").addEventListener("click", () => {
+    minAr.value = "";
+    maxAr.value = "";
+    kereso.value = "";
+    akcios.checked = false;
+    raktaron.checked = false;
+    rendezes.value = "";
+    frissites();
 });
 
 const kategoriaKartya = async (kartya, termek) => {
@@ -108,9 +133,9 @@ const kategoriaKartya = async (kartya, termek) => {
                                         <p class="card-text">${termek.leirasEn}</p>
                                         <div class="mt-auto">`;
             if (termek.regiar != Math.round(termek.ujar, 0)) {
-                htmlBelso += `              <small class="text-muted">Marked down price: ${await arfolyam(Math.round(termek.ujar, 0))} €</small> <br>`;
+                htmlBelso += `              <small class="text-muted">Marked down price: ${Math.round(Math.round(termek.ujar, 0) * euroArfolyam, 2)} €</small> <br>`;
             } else {
-                htmlBelso += `              <small class="text-muted">Price: ${await arfolyam(termek.regiar)} €</small> <br>`;
+                htmlBelso += `              <small class="text-muted">Price: ${Math.round(termek.regiar * euroArfolyam, 2)} €</small> <br>`;
             }
             htmlBelso += `                  <small class="text-muted">In store: ${termek.keszlet} </small>
                                         </div>    
@@ -302,25 +327,3 @@ const beallitAngol=()=>{
     kategoriakBetoltese()
 }
 document.getElementById("angol").addEventListener("click",beallitAngol)
-
-const arfolyam = async (arHUF) => {
-    try {
-        let response = await fetch("../../backend/arfolyam.php");
-        if (response.ok) {
-            let data = await response.json();
-            return (data['rate']*arHUF).toFixed(2);
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-document.getElementById("szurokTorlese").addEventListener("click", () => {
-    minAr.value = "";
-    maxAr.value = "";
-    kereso.value = "";
-    akcios.checked = false;
-    raktaron.checked = false;
-    rendezes.value = "";
-    frissites();
-});
