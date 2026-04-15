@@ -113,12 +113,12 @@ const szoveg=async()=>{
 
 
             document.getElementById("SzamlOrszag").placeholder="Ország";
-            document.getElementById("SzamlIr").placeholder="Irányítószán";
+            document.getElementById("SzamlIr").placeholder="Irányítószám";
             document.getElementById("SzamlVaros").placeholder="Város";
             document.getElementById("SzamlUtca").placeholder="Utca";
 
-            document.getElementById("FlakOrszag").placeholder="Country";
-            document.getElementById("FlakIr").placeholder="Irányítószán";
+            document.getElementById("FlakOrszag").placeholder="Ország";
+            document.getElementById("FlakIr").placeholder="Irányítószám";
             document.getElementById("FlakVaros").placeholder="Város";
             document.getElementById("FlakUtca").placeholder="Utca";
 
