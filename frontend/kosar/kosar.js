@@ -336,8 +336,7 @@ const szoveg=async()=>{
             document.getElementById("footer10").innerHTML=adatok[91]["szoveg"]
             document.getElementById("footer11").innerHTML=adatok[92]["szoveg"]
             document.getElementById("footer12").innerHTML=adatok[93]["szoveg"]
-
-
+            document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg_en"]
             TermekKartyak()
         }
         else{
@@ -373,9 +372,7 @@ const szoveg=async()=>{
             document.getElementById("footer10").innerHTML=adatok[91]["szoveg_en"]
             document.getElementById("footer11").innerHTML=adatok[92]["szoveg_en"]
             document.getElementById("footer12").innerHTML=adatok[93]["szoveg_en"]
-
-
-
+            document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg_en"]
             TermekKartyak()
         }
     } catch (error) {

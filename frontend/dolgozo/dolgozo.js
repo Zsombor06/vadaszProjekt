@@ -316,6 +316,7 @@ const szoveg = async () => {
             document.getElementById("Teljesites").value=adatok[42]["szoveg"]
             document.getElementById("Torles").value=adatok[25]["szoveg"]
             document.getElementById("Kijelentkezes").value=adatok[50]["szoveg"]
+            document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg"]
         } else {
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
@@ -344,6 +345,7 @@ const szoveg = async () => {
             document.getElementById("Teljesites").value=adatok[42]["szoveg_en"]
             document.getElementById("Torles").value=adatok[25]["szoveg_en"]
             document.getElementById("Kijelentkezes").value=adatok[50]["szoveg_en"]
+            document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg_en"]
         }
     } catch (error) {
         console.log(error)
