@@ -42,11 +42,22 @@ const Regisztracio = async () => {
         let szaml_varos = document.getElementById("SzamlVaros").value;
         let szaml_utca = document.getElementById("SzamlUtca").value;
 
-        let orszag = document.getElementById("FlakOrszag").value;
-        let irsz = document.getElementById("FlakIr").value;
-        let varos = document.getElementById("FlakVaros").value;
-        let utca = document.getElementById("FlakUtca").value;
-
+        let orszag;
+        let irsz ;
+        let varos ;
+        let utca ;
+        if(document.getElementById("szallitasEgyezes").checked){
+            orszag = document.getElementById("FlakOrszag").value;
+            irsz = document.getElementById("FlakIr").value;
+            varos = document.getElementById("FlakVaros").value;
+            utca = document.getElementById("FlakUtca").value;
+        }
+        else{
+            orszag= document.getElementById("SzamlOrszag").value;
+            irsz= document.getElementById("SzamlIr").value;
+            varos= document.getElementById("SzamlVaros").value;
+            utca= document.getElementById("SzamlUtca").value;
+        }
         if (jelszo !== jelszoUjra) {
             document.getElementById("hiba").hidden=false
             if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Jelszók nem egyeznek meg"
@@ -131,6 +142,8 @@ const szoveg=async()=>{
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[97]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[97]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[97]["szoveg"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[98]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[98]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[98]["szoveg"]
             document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg"] 
+            document.getElementById("szallitasEgyezesLabel").innerHTML=adatok[114]["szoveg"]
+
         } else {
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
@@ -157,6 +170,7 @@ const szoveg=async()=>{
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[97]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[97]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[97]["szoveg_en"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[98]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[98]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[98]["szoveg_en"]
             document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg_en"]
+            document.getElementById("szallitasEgyezesLabel").innerHTML=adatok[114]["szoveg_en"]
         }
     } catch (error) {
         console.log(error)
@@ -173,3 +187,11 @@ const beallitAngol = () => {
     szoveg()
 }
 document.getElementById("angol").addEventListener("click",beallitAngol)
+document.getElementById("szallitasEgyezes").addEventListener("change",()=>{
+    if(document.getElementById("szallitasEgyezes").checked){
+        document.getElementById("szallitasiDiv").hidden=false
+    }
+    else{
+        document.getElementById("szallitasiDiv").hidden=true
+    }
+})

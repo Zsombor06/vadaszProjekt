@@ -326,7 +326,8 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (114, 'Nincs találat', 'No products found'),
 (115, 'Szűrők automatikusan frissülnek', 'Filters update automatically'),
 (116, 'Szűrők törlése', 'Clear filters'),
-(117, 'Termékek','Products');
+(117, 'Termékek','Products'),
+(117, 'Más cím használata a szállításhoz?','Use a different address for shipping?');
 
 -- --------------------------------------------------------
 

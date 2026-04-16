@@ -76,6 +76,12 @@
             <div class="mb-3">
                 <input type="text" id="SzamlUtca" class="form-control form-control-lg text-center" placeholder="Utca, házszám" required>
             </div>
+            <div class="form-check">
+                <label class="form-check-label" style="font-weight: bold;" id="szallitasEgyezesLabel" for="szallitasEgyezes">Más cím használata a szállításhoz?</label>
+                <input class="form-check-input" type="checkbox" name="szallitasEgyezes" id="szallitasEgyezes">
+            </div>
+            
+            <div hidden id="szallitasiDiv">
             <h5  class="mt-3" id="szoveg5">Szállítási cím</h5>
             <div class="mb-3">
                 <input type="text" id="FlakOrszag" class="form-control form-control-lg text-center" placeholder="Ország" required>
@@ -92,7 +98,7 @@
             <div class="mb-3">
                 <input type="text" id="FlakUtca" class="form-control form-control-lg text-center" placeholder="Utca, házszám" required>
             </div>
-
+            </div>
             <div  class="d-grid">
                 <input  type="button" value="Regisztráció" id="RegGomb" class="btn btn-dark btn-lg">
             </div>
