@@ -91,6 +91,7 @@ const szoveg = async () => {
             document.getElementById("RegGomb").value=adatok[6]["szoveg"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[94]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[94]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[94]["szoveg"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[95]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[95]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[95]["szoveg"]
+            document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg"]
         } else {
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
@@ -102,6 +103,8 @@ const szoveg = async () => {
             document.getElementById("RegGomb").value=adatok[6]["szoveg_en"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[94]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[94]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[94]["szoveg_en"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[95]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[95]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[95]["szoveg_en"]
+            document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg_en"]
+            
         }
     } catch (error) {
         console.log(error)

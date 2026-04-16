@@ -130,6 +130,7 @@ const szoveg=async()=>{
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[96]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[96]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[96]["szoveg"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[97]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[97]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[97]["szoveg"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[98]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[98]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[98]["szoveg"]
+            document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg"] 
         } else {
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
@@ -155,6 +156,7 @@ const szoveg=async()=>{
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[96]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[96]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[96]["szoveg_en"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[97]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[97]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[97]["szoveg_en"]
             if(document.getElementById("hiba").hidden==false && document.getElementById("hiba").innerHTML==adatok[98]["szoveg"] || document.getElementById("hiba").innerHTML==adatok[98]["szoveg_en"])document.getElementById("hiba").innerHTML=adatok[98]["szoveg_en"]
+            document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg_en"]
         }
     } catch (error) {
         console.log(error)
