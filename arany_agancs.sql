@@ -272,12 +272,12 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (60, 'Angol leírás:', 'Description:'),
 (61, 'Kép:', 'Picture:'),
 (62, 'Raktáron:', 'In stock:'),
-(63, 'Küldés', 'Send'),
+(63, 'Küldés', 'Shipped'),
 (64, 'Termék:', 'Product:'),
 (65, 'Leárazásmértéke:', 'Discount rate:'),
 (66, 'Rendelő neve', 'Customer name'),
 (67, 'Rendelés azonosítója', 'Orders ID'),
-(68, 'Elküldés dátuma', 'Date of sending'),
+(68, 'Elküldés dátuma', 'Date of shipping'),
 (69, 'Teljesítés dátuma', 'Date of completion'),
 (70, 'Válasszon fizetési módot:', 'Choose payment method:'),
 (71, 'Bankkártya', 'Bank card'),
@@ -327,7 +327,10 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (115, 'Szűrők automatikusan frissülnek', 'Filters update automatically'),
 (116, 'Szűrők törlése', 'Clear filters'),
 (117, 'Termékek','Products'),
-(117, 'Más cím használata a szállításhoz?','Use a different address for shipping?');
+(118, 'Más cím használata a szállításhoz?','Use a different address for shipping?'),
+(119, 'Fizetés dátuma','Date of payment'),
+(120,"Dolgozó","Worker");
+
 
 -- --------------------------------------------------------
 

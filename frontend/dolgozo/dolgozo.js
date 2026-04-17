@@ -48,15 +48,17 @@ const selectFeltoltes = async () => {
         let cell3=sor.insertCell()
         let cell4=sor.insertCell()
         let cell5=sor.insertCell()
+        let cell6=sor.insertCell()
         cell1.innerHTML=adat.felhasznalo
         cell2.innerHTML=adat.id
+        cell3.innerHTML=adat.fizetesIdeje
         if(adat.elkuldve==null){
-            cell3.innerHTML="0000-00-00"
+            cell4.innerHTML="0000-00-00"
         } else {
-            cell3.innerHTML=adat.elkuldve
+            cell4.innerHTML=adat.elkuldve
         }
-        cell4.innerHTML="0000-00-00"    
-        cell5.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}`  
+        cell5.innerHTML="0000-00-00"    
+        cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}`  
     }
 }
 document.getElementById("Kijelentkezes").addEventListener("click",()=>{
@@ -174,15 +176,17 @@ const rendelesKuldes = async () => {
             let cell3=sor.insertCell()
             let cell4=sor.insertCell()
             let cell5=sor.insertCell()
+            let cell6=sor.insertCell()
             cell1.innerHTML=adat.felhasznalo
             cell2.innerHTML=adat.id
+            cell3.innerHTML=adat.fizetesIdeje
             if(adat.elkuldve==null){
-                cell3.innerHTML="0000-00-00"
+                cell4.innerHTML="0000-00-00"
             } else {
-                cell3.innerHTML=adat.elkuldve
+                cell4.innerHTML=adat.elkuldve
             }
-            cell4.innerHTML="0000-00-00"
-            cell5.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}`  
+            cell5.innerHTML="0000-00-00"
+            cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}`  
         }
     } else {
         let adatok=await httpvalasz.json()
@@ -217,15 +221,17 @@ const rendelesTeljesitve = async () => {
             let cell3=sor.insertCell()
             let cell4=sor.insertCell()
             let cell5=sor.insertCell()
+            let cell6=sor.insertCell()
             cell1.innerHTML=adat.felhasznalo
             cell2.innerHTML=adat.id
+            cell3.innerHTML=adat.fizetesIdeje
             if(adat.elkuldve==null){
-                cell3.innerHTML="0000-00-00"
+                cell4.innerHTML="0000-00-00"
             } else {
-                cell3.innerHTML=adat.elkuldve
+                cell4.innerHTML=adat.elkuldve
             }
-            cell4.innerHTML="0000-00-00"
-            cell5.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}` 
+            cell5.innerHTML="0000-00-00"
+            cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}` 
         }
     } else {
         let adatok=await httpvalasz.json()
@@ -259,15 +265,17 @@ const rendelesTorles = async () => {
             let cell3=sor.insertCell()
             let cell4=sor.insertCell()
             let cell5=sor.insertCell()
+            let cell6=sor.insertCell()
             cell1.innerHTML=adat.felhasznalo
             cell2.innerHTML=adat.id
+            cell3.innerHTML=adat.fizetesIdeje
             if(adat.elkuldve==null){
-                cell3.innerHTML="0000-00-00"
+                cell4.innerHTML="0000-00-00"
             } else {
-                cell3.innerHTML=adat.elkuldve
+                cell4.innerHTML=adat.elkuldve
             }
-            cell4.innerHTML="0000-00-00"
-            cell5.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}` 
+            cell5.innerHTML="0000-00-00"
+            cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}` 
         }
     } else {
         let adatok=await httpvalasz.json()
@@ -317,6 +325,8 @@ const szoveg = async () => {
             document.getElementById("Torles").value=adatok[25]["szoveg"]
             document.getElementById("Kijelentkezes").value=adatok[50]["szoveg"]
             document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg"]
+            document.getElementById("szoveg21").innerHTML=adatok[115]["szoveg"]
+            document.getElementById("dolgozoGomb").innerHTML=adatok[116]["szoveg"]
         } else {
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
@@ -346,6 +356,8 @@ const szoveg = async () => {
             document.getElementById("Torles").value=adatok[25]["szoveg_en"]
             document.getElementById("Kijelentkezes").value=adatok[50]["szoveg_en"]
             document.getElementById("termekGomb").innerHTML=adatok[113]["szoveg_en"]
+            document.getElementById("szoveg21").innerHTML=adatok[115]["szoveg_en"]
+            document.getElementById("dolgozoGomb").innerHTML=adatok[116]["szoveg_en"]
         }
     } catch (error) {
         console.log(error)
