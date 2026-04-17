@@ -68,32 +68,36 @@
             </div>
         </div>
         
-        <div class="card admin-card p-4 shadow-sm" id="ujFelhasznaloDiv" hidden>
-            <label>Név:</label>     <input class="form-control" style="width:auto;" type="text" id="ujNev"><br>
-            <label>Email:</label>   <input class="form-control" style="width:auto;" type="email" id="ujEmail"><br>
+        <div class="card admin-card p-4 shadow-sm align-items-center" id="ujFelhasznaloDiv" hidden>
+            <label>Név:</label>     <input class="form-control text-center"  type="text" id="ujNev"><br>
+            <label>Email:</label>   <input class="form-control text-center"  type="email" id="ujEmail"><br>
+            <label>Jelszó:</label>   <input class="form-control text-center"  type="password" id="ujJelszo"><br>
+            <label>Jelszó megerősítése:</label>   <input class="form-control text-center"  type="password" id="ujJelszoUjra"><br>
             <label><b>Számlázásicím:</b></label><br>
-            <label>Ország:</label>  <input class="form-control" style="width:auto;" type="text" id="ujorszagSzamla"><br>
-            <label>Irányítószám:</label>    <input class="form-control" style="width:auto;" type="number" id="ujirszSzamla"><br>
-            <label>Város:</label>   <input class="form-control" style="width:auto;" type="text" id="ujvarosSzamla"><br>
-            <label>Utca:</label>    <input class="form-control" style="width:auto;" type="text" id="ujutcaSzamla"><br>
+            <label>Ország:</label>  <input class="form-control text-center"  type="text" id="ujorszagSzamla"><br>
+            <label>Irányítószám:</label>    <input class="form-control text-center"  type="number" id="ujirszSzamla"><br>
+            <label>Város:</label>   <input class="form-control text-center"  type="text" id="ujvarosSzamla"><br>
+            <label>Utca:</label>    <input class="form-control text-center"  type="text" id="ujutcaSzamla"><br>
             <label for="">Rang Id:</label>
-            <select class="form-select" style="width:auto;" name="" id="rangok"></select>
+            <select class="form-select text-center"  name="" id="rangok"></select>
             <br>
             <input type="button" class="btn btn-admin" id="ujFelhasznalo" value="Feltöltés">
         </div><!-- Felhasználó feltöltés-->
         
-        <div class="card admin-card p-4 shadow-sm" id="modositFelhasznaloDiv" hidden>
+        <div class="card admin-card p-4 shadow-sm align-items-center" id="modositFelhasznaloDiv" hidden>
             <label for="">Felhasználó neve:</label>
-            <select class="form-select" style="width:auto;" name="" id="felhasznalok"></select>
+            <select class="form-select text-center"  name="" id="felhasznalok"></select>
             <br>
-            <label >Email:</label><input  class="form-control" style="width:auto;" type="email" id="modositEmail"><br>
+            <label >Email:</label><input  class="form-control text-center"  type="email" id="modositEmail"><br>
+            <label>Jelszó:</label>   <input class="form-control text-center"  type="password" id="modositJelszo"><br>
+            <label>Jelszó megerősítése:</label>   <input class="form-control text-center"  type="password" id="modositJelszoUjra"><br>
             <label ><b>Számlázásicím:</b></label><br>
-            <label >Ország:</label><input  class="form-control" style="width:auto;" type="text" id="modositorszagSzamla"><br>
-            <label >Irányítószám:</label><input  class="form-control" style="width:auto;" type="number" id="modositirszSzamla"><br>
-            <label >Város:</label><input  class="form-control" style="width:auto;" type="text" id="modositvarosSzamla"><br>
-            <label >Utca:</label><input  class="form-control" style="width:auto;" type="text" id="modositutcaSzamla"><br>
+            <label >Ország:</label><input  class="form-control text-center" type="text" id="modositorszagSzamla"><br>
+            <label >Irányítószám:</label><input  class="form-control text-center"  type="number" id="modositirszSzamla"><br>
+            <label >Város:</label><input  class="form-control text-center"  type="text" id="modositvarosSzamla"><br>
+            <label >Utca:</label><input  class="form-control text-center"  type="text" id="modositutcaSzamla"><br>
             <label for="">Rang Id:</label>
-            <select class="form-select" style="width:auto;" name="" id="rangok"></select><br>
+            <select class="form-select text-center" style="width:auto;" name="" id="rangok"></select><br>
             <input  type="button"  class="btn btn-admin" id="modositFelhasznalo" value="Módosítás">
         </div><!--Felhasználó módosítás-->
         

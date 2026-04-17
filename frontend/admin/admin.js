@@ -167,18 +167,25 @@ async function felhasznaloAdatok() {
 
 async function felhasznaloFeltolt() {
     try {
-         httpvalasz=await fetch(`../../backend/admin/index.php/ujFelhasznalo`,{
-            method:"POST",
-            body:JSON.stringify({
-                "felhasznalonev":document.getElementById("ujNev").value,
-                "email":document.getElementById("ujEmail").value,
-                "szamlazasi_orszag":document.getElementById("ujorszagSzamla").value,
-                "szamlazasi_irsz":document.getElementById("ujirszSzamla").value,
-                "szamlazasi_varos":document.getElementById("ujvarosSzamla").value,
-                "szamlazasi_utca":document.getElementById("ujutcaSzamla").value,
-                "rangId":rangok[0].value                
+        if(document.getElementById("ujJelszoUjra").value!=document.getElementById("ujJelszo").value){
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML="Jelszók nem egyeznek!"
+        }
+        else{
+
+            httpvalasz=await fetch(`../../backend/admin/index.php/ujFelhasznalo`,{
+                method:"POST",
+                body:JSON.stringify({
+                    "felhasznalonev":document.getElementById("ujNev").value,
+                    'jelszo':document.getElementById("ujJelszo").value,
+                    "email":document.getElementById("ujEmail").value,
+                    "szamlazasi_orszag":document.getElementById("ujorszagSzamla").value,
+                    "szamlazasi_irsz":document.getElementById("ujirszSzamla").value,
+                    "szamlazasi_varos":document.getElementById("ujvarosSzamla").value,
+                    "szamlazasi_utca":document.getElementById("ujutcaSzamla").value,
+                    "rangId":rangok[0].value                
+                })
             })
-         })
         if(httpvalasz.ok){
             adatok=await httpvalasz.json()
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
@@ -189,26 +196,33 @@ async function felhasznaloFeltolt() {
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
             document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
         }
-         httpvalasz=await fetch("../../backend/admin/index.php/felhasznaloNevek")
+        httpvalasz=await fetch("../../backend/admin/index.php/felhasznaloNevek")
         adatok=await httpvalasz.json()
         for (const felhasznalo of felhasznalok) {
             felhasznalo.innerHTML=""
         }
         for (const felhasznalo of felhasznalok) {
             for (const adat of adatok) {
-            felhasznalo.innerHTML+=`<option value=${adat["felhasznalonev"]}>${adat["felhasznalonev"]}</option>`
+                felhasznalo.innerHTML+=`<option value=${adat["felhasznalonev"]}>${adat["felhasznalonev"]}</option>`
+            }
         }
-        }
+    }
     } catch (error) {
         console.log(error)
     }
 }
 async function felhasznaloModosit() {
     try {
+         if(document.getElementById("modositJelszoUjra").value!=document.getElementById("modositJelszo").value){
+            document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+            document.getElementById("muveletEredmeny").innerHTML="Jelszók nem egyeznek!"
+        }
+        else{
          httpvalasz=await fetch(`../../backend/admin/index.php/modositFelhasznalo`,{
             method:"PUT",
             body:JSON.stringify({
                 "felhasznalonev":felhasznalok[0].value,
+                "jelszo":document.getElementById("modositJelszo").value,
                 "email":document.getElementById("modositEmail").value,
                 "szamlazasi_orszag":document.getElementById("modositorszagSzamla").value,
                 "szamlazasi_irsz":document.getElementById("modositirszSzamla").value,
@@ -227,6 +241,7 @@ async function felhasznaloModosit() {
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
             document.getElementById("muveletEredmeny").innerHTML=Object.values(adatok)
         }
+    }
     } catch (error) {
         console.log(error)
     }
