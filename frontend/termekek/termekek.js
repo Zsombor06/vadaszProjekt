@@ -159,7 +159,8 @@ const kategoriaKartya = async (kartya, termek) => {
 }
 const kategoriakBetoltese=async() => {
     const termekKategoria = document.getElementById('termekKategoria');
-    termekKategoria.innerHTML='<option value="0">Minden termék</option>'
+    if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") termekKategoria.innerHTML='<option value="0">Minden termék</option>'
+    else termekKategoria.innerHTML='<option value="0">All products</option>'
     termekKartyaMezo.innerHTML=""
     try {
         const httpValasz = await fetch('../../backend/navbar/index.php/kategoriakNeve');
