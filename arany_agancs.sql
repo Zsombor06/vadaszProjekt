@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Ápr 19. 14:37
+-- Létrehozás ideje: 2026. Ápr 19. 14:36
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -45,6 +45,7 @@ CREATE TABLE `felhasznalo` (
 --
 
 INSERT INTO `felhasznalo` (`felhasznalonev`, `jelszo`, `email`, `rangId`, `szamlazasi_orszag`, `szamlazasi_iranyitoszam`, `szamlazasi_varos`, `szamlazasi_utca`) VALUES
+('111', '$2y$10$a7kYt42vLEKLVROBZ8DdDOPepms6Cb0Iehxp.9hPLizzCE3b2p5l2', 'yooseeka@gmail.com', 3, 'Magyarország', 8200, 'Veszprém', 'Vécsey Károly utca 5.'),
 ('admin', '$2y$10$p/VsqPDZalVnOXcz1fmLrum08lLeUN7ZWfrjbov455I8/ckrVCk.O', 'admin@admin', 1, 'Magyarország', 8200, 'Veszprém', 'Vécsey Károly utca 5'),
 ('Balázs Liliéna', '$2y$10$XoPAP.LxXeezuRstnTe6hehsyTx6zFAax5/DN3ApLsiFPBhMz8mmi', 'balazs.liliena@freemail.com', 2, 'Magyarország', 5600, 'Békéscsaba', 'Tinódi utca 25'),
 ('Barna Áron', '$2y$10$ek.ghP.w/QzYE8K9z7ZJhekoOXjGFClhB1NcS5/duqd92lb7OJDr6', 'bararo1978@gmail.com', 3, 'Magyarország', 2131, 'Göd', 'Előd utca 2'),
@@ -187,7 +188,9 @@ INSERT INTO `rendeles` (`id`, `felhasznalo`, `fizetve`, `fizetesIdeje`, `elkuldv
 (48, 'Jónás Emőke', 0, NULL, NULL, NULL, NULL),
 (49, 'Pap Linda', 0, NULL, NULL, NULL, NULL),
 (50, 'dsimon', 1, '2026-04-19 14:12:19', NULL, NULL, 31),
-(51, 'dsimon', 0, NULL, NULL, NULL, NULL);
+(51, 'dsimon', 0, NULL, NULL, NULL, NULL),
+(52, '111', 1, '2026-04-19 14:19:42', NULL, NULL, 32),
+(53, '111', 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -218,7 +221,8 @@ INSERT INTO `szallitasicimek` (`id`, `felhasznalo`, `orszag`, `iranyitoszam`, `v
 (28, 'Pap Linda', 'Magyarország', 6000, 'Kecskemét', 'Duna utca 9'),
 (29, 'Balázs Liliéna', 'Magyarország', 5600, 'Békéscsaba', 'Tinódi utca 25'),
 (30, 'Jónás Emőke', 'Magyarország', 8200, 'Veszprém', 'Iskola utca 4'),
-(31, 'dsimon', 'Magyarország', 8200, 'Veszprém', 'Vécsey Károly utca 5.');
+(31, 'dsimon', 'Magyarország', 8200, 'Veszprém', 'Vécsey Károly utca 5.'),
+(32, '111', 'Magyarország', 8200, 'Veszprém', 'Vécsey Károly utca 5.');
 
 -- --------------------------------------------------------
 
@@ -324,7 +328,7 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (88, 'Főoldal', 'Main page'),
 (89, 'Rólunk', 'About us'),
 (90, 'Termékek', 'Products'),
-(91, 'Kapcsolat', 'Contacts'),
+(91, 'Kapcsolatok', 'Contacts'),
 (92, 'Nyitvatartás', 'Opening hours'),
 (93, 'Hétfő - Péntek:', 'Monday - Friday:'),
 (94, 'Szombat:', 'Saturday:'),
