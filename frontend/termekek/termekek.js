@@ -159,7 +159,7 @@ const kategoriaKartya = async (kartya, termek) => {
 }
 const kategoriakBetoltese=async() => {
     const termekKategoria = document.getElementById('termekKategoria');
-    if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") termekKategoria.innerHTML='<option value="0">Minden termék</option>'
+    if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") termekKategoria.innerHTML='<option value="0">Összes termék</option>'
     else termekKategoria.innerHTML='<option value="0">All products</option>'
     termekKartyaMezo.innerHTML=""
     try {
@@ -195,10 +195,11 @@ termekKategoria.addEventListener('change', async () => {
         const selectedKategoria = termekKategoria.value;
         termekKartyaMezo.innerHTML = '';
         localStorage.setItem("kategoria", selectedKategoria);
+        let httpValasz
         if (selectedKategoria != 0) {
-            let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${selectedKategoria}`);
+            httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${selectedKategoria}`);
         } else {
-            let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatokOsszes`); // Minden termék lekérése TODO backend
+            httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatokOsszes`); // Minden termék lekérése TODO backend
         }
         osszesTermek = await httpValasz.json();
         await frissites();

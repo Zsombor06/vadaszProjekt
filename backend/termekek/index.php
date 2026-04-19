@@ -40,4 +40,12 @@ switch(end($uri)){
         }
         echo json_encode(["valasz"=>"Valami hiba történt!"], JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
-    }
+    case "termekAdatokOsszes":
+        if($metodus != "GET"){
+            return http_response_code(405);
+        }
+        $sql = "SELECT * FROM termek";
+        $eredmeny = adatokLekerese($sql);
+        echo json_encode($eredmeny, JSON_UNESCAPED_UNICODE);
+        return http_response_code(200);
+}
