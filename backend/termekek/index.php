@@ -44,7 +44,7 @@ switch(end($uri)){
         if($metodus != "GET"){
             return http_response_code(405);
         }
-        $sql = "SELECT * FROM termek";
+        $sql = "SELECT termek.id as id ,nev,nevEn,`leiras`,leirasEn, kep, ar as regiar, (`ar`-ar*(LearazasMerteke/100)) as ujar,`keszlet` FROM termek inner JOIN learazas on learazasid=learazas.id ";
         $eredmeny = adatokLekerese($sql);
         echo json_encode($eredmeny, JSON_UNESCAPED_UNICODE);
         return http_response_code(200);

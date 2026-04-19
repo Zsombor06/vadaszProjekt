@@ -5,6 +5,8 @@ felhasznalok=document.querySelectorAll("#felhasznalok")
 kategoriak=document.querySelectorAll("#kategoriak")
 learazasok=document.querySelectorAll("#learazasok")
 termekNevek=document.querySelectorAll("#termekNevek")
+var rendelesTabla=document.getElementById("tabla")
+var valasztottSor = null;
 function muveletFeltolt(){
     if(tablaValaszt.value!=""){
         muveletValaszt.innerHTML='<option value="">Kérem válasszon műveletet</option>'
@@ -687,3 +689,171 @@ async function termekChart(){
 window.addEventListener("load", async () => {
     await termekChart();
 });
+const sorKivalaszt = (e) => {
+    const sor = e.target.closest("tr");
+    if (valasztottSor) {
+        valasztottSor.classList.remove("table-primary");
+    }
+    if (sor === valasztottSor) {
+        valasztottSor = null; 
+    } else {
+        sor.classList.add("table-primary");
+        valasztottSor = sor;
+    }
+}
+const rendelesKuldes = async () => {
+    if (!valasztottSor) {
+        document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+        document.getElementById("rendelesEredmeny").innerHTML="Válassz ki egy rendelést"
+        return;
+    }
+    const cellak = valasztottSor.querySelectorAll("td");
+    let httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesKuldes`,{
+        method:"PUT",
+        body:JSON.stringify({"rendelesId":cellak[1].textContent})
+    })
+    if(httpvalasz.ok){
+        let adatok=await httpvalasz.json()
+        document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
+        document.getElementById("rendelesEredmeny").innerHTML=Object.values(adatok)
+        httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesekAdatai`)
+        adatok=await httpvalasz.json()
+        rendelesTabla.innerHTML=""
+        for (const adat of adatok) {
+            let httpValasz2=await fetch(`../../backend/dolgozo/index.php/rendelesiCim?szallitasId=${adat.szallitasId}`)
+            let adat2=await httpValasz2.json()
+            let sor=rendelesTabla.insertRow()
+            let cell1=sor.insertCell()
+            let cell2=sor.insertCell()
+            let cell3=sor.insertCell()
+            let cell4=sor.insertCell()
+            let cell6=sor.insertCell()
+            cell1.innerHTML=adat.felhasznalo
+            cell2.innerHTML=adat.id
+            cell3.innerHTML=adat.fizetesIdeje
+            if(adat.elkuldve==null){
+                cell4.innerHTML="0000-00-00"
+            } else {
+                cell4.innerHTML=adat.elkuldve
+            }
+            cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}`  
+        }
+    } else {
+        let adatok=await httpvalasz.json()
+        document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+        document.getElementById("rendelesEredmeny").innerHTML=Object.values(adatok)
+    }
+}
+const rendelesTeljesitve = async () => {
+    if (!valasztottSor) {
+        document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+        document.getElementById("rendelesEredmeny").innerHTML="Válassz ki egy rendelést"
+        return;
+    }
+    const cellak = valasztottSor.querySelectorAll("td");
+    let httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesTeljesitve`,{
+        method:"PUT",
+        body:JSON.stringify({"rendelesId":cellak[1].textContent})
+    })
+    if(httpvalasz.ok){
+        let adatok=await httpvalasz.json()
+        document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
+        document.getElementById("rendelesEredmeny").innerHTML=Object.values(adatok)
+        httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesekAdatai`)
+        adatok=await httpvalasz.json()
+        rendelesTabla.innerHTML=""
+        for (const adat of adatok) {
+            let httpValasz2=await fetch(`../../backend/dolgozo/index.php/rendelesiCim?szallitasId=${adat.szallitasId}`)
+            let adat2=await httpValasz2.json()
+            let sor=rendelesTabla.insertRow()
+            let cell1=sor.insertCell()
+            let cell2=sor.insertCell()
+            let cell3=sor.insertCell()
+            let cell4=sor.insertCell()
+            let cell6=sor.insertCell()
+            cell1.innerHTML=adat.felhasznalo
+            cell2.innerHTML=adat.id
+            cell3.innerHTML=adat.fizetesIdeje
+            if(adat.elkuldve==null){
+                cell4.innerHTML="0000-00-00"
+            } else {
+                cell4.innerHTML=adat.elkuldve
+            }
+            cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}` 
+        }
+    } else {
+        let adatok=await httpvalasz.json()
+        document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+        document.getElementById("rendelesEredmeny").innerHTML=Object.values(adatok)
+    }
+}
+const rendelesTorles = async () => {
+     if (!valasztottSor) {
+        document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+        document.getElementById("rendelesEredmeny").innerHTML="Válassz ki egy rendelést"
+        return;
+    }
+    const cellak = valasztottSor.querySelectorAll("td");
+    let httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesTorles`,{
+        method:"DELETE",
+        body:JSON.stringify({"rendelesId":cellak[1].textContent})
+    })
+    if(httpvalasz.ok){
+        document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
+        document.getElementById("rendelesEredmeny").innerHTML="Sikeres törlés"
+        httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesekAdatai`)
+        let adatok=await httpvalasz.json()
+        rendelesTabla.innerHTML=""
+        for (const adat of adatok) {
+            let httpValasz2=await fetch(`../../backend/dolgozo/index.php/rendelesiCim?szallitasId=${adat.szallitasId}`)
+            let adat2=await httpValasz2.json()
+            let sor=rendelesTabla.insertRow()
+            let cell1=sor.insertCell()
+            let cell2=sor.insertCell()
+            let cell3=sor.insertCell()
+            let cell4=sor.insertCell()
+            let cell6=sor.insertCell()
+            cell1.innerHTML=adat.felhasznalo
+            cell2.innerHTML=adat.id
+            cell3.innerHTML=adat.fizetesIdeje
+            if(adat.elkuldve==null){
+                cell4.innerHTML="0000-00-00"
+            } else {
+                cell4.innerHTML=adat.elkuldve
+            }
+            cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}` 
+        }
+    } else {
+        let adatok=await httpvalasz.json()
+        document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-danger d-flex justify-content-center")
+        document.getElementById("rendelesEredmeny").innerHTML=Object.values(adatok)
+    }
+}
+window.addEventListener("load",async()=>{
+    let httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesekAdatai`)
+    let adatok=await httpvalasz.json()
+    rendelesTabla.innerHTML=""
+    for (const adat of adatok) {
+        let httpValasz2=await fetch(`../../backend/dolgozo/index.php/rendelesiCim?szallitasId=${adat.szallitasId}`)
+        let adat2=await httpValasz2.json()
+        let sor=rendelesTabla.insertRow()
+        let cell1=sor.insertCell()
+        let cell2=sor.insertCell()
+        let cell3=sor.insertCell()
+        let cell4=sor.insertCell()
+        let cell6=sor.insertCell()
+        cell1.innerHTML=adat.felhasznalo
+        cell2.innerHTML=adat.id
+        cell3.innerHTML=adat.fizetesIdeje
+        if(adat.elkuldve==null){
+            cell4.innerHTML="0000-00-00"
+        } else {
+            cell4.innerHTML=adat.elkuldve
+        }
+        cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}`  
+    }
+})
+rendelesTabla.addEventListener("click",sorKivalaszt)
+document.getElementById("Kuldes").addEventListener("click",rendelesKuldes)
+document.getElementById("Teljesites").addEventListener("click",rendelesTeljesitve)
+document.getElementById("Torles").addEventListener("click",rendelesTorles)

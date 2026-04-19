@@ -47,7 +47,6 @@ const selectFeltoltes = async () => {
         let cell2=sor.insertCell()
         let cell3=sor.insertCell()
         let cell4=sor.insertCell()
-        let cell5=sor.insertCell()
         let cell6=sor.insertCell()
         cell1.innerHTML=adat.felhasznalo
         cell2.innerHTML=adat.id
@@ -56,8 +55,7 @@ const selectFeltoltes = async () => {
             cell4.innerHTML="0000-00-00"
         } else {
             cell4.innerHTML=adat.elkuldve
-        }
-        cell5.innerHTML="0000-00-00"    
+        } 
         cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}`  
     }
 }
@@ -175,7 +173,6 @@ const rendelesKuldes = async () => {
             let cell2=sor.insertCell()
             let cell3=sor.insertCell()
             let cell4=sor.insertCell()
-            let cell5=sor.insertCell()
             let cell6=sor.insertCell()
             cell1.innerHTML=adat.felhasznalo
             cell2.innerHTML=adat.id
@@ -185,7 +182,6 @@ const rendelesKuldes = async () => {
             } else {
                 cell4.innerHTML=adat.elkuldve
             }
-            cell5.innerHTML="0000-00-00"
             cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}`  
         }
     } else {
@@ -220,7 +216,6 @@ const rendelesTeljesitve = async () => {
             let cell2=sor.insertCell()
             let cell3=sor.insertCell()
             let cell4=sor.insertCell()
-            let cell5=sor.insertCell()
             let cell6=sor.insertCell()
             cell1.innerHTML=adat.felhasznalo
             cell2.innerHTML=adat.id
@@ -230,7 +225,6 @@ const rendelesTeljesitve = async () => {
             } else {
                 cell4.innerHTML=adat.elkuldve
             }
-            cell5.innerHTML="0000-00-00"
             cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}` 
         }
     } else {
@@ -264,7 +258,6 @@ const rendelesTorles = async () => {
             let cell2=sor.insertCell()
             let cell3=sor.insertCell()
             let cell4=sor.insertCell()
-            let cell5=sor.insertCell()
             let cell6=sor.insertCell()
             cell1.innerHTML=adat.felhasznalo
             cell2.innerHTML=adat.id
@@ -274,7 +267,6 @@ const rendelesTorles = async () => {
             } else {
                 cell4.innerHTML=adat.elkuldve
             }
-            cell5.innerHTML="0000-00-00"
             cell6.innerHTML=`${adat2.orszag}, ${adat2.iranyitoszam} ${adat2.varos}, ${adat2.utca}` 
         }
     } else {
@@ -318,7 +310,6 @@ const szoveg = async () => {
             document.getElementById("szoveg16").innerHTML=adatok[62]["szoveg"]
             document.getElementById("szoveg17").innerHTML=adatok[63]["szoveg"]
             document.getElementById("szoveg18").innerHTML=adatok[64]["szoveg"]
-            document.getElementById("szoveg19").innerHTML=adatok[65]["szoveg"]
             document.getElementById("szoveg20").innerHTML=adatok[15]["szoveg"]
             document.getElementById("Kuldes").value=adatok[43]["szoveg"]
             document.getElementById("Teljesites").value=adatok[42]["szoveg"]
@@ -349,7 +340,6 @@ const szoveg = async () => {
             document.getElementById("szoveg16").innerHTML=adatok[62]["szoveg_en"]
             document.getElementById("szoveg17").innerHTML=adatok[63]["szoveg_en"]
             document.getElementById("szoveg18").innerHTML=adatok[64]["szoveg_en"]
-            document.getElementById("szoveg19").innerHTML=adatok[65]["szoveg_en"]
             document.getElementById("szoveg20").innerHTML=adatok[15]["szoveg_en"]
             document.getElementById("Kuldes").value=adatok[43]["szoveg_en"]
             document.getElementById("Teljesites").value=adatok[42]["szoveg_en"]

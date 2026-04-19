@@ -41,10 +41,8 @@ const termekSzures = (termekek) => {
     const csakAkcios = akcios.checked;
     const csakRaktaron = raktaron.checked;
     const nyelv = localStorage.getItem("nyelv");
-
     const nevNyelv = nyelv === "en" ? "nevEn" : "nev";
     const leirasNyelv = nyelv === "en" ? "leirasEn" : "leiras";
-
     let eredmeny = termekek.filter(t => {
         const ar = nyelv === "en" ? Math.round(Math.round(t.ujar, 0) * euroArfolyam, 2) : Math.round(t.ujar, 0);
         const regiar = nyelv === "en" ? Math.round(Math.round(t.regiar, 0) * euroArfolyam, 2) : Math.round(t.regiar, 0);
@@ -65,6 +63,7 @@ const termekSzures = (termekek) => {
     if (rendezes.value === "arCsokkeno") {
         eredmeny.sort((a, b) => b.ujar - a.ujar);
     }
+
     return eredmeny;
 };
 
@@ -181,7 +180,13 @@ const kategoriakBetoltese=async() => {
         }
         if(localStorage.getItem("kategoria")){
             let kategoria=localStorage.getItem("kategoriaId")
-            let httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${kategoria}`);
+            let httpValasz
+            if(localStorage.getItem("kategoria")>0){
+             httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${kategoria}`);
+            }
+            else{
+             httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatokOsszes`);
+            }
             osszesTermek = await httpValasz.json();
             await frissites();
         }
@@ -199,7 +204,7 @@ termekKategoria.addEventListener('change', async () => {
         if (selectedKategoria != 0) {
             httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatok?kategoria=${selectedKategoria}`);
         } else {
-            httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatokOsszes`); // Minden termék lekérése TODO backend
+            httpValasz = await fetch(`../../backend/termekek/index.php/termekAdatokOsszes`);
         }
         osszesTermek = await httpValasz.json();
         await frissites();
