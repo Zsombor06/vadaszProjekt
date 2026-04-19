@@ -116,7 +116,14 @@ const szoveg=async()=>{
         let adatok=await httpvalasz.json()
         if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg"]
+            if(localStorage.getItem('token')){
+            let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+            let adat=await httpValasz.json()
+            document.getElementById("felhasznaloGomb").innerHTML=adat["felhasznalonev"]
+            }
+            else{
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
+            }
             document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg"]
             document.getElementById("FnevIn").placeholder="Felhasználónév";
             document.getElementById("FjelszoIn").placeholder="Jelszó";
@@ -146,7 +153,14 @@ const szoveg=async()=>{
             document.getElementById("dolgozoGomb").innerHTML=adatok[116]["szoveg"]
         } else {
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
+            if(localStorage.getItem('token')){
+            let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
+            let adat=await httpValasz.json()
+            document.getElementById("felhasznaloGomb").innerHTML=adat["felhasznalonev"]
+            }
+            else{
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
+            }
             document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg_en"]
             document.getElementById("FnevIn").placeholder="User name";
             document.getElementById("FjelszoIn").placeholder="Password";

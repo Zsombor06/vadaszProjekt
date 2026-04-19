@@ -21,7 +21,6 @@ const jogosultsagok=async()=>{
             let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
             if (httpValasz.ok) {    
                 let htttpAdat=await httpValasz.json()
-                document.getElementById("felhasznaloGomb").innerHTML=htttpAdat["felhasznalonev"]
                 if(htttpAdat["rangId"]==1){
                     document.getElementById("adminGomb").hidden=false
                     document.getElementById("dolgozoGomb").hidden=false

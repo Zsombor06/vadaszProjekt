@@ -328,7 +328,7 @@ INSERT INTO `szoveg` (`id`, `szoveg`, `szoveg_en`) VALUES
 (88, 'Főoldal', 'Main page'),
 (89, 'Rólunk', 'About us'),
 (90, 'Termékek', 'Products'),
-(91, 'Kapcsolatok', 'Contacts'),
+(91, 'Kapcsolat', 'Contacts'),
 (92, 'Nyitvatartás', 'Opening hours'),
 (93, 'Hétfő - Péntek:', 'Monday - Friday:'),
 (94, 'Szombat:', 'Saturday:'),

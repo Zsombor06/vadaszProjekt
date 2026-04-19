@@ -50,7 +50,6 @@ async function rangFeltoltes() {
 }
 async function felToltesek() {
     try {
-
         //rangok feltöltése select-be
         let httpvalasz=await fetch("../../backend/admin/index.php/rangokNeve")
         let adatok=await httpvalasz.json()
