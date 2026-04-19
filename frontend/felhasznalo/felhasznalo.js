@@ -276,7 +276,7 @@ const szoveg=async()=>{
         let adatok=await httpvalasz.json()
         if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg"]
-            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
+            
             document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg"]
             document.getElementById("szoveg4").innerHTML=adatok[26]["szoveg"]
             document.getElementById("szoveg5").innerHTML=adatok[27]["szoveg"]

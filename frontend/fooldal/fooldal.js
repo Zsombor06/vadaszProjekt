@@ -26,7 +26,11 @@ const regisztralasGomb = async () => {
     }
 }
 document.getElementById("Regisztralas").addEventListener("click", regisztralasGomb);
-
+window.addEventListener("load",()=>{
+    if(localStorage.getItem('token')){
+        document.getElementById("Regisztralas").hidden=true
+    }
+})
 const szoveg=async()=>{
     try {
         let httpvalasz=await fetch("../../backend/szoveg/szoveg.php/szoveg")

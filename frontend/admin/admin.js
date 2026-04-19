@@ -1,7 +1,8 @@
 tablaValaszt=document.getElementById("tablaValaszt")
 muveletValaszt=document.getElementById("muveletValaszt")
 rangok=document.querySelectorAll("#rangok")
-felhasznalok=document.querySelectorAll("#felhasznalok")
+felhasznalokM=document.getElementById("felhasznalokM")
+felhasznalokT=document.getElementById("felhasznalokT")
 kategoriak=document.querySelectorAll("#kategoriak")
 learazasok=document.querySelectorAll("#learazasok")
 termekNevek=document.querySelectorAll("#termekNevek")
@@ -63,14 +64,14 @@ async function felToltesek() {
         //nevek feltöltése select-be
         httpvalasz=await fetch("../../backend/admin/index.php/felhasznaloNevek")
         adatok=await httpvalasz.json()
-        for (const felhasznalo of felhasznalok) {
-            felhasznalok.innerHTML=""
+        for (const adat of adatok) {
+            felhasznalokM.innerHTML+=`<option value="${adat["felhasznalonev"]}">${adat["felhasznalonev"]}</option>`
         }
-        for (const felhasznalo of felhasznalok) {
-            for (const adat of adatok) {
-            felhasznalo.innerHTML+=`<option value=${adat["felhasznalonev"]}>${adat["felhasznalonev"]}</option>`
+        
+        for (const adat of adatok) {
+            felhasznalokT.innerHTML+=`<option value=${adat["felhasznalonev"]}>${adat["felhasznalonev"]}</option>`
         }
-        }
+        
         //kategóriák feltöltése select-be
         httpvalasz=await fetch("../../backend/admin/index.php/kategoriakNeve")
         adatok=await httpvalasz.json()
@@ -95,8 +96,9 @@ async function felToltesek() {
         for (const termekNeve of termekNevek) {
             for (const adat of adatok) {
             termekNeve.innerHTML+=`<option value=${adat["id"]}>${adat["nev"]}</option>`
+            }
         }
-        }
+    
     } catch (error) {
         console.log(error)
     }
@@ -154,8 +156,9 @@ function vegpont(){
 
 async function felhasznaloAdatok() {
     try {
-        httpvalasz=await fetch(`../../backend/admin/index.php/felhasznaloAdatok?felhasznalo=${felhasznalok[0].value}`)
-        adatok=await httpvalasz.json()
+
+        let httpvalasz=await fetch(`../../backend/admin/index.php/felhasznaloAdatok?felhasznalo=${felhasznalokM.value}`)
+        let adatok=await httpvalasz.json()
         document.getElementById("modositEmail").value=adatok["email"]
         document.getElementById("modositorszagSzamla").value=adatok["szamlazasi_orszag"]
         document.getElementById("modositirszSzamla").value=adatok["szamlazasi_iranyitoszam"]
@@ -223,7 +226,7 @@ async function felhasznaloModosit() {
          httpvalasz=await fetch(`../../backend/admin/index.php/modositFelhasznalo`,{
             method:"PUT",
             body:JSON.stringify({
-                "felhasznalonev":felhasznalok[0].value,
+                "felhasznalonev":felhasznalokM.value,
                 "jelszo":document.getElementById("modositJelszo").value,
                 "email":document.getElementById("modositEmail").value,
                 "szamlazasi_orszag":document.getElementById("modositorszagSzamla").value,
@@ -251,10 +254,10 @@ async function felhasznaloModosit() {
 
 async function felhasznaloTorles() {
     try {
-        if(felhasznalok[1].value!="admin"){
+        if(felhasznalokT.value!="admin"){
             httpvalasz=await fetch(`../../backend/admin/index.php/felhasznaloTorles`,{
             method:"DELETE",
-            body:JSON.stringify({"felhasznalonev":felhasznalok[1].value})}
+            body:JSON.stringify({"felhasznalonev":felhasznalokT.value})}
         )
          if(httpvalasz.ok){
             document.getElementById("muveletEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")
@@ -444,7 +447,7 @@ async function termekTorles() {
 
 tablaValaszt.addEventListener("change",muveletFeltolt)
 muveletValaszt.addEventListener("change",vegpont)
-felhasznalok[0].addEventListener("click",felhasznaloAdatok)
+felhasznalokM.addEventListener("click",felhasznaloAdatok)
 window.addEventListener("load",felToltesek)
 document.getElementById("ujFelhasznalo").addEventListener("click",felhasznaloFeltolt)
 document.getElementById("modositFelhasznalo").addEventListener("click",felhasznaloModosit)

@@ -66,7 +66,7 @@ switch(end($uri)){
     $jelszo = password_hash($bodyAdatok["jelszo"], PASSWORD_DEFAULT);
      if(empty($bodyAdatok["felhasznalonev"])||empty($bodyAdatok["jelszo"]) || empty($bodyAdatok["email"])||empty($bodyAdatok["szamlazasi_irsz"]) ||empty($bodyAdatok["szamlazasi_orszag"]) ||empty($bodyAdatok["szamlazasi_varos"]) ||empty($bodyAdatok["szamlazasi_utca"]) ||empty($bodyAdatok["rangId"]))
     {
-        echo json_encode(["valasz"=>$jelszo],JSON_UNESCAPED_UNICODE);
+        echo json_encode(["valasz"=>"Hiányzó adatok!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
     }
     $modositFelhasznaloSQL="UPDATE felhasznalo SET jelszo=?, email=?, szamlazasi_iranyitoszam=?,szamlazasi_orszag=?,szamlazasi_varos=?,szamlazasi_utca=?,rangId=? WHERE felhasznalonev=?";

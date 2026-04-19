@@ -100,7 +100,7 @@ body {
     color: white;
 }
 .dolgozo-btn {
-    background-color: #2f3e2b;
+    background-color: #c49e3c;
     color: white;
     border: none;
     border-radius: 10px;
@@ -110,7 +110,7 @@ body {
 }
 .dolgozo-btn:hover {
     background-color: #c49e3c;
-    color: #2f3e2b;
+    color: white;
 }
 
 .btn {
