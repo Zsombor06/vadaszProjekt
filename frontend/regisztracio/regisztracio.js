@@ -119,7 +119,12 @@ const szoveg=async()=>{
             if(localStorage.getItem('token')){
             let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
             let adat=await httpValasz.json()
+            if(adat["felhasznalonev"]==null){
+            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
+            }
+            else{
             document.getElementById("felhasznaloGomb").innerHTML=adat["felhasznalonev"]
+            }
             }
             else{
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
@@ -156,7 +161,12 @@ const szoveg=async()=>{
             if(localStorage.getItem('token')){
             let httpValasz = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`)
             let adat=await httpValasz.json()
+            if(adat["felhasznalonev"]==null){
+            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
+            }
+            else{
             document.getElementById("felhasznaloGomb").innerHTML=adat["felhasznalonev"]
+            }
             }
             else{
             document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
