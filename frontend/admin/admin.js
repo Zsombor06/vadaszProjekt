@@ -468,12 +468,10 @@ const szoveg=async()=>{
         let adatok=await httpvalasz.json()
         if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu"){
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg"]
-            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg"]
             document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg"]
             }
         else{
             document.getElementById("kosarGomb").innerHTML=adatok[0]["szoveg_en"]
-            document.getElementById("felhasznaloGomb").innerHTML=adatok[1]["szoveg_en"]
             document.getElementById("szoveg3").innerHTML=adatok[2]["szoveg_en"]
         }
     } catch (error) {
