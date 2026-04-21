@@ -103,9 +103,9 @@ const kategoriaKartya = async (kartya, termek) => {
                                         <p class="card-text">${termek.leiras}</p>
                                         <div class="mt-auto"> `;
             if (termek.regiar != Math.round(termek.ujar, 0)) {
-                htmlBelso += `              <small class="text-muted">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br> `;
+                htmlBelso += `              <small class="text-muted arResz">Leárazott ár: ${Math.round(termek.ujar, 0)} Ft</small> <br> `;
             } else {
-                htmlBelso += `              <small class="text-muted">Ár: ${termek.regiar} Ft</small> <br>`;
+                htmlBelso += `              <small class="text-muted arResz">Ár: ${termek.regiar} Ft</small> <br>`;
             }
             htmlBelso += `                  <small class="text-muted">Raktáron: ${termek.keszlet} db </small>                        
                                         </div>
@@ -132,9 +132,9 @@ const kategoriaKartya = async (kartya, termek) => {
                                         <p class="card-text">${termek.leirasEn}</p>
                                         <div class="mt-auto">`;
             if (termek.regiar != Math.round(termek.ujar, 0)) {
-                htmlBelso += `              <small class="text-muted">Marked down price: ${Math.round(Math.round(termek.ujar, 0) * euroArfolyam, 2)} €</small> <br>`;
+                htmlBelso += `              <small class="text-muted arResz">Marked down price: ${Math.round(Math.round(termek.ujar, 0) * euroArfolyam, 2)} €</small> <br>`;
             } else {
-                htmlBelso += `              <small class="text-muted">Price: ${Math.round(termek.regiar * euroArfolyam, 2)} €</small> <br>`;
+                htmlBelso += `              <small class="text-muted arResz">Price: ${Math.round(termek.regiar * euroArfolyam, 2)} €</small> <br>`;
             }
             htmlBelso += `                  <small class="text-muted">In store: ${termek.keszlet} </small>
                                         </div>    
