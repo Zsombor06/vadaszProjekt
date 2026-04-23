@@ -207,9 +207,36 @@ document.getElementById("torlesModal").addEventListener("show.bs.modal", functio
     const Tid = button.getAttribute("data-id");
     document.getElementById("torlesConfirm").setAttribute("data-id", Tid);
 });
-document.getElementById("torlesConfirm").addEventListener("click", (e) => {
+document.getElementById("torlesConfirm").addEventListener("click", async (e) => {
+    try {
     const Tid = e.target.dataset.id;
-    tetelTorles(Tid);
+        const httpValasz = await fetch("../../backend/kosar/tetelTorles.php", { 
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ "id": Tid })
+        });
+        let httpAdat = await httpValasz.json();
+        if (httpValasz.ok) {
+            document.getElementById(`termek_${Tid}`).remove();
+            document.getElementById("modalHibaMezo").innerText = httpAdat.uzenet;
+            setTimeout(() => {
+                let modalEl = document.getElementById('torlesModal')
+                let modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                modal.hide();
+                
+            }, 1000)
+            vegosszegSzamitas();
+        } else {
+            console.error(httpAdat.hiba);
+            document.getElementById("modalHibaMezo").innerText = httpAdat.hiba;
+        }
+        
+    }   catch (err) {
+        console.error(err);
+        document.getElementById("modalHibaMezo").innerText = "Hiba történt a törlés során!";
+    }
 });
 
 window.addEventListener("load", TermekKartyak);
