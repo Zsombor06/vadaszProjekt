@@ -88,11 +88,8 @@ $sikeresReg = $stmt->execute([
 ]);
 
 if ($sikeresReg) {
-    emailKuldes(
-        $data->email,
-        $data->felhasznalonev,
-        "Sikeres regisztráció",
-        `<div>
+    $emailHTML = <<<HTML
+            <div>
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f1ea; padding: 40px 20px;">
                 <tr>
                     <td align="center">
@@ -162,8 +159,18 @@ if ($sikeresReg) {
                     </td>
                 </tr>
             </table>
-        </div>`
+        </div>
+HTML;
+    $eredmeny = emailKuldes(
+        $data->email,
+        $data->felhasznalonev,
+        "Sikeres regisztráció",
+        $emailHTML
     );
+    if ($eredmeny !== true) {
+        echo json_encode(["hiba" => "Email hiba: " . $eredmeny]);
+        exit;
+    }
     echo json_encode(["uzenet" => "Felhasználó sikeresen létrehozva!"]);
 } else {
     echo json_encode(["uzenet" => "Felhasználó létrehozása sikertelen!"]);

@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 require 'config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 function emailKuldes($cimzettEmail, $cimzettNev, $targy, $uzenet) {
     
     $mail = new PHPMailer(true);
-    $mail->SMTPDebug = 2;
+    $mail->SMTPDebug = 0;
 
     $mail->isSMTP();
     $mail->CharSet = 'UTF-8';

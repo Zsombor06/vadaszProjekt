@@ -31,7 +31,8 @@ document.getElementById("BejGomb").addEventListener("click", function () {
 });
 
 const Regisztracio = async () => {
-     try {
+    console.log("Regisztráció gomb megnyomva");
+    try {
         let fnev = document.getElementById("FnevIn").value;
         let jelszo = document.getElementById("FjelszoIn").value;
         let jelszoUjra = document.getElementById("FjelszoUjraIn").value;
@@ -51,8 +52,7 @@ const Regisztracio = async () => {
             irsz = document.getElementById("FlakIr").value;
             varos = document.getElementById("FlakVaros").value;
             utca = document.getElementById("FlakUtca").value;
-        }
-        else{
+        } else {
             orszag= document.getElementById("SzamlOrszag").value;
             irsz= document.getElementById("SzamlIr").value;
             varos= document.getElementById("SzamlVaros").value;
@@ -60,8 +60,11 @@ const Regisztracio = async () => {
         }
         if (jelszo !== jelszoUjra) {
             document.getElementById("hiba").hidden=false
-            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Jelszók nem egyeznek meg"
-            else document.getElementById("hiba").innerHTML="The passwords dont match"
+            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") {
+                document.getElementById("hiba").innerHTML="Jelszók nem egyeznek meg"
+            } else {
+                document.getElementById("hiba").innerHTML="The passwords dont match"
+            }
             return;
         }
         let regAdatok = {
@@ -90,19 +93,23 @@ const Regisztracio = async () => {
         } else {
             document.getElementById("hiba").hidden=false
             if(adat.hiba==1){
-            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Minden mező kitöltése kötelező"
-            else document.getElementById("hiba").innerHTML="All fields are required!"
+                if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu") {
+                    document.getElementById("hiba").innerHTML = "Minden mező kitöltése kötelező"
+                } else { 
+                    document.getElementById("hiba").innerHTML="All fields are required!"
+                }
             }
             else if(adat.hiba==2){
-            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Felhasználónév már foglalt!"
-            else document.getElementById("hiba").innerHTML="Username already in use!"    
+                if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Felhasználónév már foglalt!"
+                else document.getElementById("hiba").innerHTML="Username already in use!"    
             }
             else{
-            if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Email cím már foglat!"
-            else document.getElementById("hiba").innerHTML="Email address already in use!"   
+                if(localStorage.getItem("nyelv")==null || localStorage.getItem("nyelv")=="hu")document.getElementById("hiba").innerHTML="Email cím már foglat!"
+                else document.getElementById("hiba").innerHTML="Email address already in use!"   
             }
         }
     } catch (err) {
+        console.log(err);
         document.getElementById("hiba").hidden=false
         document.getElementById("hiba").innerHTML="ERROR 404"
     }
