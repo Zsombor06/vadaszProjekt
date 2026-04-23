@@ -8,10 +8,67 @@
   },
   "item": [
     {
-      "name": "New Request",
+      "name": "TermékTeszt",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Sikeresen a lekérés\",function(){\r",
+              "    pm.response.to.have .status(200);\r",
+              "}\r",
+              ")\r",
+              "pm.test(\"Lekérés megfelelő adatot tartalmaz\",function(){\r",
+              "    const valasz = pm.response.json();\r",
+              "    pm.expect(valasz).to.have.property(\"nev\");\r",
+              "    pm.expect(valasz).to.have.property(\"nevEn\");\r",
+              "    pm.expect(valasz).to.have.property(\"leiras\");\r",
+              "    pm.expect(valasz).to.have.property(\"leirasEn\");\r",
+              "    pm.expect(valasz).to.have.property(\"ar\");\r",
+              "    pm.expect(valasz).to.have.property(\"kategoriaId\");\r",
+              "    pm.expect(valasz).to.have.property(\"keszlet\");\r",
+              "    pm.expect(valasz).to.have.property(\"learazasid\");\r",
+              "}\r",
+              ")\r",
+              "pm.test(\"Lekérés megfelelő terméket ad vissza\",function(){\r",
+              "    const valasz = pm.response.json();\r",
+              "    pm.expect(valasz.nev).to.eql(\"Vadhús hűtőtáska\");\r",
+              "})\r",
+              "pm.test(\"Van raktáron\",function(){\r",
+              "    const valasz = pm.response.json();\r",
+              "    pm.expect(valasz.keszlet).greaterThan(0)\r",
+              "}\r",
+              ")"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
-        "header": []
+        "header": [],
+        "url": {
+          "raw": "http://localhost/vadaszProjekt/backend/admin/index.php/termekAdatok?id=25",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "vadaszProjekt",
+            "backend",
+            "admin",
+            "index.php",
+            "termekAdatok"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "25"
+            }
+          ]
+        }
       },
       "response": []
     }
