@@ -156,7 +156,7 @@ const rendelesKuldes = async () => {
     const cellak = valasztottSor.querySelectorAll("td");
     let httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesKuldes`,{
         method:"PUT",
-        body:JSON.stringify({"nev":cellak[0].textContent,"rendelesId":cellak[1].textContent})
+        body:JSON.stringify({"nev":cellak[0].textContent,"rendelesId":cellak[1].textContent,"cim":cellak[4].textContent})
     })
     if(httpvalasz.ok){
         let adatok=await httpvalasz.json()
@@ -199,7 +199,7 @@ const rendelesTeljesitve = async () => {
     const cellak = valasztottSor.querySelectorAll("td");
     let httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesTeljesitve`,{
         method:"PUT",
-        body:JSON.stringify({"nev":cellak[0].textContent,"rendelesId":cellak[1].textContent})
+        body:JSON.stringify({"nev":cellak[0].textContent,"rendelesId":cellak[1].textContent,"cim":cellak[4].textContent})
     })
     if(httpvalasz.ok){
         let adatok=await httpvalasz.json()
@@ -242,7 +242,7 @@ const rendelesTorles = async () => {
     const cellak = valasztottSor.querySelectorAll("td");
     let httpvalasz=await fetch(`../../backend/dolgozo/index.php/rendelesTorles`,{
         method:"DELETE",
-        body:JSON.stringify({"nev":cellak[0].textContent,"rendelesId":cellak[1].textContent})
+        body:JSON.stringify({"nev":cellak[0].textContent,"rendelesId":cellak[1].textContent,"cim":cellak[4].textContent})
     })
     if(httpvalasz.ok){
         document.getElementById("rendelesEredmeny").setAttribute("class","alert alert-success d-flex justify-content-center")

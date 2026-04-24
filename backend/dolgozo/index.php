@@ -89,7 +89,20 @@ HTML;
         if($rendelesKuldes){
                     $emailLekeresSQL="SELECT email from felhasznalo where felhasznalonev=?";
         $emailLekeres=adatokLekerese($emailLekeresSQL,"s",[$bodyAdatok["nev"]]);
-    $emailHTML = <<<HTML
+        $termekAdatokSQL="    SELECT 
+        t.id,
+        t.termekId,
+        t.mennyiseg,
+        tr.nev,
+        tr.nevEn,
+        tr.kep,
+        (tr.ar-tr.ar*LearazasMerteke/100) as ar
+        FROM tetelek t
+        JOIN termek tr ON tr.id = t.termekId
+        join learazas on learazasId=learazas.id
+        WHERE t.rendelesId = ?";
+        $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$bodyAdatok["rendelesId"]]);
+        $emailHTML = <<<HTML
             <div>
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f1ea; padding: 40px 20px;">
                 <tr>
@@ -106,7 +119,9 @@ HTML;
                                         Kedves, {$bodyAdatok["nev"]}!
                                     </h2>                            
                                     <p style="margin: 0 0 25px 0; color: #444; font-size: 16px; line-height: 1.6;">
-                                        Rendelésedet összekészíttük, és leadtuk postának.
+                                        Rendelésedet összekészíttük, és leadtuk a szállítónak.<br>
+                                        Rendelésed azonosítója: {$bodyAdatok["rendelesId"]}
+                                        Szállítási cím: <b>{$bodyAdatok["cim"]}</b>
                                     </p>
                                 </td>
                             </tr>

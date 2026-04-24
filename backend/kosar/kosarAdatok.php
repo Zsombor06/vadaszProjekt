@@ -20,9 +20,10 @@ $stmt = $pdo->prepare("
         tr.nev,
         tr.nevEn,
         tr.kep,
-        tr.ar
+        (tr.ar-tr.ar*LearazasMerteke/100) as ar
     FROM tetelek t
     JOIN termek tr ON tr.id = t.termekId
+    join learazas on learazasId=learazas.id
     WHERE t.rendelesId = ?
 ");
 $stmt->execute([$rendelesId]);
