@@ -83,18 +83,33 @@ switch(end($uri)){
         if($metodus!="DELETE"){
             return http_response_code(405);
         }
-        $cimekTorleseSQL="DELETE FROM szallitasicimek WHERE felhasznalo=?";
-        $cimekTorlese=adatokValtoztatasa($cimekTorleseSQL,"s",[$bodyAdatok["felhasznalonev"]]);
         $kosarTorlesSQL="DELETE tetelek FROM `tetelek` INNER join rendeles ON rendeles.id=rendelesId WHERE felhasznalo=?";
         $kosarTorles=adatokValtoztatasa($kosarTorlesSQL,"s",[$bodyAdatok["felhasznalonev"]]);
-        $rendelesekTorlesSQL="DELETE  FROM rendeles WHERE felhasznalo=?";
+        $rendelesekTorlesSQL="DELETE rendeles FROM rendeles WHERE felhasznalo=?";
         $rendelesTorles=adatokValtoztatasa($rendelesekTorlesSQL,"s",[$bodyAdatok["felhasznalonev"]]);
-        $felhasznaloTorlesSQL="DELETE FROM felhasznalo WHERE felhasznalonev=?";
+        $cimekTorleseSQL="DELETE szallitasicimek FROM szallitasicimek WHERE felhasznalo=?";
+        $cimekTorlese=adatokValtoztatasa($cimekTorleseSQL,"s",[$bodyAdatok["felhasznalonev"]]);
+        $felhasznaloTorlesSQL="DELETE felhasznalo FROM felhasznalo WHERE felhasznalonev=?";
         $felhasznaloTorles=adatokValtoztatasa($felhasznaloTorlesSQL,"s",[$bodyAdatok["felhasznalonev"]]);
-        if($cimekTorlese && $felhasznaloTorles && $kosarTorles && $rendelesTorles){
+        if($cimekTorlese==false){
+        echo json_encode(["valasz"=>"Sikertelen cím torles!"],JSON_UNESCAPED_UNICODE);
+        return http_response_code(400);
+        }
+        if($kosarTorles==false){
+        echo json_encode(["valasz"=>"Sikertelen kosár torles!"],JSON_UNESCAPED_UNICODE);
+        return http_response_code(400);
+        }
+        if($rendelesTorles==false){
+        echo json_encode(["valasz"=>"Sikertelen rendelés torles!"],JSON_UNESCAPED_UNICODE);
+        return http_response_code(400);
+        }if($felhasznaloTorles==false){
+        echo json_encode(["valasz"=>"Sikertelen felhasználó torles!"],JSON_UNESCAPED_UNICODE);
+        return http_response_code(400);
+        }
+        if($cimekTorlese==true && $felhasznaloTorles==true && $kosarTorles==true && $rendelesTorles==true){
         echo json_encode(["valasz"=>"Sikeres torles!"],JSON_UNESCAPED_UNICODE);
-        return http_response_code(201);
-    }
+        return http_response_code(204);
+        }
     echo json_encode(["valasz"=>"Sikertelen torles!"],JSON_UNESCAPED_UNICODE);
         return http_response_code(400);
 

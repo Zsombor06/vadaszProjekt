@@ -1,5 +1,7 @@
 <?php
 include "../sql_fuggvenyek.php";
+require '../config.php';
+require '../emailKuldes.php';
 $metodus=$_SERVER["REQUEST_METHOD"];
 $uri=parse_url($_SERVER["REQUEST_URI"],PHP_URL_PATH);
 $uri=explode("/",$uri);
@@ -16,11 +18,58 @@ switch(end($uri)){
         $rendelesTorlesSQL="DELETE from rendeles where id=?";
         $rendelesTorles=adatokValtoztatasa($rendelesTorlesSQL,"i",[$bodyAdatok["rendelesId"]]);
         if($rendelesTorles){
+        $emailLekeresSQL="SELECT email from felhasznalo where felhasznalonev=?";
+        $emailLekeres=adatokLekerese($emailLekeresSQL,"s",[$bodyAdatok["nev"]]);
+    $emailHTML = <<<HTML
+            <div>
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f1ea; padding: 40px 20px;">
+                <tr>
+                    <td align="center">
+                        <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <tr>
+                                <td style="background-color: #2f3e2b; padding: 30px 40px; text-align: center;">
+                                    <h1 style="margin: 0; color: #c49e3c; font-size: 28px; font-weight: 600; letter-spacing: 1px;">Arany Agancs</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 40px;">
+                                    <h2 style="margin: 0 0 20px 0; color: #2f3e2b; font-size: 22px; font-weight: 600;">
+                                        Kedves, {$bodyAdatok["nev"]}!
+                                    </h2>                            
+                                    <p style="margin: 0 0 25px 0; color: #444; font-size: 16px; line-height: 1.6;">
+                                        Sajnálatos okok miatt töröltük rendelésedet.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #2f3e2b; padding: 25px 40px;">
+                                    <p style="margin: 0 0 5px 0; color: #c49e3c; font-size: 14px; font-weight: 600;">
+                                        Az Arany Agancs Csapata
+                                    </p>
+                                    <p style="margin: 0; color: #a0a0a0; font-size: 12px;">
+                                        Ez egy automatikus üzenet, kérjük ne válaszolj rá.
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+HTML;
+ $eredmeny = emailKuldes(
+        $emailLekeres[0]["email"],
+        $bodyAdatok["nev"],
+        "Rendelés törölve",
+        $emailHTML
+    );
             echo json_encode(["valasz"=>"Sikeres törlés"],JSON_UNESCAPED_UNICODE);
             return http_response_code(204);
         }
           echo json_encode(["valasz"=>"Sikertelen törlés"],JSON_UNESCAPED_UNICODE);
           return http_response_code(400);
+
+
     case "rendelesKuldes":
         if($metodus!="PUT"){
             return http_response_code(405);
@@ -38,6 +87,73 @@ switch(end($uri)){
         $rendelesKuldesSQL="UPDATE `rendeles` SET`elkuldve`=Now() WHERE `id`=?";
         $rendelesKuldes=adatokValtoztatasa($rendelesKuldesSQL,"i",[$bodyAdatok["rendelesId"]]);
         if($rendelesKuldes){
+                    $emailLekeresSQL="SELECT email from felhasznalo where felhasznalonev=?";
+        $emailLekeres=adatokLekerese($emailLekeresSQL,"s",[$bodyAdatok["nev"]]);
+        $termekAdatokSQL="    SELECT 
+        t.id,
+        t.termekId,
+        t.mennyiseg,
+        tr.nev,
+        tr.nevEn,
+        tr.kep,
+        (tr.ar-tr.ar*LearazasMerteke/100) as ar
+        FROM tetelek t
+        JOIN termek tr ON tr.id = t.termekId
+        join learazas on learazasId=learazas.id
+        WHERE t.rendelesId = ?";
+        $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$bodyAdatok["rendelesId"]]);
+        $sorAdat;
+        foreach ($termekAdatok as $termekAdat) {
+            $sorAdat+="<tr><td>{$termekAdat["nev"]}</td><td>{$termekAdat["mennyiseg"]}</td><td>{$termekAdat["ar"]}</td></tr>";
+        }
+        $emailHTML = <<<HTML
+            <div>
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f1ea; padding: 40px 20px;">
+                <tr>
+                    <td align="center">
+                        <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <tr>
+                                <td style="background-color: #2f3e2b; padding: 30px 40px; text-align: center;">
+                                    <h1 style="margin: 0; color: #c49e3c; font-size: 28px; font-weight: 600; letter-spacing: 1px;">Arany Agancs</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 40px;">
+                                    <h2 style="margin: 0 0 20px 0; color: #2f3e2b; font-size: 22px; font-weight: 600;">
+                                        Kedves, {$bodyAdatok["nev"]}!
+                                    </h2>                            
+                                    <p style="margin: 0 0 25px 0; color: #444; font-size: 16px; line-height: 1.6;">
+                                        Rendelésedet összekészíttük, és leadtuk a szállítónak.<br>
+                                        Rendelésed azonosítója: {$bodyAdatok["rendelesId"]}
+                                        Szállítási cím: <b>{$bodyAdatok["cim"]}</b>
+                                    </p>
+                                    <table>
+                                        {$sorAdat}
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #2f3e2b; padding: 25px 40px;">
+                                    <p style="margin: 0 0 5px 0; color: #c49e3c; font-size: 14px; font-weight: 600;">
+                                        Az Arany Agancs Csapata
+                                    </p>
+                                    <p style="margin: 0; color: #a0a0a0; font-size: 12px;">
+                                        Ez egy automatikus üzenet, kérjük ne válaszolj rá.
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+HTML;
+ $eredmeny = emailKuldes(
+        $emailLekeres[0]["email"],
+        $bodyAdatok["nev"],
+        "Rendelés elküldve",
+        $emailHTML
+    );
             echo json_encode(["valasz"=>"Sikeresen elküldve"],JSON_UNESCAPED_UNICODE);
             return http_response_code(200);
         }
@@ -54,6 +170,72 @@ switch(end($uri)){
         $rendelesTeljesitveSQL="UPDATE `rendeles` SET`teljesitve`=Now() WHERE `id`=?";
         $rendelesTeljesitve=adatokValtoztatasa($rendelesTeljesitveSQL,"i",[$bodyAdatok["rendelesId"]]);
         if($rendelesTeljesitve){
+                                $emailLekeresSQL="SELECT email from felhasznalo where felhasznalonev=?";
+        $emailLekeres=adatokLekerese($emailLekeresSQL,"s",[$bodyAdatok["nev"]]);
+         $termekAdatokSQL="    SELECT 
+        t.id,
+        t.termekId,
+        t.mennyiseg,
+        tr.nev,
+        tr.nevEn,
+        tr.kep,
+        (tr.ar-tr.ar*LearazasMerteke/100) as ar
+        FROM tetelek t
+        JOIN termek tr ON tr.id = t.termekId
+        join learazas on learazasId=learazas.id
+        WHERE t.rendelesId = ?";
+        $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$bodyAdatok["rendelesId"]]);
+        $sorAdat;
+        foreach ($termekAdatok as $termekAdat) {
+            $sorAdat+="<tr><td>{$termekAdat["nev"]}</td><td>{$termekAdat["mennyiseg"]}</td><td>{$termekAdat["ar"]}</td></tr>";
+        }
+    $emailHTML = <<<HTML
+            <div>
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f1ea; padding: 40px 20px;">
+                <tr>
+                    <td align="center">
+                        <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <tr>
+                                <td style="background-color: #2f3e2b; padding: 30px 40px; text-align: center;">
+                                    <h1 style="margin: 0; color: #c49e3c; font-size: 28px; font-weight: 600; letter-spacing: 1px;">Arany Agancs</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 40px;">
+                                    <h2 style="margin: 0 0 20px 0; color: #2f3e2b; font-size: 22px; font-weight: 600;">
+                                        Kedves, {$bodyAdatok["nev"]}!
+                                    </h2>                            
+                                    <p style="margin: 0 0 25px 0; color: #444; font-size: 16px; line-height: 1.6;">
+                                        Rendelésedet sikeresen elérte {$bodyAdatok["cim"]}, reméljük még fogsz tölünk vásárolni.<br>
+                                        Rendelésed azonosítója: {$bodyAdatok["rendelesId"]}
+                                    </p>
+                                    <table>
+                                    {$sorAdat}
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #2f3e2b; padding: 25px 40px;">
+                                    <p style="margin: 0 0 5px 0; color: #c49e3c; font-size: 14px; font-weight: 600;">
+                                        Az Arany Agancs Csapata
+                                    </p>
+                                    <p style="margin: 0; color: #a0a0a0; font-size: 12px;">
+                                        Ez egy automatikus üzenet, kérjük ne válaszolj rá.
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+HTML;
+ $eredmeny = emailKuldes(
+        $emailLekeres[0]["email"],
+        $bodyAdatok["nev"],
+        "Rendelés teljesítve",
+        $emailHTML
+    );
             echo json_encode(["valasz"=>"Sikeresen teljesítve"],JSON_UNESCAPED_UNICODE);
             return http_response_code(200);
         }
