@@ -147,3 +147,119 @@ const beallitAngol = () => {
     szoveg()
 }
 document.getElementById("angol").addEventListener("click",beallitAngol)
+
+
+let userEmail = "";
+let userOTP = "";
+
+
+
+function showModalMsg(msg, isError = true) {
+    const msgDiv = document.getElementById('modal-footer-msg');
+    if (msgDiv) {
+        msgDiv.innerText = msg;
+        msgDiv.className = isError ? "text-center pb-3 text-danger" : "text-center pb-3 text-success";
+        msgDiv.style.display = 'block';
+    }
+}
+
+async function sendOTP() {
+    const emailInput = document.getElementById('resetEmail');
+    const email = emailInput ? emailInput.value : "";
+    
+    if (!email) {
+        showModalMsg("Adj meg egy e-mail címet!");
+        return;
+    }
+
+    showModalMsg("Küldés folyamatban...", false);
+
+    try {
+        const response = await fetch('../../backend/bejelentkezes/forgotten_password.php', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            userEmail = email;
+            document.getElementById('modal-body-content').innerHTML = `
+                <div id="step2">
+                    <p class="text-dark">A kódot elküldtük az e-mail címedre!</p>
+                    <input type="text" id="otpInput" class="form-control mb-3" placeholder="6 jegyű kód">
+                    <button id="btnVerifyOTP" class="btn btn-primary w-100">Kód ellenőrzése</button>
+                </div>
+            `;
+            showModalMsg(""); 
+        } else {
+            showModalMsg(data.valasz || "Hiba történt!");
+        }
+    } catch (e) {
+        showModalMsg("Szerver hiba történt!");
+    }
+}
+
+async function verifyOTP() {
+    const otp = document.getElementById('otpInput').value;
+    if (!otp) return showModalMsg("Add meg a kódot!");
+
+    const response = await fetch('../../backend/bejelentkezes/verify_code.php', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: userEmail, code: otp })
+    });
+
+    if (response.ok) {
+        userOTP = otp;
+        document.getElementById('modal-body-content').innerHTML = `
+            <div id="step3">
+                <p>Kód elfogadva! Add meg az új jelszavadat:</p>
+                <input type="password" id="newPass" class="form-control mb-2" placeholder="Új jelszó">
+                <input type="password" id="newPassConfirm" class="form-control mb-3" placeholder="Megerősítés">
+                <button id="btnSavePassword" class="btn btn-primary w-100">Mentés</button>
+            </div>
+        `;
+        showModalMsg("");
+    } else {
+        showModalMsg("Hibás vagy lejárt kód!");
+    }
+}
+
+async function saveNewPassword() {
+    const pass = document.getElementById('newPass').value;
+    const confirm = document.getElementById('newPassConfirm').value;
+
+    if (!pass || pass.length < 6) return showModalMsg("Túl rövid jelszó!");
+    if (pass !== confirm) return showModalMsg("A jelszavak nem egyeznek!");
+
+    const response = await fetch('../../backend/bejelentkezes/reset_password.php', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: userEmail, token: userOTP, ujJelszo: pass })
+    });
+
+    if (response.ok) {
+        showModalMsg("Sikeres módosítás! Frissítés...", false);
+        setTimeout(() => location.reload(), 2000);
+    } else {
+        showModalMsg("Hiba a mentés során!");
+    }
+}
+
+window.sendOTP = sendOTP;
+window.verifyOTP = verifyOTP;
+window.saveNewPassword = saveNewPassword;
+
+document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'btnSendOTP') {
+        sendOTP();
+    }
+    if (e.target && e.target.id === 'btnVerifyOTP') {
+        verifyOTP();
+    }
+    if (e.target && e.target.id === 'btnSavePassword') {
+        saveNewPassword();
+    }
+});
