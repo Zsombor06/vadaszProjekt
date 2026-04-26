@@ -102,6 +102,10 @@ HTML;
         join learazas on learazasId=learazas.id
         WHERE t.rendelesId = ?";
         $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$bodyAdatok["rendelesId"]]);
+        $sorAdat;
+        foreach ($termekAdatok as $termekAdat) {
+            $sorAdat+="<tr><td>{$termekAdat["nev"]}</td><td>{$termekAdat["mennyiseg"]}</td><td>{$termekAdat["ar"]}</td></tr>";
+        }
         $emailHTML = <<<HTML
             <div>
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f1ea; padding: 40px 20px;">
@@ -123,6 +127,9 @@ HTML;
                                         Rendelésed azonosítója: {$bodyAdatok["rendelesId"]}
                                         Szállítási cím: <b>{$bodyAdatok["cim"]}</b>
                                     </p>
+                                    <table>
+                                        {$sorAdat}
+                                    </table>
                                 </td>
                             </tr>
                             <tr>
@@ -165,6 +172,23 @@ HTML;
         if($rendelesTeljesitve){
                                 $emailLekeresSQL="SELECT email from felhasznalo where felhasznalonev=?";
         $emailLekeres=adatokLekerese($emailLekeresSQL,"s",[$bodyAdatok["nev"]]);
+         $termekAdatokSQL="    SELECT 
+        t.id,
+        t.termekId,
+        t.mennyiseg,
+        tr.nev,
+        tr.nevEn,
+        tr.kep,
+        (tr.ar-tr.ar*LearazasMerteke/100) as ar
+        FROM tetelek t
+        JOIN termek tr ON tr.id = t.termekId
+        join learazas on learazasId=learazas.id
+        WHERE t.rendelesId = ?";
+        $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$bodyAdatok["rendelesId"]]);
+        $sorAdat;
+        foreach ($termekAdatok as $termekAdat) {
+            $sorAdat+="<tr><td>{$termekAdat["nev"]}</td><td>{$termekAdat["mennyiseg"]}</td><td>{$termekAdat["ar"]}</td></tr>";
+        }
     $emailHTML = <<<HTML
             <div>
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f1ea; padding: 40px 20px;">
@@ -182,8 +206,12 @@ HTML;
                                         Kedves, {$bodyAdatok["nev"]}!
                                     </h2>                            
                                     <p style="margin: 0 0 25px 0; color: #444; font-size: 16px; line-height: 1.6;">
-                                        Rendelésedet sikeresen elért a címpontjához, reméljük még fogsz tölünk vásárolni.
+                                        Rendelésedet sikeresen elérte {$bodyAdatok["cim"]}, reméljük még fogsz tölünk vásárolni.<br>
+                                        Rendelésed azonosítója: {$bodyAdatok["rendelesId"]}
                                     </p>
+                                    <table>
+                                    {$sorAdat}
+                                    </table>
                                 </td>
                             </tr>
                             <tr>
