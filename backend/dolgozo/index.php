@@ -90,23 +90,24 @@ HTML;
                     $emailLekeresSQL="SELECT email from felhasznalo where felhasznalonev=?";
         $emailLekeres=adatokLekerese($emailLekeresSQL,"s",[$bodyAdatok["nev"]]);
         $termekAdatokSQL="    SELECT 
-        t.id,
-        t.termekId,
         t.mennyiseg,
         tr.nev,
         tr.nevEn,
-        tr.kep,
-        (tr.ar-tr.ar*LearazasMerteke/100) as ar
+        (tr.ar-tr.ar*LearazasMerteke/100*t.mennyiseg) as ar
         FROM tetelek t
         JOIN termek tr ON tr.id = t.termekId
         join learazas on learazasId=learazas.id
         WHERE t.rendelesId = ?";
         $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$bodyAdatok["rendelesId"]]);
-        $sorAdat;
+        $sorAdat="";
         foreach ($termekAdatok as $termekAdat) {
-            $sorAdat+="<tr><td>{$termekAdat["nev"]}</td><td>{$termekAdat["mennyiseg"]}</td><td>{$termekAdat["ar"]}</td></tr>";
+            $sorAdat=$sorAdat."<tr><td>{$termekAdat["nev"]}</td><td text='center'>{$termekAdat["mennyiseg"]}</td><td>{$termekAdat["ar"]}Ft</td></tr>";
         }
         $emailHTML = <<<HTML
+          <head>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+            </head>
+            <body>
             <div>
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f1ea; padding: 40px 20px;">
                 <tr>
@@ -124,10 +125,11 @@ HTML;
                                     </h2>                            
                                     <p style="margin: 0 0 25px 0; color: #444; font-size: 16px; line-height: 1.6;">
                                         Rendelésedet összekészíttük, és leadtuk a szállítónak.<br>
-                                        Rendelésed azonosítója: {$bodyAdatok["rendelesId"]}
+                                        Rendelésed azonosítója: <b>{$bodyAdatok["rendelesId"]}</b>
                                         Szállítási cím: <b>{$bodyAdatok["cim"]}</b>
                                     </p>
-                                    <table>
+                                    <table class="table" style="border: border: 1px solid black; border-collapse: collapse;">
+                                        <tr><th>Termék</th><th>Mennyiség</th><th>Ár</th></tr>
                                         {$sorAdat}
                                     </table>
                                 </td>
@@ -147,6 +149,7 @@ HTML;
                 </tr>
             </table>
         </div>
+    </body>
 HTML;
  $eredmeny = emailKuldes(
         $emailLekeres[0]["email"],
@@ -173,23 +176,24 @@ HTML;
                                 $emailLekeresSQL="SELECT email from felhasznalo where felhasznalonev=?";
         $emailLekeres=adatokLekerese($emailLekeresSQL,"s",[$bodyAdatok["nev"]]);
          $termekAdatokSQL="    SELECT 
-        t.id,
         t.termekId,
         t.mennyiseg,
         tr.nev,
-        tr.nevEn,
-        tr.kep,
-        (tr.ar-tr.ar*LearazasMerteke/100) as ar
+        (tr.ar-tr.ar*LearazasMerteke/100*t.mennyiseg) as ar
         FROM tetelek t
         JOIN termek tr ON tr.id = t.termekId
         join learazas on learazasId=learazas.id
         WHERE t.rendelesId = ?";
         $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$bodyAdatok["rendelesId"]]);
-        $sorAdat;
+        $sorAdat="";
         foreach ($termekAdatok as $termekAdat) {
-            $sorAdat+="<tr><td>{$termekAdat["nev"]}</td><td>{$termekAdat["mennyiseg"]}</td><td>{$termekAdat["ar"]}</td></tr>";
+            $sorAdat=$sorAdat."<tr><td>{$termekAdat["nev"]}</td><td text='center'>{$termekAdat["mennyiseg"]}</td><td>{$termekAdat["ar"]}Ft</td></tr>";
         }
     $emailHTML = <<<HTML
+            <head>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+            </head>
+            <body>
             <div>
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f1ea; padding: 40px 20px;">
                 <tr>
@@ -206,10 +210,11 @@ HTML;
                                         Kedves, {$bodyAdatok["nev"]}!
                                     </h2>                            
                                     <p style="margin: 0 0 25px 0; color: #444; font-size: 16px; line-height: 1.6;">
-                                        Rendelésedet sikeresen elérte {$bodyAdatok["cim"]}, reméljük még fogsz tölünk vásárolni.<br>
-                                        Rendelésed azonosítója: {$bodyAdatok["rendelesId"]}
+                                        Rendelésedet sikeresen elérte <b>{$bodyAdatok["cim"]} </b> címet, reméljük még fogsz tölünk vásárolni.<br>
+                                        Rendelésed azonosítója: <b>{$bodyAdatok["rendelesId"]}</b>
                                     </p>
-                                    <table>
+                                    <table class="table" style="border: border: 1px solid black; border-collapse: collapse;">
+                                        <tr><th>Termék</th><th>Mennyiség</th><th>Ár</th></tr>
                                     {$sorAdat}
                                     </table>
                                 </td>
@@ -229,6 +234,7 @@ HTML;
                 </tr>
             </table>
         </div>
+    </body>
 HTML;
  $eredmeny = emailKuldes(
         $emailLekeres[0]["email"],
