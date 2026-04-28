@@ -93,7 +93,7 @@ HTML;
         t.mennyiseg,
         tr.nev,
         tr.nevEn,
-        (tr.ar-tr.ar*LearazasMerteke/100*t.mennyiseg) as ar
+        floor((tr.ar-tr.ar*LearazasMerteke/100)*t.mennyiseg) as ar
         FROM tetelek t
         JOIN termek tr ON tr.id = t.termekId
         join learazas on learazasId=learazas.id
@@ -101,7 +101,7 @@ HTML;
         $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$bodyAdatok["rendelesId"]]);
         $sorAdat="";
         foreach ($termekAdatok as $termekAdat) {
-            $sorAdat=$sorAdat."<tr><td>{$termekAdat["nev"]}</td><td text='center'>{$termekAdat["mennyiseg"]}</td><td>{$termekAdat["ar"]}Ft</td></tr>";
+            $sorAdat=$sorAdat."<tr style='border: 1px solid black; border-collapse: collapse;'><td style='border: 1px solid black; border-collapse: collapse;'>{$termekAdat["nev"]}</td><td style='border: 1px solid black; border-collapse: collapse;'>{$termekAdat["mennyiseg"]}db</td><td style='border: 1px solid black; border-collapse: collapse;'>{$termekAdat["ar"]}Ft</td></tr>";
         }
         $emailHTML = <<<HTML
           <head>
@@ -128,8 +128,8 @@ HTML;
                                         Rendelésed azonosítója: <b>{$bodyAdatok["rendelesId"]}</b>
                                         Szállítási cím: <b>{$bodyAdatok["cim"]}</b>
                                     </p>
-                                    <table class="table" style="border: border: 1px solid black; border-collapse: collapse;">
-                                        <tr><th>Termék</th><th>Mennyiség</th><th>Ár</th></tr>
+                                    <table class="table" style='border: 1px solid black; border-collapse: collapse;'>
+                                        <tr style='border: 1px solid black; border-collapse: collapse;'><th style='border: 1px solid black; border-collapse: collapse;'>Termék</th><th style='border: 1px solid black; border-collapse: collapse;'>Mennyiség</th><th style='border: 1px solid black; border-collapse: collapse;'>Ár</th></tr>
                                         {$sorAdat}
                                     </table>
                                 </td>
@@ -179,7 +179,7 @@ HTML;
         t.termekId,
         t.mennyiseg,
         tr.nev,
-        (tr.ar-tr.ar*LearazasMerteke/100*t.mennyiseg) as ar
+        floor((tr.ar-tr.ar*LearazasMerteke/100)*t.mennyiseg) as ar
         FROM tetelek t
         JOIN termek tr ON tr.id = t.termekId
         join learazas on learazasId=learazas.id
@@ -187,7 +187,7 @@ HTML;
         $termekAdatok=adatokLekerese($termekAdatokSQL,"i",[$bodyAdatok["rendelesId"]]);
         $sorAdat="";
         foreach ($termekAdatok as $termekAdat) {
-            $sorAdat=$sorAdat."<tr><td>{$termekAdat["nev"]}</td><td text='center'>{$termekAdat["mennyiseg"]}</td><td>{$termekAdat["ar"]}Ft</td></tr>";
+            $sorAdat=$sorAdat."<tr style='border: 1px solid black; border-collapse: collapse;'><td style='border: 1px solid black; border-collapse: collapse;'>{$termekAdat["nev"]}</td><td style='border: 1px solid black; border-collapse: collapse;'>{$termekAdat["mennyiseg"]}db</td><td style='border: 1px solid black; border-collapse: collapse;'>{$termekAdat["ar"]}Ft</td></tr>";
         }
     $emailHTML = <<<HTML
             <head>
@@ -213,8 +213,8 @@ HTML;
                                         Rendelésedet sikeresen elérte <b>{$bodyAdatok["cim"]} </b> címet, reméljük még fogsz tölünk vásárolni.<br>
                                         Rendelésed azonosítója: <b>{$bodyAdatok["rendelesId"]}</b>
                                     </p>
-                                    <table class="table" style="border: border: 1px solid black; border-collapse: collapse;">
-                                        <tr><th>Termék</th><th>Mennyiség</th><th>Ár</th></tr>
+                                    <table class="table" style="border: 1px solid black; border-collapse: collapse;">
+                                        <tr style='border: 1px solid black; border-collapse: collapse;'><th style='border: 1px solid black; border-collapse: collapse;'>Termék</th><th style='border: 1px solid black; border-collapse: collapse;'>Mennyiség</th><th style='border: 1px solid black; border-collapse: collapse;'>Ár</th></tr>
                                     {$sorAdat}
                                     </table>
                                 </td>
