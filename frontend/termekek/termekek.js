@@ -215,7 +215,6 @@ termekKategoria.addEventListener('change', async () => {
 
 const Kosaraba = async (e) => {
     let id = e.target.getAttribute('data-id');
-    console.log('Kosárba gomb kattintva, termék ID: ' + id);
     if(localStorage.getItem('token')) {
         let httpResponse = await fetch(`../../backend/bejelentkezes/profile.php/authenticate?Authorization=${localStorage.getItem('token')}`);
         if (httpResponse.ok) {
@@ -230,12 +229,6 @@ const Kosaraba = async (e) => {
                     "termek": id
                 })
             });
-            if (httpResponse.ok) {
-                let httpAdat = await httpResponse.json();
-                console.log(httpAdat);
-            } else {
-                alert('Hiba történt a kosárhoz adás során.');
-            }
         }
     } else {
         window.location.href="../bejelentkezes/bejelentkezes.html"
