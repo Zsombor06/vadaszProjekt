@@ -93,7 +93,7 @@ $termekAdatokSQL="    SELECT
                                         <tr style='border: 1px solid black; border-collapse: collapse;'><th style='border: 1px solid black; border-collapse: collapse;'>Termék</th><th style='border: 1px solid black; border-collapse: collapse;'>Mennyiség</th><th style='border: 1px solid black; border-collapse: collapse;'>Ár</th></tr>
                                     {$sorAdat}
                                     </table>
-                                    <h2>Végösszeg: {$teljOsszeg}<h2>
+                                    <h2>Végösszeg: {$teljOsszeg} Ft<h2>
                                 </td>
                             </tr>
                             <tr>
