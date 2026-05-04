@@ -1,10 +1,10 @@
 {
   "info": {
-    "_postman_id": "4aaa5376-ef24-4d0f-9937-dc23e2f86992",
+    "_postman_id": "34e3ddb0-3c59-4e31-ae4a-5b12997f5f59",
     "name": "vadaszProjekt",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "53174706",
-    "_collection_link": "https://go.postman.co/collection/53174706-4aaa5376-ef24-4d0f-9937-dc23e2f86992?source=collection_link"
+    "_exporter_id": "54503671",
+    "_collection_link": "https://go.postman.co/collection/54503671-34e3ddb0-3c59-4e31-ae4a-5b12997f5f59?source=collection_link"
   },
   "item": [
     {
@@ -125,7 +125,7 @@
       "response": []
     },
     {
-      "name": "KosaárhozAdás",
+      "name": "KosárhozAdás",
       "event": [
         {
           "listen": "test",
